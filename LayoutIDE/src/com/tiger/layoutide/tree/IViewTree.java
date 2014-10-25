@@ -2,7 +2,7 @@ package com.tiger.layoutide.tree;
 
 import java.util.List;
 
-public interface IViewTree
+public interface IViewTree extends IViewTreeNode
 {
 	void addViewTreeNode(IViewTreeNode viewTreeNode);
 	
