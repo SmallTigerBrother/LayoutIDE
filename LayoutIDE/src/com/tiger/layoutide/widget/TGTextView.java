@@ -5,8 +5,8 @@ import android.text.TextUtils;
 import android.util.AttributeSet;
 import android.widget.TextView;
 
+import com.mn.tiger.utility.LogTools;
 import com.tiger.layoutide.ide.ViewHelper;
-import com.tiger.layoutide.tree.IView;
 import com.tiger.layoutide.tree.IViewTreeNode;
 import com.tiger.layoutide.tree.ViewTreeNodeImp;
 
@@ -16,6 +16,8 @@ import com.tiger.layoutide.tree.ViewTreeNodeImp;
  */
 public class TGTextView extends TextView implements IViewTreeNode, IView
 {
+	private static String LOG_TAG = TGTextView.class.getSimpleName();
+	
 	private IViewTreeNode viewTreeNode;
 	
 	private ViewHelper viewHelper;
@@ -69,30 +71,85 @@ public class TGTextView extends TextView implements IViewTreeNode, IView
 	}
 	
 	@Override
-	public void setTextColor(int color)
-	{
-		super.setTextColor(color);
-		viewHelper.setTextColor(color);
-	}
-	
-	@Override
-	public int getTextColor()
+	public String getTextColor()
 	{
 		return viewHelper.getTextColor();
 	}
 	
 	@Override
-	public void setTextSize(int unit, float size)
+	public void setTextColor(String color)
 	{
-		super.setTextSize(unit, size);
-		viewHelper.setTextSize(size);
+		try
+		{
+			if(color.contains("#"))
+			{
+				color.replace("#", "");
+			}
+			if(color.contains("0x"))
+			{
+				color.replace("0x", "");
+			}
+			
+			int rgbColorInt = ViewHelper.getColorInt(color);
+			if(rgbColorInt > Integer.MIN_VALUE)
+			{
+				super.setTextColor(rgbColorInt);
+				viewHelper.setTextColor(color);
+			}
+			else
+			{
+				LogTools.w(LOG_TAG, "The textColor can not be parsed from value " + color);
+			}
+		}
+		catch (Exception e)
+		{
+			LogTools.w(LOG_TAG, "The textColor can not be parsed from value " + color);
+		}
 	}
 	
 	@Override
-	public void setBackgroundColor(int color)
+	public void setTextSize(String textSize)
 	{
-		super.setBackgroundColor(color);
-		viewHelper.setBackgroundColor(color);
+		try
+		{
+			super.setTextSize(Float.valueOf(textSize));
+			viewHelper.setTextSize(textSize);
+		}
+		catch (Exception e)
+		{
+			LogTools.e(LOG_TAG, "The textSize can not be parsed from value " + textSize);
+		}
+	}
+	
+	@Override
+	public void setBackgroundColor(String color)
+	{
+		try
+		{
+			if(color.contains("#"))
+			{
+				color.replace("#", "");
+			}
+			if(color.contains("0x"))
+			{
+				color.replace("0x", "");
+			}
+			
+			int rgbColorInt = ViewHelper.getColorInt(color);
+			if(rgbColorInt > Integer.MIN_VALUE)
+			{
+				super.setBackgroundColor(rgbColorInt);
+				viewHelper.setBackgroundColor(color);
+			}
+			else
+			{
+				LogTools.w(LOG_TAG, "The backgroundColor can not be parsed from value " + color);
+			}
+		}
+		catch (Exception e)
+		{
+			LogTools.e(LOG_TAG, "The backgroundColor can not be parsed from value " + color);
+		}
 	}
 
 	@Override
@@ -150,7 +207,7 @@ public class TGTextView extends TextView implements IViewTreeNode, IView
 	}
 
 	@Override
-	public int getBackgroundColor()
+	public String getBackgroundColor()
 	{
 		return viewHelper.getBackgroundColor();
 	}
@@ -180,16 +237,32 @@ public class TGTextView extends TextView implements IViewTreeNode, IView
 	}
 
 	@Override
-	public void setLayoutWeight(float weight)
+	public void setLayoutWeight(String weight)
 	{
 		viewHelper.setLayoutWeight(weight);
 	}
 
 	@Override
-	public void setLayoutMarginLeft(int marginLeft)
+	public void setLayoutMarginLeft(String marginLeft)
 	{
 		viewHelper.setLayoutMarginLeft(marginLeft);
 	}
 
-	
+	@Override
+	public void setLayoutMarginRight(String marginRight)
+	{
+		viewHelper.setLayoutMarginRight(marginRight);
+	}
+
+	@Override
+	public void setLayoutMarginTop(String marginTop)
+	{
+		viewHelper.setLayoutMarginTop(marginTop);
+	}
+
+	@Override
+	public void setLayoutMarginBottom(String marginBottom)
+	{
+		viewHelper.setLayoutMarginBottom(marginBottom);
+	}
 }

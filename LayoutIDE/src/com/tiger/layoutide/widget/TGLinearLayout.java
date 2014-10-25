@@ -7,8 +7,9 @@ import android.util.AttributeSet;
 import android.view.View;
 import android.widget.LinearLayout;
 
+import com.mn.tiger.utility.LogTools;
 import com.tiger.layoutide.ide.ViewGroupHelper;
-import com.tiger.layoutide.tree.IViewGroup;
+import com.tiger.layoutide.ide.ViewHelper;
 import com.tiger.layoutide.tree.IViewTree;
 import com.tiger.layoutide.tree.IViewTreeNode;
 import com.tiger.layoutide.tree.ViewTreeImp;
@@ -19,6 +20,8 @@ import com.tiger.layoutide.tree.ViewTreeImp;
  */
 public class TGLinearLayout extends LinearLayout implements IViewGroup, IViewTree
 {
+	private static String LOG_TAG = TGLinearLayout.class.getSimpleName();
+	
 	private IViewTree viewTree;
 	
 	private ViewGroupHelper viewGroupHelper;
@@ -60,13 +63,6 @@ public class TGLinearLayout extends LinearLayout implements IViewGroup, IViewTre
 	public void setIdName(String idName)
 	{
 		viewGroupHelper.setIdName(idName);
-	}
-	
-	@Override
-	public void setBackgroundColor(int color)
-	{
-		super.setBackgroundColor(color);
-		viewGroupHelper.setBackgroundColor(color);
 	}
 	
 	@Override
@@ -132,21 +128,39 @@ public class TGLinearLayout extends LinearLayout implements IViewGroup, IViewTre
 	}
 
 	@Override
-	public void setLayoutWeight(float weight)
+	public void setLayoutWeight(String weight)
 	{
 		viewGroupHelper.setLayoutWeight(weight);
+	}
+
+	@Override
+	public void setLayoutMarginLeft(String marginLeft)
+	{
+		viewGroupHelper.setLayoutMarginLeft(marginLeft);
+	}
+
+	@Override
+	public void setLayoutMarginRight(String marginRight)
+	{
+		viewGroupHelper.setLayoutMarginRight(marginRight);
+	}
+
+	@Override
+	public void setLayoutMarginTop(String marginTop)
+	{
+		viewGroupHelper.setLayoutMarginTop(marginTop);
+	}
+
+	@Override
+	public void setLayoutMarginBottom(String marginBottom)
+	{
+		viewGroupHelper.setLayoutMarginBottom(marginBottom);
 	}
 
 	@Override
 	public float getLayoutWeight()
 	{
 		return viewGroupHelper.getLayoutWeight();
-	}
-
-	@Override
-	public void setLayoutMarginLeft(int marginLeft)
-	{
-		viewGroupHelper.setLayoutMarginLeft(marginLeft);
 	}
 
 	@Override
@@ -174,11 +188,42 @@ public class TGLinearLayout extends LinearLayout implements IViewGroup, IViewTre
 	}
 
 	@Override
-	public int getBackgroundColor()
+	public String getBackgroundColor()
 	{
 		return viewGroupHelper.getBackgroundColor();
 	}
 
+	@Override
+	public void setBackgroundColor(String color)
+	{
+		try
+		{
+			if(color.contains("#"))
+			{
+				color.replace("#", "");
+			}
+			if(color.contains("0x"))
+			{
+				color.replace("0x", "");
+			}
+			
+			int rgbColorInt = ViewHelper.getColorInt(color);
+			if(rgbColorInt > Integer.MIN_VALUE)
+			{
+				super.setBackgroundColor(rgbColorInt);
+				viewGroupHelper.setBackgroundColor(color);
+			}
+			else
+			{
+				LogTools.w(LOG_TAG, "The backgroundColor can not be parsed from value " + color);
+			}
+		}
+		catch (Exception e)
+		{
+			LogTools.e(LOG_TAG, "The backgroundColor can not be parsed from value " + color);
+		}
+	}
+	
 	@Override
 	public String getGravityStringValue()
 	{
@@ -210,7 +255,7 @@ public class TGLinearLayout extends LinearLayout implements IViewGroup, IViewTre
 	}
 
 	@Override
-	public void setTextSize(float textSize)
+	public void setTextSize(String textSize)
 	{
 	}
 
@@ -221,14 +266,25 @@ public class TGLinearLayout extends LinearLayout implements IViewGroup, IViewTre
 	}
 
 	@Override
-	public void setTextColor(int textColor)
+	public void setTextColor(String textColor)
 	{
 	}
 
 	@Override
-	public int getTextColor()
+	public String getTextColor()
 	{
-		return 0;
+		return null;
 	}
-	
+
+	@Override
+	public boolean isRootViewGroup()
+	{
+		return viewGroupHelper.isRootViewGroup();
+	}
+
+	@Override
+	public void setRootViewGroup(boolean isRootView)
+	{
+		this.viewGroupHelper.setRootViewGroup(isRootView);
+	}
 }
