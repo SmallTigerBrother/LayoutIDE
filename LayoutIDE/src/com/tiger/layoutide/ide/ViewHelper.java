@@ -1,5 +1,7 @@
 package com.tiger.layoutide.ide;
 
+import android.graphics.Color;
+import android.text.TextUtils;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewGroup.MarginLayoutParams;
@@ -7,29 +9,28 @@ import android.widget.LinearLayout;
 
 import com.mn.tiger.utility.DisplayUtils;
 import com.mn.tiger.utility.LogTools;
-import com.tiger.layoutide.tree.IView;
 import com.tiger.layoutide.utils.Constant;
+import com.tiger.layoutide.widget.IView;
 
 public class ViewHelper implements IView
 {
 	private static String LOG_TAG = ViewHelper.class.getSimpleName();
 	
+	private View view;
+	
 	private String idName = "";
 
-	private int textColor = -1;
+	private String textColor = "";
 
-	private int backgroundColor = -1;
+	private String backgroundColor = "";
 	
 	private String text;
 	
 	private float textSize;
-
-	private View view;
 	
 	private int layoutWidth = Integer.MIN_VALUE;;
 	
 	private int layoutHeight = Integer.MIN_VALUE;
-	
 	
 	private int leftMargin = Integer.MIN_VALUE;
 	
@@ -72,26 +73,22 @@ public class ViewHelper implements IView
 		return text;
 	}
 	
-	public void setTextSize(float textSize)
-	{
-		this.textSize = textSize;
-	}
-
 	@Override
 	public float getTextSize()
 	{
 		return textSize;
 	}
 
-	public void setTextColor(int textColor)
-	{
-		this.textColor = textColor;
-	}
-
 	@Override
-	public int getTextColor()
+	public String getTextColor()
 	{
 		return textColor;
+	}
+	
+	@Override
+	public void setTextColor(String textColor)
+	{
+		this.textColor = textColor;
 	}
 
 	@Override
@@ -165,6 +162,30 @@ public class ViewHelper implements IView
 			return -1;
 		}
 	}
+	
+	@Override
+	public void setLayoutWeight(String weight)
+	{
+		LinearLayout.LayoutParams layoutParams = (LinearLayout.LayoutParams) view.getLayoutParams();
+		
+		if(!TextUtils.isEmpty(weight))
+		{
+			try
+			{
+				layoutParams.weight = Float.valueOf(weight);
+			}
+			catch (Exception e)
+			{
+				LogTools.e(LOG_TAG, "The layout weight can not be parsed from value " + weight);
+			}
+		}
+		else
+		{
+			layoutParams.weight = 0;
+		}
+		
+		view.setLayoutParams(layoutParams);
+	}
 
 	@Override
 	public int getLayoutMarginLeft()
@@ -227,15 +248,16 @@ public class ViewHelper implements IView
 		}
 	}
 
-	public void setBackgroundColor(int backgroundColor)
+	@Override
+	public String getBackgroundColor()
 	{
-		this.backgroundColor = backgroundColor;
+		return backgroundColor;
 	}
 	
 	@Override
-	public int getBackgroundColor()
+	public void setBackgroundColor(String color)
 	{
-		return backgroundColor;
+		this.backgroundColor = color;
 	}
 
 	@Override
@@ -314,29 +336,12 @@ public class ViewHelper implements IView
 	}
 
 	@Override
-	public void setLayoutWeight(float weight)
+	public void setLayoutMarginLeft(String marginLeft)
 	{
-		LinearLayout.LayoutParams layoutParams = (LinearLayout.LayoutParams) view.getLayoutParams();
-		try
-		{
-			layoutParams.weight = Float.valueOf(weight);
-		}
-		catch (Exception e)
-		{
-			LogTools.e(LOG_TAG, "The layout weight can not be parsed from value " + weight);
-		}
-		
-		view.setLayoutParams(layoutParams);
-	}
-
-	@Override
-	public void setLayoutMarginLeft(int marginLeft)
-	{
-		this.leftMargin = marginLeft;
-		
 		MarginLayoutParams layoutParams = (MarginLayoutParams)view.getLayoutParams();
 		try
 		{
+			this.leftMargin = Integer.valueOf(marginLeft);
 			layoutParams.leftMargin = DisplayUtils.dip2px(view.getContext(), this.leftMargin);
 		}
 		catch (Exception e)
@@ -347,6 +352,85 @@ public class ViewHelper implements IView
 		view.setLayoutParams(layoutParams);
 		
 	}
-	
-	
+
+	public void setLayoutMarginRight(String marginRight)
+	{
+		MarginLayoutParams layoutParams = (MarginLayoutParams)view.getLayoutParams();
+		try
+		{
+			this.rightMargin = Integer.valueOf(marginRight);
+			layoutParams.rightMargin = DisplayUtils.dip2px(view.getContext(), this.rightMargin);
+		}
+		catch (Exception e)
+		{
+			LogTools.e(LOG_TAG, "The layout marginRight can not be parsed from value " + marginRight);
+		}
+		
+		view.setLayoutParams(layoutParams);
+	}
+
+
+	public void setLayoutMarginTop(String marginTop)
+	{
+		MarginLayoutParams layoutParams = (MarginLayoutParams)view.getLayoutParams();
+		try
+		{
+			this.topMargin = Integer.valueOf(marginTop);
+			layoutParams.topMargin = DisplayUtils.dip2px(view.getContext(), this.leftMargin);
+		}
+		catch (Exception e)
+		{
+			LogTools.e(LOG_TAG, "The layout marginTop can not be parsed from value " + topMargin);
+		}
+		
+		view.setLayoutParams(layoutParams);
+	}
+
+	public void setLayoutMarginBottom(String marginBottom)
+	{
+		MarginLayoutParams layoutParams = (MarginLayoutParams)view.getLayoutParams();
+		try
+		{
+			this.bottomMargin = Integer.valueOf(marginBottom);
+			layoutParams.bottomMargin = DisplayUtils.dip2px(view.getContext(), this.leftMargin);
+		}
+		catch (Exception e)
+		{
+			LogTools.e(LOG_TAG, "The layout marginBottom can not be parsed from value " + bottomMargin);
+		}
+		
+		view.setLayoutParams(layoutParams);
+	}
+
+	@Override
+	public void setTextSize(String textSize)
+	{
+		try
+		{
+			this.textSize = Float.valueOf(textSize);
+		}
+		catch (Exception e)
+		{
+			LogTools.w(LOG_TAG, "The textSize can not be parsed from value " + textSize);
+		}
+	}
+
+	public static int getColorInt(String colorStr)
+	{
+		if(colorStr.length() == 6)
+		{
+			return Color.rgb(Integer.valueOf(colorStr.substring(0, 2), 16),
+					Integer.valueOf(colorStr.substring(2, 4), 16), 
+					Integer.valueOf(colorStr.substring(4, 6), 16));
+		}
+		else if(colorStr.length() == 8)
+		{
+			return Color.argb(Integer.valueOf(colorStr.substring(0, 2), 16),
+					Integer.valueOf(colorStr.substring(2, 4), 16), 
+					Integer.valueOf(colorStr.substring(4, 6), 16),
+					Integer.valueOf(colorStr.substring(6, 8), 16));
+		}
+		
+		return Integer.MIN_VALUE;
+	}
 }
