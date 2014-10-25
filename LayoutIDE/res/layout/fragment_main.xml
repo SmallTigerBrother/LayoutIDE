@@ -9,7 +9,7 @@
     tools:context="com.tiger.layoutide.MainActivity$PlaceholderFragment" >
 
     <ScrollView
-        android:id="@+id/scrollView1"
+        android:id="@+id/properties_tool_bar"
         android:layout_width="400dp"
         android:layout_height="match_parent"
         android:layout_alignParentRight="true"
@@ -233,8 +233,7 @@
                         android:id="@+id/background_color_editor"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:inputType="number" />
+                        android:layout_weight="1" />
                 </LinearLayout>
             </LinearLayout>
 
@@ -287,8 +286,7 @@
                         android:id="@+id/text_color_editor"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:inputType="number" />
+                        android:layout_weight="1" />
                 </LinearLayout>
 
                 <LinearLayout
@@ -337,22 +335,22 @@
         </LinearLayout>
     </ScrollView>
 
-    <com.tiger.layoutide.widget.TGLinearLayout
+    <com.tiger.layoutide.ide.Emulator
         android:id="@+id/emulator_screen"
-        android:layout_width="300dp"
-        android:layout_height="match_parent"
-        android:layout_alignTop="@+id/scrollView1"
-        android:layout_marginRight="22dp"
-        android:layout_toLeftOf="@+id/scrollView1"
+        android:layout_width="500dp"
+        android:layout_height="800dp"
+        android:layout_alignTop="@+id/properties_tool_bar"
+        android:layout_marginRight="20dp"
+        android:layout_toLeftOf="@+id/properties_tool_bar"
         android:background="@android:color/holo_green_light" >
-    </com.tiger.layoutide.widget.TGLinearLayout>
+    </com.tiger.layoutide.ide.Emulator>
 
     <Button
         android:id="@+id/test_btn"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignLeft="@+id/textView1"
-        android:layout_below="@+id/textView1"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
         android:layout_marginTop="29dp"
         android:text="Button" />
 
