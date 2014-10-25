@@ -3,7 +3,9 @@ package com.tiger.layoutide.tree;
 import java.util.LinkedList;
 import java.util.List;
 
-public class ViewTreeImp implements IViewTree
+import com.tiger.layoutide.widget.IViewGroup;
+
+public class ViewTreeImp extends ViewTreeNodeImp implements IViewTree
 {
 	private LinkedList<IViewTreeNode> viewTreeNodes;
 	
@@ -11,6 +13,8 @@ public class ViewTreeImp implements IViewTree
 	
 	public ViewTreeImp(IViewGroup viewGroup)
 	{
+		super(viewGroup);
+		
 		viewTreeNodes = new LinkedList<IViewTreeNode>();
 		
 		this.viewGroup = viewGroup;
@@ -25,7 +29,17 @@ public class ViewTreeImp implements IViewTree
 	@Override
 	public String getXMLString()
 	{
-		StringBuilder xmlOutPutStr = new StringBuilder("<" + viewGroup.getClassSimpleName());
+		StringBuilder xmlOutPutStr = new StringBuilder("<" + viewGroup.getClassSimpleName() + "\n");
+		
+		if(viewGroup.isRootViewGroup())
+		{
+			//添加namespace字段
+			xmlOutPutStr.append("xmlns:android=\"http://schemas.android.com/apk/res/android\"" + "\n");
+			xmlOutPutStr.append("xmlns:tools=\"http://schemas.android.com/tools\"" + "\n");
+		}
+		
+		//添加layout自身属性字段
+		xmlOutPutStr.append(getPropertiesString());
 		
 		xmlOutPutStr.append(">\n");
 		
