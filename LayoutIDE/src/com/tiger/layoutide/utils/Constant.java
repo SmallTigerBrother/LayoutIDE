@@ -36,7 +36,7 @@ public class Constant
 	
 	public static final String TEXT_COLOR = "android:textColor=\"#%1$s\"";
 	
-	public static final String GRAVITY = "android:gravity=\"#%1$s\"";
+	public static final String GRAVITY = "android:gravity=\"%1$s\"";
 	
 	
 	
