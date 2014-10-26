@@ -541,11 +541,11 @@ public class ViewHelper implements IView
 	@Override
 	public void setToLeftOf(String anchorIdName)
 	{
-		RelativeLayout.LayoutParams layoutParams = (RelativeLayout.LayoutParams) view.getLayoutParams();
+		TGRelativeLayout.LayoutParams layoutParams = (TGRelativeLayout.LayoutParams) view.getLayoutParams();
 		int anchorId = ((TGRelativeLayout)view.getParent()).getChildId(anchorIdName);
 		if(anchorId > 0)
 		{
-			layoutParams.addRule(RelativeLayout.LEFT_OF, anchorId);
+			layoutParams.addRule(RelativeLayout.LEFT_OF, anchorId, anchorIdName);
 			view.setLayoutParams(layoutParams);
 		}
 		else
@@ -572,11 +572,11 @@ public class ViewHelper implements IView
 	@Override
 	public void setToRightOf(String anchorIdName)
 	{
-		RelativeLayout.LayoutParams layoutParams = (RelativeLayout.LayoutParams) view.getLayoutParams();
+		TGRelativeLayout.LayoutParams layoutParams = (TGRelativeLayout.LayoutParams) view.getLayoutParams();
 		int anchorId = ((TGRelativeLayout)view.getParent()).getChildId(anchorIdName);
 		if(anchorId > 0)
 		{
-			layoutParams.addRule(RelativeLayout.RIGHT_OF, anchorId);
+			layoutParams.addRule(RelativeLayout.RIGHT_OF, anchorId, anchorIdName);
 			view.setLayoutParams(layoutParams);
 		}
 		else
@@ -603,11 +603,11 @@ public class ViewHelper implements IView
 	@Override
 	public void setBelow(String anchorIdName)
 	{
-		RelativeLayout.LayoutParams layoutParams = (RelativeLayout.LayoutParams) view.getLayoutParams();
+		TGRelativeLayout.LayoutParams layoutParams = (TGRelativeLayout.LayoutParams) view.getLayoutParams();
 		int anchorId = ((TGRelativeLayout)view.getParent()).getChildId(anchorIdName);
 		if(anchorId > 0)
 		{
-			layoutParams.addRule(RelativeLayout.BELOW, anchorId);
+			layoutParams.addRule(RelativeLayout.BELOW, anchorId, anchorIdName);
 			view.setLayoutParams(layoutParams);
 		}
 		else
@@ -634,11 +634,11 @@ public class ViewHelper implements IView
 	@Override
 	public void setAbove(String anchorIdName)
 	{
-		RelativeLayout.LayoutParams layoutParams = (RelativeLayout.LayoutParams) view.getLayoutParams();
+		TGRelativeLayout.LayoutParams layoutParams = (TGRelativeLayout.LayoutParams) view.getLayoutParams();
 		int anchorId = ((TGRelativeLayout)view.getParent()).getChildId(anchorIdName);
 		if(anchorId > 0)
 		{
-			layoutParams.addRule(RelativeLayout.ABOVE, anchorId);
+			layoutParams.addRule(RelativeLayout.ABOVE, anchorId, anchorIdName);
 			view.setLayoutParams(layoutParams);
 		}
 		else
@@ -665,11 +665,11 @@ public class ViewHelper implements IView
 	@Override
 	public void setAlignLeft(String anchorIdName)
 	{
-		RelativeLayout.LayoutParams layoutParams = (RelativeLayout.LayoutParams) view.getLayoutParams();
+		TGRelativeLayout.LayoutParams layoutParams = (TGRelativeLayout.LayoutParams) view.getLayoutParams();
 		int anchorId = ((TGRelativeLayout)view.getParent()).getChildId(anchorIdName);
 		if(anchorId > 0)
 		{
-			layoutParams.addRule(RelativeLayout.ALIGN_LEFT, anchorId);
+			layoutParams.addRule(RelativeLayout.ALIGN_LEFT, anchorId, anchorIdName);
 			view.setLayoutParams(layoutParams);
 		}
 		else
@@ -696,11 +696,11 @@ public class ViewHelper implements IView
 	@Override
 	public void setAlignRight(String anchorIdName)
 	{
-		RelativeLayout.LayoutParams layoutParams = (RelativeLayout.LayoutParams) view.getLayoutParams();
+		TGRelativeLayout.LayoutParams layoutParams = (TGRelativeLayout.LayoutParams) view.getLayoutParams();
 		int anchorId = ((TGRelativeLayout)view.getParent()).getChildId(anchorIdName);
 		if(anchorId > 0)
 		{
-			layoutParams.addRule(RelativeLayout.ALIGN_RIGHT, anchorId);
+			layoutParams.addRule(RelativeLayout.ALIGN_RIGHT, anchorId, anchorIdName);
 			view.setLayoutParams(layoutParams);
 		}
 		else
@@ -727,11 +727,11 @@ public class ViewHelper implements IView
 	@Override
 	public void setAlignTop(String anchorIdName)
 	{
-		RelativeLayout.LayoutParams layoutParams = (RelativeLayout.LayoutParams) view.getLayoutParams();
+		TGRelativeLayout.LayoutParams layoutParams = (TGRelativeLayout.LayoutParams) view.getLayoutParams();
 		int anchorId = ((TGRelativeLayout)view.getParent()).getChildId(anchorIdName);
 		if(anchorId > 0)
 		{
-			layoutParams.addRule(RelativeLayout.ALIGN_TOP, anchorId);
+			layoutParams.addRule(RelativeLayout.ALIGN_TOP, anchorId, anchorIdName);
 			view.setLayoutParams(layoutParams);
 		}
 		else
@@ -758,11 +758,11 @@ public class ViewHelper implements IView
 	@Override
 	public void setAlignBottom(String anchorIdName)
 	{
-		RelativeLayout.LayoutParams layoutParams = (RelativeLayout.LayoutParams) view.getLayoutParams();
+		TGRelativeLayout.LayoutParams layoutParams = (TGRelativeLayout.LayoutParams) view.getLayoutParams();
 		int anchorId = ((TGRelativeLayout)view.getParent()).getChildId(anchorIdName);
 		if(anchorId > 0)
 		{
-			layoutParams.addRule(RelativeLayout.ALIGN_BOTTOM, anchorId);
+			layoutParams.addRule(RelativeLayout.ALIGN_BOTTOM, anchorId, anchorIdName);
 			view.setLayoutParams(layoutParams);
 		}
 		else
