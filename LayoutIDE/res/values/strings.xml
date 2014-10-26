@@ -4,5 +4,10 @@
     <string name="app_name">LayoutIDE</string>
     <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
+    <string-array name="align_parent_values">
+        <item>false</item>
+        <item >true</item>
+        
+    </string-array>
 
 </resources>
