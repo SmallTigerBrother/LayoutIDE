@@ -1,10 +1,17 @@
 package com.tiger.layoutide.ide;
 
-import com.tiger.layoutide.widget.IViewGroup;
-
+import android.view.DragEvent;
+import android.view.View;
+import android.view.View.OnClickListener;
+import android.view.View.OnDragListener;
 import android.view.ViewGroup;
 
-public class ViewGroupHelper extends ViewHelper implements IViewGroup
+import com.tiger.layoutide.widget.IView;
+import com.tiger.layoutide.widget.IViewGroup;
+import com.tiger.layoutide.widget.TGLinearLayout;
+import com.tiger.layoutide.widget.TGRelativeLayout;
+
+public class ViewGroupHelper extends ViewHelper implements IViewGroup, OnDragListener
 {
 	private boolean isRootViewGroup = false;
 	
@@ -23,5 +30,34 @@ public class ViewGroupHelper extends ViewHelper implements IViewGroup
 	public void setRootViewGroup(boolean isRootView)
 	{
 		this.isRootViewGroup = isRootView;
+	}
+
+	@Override
+	public boolean onDrag(View v, DragEvent event)
+	{
+		if(event.getAction() == DragEvent.ACTION_DROP)
+		{
+			if(null != Emulator.getSingleInstance().getNewViewModel())
+			{
+				if(getView() instanceof TGLinearLayout || getView() instanceof TGRelativeLayout)
+				{
+					ViewGroup viewGroup = (ViewGroup)getView();
+					
+					View newView = (Emulator.getSingleInstance().getNewViewModel()).newInstance();
+					newView.setOnClickListener(new OnClickListener()
+					{
+						@Override
+						public void onClick(View v)
+						{
+							PropertiesToolBar.getSingleInstance().setSelectedView((IView)v);
+						}
+					});
+					
+					viewGroup.addView(newView);
+					Emulator.getSingleInstance().setNewViewModel(null);
+				}
+			}
+		}
+		return true;
 	} 
 }
