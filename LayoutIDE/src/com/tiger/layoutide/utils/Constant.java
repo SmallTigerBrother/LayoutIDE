@@ -26,6 +26,8 @@ public class Constant
 	
 	public static final String MATCH_PARENT = "match_parent";
 	
+	
+	
 	public static final String BACKGROUND_COLOR = "android:background=\"#%1$s\"";
 	
 	
@@ -41,5 +43,28 @@ public class Constant
 	
 	
 	
+	public static final String ALIGN_PARENT_LEFT = "android:layout_alignParentLeft=\"%1$s\"";
+	
+	public static final String ALIGN_PARENT_RIGHT = "android:layout_alignParentRight=\"%1$s\"";
+	
+	public static final String ALIGN_PARENT_TOP = "android:layout_alignParentTop=\"%1$s\"";
+	
+	public static final String ALIGN_PARENT_BOTTOM = "android:layout_alignParentBottom=\"%1$s\"";
+	
+	public static final String TO_LEFT_OF = "android:layout_toLeftOf=\"@id/%1$s\"";
+	
+	public static final String TO_RIGHT_OF = "android:layout_toRightOf=\"@id/%1$s\"";
+	
+	public static final String ABOVE = "android:layout_below=\"@id/%1$s\"";
+	
+	public static final String BELOW = "android:layout_above=\"@id/%1$s\"";
+	
+	public static final String ALIGN_LEFT = "android:layout_alignLeft=\"@id/\"";
+	
+	public static final String ALIGN_RIGHT = "android:layout_alignRight=\"@id/\"";
+	
+	public static final String ALIGN_TOP = "android:layout_alignTop=\"@id/\"";
+	
+	public static final String ALIGN_BOTTOM = "android:layout_alignBottom=\"@id/\"";
 	
 }
