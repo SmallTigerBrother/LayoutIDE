@@ -515,6 +515,10 @@ public class TGRelativeLayout extends RelativeLayout implements IViewTree,IViewG
 	
 	public static class LayoutParams extends RelativeLayout.LayoutParams
 	{
+		private String leftOfAnchorId;
+		
+		private String rightOfAnchorId;
+		
 		private String belowAnchorId;
 		
 		private String aboveAnchorId;
@@ -552,6 +556,14 @@ public class TGRelativeLayout extends RelativeLayout implements IViewTree,IViewG
 			super.addRule(verb, anchor);
 			switch (verb)
 			{
+				case RelativeLayout.LEFT_OF:
+					leftOfAnchorId = anchorIdName;
+					break;
+				
+				case RelativeLayout.RIGHT_OF:
+					rightOfAnchorId = anchorIdName;
+					break;
+					
 				case RelativeLayout.BELOW:
 					belowAnchorId = anchorIdName;
 					break;
@@ -579,6 +591,16 @@ public class TGRelativeLayout extends RelativeLayout implements IViewTree,IViewG
 				default:
 					break;
 			}
+		}
+		
+		public String getLeftOfAnchorId()
+		{
+			return leftOfAnchorId;
+		}
+		
+		public String getRightOfAnchorId()
+		{
+			return rightOfAnchorId;
 		}
 
 		public String getBelowAnchorId()
