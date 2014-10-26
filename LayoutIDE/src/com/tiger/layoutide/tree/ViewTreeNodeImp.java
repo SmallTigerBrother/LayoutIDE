@@ -38,10 +38,7 @@ public class ViewTreeNodeImp implements IViewTreeNode
 		propertiesStrBuilder.append(String.format(Constant.LAYOUT_WIDTH, view.getLayoutWidth()) + "\n");
 		propertiesStrBuilder.append(String.format(Constant.LAYOUT_HEIGHT, view.getLayoutHeight()) + "\n");
 		
-		if(view.getLayoutWeight() > 0)
-		{
-			propertiesStrBuilder.append(String.format(Constant.LAYOUT_WEIGHT, view.getLayoutWeight()) + "\n");
-		}
+		/********************************* Common Position *************************************/
 		
 		if(view.getLayoutMarginLeft() > 0)
 		{
@@ -63,6 +60,25 @@ public class ViewTreeNodeImp implements IViewTreeNode
 			propertiesStrBuilder.append(String.format(Constant.LAYOUT_MARGIN_BOTTOM, view.getLayoutMarginBottom()) + "\n");
 		}
 		
+		/********************************* LinearLayout *************************************/
+		
+		if(view.getLayoutWeight() > 0)
+		{
+			propertiesStrBuilder.append(String.format(Constant.LAYOUT_WEIGHT, view.getLayoutWeight()) + "\n");
+		}
+		
+		if(!TextUtils.isEmpty(view.getGravityStringValue()))
+		{
+			propertiesStrBuilder.append(String.format(Constant.GRAVITY, view.getGravityStringValue()) + "\n");
+		}
+		
+		if(!TextUtils.isEmpty(view.getLayoutGravityStringValue()))
+		{
+			propertiesStrBuilder.append(String.format(Constant.LAYOUT_GRAVITY, view.getLayoutGravityStringValue()) + "\n");
+		}
+		
+		/********************************* Content *************************************/
+		
 		if(!TextUtils.isEmpty(view.getText()))
 		{
 			propertiesStrBuilder.append(String.format(Constant.TEXT, view.getText()) + "\n");
@@ -78,19 +94,73 @@ public class ViewTreeNodeImp implements IViewTreeNode
 			propertiesStrBuilder.append(String.format(Constant.TEXT_COLOR, view.getTextColor()) + "\n");
 		}
 		
+		/********************************* BackGround *************************************/
+		
 		if(!TextUtils.isEmpty(view.getBackgroundColor()))
 		{
 			propertiesStrBuilder.append(String.format(Constant.BACKGROUND_COLOR, view.getBackgroundColor()) + "\n");
 		}
 		
-		if(!TextUtils.isEmpty(view.getGravityStringValue()))
+		/********************************* RelativeLayout *************************************/
+		
+		if(!TextUtils.isEmpty(view.getAlignParentLeft()))
 		{
-			propertiesStrBuilder.append(String.format(Constant.GRAVITY, view.getGravityStringValue()) + "\n");
+			propertiesStrBuilder.append(String.format(Constant.ALIGN_PARENT_LEFT, view.getAlignParentLeft()) + "\n");
 		}
 		
-		if(!TextUtils.isEmpty(view.getLayoutGravityStringValue()))
+		if(!TextUtils.isEmpty(view.getAlignParentRight()))
 		{
-			propertiesStrBuilder.append(String.format(Constant.LAYOUT_GRAVITY, view.getLayoutGravityStringValue()) + "\n");
+			propertiesStrBuilder.append(String.format(Constant.ALIGN_PARENT_RIGHT, view.getAlignParentRight()) + "\n");
+		}
+		
+		if(!TextUtils.isEmpty(view.getAlignParentTop()))
+		{
+			propertiesStrBuilder.append(String.format(Constant.ALIGN_PARENT_TOP, view.getAlignParentTop()) + "\n");
+		}
+		
+		if(!TextUtils.isEmpty(view.getAlignParentBottom()))
+		{
+			propertiesStrBuilder.append(String.format(Constant.ALIGN_PARENT_BOTTOM, view.getAlignParentBottom()) + "\n");
+		}
+		
+		if(!TextUtils.isEmpty(view.getToLeftOf()))
+		{
+			propertiesStrBuilder.append(String.format(Constant.TO_LEFT_OF, view.getToLeftOf()) + "\n");
+		}
+		
+		if(!TextUtils.isEmpty(view.getToRightOf()))
+		{
+			propertiesStrBuilder.append(String.format(Constant.TO_RIGHT_OF, view.getToRightOf()) + "\n");
+		}
+		
+		if(!TextUtils.isEmpty(view.getBelow()))
+		{
+			propertiesStrBuilder.append(String.format(Constant.BELOW, view.getBelow()) + "\n");
+		}
+		
+		if(!TextUtils.isEmpty(view.getAbove()))
+		{
+			propertiesStrBuilder.append(String.format(Constant.ABOVE, view.getAbove()) + "\n");
+		}
+		
+		if(!TextUtils.isEmpty(view.getAlignLeft()))
+		{
+			propertiesStrBuilder.append(String.format(Constant.ALIGN_LEFT, view.getAlignLeft()) + "\n");
+		}
+		
+		if(!TextUtils.isEmpty(view.getAlignRight()))
+		{
+			propertiesStrBuilder.append(String.format(Constant.ALIGN_RIGHT, view.getAlignRight()) + "\n");
+		}
+		
+		if(!TextUtils.isEmpty(view.getAlignTop()))
+		{
+			propertiesStrBuilder.append(String.format(Constant.ALIGN_TOP, view.getAlignTop()) + "\n");
+		}
+		
+		if(!TextUtils.isEmpty(view.getAlignBottom()))
+		{
+			propertiesStrBuilder.append(String.format(Constant.ALIGN_BOTTOM, view.getAlignBottom()) + "\n");
 		}
 		
 		return propertiesStrBuilder.toString();
