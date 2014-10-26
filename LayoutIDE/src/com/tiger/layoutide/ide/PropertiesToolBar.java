@@ -1,26 +1,29 @@
 package com.tiger.layoutide.ide;
 
+import android.content.Context;
 import android.text.Editable;
 import android.text.TextUtils;
 import android.text.TextWatcher;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemSelectedListener;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Spinner;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import com.mn.tiger.annonation.ViewById;
 import com.mn.tiger.utility.ViewInjector;
 import com.tiger.layoutide.R;
 import com.tiger.layoutide.widget.IView;
-import com.tiger.layoutide.widget.TGLinearLayout;
 
 public class PropertiesToolBar
 {
 	@ViewById(id = R.id.emulator_screen)
-	private TGLinearLayout emulatorLayout;
+	private Emulator emulatorLayout;
 	
+	@ViewById(id = R.id.curview_name)
+	private TextView curViewName;
 	
 	@ViewById(id = R.id.id_editor)
 	private EditText idEditText;
@@ -61,17 +64,22 @@ public class PropertiesToolBar
 	@ViewById(id = R.id.gravity_selector)
 	private Spinner gravitySelector;
 	
-	@ViewById(id = R.id.test_btn)
-	private Button testButton;
-	
-	@ViewById(id = R.id.output_xml)
-	private Button outputButton;
-	
 	private IView selectedView = null;
+	
+	private Context context;
+	
+	private static PropertiesToolBar propertiesToolBar;
+	
+	public static PropertiesToolBar getSingleInstance()
+	{
+		return propertiesToolBar;
+	}
 	
 	public PropertiesToolBar(View mainView)
 	{
 		ViewInjector.initInjectedView(this, mainView);
+		
+		this.context = mainView.getContext();
 		
 		idEditText.addTextChangedListener(new TextWatcher()
 		{
@@ -92,7 +100,14 @@ public class PropertiesToolBar
 			{
 				if(!TextUtils.isEmpty(s))
 				{
-					selectedView.setIdName(s.toString());
+					if(null != selectedView)
+					{
+						selectedView.setIdName(s.toString());
+					}
+					else
+					{
+						Toast.makeText(context, "Please select one View before edit the property", Toast.LENGTH_SHORT).show();
+					}
 				}
 			}
 		});
@@ -102,6 +117,8 @@ public class PropertiesToolBar
 		initBackgroundPropertyEditors();
 		
 		initContentPropertyEditors();
+		
+		propertiesToolBar = this;
 	}
 	
 	private void initPositionPropertyEditors()
@@ -125,7 +142,14 @@ public class PropertiesToolBar
 			{
 				if(!TextUtils.isEmpty(s))
 				{
-					selectedView.setLayoutWidth(s.toString());
+					if(null != selectedView)
+					{
+						selectedView.setLayoutWidth(s.toString());
+					}
+					else
+					{
+						Toast.makeText(context, "Please select one View before edit the property", Toast.LENGTH_SHORT).show();
+					}
 				}
 			}
 		});
@@ -149,7 +173,14 @@ public class PropertiesToolBar
 			{
 				if(!TextUtils.isEmpty(s))
 				{
-					selectedView.setLayoutHeight(s.toString());
+					if(null != selectedView)
+					{
+						selectedView.setLayoutHeight(s.toString());
+					}
+					else
+					{
+						Toast.makeText(context, "Please select one View before edit the property", Toast.LENGTH_SHORT).show();
+					}
 				}
 			}
 		});
@@ -173,11 +204,25 @@ public class PropertiesToolBar
 			{
 				if(!TextUtils.isEmpty(s))
 				{
-					selectedView.setLayoutWeight(s.toString());
+					if(null != selectedView)
+					{
+						selectedView.setLayoutWeight(s.toString());
+					}
+					else
+					{
+						Toast.makeText(context, "Please select one View before edit the property", Toast.LENGTH_SHORT).show();
+					}
 				}
 				else
 				{
-					selectedView.setLayoutWeight("");
+					if(null != selectedView)
+					{
+						selectedView.setLayoutWeight("");
+					}
+					else
+					{
+						Toast.makeText(context, "Please select one View before edit the property", Toast.LENGTH_SHORT).show();
+					}
 				}
 			}
 		});
@@ -201,7 +246,14 @@ public class PropertiesToolBar
 			{
 				if(!TextUtils.isEmpty(s))
 				{
-					selectedView.setLayoutMarginLeft(s.toString());
+					if(null != selectedView)
+					{
+						selectedView.setLayoutMarginLeft(s.toString());
+					}
+					else
+					{
+						Toast.makeText(context, "Please select one View before edit the property", Toast.LENGTH_SHORT).show();
+					}
 				}
 			}
 		});
@@ -225,7 +277,14 @@ public class PropertiesToolBar
 			{
 				if(!TextUtils.isEmpty(s))
 				{
-					selectedView.setLayoutMarginRight(s.toString());
+					if(null != selectedView)
+					{
+						selectedView.setLayoutMarginRight(s.toString());
+					}
+					else
+					{
+						Toast.makeText(context, "Please select one View before edit the property", Toast.LENGTH_SHORT).show();
+					}
 				}
 			}
 		});
@@ -249,7 +308,14 @@ public class PropertiesToolBar
 			{
 				if(!TextUtils.isEmpty(s))
 				{
-					selectedView.setLayoutMarginTop(s.toString());
+					if(null != selectedView)
+					{
+						selectedView.setLayoutMarginTop(s.toString());
+					}
+					else
+					{
+						Toast.makeText(context, "Please select one View before edit the property", Toast.LENGTH_SHORT).show();
+					}
 				}
 			}
 		});
@@ -273,7 +339,14 @@ public class PropertiesToolBar
 			{
 				if(!TextUtils.isEmpty(s))
 				{
-					selectedView.setLayoutMarginBottom(s.toString());
+					if(null != selectedView)
+					{
+						selectedView.setLayoutMarginBottom(s.toString());
+					}
+					else
+					{
+						Toast.makeText(context, "Please select one View before edit the property", Toast.LENGTH_SHORT).show();
+					}
 				}
 			}
 		});
@@ -301,7 +374,14 @@ public class PropertiesToolBar
 			{
 				if(!TextUtils.isEmpty(s))
 				{
-					selectedView.setBackgroundColor(s.toString());
+					if(null != selectedView)
+					{
+						selectedView.setBackgroundColor(s.toString());
+					}
+					else
+					{
+						Toast.makeText(context, "Please select one View before edit the property", Toast.LENGTH_SHORT).show();
+					}
 				}
 			}
 		});
@@ -328,11 +408,25 @@ public class PropertiesToolBar
 			{
 				if(!TextUtils.isEmpty(s))
 				{
-					selectedView.setText(s.toString());
+					if(null != selectedView)
+					{
+						selectedView.setText(s.toString());
+					}
+					else
+					{
+						Toast.makeText(context, "Please select one View before edit the property", Toast.LENGTH_SHORT).show();
+					}
 				}
 				else
 				{
-					selectedView.setText("");
+					if(null != selectedView)
+					{
+						selectedView.setText("");
+					}
+					else
+					{
+						Toast.makeText(context, "Please select one View before edit the property", Toast.LENGTH_SHORT).show();
+					}
 				}
 			}
 		});
@@ -356,7 +450,14 @@ public class PropertiesToolBar
 			{
 				if(!TextUtils.isEmpty(s))
 				{
-					selectedView.setTextColor(s.toString());
+					if(null != selectedView)
+					{
+						selectedView.setTextColor(s.toString());
+					}
+					else
+					{
+						Toast.makeText(context, "Please select one View before edit the property", Toast.LENGTH_SHORT).show();
+					}
 				}
 			}
 		});
@@ -380,7 +481,14 @@ public class PropertiesToolBar
 			{
 				if(!TextUtils.isEmpty(s))
 				{
-					selectedView.setTextSize(s.toString());
+					if(null != selectedView)
+					{
+						selectedView.setTextSize(s.toString());
+					}
+					else
+					{
+						Toast.makeText(context, "Please select one View before edit the property", Toast.LENGTH_SHORT).show();
+					}
 				}
 			}
 		});
@@ -402,6 +510,158 @@ public class PropertiesToolBar
 	
 	public void setSelectedView(IView selectedView)
 	{
+		defaultSelectedViewChanagedListener.onSelectedViewChanaged(this.selectedView, selectedView);
+		
 		this.selectedView = selectedView;
+		
+		if(null != selectedView)
+		{
+			curViewName.setText(selectedView.getClassSimpleName());
+			
+			if(!TextUtils.isEmpty(selectedView.getIdName()))
+			{
+				idEditText.setText(selectedView.getIdName());
+			}
+			else
+			{
+				idEditText.setText("");
+			}
+			
+			if(!TextUtils.isEmpty(selectedView.getLayoutWidth()))
+			{
+				String width = selectedView.getLayoutWidth();
+				if(width.contains("dp"))
+				{
+					width = width.replace("dp", "");
+				}
+				layoutWidthEditText.setText(width);
+			}
+			else
+			{
+				layoutWidthEditText.setText("");
+			}
+			
+			if(!TextUtils.isEmpty(selectedView.getLayoutHeight()))
+			{
+				String height = selectedView.getLayoutHeight();
+				if(height.contains("dp"))
+				{
+					height = height.replace("dp", "");
+				}
+				layoutHeightEditText.setText(height);
+			}
+			else
+			{
+				layoutHeightEditText.setText("");
+			}
+			
+			if(selectedView.getLayoutWeight() > 0)
+			{
+				layoutWeightEditText.setText(selectedView.getLayoutWeight() + "");
+			}
+			else
+			{
+				layoutWeightEditText.setText("");
+			}
+			
+			if(selectedView.getLayoutMarginLeft() > 0)
+			{
+				marginLeftEditText.setText(selectedView.getLayoutMarginLeft() + "");
+			}
+			else
+			{
+				marginLeftEditText.setText("");
+			}
+			
+			if(selectedView.getLayoutMarginRight() > 0)
+			{
+				marginRightEditText.setText(selectedView.getLayoutMarginRight() + "");
+			}
+			else
+			{
+				marginRightEditText.setText("");
+			}
+			
+			if(selectedView.getLayoutMarginTop() > 0)
+			{
+				marginTopEditText.setText(selectedView.getLayoutMarginTop() + "");
+			}
+			else
+			{
+				marginTopEditText.setText("");
+			}
+			
+			if(selectedView.getLayoutMarginBottom() > 0)
+			{
+				marginBottomEditText.setText(selectedView.getLayoutMarginBottom() + "");
+			}
+			else
+			{
+				marginBottomEditText.setText("");
+			}
+			
+			if(!TextUtils.isEmpty(selectedView.getBackgroundColor()))
+			{
+				backgroundColorEditText.setText(selectedView.getBackgroundColor());
+			}
+			else
+			{
+				backgroundColorEditText.setText("");
+			}
+			
+			if(!TextUtils.isEmpty(selectedView.getText()))
+			{
+				textEditText.setText(selectedView.getText());
+			}
+			else
+			{
+				textEditText.setText("");
+			}
+			
+			if(selectedView.getTextSize() > 0)
+			{
+				textSizeEditText.setText(selectedView.getTextSize() + "");
+			}
+			else
+			{
+				textSizeEditText.setText("");
+			}
+			
+			if(!TextUtils.isEmpty(selectedView.getTextColor()))
+			{
+				textColorEditText.setText(selectedView.getTextColor());
+			}
+			else
+			{
+				textColorEditText.setText("");
+			}
+		}
+	}
+	
+	private OnSelectedViewChanagedListener defaultSelectedViewChanagedListener = new OnSelectedViewChanagedListener()
+	{
+		@Override
+		public void onSelectedViewChanaged(IView lastSelectedView, IView curSelectedView)
+		{
+			if(lastSelectedView != curSelectedView)
+			{
+				//设置上一次选中的View的状态为未选中状态
+				if(null != lastSelectedView)
+				{
+					lastSelectedView.onUnSelected();
+				}
+				
+				if(null != curSelectedView)
+				{
+					//设置当前选中的View的状态为选中状态
+					curSelectedView.onSelected();
+				}
+			}
+		}
+	};
+	
+	public static interface OnSelectedViewChanagedListener
+	{
+		void onSelectedViewChanaged(IView lastSelectedView, IView curSelectedView);
 	}
 }
