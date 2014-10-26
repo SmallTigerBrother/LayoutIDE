@@ -15,7 +15,6 @@
         android:layout_height="match_parent"
         android:layout_alignParentRight="true"
         android:layout_marginLeft="20dp"
-        android:layout_alignLeft="@id/"
         android:background="@android:color/holo_blue_bright" >
 
         <LinearLayout
