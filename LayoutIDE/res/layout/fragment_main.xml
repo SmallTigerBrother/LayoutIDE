@@ -1,5 +1,6 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main_view"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:paddingBottom="@dimen/activity_vertical_margin"
@@ -14,6 +15,7 @@
         android:layout_height="match_parent"
         android:layout_alignParentRight="true"
         android:layout_marginLeft="20dp"
+        android:layout_alignLeft="@id/"
         android:background="@android:color/holo_blue_bright" >
 
         <LinearLayout
@@ -29,178 +31,454 @@
                 android:visibility="visible" >
 
                 <TextView
+                    android:id="@+id/curview_name"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:background="@android:color/holo_blue_dark"
                     android:gravity="center"
-                    android:text="位置参数" />
+                    android:text="ViewName"
+                    android:textSize="24sp" />
 
                 <LinearLayout
+                    android:id="@+id/common_positin_properties"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal" >
+                    android:orientation="vertical"
+                    android:visibility="visible" >
 
                     <TextView
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_gravity="center_vertical"
-                        android:layout_weight="1"
+                        android:background="@android:color/holo_blue_dark"
                         android:gravity="center"
-                        android:text="id" />
+                        android:text="位置参数" />
 
-                    <EditText
-                        android:id="@+id/id_editor"
+                    <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:hint="请输入id" />
+                        android:orientation="horizontal" >
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:layout_weight="1"
+                            android:gravity="center"
+                            android:text="id" />
+
+                        <EditText
+                            android:id="@+id/id_editor"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:hint="请输入id" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal" >
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:layout_weight="1"
+                            android:gravity="center"
+                            android:text="layout_width" />
+
+                        <AutoCompleteTextView
+                            android:id="@+id/layout_width_editor"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="wrap_content" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal" >
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:layout_weight="1"
+                            android:gravity="center"
+                            android:text="layout_height" />
+
+                        <AutoCompleteTextView
+                            android:id="@+id/layout_height_eidtor"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:text="wrap_content" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal" >
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:layout_weight="1"
+                            android:gravity="center"
+                            android:text="marginLeft" />
+
+                        <EditText
+                            android:id="@+id/layout_marginleft_editor"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:inputType="number" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal" >
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:layout_weight="1"
+                            android:gravity="center"
+                            android:inputType="number"
+                            android:text="marginRight" />
+
+                        <EditText
+                            android:id="@+id/layout_marginRight_editor"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal" >
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:layout_weight="1"
+                            android:gravity="center"
+                            android:inputType="number"
+                            android:text="marginTop" />
+
+                        <EditText
+                            android:id="@+id/layout_marginTop_editor"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1" />
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:orientation="horizontal" >
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:layout_weight="1"
+                            android:gravity="center"
+                            android:text="marginBottom" />
+
+                        <EditText
+                            android:id="@+id/layout_marginBottom_editor"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:inputType="number" />
+                    </LinearLayout>
                 </LinearLayout>
 
                 <LinearLayout
+                    android:id="@+id/linear_position_properties"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal" >
+                    android:orientation="vertical"
+                    android:visibility="visible" >
 
-                    <TextView
+                    <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_gravity="center_vertical"
-                        android:layout_weight="1"
-                        android:gravity="center"
-                        android:text="layout_width" />
+                        android:orientation="horizontal" >
 
-                    <AutoCompleteTextView
-                        android:id="@+id/layout_width_editor"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:text="wrap_content" />
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:layout_weight="1"
+                            android:gravity="center"
+                            android:text="weight" />
+
+                        <AutoCompleteTextView
+                            android:id="@+id/layout_weight_editor"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:inputType="number" />
+                    </LinearLayout>
                 </LinearLayout>
 
                 <LinearLayout
+                    android:id="@+id/relative_position_properties"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:orientation="horizontal" >
+                    android:orientation="vertical" >
 
-                    <TextView
+                    <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_gravity="center_vertical"
-                        android:layout_weight="1"
-                        android:gravity="center"
-                        android:text="layout_height" />
+                        android:orientation="horizontal" >
 
-                    <AutoCompleteTextView
-                        android:id="@+id/layout_height_eidtor"
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:layout_weight="1"
+                            android:gravity="center"
+                            android:text="alignParentLeft" />
+
+                        <Spinner
+                            android:id="@+id/layout_marginBottom_editor"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1" 
+                            android:entries="@array/align_parent_values"/>
+                    </LinearLayout>
+
+                    <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:text="wrap_content" />
-                </LinearLayout>
+                        android:orientation="horizontal" >
 
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal" >
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:layout_weight="1"
+                            android:gravity="center"
+                            android:text="alignParentRight" />
 
-                    <TextView
+                        <Spinner
+                            android:id="@+id/layout_marginBottom_editor"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:entries="@array/align_parent_values" />
+                    </LinearLayout>
+
+                    <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_gravity="center_vertical"
-                        android:layout_weight="1"
-                        android:gravity="center"
-                        android:text="weight" />
+                        android:orientation="horizontal" >
 
-                    <AutoCompleteTextView
-                        android:id="@+id/layout_weight_editor"
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:layout_weight="1"
+                            android:gravity="center"
+                            android:text="alignParentTop" />
+
+                        <Spinner
+                            android:id="@+id/layout_marginBottom_editor"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1"
+                            android:entries="@array/align_parent_values" />
+                    </LinearLayout>
+
+                    <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:inputType="number" />
-                </LinearLayout>
+                        android:orientation="horizontal" >
 
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal" >
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:layout_weight="1"
+                            android:gravity="center"
+                            android:text="alignParentBottom" />
 
-                    <TextView
+                        <Spinner
+                            android:id="@+id/layout_marginBottom_editor"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1" 
+                            android:entries="@array/align_parent_values"/>
+                    </LinearLayout>
+
+                    <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_gravity="center_vertical"
-                        android:layout_weight="1"
-                        android:gravity="center"
-                        android:text="marginLeft" />
+                        android:orientation="horizontal" >
 
-                    <EditText
-                        android:id="@+id/layout_marginleft_editor"
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:layout_weight="1"
+                            android:gravity="center"
+                            android:text="below" />
+
+                        <Spinner
+                            android:id="@+id/layout_marginBottom_editor"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1" />
+                    </LinearLayout>
+
+                    <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:inputType="number" />
-                </LinearLayout>
+                        android:orientation="horizontal" >
 
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal" >
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:layout_weight="1"
+                            android:gravity="center"
+                            android:text="above" />
 
-                    <TextView
+                        <Spinner
+                            android:id="@+id/layout_marginBottom_editor"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1" />
+                    </LinearLayout>
+
+                    <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_gravity="center_vertical"
-                        android:layout_weight="1"
-                        android:gravity="center"
-                        android:inputType="number"
-                        android:text="marginRight" />
+                        android:orientation="horizontal" >
 
-                    <EditText
-                        android:id="@+id/layout_marginRight_editor"
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:layout_weight="1"
+                            android:gravity="center"
+                            android:text="toLeftOf" />
+
+                        <Spinner
+                            android:id="@+id/layout_marginBottom_editor"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1" />
+                    </LinearLayout>
+
+                    <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_weight="1" />
-                </LinearLayout>
+                        android:orientation="horizontal" >
 
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal" >
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:layout_weight="1"
+                            android:gravity="center"
+                            android:text="toRightOf" />
 
-                    <TextView
+                        <Spinner
+                            android:id="@+id/layout_marginBottom_editor"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1" />
+                    </LinearLayout>
+
+                    <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_gravity="center_vertical"
-                        android:layout_weight="1"
-                        android:gravity="center"
-                        android:inputType="number"
-                        android:text="marginTop" />
+                        android:orientation="horizontal" >
 
-                    <EditText
-                        android:id="@+id/layout_marginTop_editor"
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:layout_weight="1"
+                            android:gravity="center"
+                            android:text="alignLeft" />
+
+                        <Spinner
+                            android:id="@+id/layout_marginBottom_editor"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1" />
+                    </LinearLayout>
+
+                    <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_weight="1" />
-                </LinearLayout>
+                        android:orientation="horizontal" >
 
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:orientation="horizontal" >
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:layout_weight="1"
+                            android:gravity="center"
+                            android:text="alignRight" />
 
-                    <TextView
+                        <Spinner
+                            android:id="@+id/layout_marginBottom_editor"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1" />
+                    </LinearLayout>
+
+                    <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_gravity="center_vertical"
-                        android:layout_weight="1"
-                        android:gravity="center"
-                        android:text="marginBottom" />
+                        android:orientation="horizontal" >
 
-                    <EditText
-                        android:id="@+id/layout_marginBottom_editor"
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:layout_weight="1"
+                            android:gravity="center"
+                            android:text="alignTop" />
+
+                        <Spinner
+                            android:id="@+id/layout_marginBottom_editor"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1" />
+                    </LinearLayout>
+
+                    <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        android:inputType="number" />
+                        android:orientation="horizontal" >
+
+                        <TextView
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_gravity="center_vertical"
+                            android:layout_weight="1"
+                            android:gravity="center"
+                            android:text="alignBottom" />
+
+                        <Spinner
+                            android:id="@+id/layout_marginBottom_editor"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_weight="1" />
+                    </LinearLayout>
                 </LinearLayout>
             </LinearLayout>
 
@@ -240,7 +518,8 @@
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical" >
+                android:orientation="vertical"
+                android:visibility="gone" >
 
                 <TextView
                     android:layout_width="match_parent"
@@ -322,14 +601,13 @@
                         android:layout_weight="1"
                         android:gravity="center"
                         android:text="gravity" />
-                    
+
                     <Spinner
-                         android:id="@+id/gravity_selector"
+                        android:id="@+id/gravity_selector"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_weight="1"
-                        ></Spinner>
-
+                        android:layout_weight="1" >
+                    </Spinner>
                 </LinearLayout>
             </LinearLayout>
         </LinearLayout>
@@ -337,30 +615,80 @@
 
     <com.tiger.layoutide.ide.Emulator
         android:id="@+id/emulator_screen"
-        android:layout_width="500dp"
-        android:layout_height="800dp"
+        android:layout_width="400dp"
+        android:layout_height="600dp"
         android:layout_alignTop="@+id/properties_tool_bar"
         android:layout_marginRight="20dp"
         android:layout_toLeftOf="@+id/properties_tool_bar"
         android:background="@android:color/holo_green_light" >
     </com.tiger.layoutide.ide.Emulator>
 
-    <Button
-        android:id="@+id/test_btn"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentLeft="true"
-        android:layout_marginTop="29dp"
-        android:text="Button" />
+    <LinearLayout
+        android:id="@+id/example_panel"
+        android:layout_width="200dp"
+        android:layout_height="match_parent"
+        android:orientation="vertical" >
+
+        <com.tiger.layoutide.widget.TGTextView
+            android:id="@+id/textview_model"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="TextView" />
+
+        <com.tiger.layoutide.widget.TGButton
+            android:id="@+id/button_model"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Button" />
+
+        <com.tiger.layoutide.widget.TGEditText
+            android:id="@+id/edittext_model"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="EditText" />
+
+        <com.tiger.layoutide.widget.TGImageView
+            android:id="@+id/imageview_model"
+            android:layout_width="80dp"
+            android:layout_height="40dp"
+            android:background="@drawable/ic_launcher" />
+
+        <com.tiger.layoutide.widget.TGCheckBox
+            android:id="@+id/checkbox_model"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="CheckBox" />
+
+        <com.tiger.layoutide.widget.TGLinearLayout
+            android:id="@+id/linearlayout_model"
+            android:layout_width="80dp"
+            android:layout_height="40dp"
+            android:background="@android:color/holo_green_dark"
+            android:orientation="horizontal" />
+
+        <com.tiger.layoutide.widget.TGRelativeLayout
+            android:id="@+id/relativelayout_model"
+            android:layout_width="80dp"
+            android:layout_height="40dp"
+            android:background="@android:color/holo_blue_light" />
+    </LinearLayout>
 
     <Button
         android:id="@+id/output_xml"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_alignRight="@+id/test_btn"
-        android:layout_below="@+id/test_btn"
+        android:layout_alignParentBottom="true"
         android:layout_marginTop="21dp"
         android:text="输出xml" />
+
+    <TextView
+        android:id="@+id/garbage_bin"
+        android:layout_width="100dp"
+        android:layout_height="100dp"
+        android:layout_alignBottom="@+id/example_panel"
+        android:layout_marginRight="49dp"
+        android:layout_toLeftOf="@+id/emulator_screen"
+        android:text="我是垃圾箱"
+        android:textSize="40sp" />
 
 </RelativeLayout>
