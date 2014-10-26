@@ -3,11 +3,17 @@ package com.tiger.layoutide.widget;
 import java.util.List;
 
 import android.content.Context;
+import android.graphics.Canvas;
+import android.graphics.Color;
+import android.graphics.Paint;
+import android.graphics.Paint.Style;
 import android.util.AttributeSet;
 import android.view.View;
+import android.view.View.OnLongClickListener;
 import android.widget.ListView;
 
 import com.mn.tiger.utility.LogTools;
+import com.tiger.layoutide.ide.Emulator;
 import com.tiger.layoutide.ide.ViewGroupHelper;
 import com.tiger.layoutide.ide.ViewHelper;
 import com.tiger.layoutide.tree.IViewTree;
@@ -18,13 +24,17 @@ import com.tiger.layoutide.tree.ViewTreeImp;
  * @author Dalang
  *
  */
-public class TGListView extends ListView implements IViewGroup, IViewTree
+public class TGListView extends ListView implements IViewGroup, IViewTree, OnLongClickListener
 {
 	private static String LOG_TAG = TGListView.class.getSimpleName();
 	
 	private IViewTree viewTree;
 	
 	private ViewGroupHelper viewGroupHelper;
+	
+	private boolean isSelected = false;
+	
+	private Paint paint = null;
 	
 	public TGListView(Context context)
 	{
@@ -35,16 +45,16 @@ public class TGListView extends ListView implements IViewGroup, IViewTree
 	{
 		super(context, attrs);
 		
-		viewGroupHelper = new ViewGroupHelper(this)
-		{
-			@Override
-			public String getClassSimpleName()
-			{
-				return "ListView";
-			}
-		};
+		viewGroupHelper = new ViewGroupHelper(this);
 		
 		viewTree = new ViewTreeImp(viewGroupHelper);
+		
+		paint = new Paint();
+		paint.setColor(Color.RED);
+		paint.setStyle(Style.STROKE);
+		paint.setStrokeWidth(10);
+		
+		this.setOnLongClickListener(this);
 	}
 
 	@Override
@@ -99,7 +109,7 @@ public class TGListView extends ListView implements IViewGroup, IViewTree
 	@Override
 	public String getClassSimpleName()
 	{
-		return "LinearLayout";
+		return "ListView";
 	}
 
 	@Override
@@ -287,4 +297,191 @@ public class TGListView extends ListView implements IViewGroup, IViewTree
 		this.viewGroupHelper.setRootViewGroup(isRootView);
 	}
 	
+	@Override
+	public void onSelected()
+	{
+		this.isSelected = true;
+		//执行重绘
+		this.invalidate();
+	}
+	
+	@Override
+	public void onUnSelected()
+	{
+		//执行重绘
+		this.isSelected = false;
+		this.invalidate();
+	}
+	
+	@Override
+	protected void onDraw(Canvas canvas)
+	{
+		if(isSelected)
+		{
+			canvas.drawRect(0, 0, getWidth(), getHeight(), paint);
+			super.onDraw(canvas);
+		}
+		else
+		{
+			super.onDraw(canvas);
+		}
+	}
+	
+	@Override
+	public boolean onLongClick(View v) 
+	{
+		this.startDrag(null, new DragShadowBuilder(v) , null, 0);
+		Emulator.getSingleInstance().setCurDragView(this);
+		return true;
+	}
+	
+	@Override
+	public View newInstance()
+	{
+		return null;
+	}
+	
+	@Override
+	public void setAlignParentLeft(String value)
+	{
+		viewGroupHelper.setAlignParentLeft(value);
+	}
+
+	@Override
+	public String getAlignParentLeft()
+	{
+		return viewGroupHelper.getAlignParentLeft();
+	}
+
+	@Override
+	public void setAlignParentRight(String value)
+	{
+		viewGroupHelper.setAlignParentRight(value);
+	}
+
+	@Override
+	public String getAlignParentRight()
+	{
+		return viewGroupHelper.getAlignParentRight();
+	}
+
+	@Override
+	public void setAlignParentTop(String value)
+	{
+		viewGroupHelper.setAlignParentTop(value);
+	}
+
+	@Override
+	public String getAlignParentTop()
+	{
+		return viewGroupHelper.getAlignParentTop();
+	}
+
+	@Override
+	public void setAlignParentBottom(String value)
+	{
+		viewGroupHelper.setAlignParentBottom(value);
+	}
+
+	@Override
+	public String getAlignParentBottom()
+	{
+		return viewGroupHelper.getAlignParentBottom();
+	}
+	
+	@Override
+	public void setToLeftOf(String anchorIdName)
+	{
+		viewGroupHelper.setToLeftOf(anchorIdName);
+	}
+	
+	@Override
+	public String getToLeftOf()
+	{
+		return viewGroupHelper.getToLeftOf();
+	}
+	
+	@Override
+	public void setToRightOf(String anchorIdName)
+	{
+		viewGroupHelper.setToRightOf(anchorIdName);
+	}
+	
+	@Override
+	public String getToRightOf()
+	{
+		return viewGroupHelper.getToRightOf();
+	}
+
+	@Override
+	public void setBelow(String anchorIdName)
+	{
+		viewGroupHelper.setBelow(anchorIdName);
+	}
+
+	@Override
+	public String getBelow()
+	{
+		return viewGroupHelper.getBelow();
+	}
+
+	@Override
+	public void setAbove(String anchorIdName)
+	{
+		viewGroupHelper.setAbove(anchorIdName);
+	}
+
+	@Override
+	public String getAbove()
+	{
+		return viewGroupHelper.getAbove();
+	}
+
+	@Override
+	public void setAlignLeft(String anchorIdName)
+	{
+		viewGroupHelper.setAlignLeft(anchorIdName);
+	}
+
+	@Override
+	public String getAlignLeft()
+	{
+		return viewGroupHelper.getAlignLeft();
+	}
+
+	@Override
+	public void setAlignRight(String anchorIdName)
+	{
+		viewGroupHelper.setAlignRight(anchorIdName);
+	}
+
+	@Override
+	public String getAlignRight()
+	{
+		return viewGroupHelper.getAlignRight();
+	}
+
+	@Override
+	public void setAlignTop(String anchorIdName)
+	{
+		viewGroupHelper.setAlignTop(anchorIdName);
+	}
+
+	@Override
+	public String getAlignTop()
+	{
+		return viewGroupHelper.getAlignTop();
+	}
+
+	@Override
+	public void setAlignBottom(String anchorIdName)
+	{
+		viewGroupHelper.setAlignBottom(anchorIdName);
+	}
+
+	@Override
+	public String getAlignBottom()
+	{
+		return viewGroupHelper.getAlignBottom();
+	}
 }
