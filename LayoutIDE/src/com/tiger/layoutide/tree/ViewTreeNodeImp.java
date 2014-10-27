@@ -163,6 +163,21 @@ public class ViewTreeNodeImp implements IViewTreeNode
 			propertiesStrBuilder.append(String.format(Constant.ALIGN_BOTTOM, view.getAlignBottom()) + "\n");
 		}
 		
+		if(!TextUtils.isEmpty(view.getCenterInParent()))
+		{
+			propertiesStrBuilder.append(String.format(Constant.CENTER_IN_PARENT, view.getCenterInParent()) + "\n");
+		}
+		
+		if(!TextUtils.isEmpty(view.getCenterHorizontal()))
+		{
+			propertiesStrBuilder.append(String.format(Constant.CENTER_HORIZONTAL, view.getCenterHorizontal()) + "\n");
+		}
+		
+		if(!TextUtils.isEmpty(view.getCenterVertical()))
+		{
+			propertiesStrBuilder.append(String.format(Constant.CENTER_VERTICAL, view.getCenterVertical()) + "\n");
+		}
+		
 		return propertiesStrBuilder.toString();
 	}
 
