@@ -22,6 +22,7 @@ import com.mn.tiger.utility.LogTools;
 import com.mn.tiger.utility.ViewInjector;
 import com.tiger.layoutide.ide.Emulator;
 import com.tiger.layoutide.ide.ExampleViewPanel;
+import com.tiger.layoutide.ide.JCodeHelper;
 import com.tiger.layoutide.ide.PropertiesToolBar;
 
 public class MainActivity extends Activity
@@ -74,6 +75,14 @@ public class MainActivity extends Activity
 					outputStream.flush();
 					
 					outputStream.close();
+					
+					FileOutputStream outputStream2 = MainActivity.this.openFileOutput("BBBB.java", MODE_WORLD_WRITEABLE);
+					
+					outputStream2.write(JCodeHelper.outputInjectViewById(emulatorLayout).getBytes());
+					
+					outputStream2.flush();
+					
+					outputStream2.close();
 				}
 				catch (FileNotFoundException e)
 				{
