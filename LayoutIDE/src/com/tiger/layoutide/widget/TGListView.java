@@ -47,7 +47,7 @@ public class TGListView extends ListView implements IViewGroup, IViewTree, OnLon
 		
 		viewGroupHelper = new ViewGroupHelper(this);
 		
-		viewTree = new ViewTreeImp(viewGroupHelper);
+		viewTree = new ViewTreeImp(this);
 		
 		paint = new Paint();
 		paint.setColor(Color.RED);
@@ -483,5 +483,41 @@ public class TGListView extends ListView implements IViewGroup, IViewTree, OnLon
 	public String getAlignBottom()
 	{
 		return viewGroupHelper.getAlignBottom();
+	}
+	
+	@Override
+	public void setCenterInParent(String value)
+	{
+		viewGroupHelper.setCenterInParent(value);
+	}
+
+	@Override
+	public String getCenterInParent()
+	{
+		return viewGroupHelper.getCenterInParent();
+	}
+
+	@Override
+	public void setCenterVertical(String value)
+	{
+		viewGroupHelper.setCenterVertical(value);
+	}
+
+	@Override
+	public String getCenterVertical()
+	{
+		return viewGroupHelper.getCenterVertical();
+	}
+
+	@Override
+	public void setCenterHorizontal(String value)
+	{
+		viewGroupHelper.setCenterHorizontal(value);
+	}
+
+	@Override
+	public String getCenterHorizontal()
+	{
+		return viewGroupHelper.getCenterHorizontal();
 	}
 }

@@ -45,7 +45,7 @@ public class TGTextView extends TextView implements IViewTreeNode, IView, ISelec
 		
 		viewHelper = new ViewHelper(this);
 		
-		viewTreeNode = new ViewTreeNodeImp(viewHelper);
+		viewTreeNode = new ViewTreeNodeImp(this);
 		
 		paint = new Paint();
 		paint.setColor(Color.RED);
@@ -469,6 +469,42 @@ public class TGTextView extends TextView implements IViewTreeNode, IView, ISelec
 	public String getAlignBottom()
 	{
 		return viewHelper.getAlignBottom();
+	}
+
+	@Override
+	public void setCenterInParent(String value)
+	{
+		viewHelper.setCenterInParent(value);
+	}
+
+	@Override
+	public String getCenterInParent()
+	{
+		return viewHelper.getCenterInParent();
+	}
+
+	@Override
+	public void setCenterVertical(String value)
+	{
+		viewHelper.setCenterVertical(value);
+	}
+
+	@Override
+	public String getCenterVertical()
+	{
+		return viewHelper.getCenterVertical();
+	}
+
+	@Override
+	public void setCenterHorizontal(String value)
+	{
+		viewHelper.setCenterHorizontal(value);
+	}
+
+	@Override
+	public String getCenterHorizontal()
+	{
+		return viewHelper.getCenterHorizontal();
 	}
 
 }

@@ -48,7 +48,7 @@ public class TGLinearLayout extends LinearLayout implements IViewGroup, IViewTre
 		
 		viewGroupHelper = new ViewGroupHelper(this);
 		
-		viewTree = new ViewTreeImp(viewGroupHelper);
+		viewTree = new ViewTreeImp(this);
 		
 		paint = new Paint();
 		paint.setColor(Color.RED);
@@ -89,6 +89,27 @@ public class TGLinearLayout extends LinearLayout implements IViewGroup, IViewTre
 	public void addViewTreeNode(IViewTreeNode viewTreeNode)
 	{
 		viewTree.addViewTreeNode(viewTreeNode);
+	}
+	
+	@Override
+	public void removeAllViews()
+	{
+		super.removeAllViews();
+		viewTree.clearViewTreeNode();
+	}
+	
+	@Override
+	public void removeView(View view)
+	{
+		super.removeView(view);
+		viewTree.removeViewTreeNode((IViewTreeNode)view);
+	}
+	
+	@Override
+	public void removeViewAt(int index)
+	{
+		viewTree.removeViewTreeNode((IViewTreeNode)getChildAt(index));
+		super.removeViewAt(index);
 	}
 
 	@Override
@@ -491,5 +512,41 @@ public class TGLinearLayout extends LinearLayout implements IViewGroup, IViewTre
 	public String getAlignBottom()
 	{
 		return viewGroupHelper.getAlignBottom();
+	}
+	
+	@Override
+	public void setCenterInParent(String value)
+	{
+		viewGroupHelper.setCenterInParent(value);
+	}
+
+	@Override
+	public String getCenterInParent()
+	{
+		return viewGroupHelper.getCenterInParent();
+	}
+
+	@Override
+	public void setCenterVertical(String value)
+	{
+		viewGroupHelper.setCenterVertical(value);
+	}
+
+	@Override
+	public String getCenterVertical()
+	{
+		return viewGroupHelper.getCenterVertical();
+	}
+
+	@Override
+	public void setCenterHorizontal(String value)
+	{
+		viewGroupHelper.setCenterHorizontal(value);
+	}
+
+	@Override
+	public String getCenterHorizontal()
+	{
+		return viewGroupHelper.getCenterHorizontal();
 	}
 }

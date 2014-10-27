@@ -117,6 +117,17 @@ public interface IView extends ISelectable
 	
 	String getAlignBottom();
 	
+	void setCenterInParent(String value);
+	
+	String getCenterInParent();
+	
+	void setCenterVertical(String value);
+	
+	String getCenterVertical();
+	
+	void setCenterHorizontal(String value);
+	
+	String getCenterHorizontal();
 	
 	/***********************  Other ****************************/
 	View newInstance();
