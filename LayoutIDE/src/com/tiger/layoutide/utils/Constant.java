@@ -1,8 +1,12 @@
 package com.tiger.layoutide.utils;
 
+
 public class Constant
 {
-	public static final int VIEW_ID_TAG_KEY = 1000;;
+	public static final String TRUE = "true";
+	
+	public static final String FALSE = "false";
+	
 	
 	public static final String ID = "android:id=\"@+id/%1$s\"";
 	
@@ -41,7 +45,7 @@ public class Constant
 	public static final String GRAVITY = "android:gravity=\"%1$s\"";
 	
 	
-	
+	public static final String ANCHOR_NONE = "AnchorNone";
 	
 	public static final String ALIGN_PARENT_LEFT = "android:layout_alignParentLeft=\"%1$s\"";
 	
@@ -67,4 +71,16 @@ public class Constant
 	
 	public static final String ALIGN_BOTTOM = "android:layout_alignBottom=\"@id/\"";
 	
+	public static final String CENTER_IN_PARENT = "android:layout_centerInParent=\"%1$s\"";
+	
+	public static final String CENTER_VERTICAL = "android:layout_centerVertical=\"%1$s\"";
+	
+	public static final String CENTER_HORIZONTAL = "android:layout_centerHorizontal=\"%1$s\"";
+	
+	
+	
+	
+	public static final String JCODE_INJECT_VIEW_BY_ID_ANNONATION = "@ViewById(id = R.id.%1$s)";
+	
+	public static final String JCODE_INJECT_VIEW_BY_ID_DECLARE = "private %1$s %2$s;";
 }
