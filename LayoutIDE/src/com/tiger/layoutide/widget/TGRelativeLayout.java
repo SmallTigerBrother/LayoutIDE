@@ -1,5 +1,6 @@
 package com.tiger.layoutide.widget;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import android.content.Context;
@@ -7,6 +8,7 @@ import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Paint.Style;
+import android.text.TextUtils;
 import android.util.AttributeSet;
 import android.view.View;
 import android.view.View.OnLongClickListener;
@@ -20,6 +22,7 @@ import com.tiger.layoutide.ide.ViewHelper;
 import com.tiger.layoutide.tree.IViewTree;
 import com.tiger.layoutide.tree.IViewTreeNode;
 import com.tiger.layoutide.tree.ViewTreeImp;
+import com.tiger.layoutide.utils.Constant;
 
 /**
  * @author Dalang
@@ -38,7 +41,7 @@ public class TGRelativeLayout extends RelativeLayout implements IViewTree,IViewG
 	
 	private Paint paint = null;
 	
-	private int curChildViewId;
+	private int curChildViewId = 1;
 	
 	public TGRelativeLayout(Context context)
 	{
@@ -51,7 +54,7 @@ public class TGRelativeLayout extends RelativeLayout implements IViewTree,IViewG
 
 		viewGroupHelper = new ViewGroupHelper(this);
 		
-		viewTree = new ViewTreeImp(viewGroupHelper);
+		viewTree = new ViewTreeImp(this);
 		
 		paint = new Paint();
 		paint.setColor(Color.RED);
@@ -94,6 +97,27 @@ public class TGRelativeLayout extends RelativeLayout implements IViewTree,IViewG
 	public void addViewTreeNode(IViewTreeNode viewTreeNode)
 	{
 		viewTree.addViewTreeNode(viewTreeNode);
+	}
+	
+	@Override
+	public void removeAllViews()
+	{
+		super.removeAllViews();
+		viewTree.clearViewTreeNode();
+	}
+	
+	@Override
+	public void removeView(View view)
+	{
+		super.removeView(view);
+		viewTree.removeViewTreeNode((IViewTreeNode)view);
+	}
+	
+	@Override
+	public void removeViewAt(int index)
+	{
+		viewTree.removeViewTreeNode((IViewTreeNode)getChildAt(index));
+		super.removeViewAt(index);
 	}
 
 	@Override
@@ -366,7 +390,24 @@ public class TGRelativeLayout extends RelativeLayout implements IViewTree,IViewG
 		{
 			return view.getId();
 		}
-		return -1;
+		return 0;
+	}
+	
+	public ArrayList<CharSequence> getChildIdList()
+	{
+		ArrayList<CharSequence> childIdList = new ArrayList<CharSequence>();
+		childIdList.add(Constant.ANCHOR_NONE);
+		View view = null;
+		for(int i = 0; i < getChildCount(); i++)
+		{
+			view = getChildAt(i);
+			if(!TextUtils.isEmpty(((IView)view).getIdName()))
+			{
+				childIdList.add(((IView)view).getIdName());
+			}
+		}
+		
+		return childIdList;
 	}
 	
 	@Override
@@ -511,6 +552,42 @@ public class TGRelativeLayout extends RelativeLayout implements IViewTree,IViewG
 	public String getAlignBottom()
 	{
 		return viewGroupHelper.getAlignBottom();
+	}
+	
+	@Override
+	public void setCenterInParent(String value)
+	{
+		viewGroupHelper.setCenterInParent(value);
+	}
+
+	@Override
+	public String getCenterInParent()
+	{
+		return viewGroupHelper.getCenterInParent();
+	}
+
+	@Override
+	public void setCenterVertical(String value)
+	{
+		viewGroupHelper.setCenterVertical(value);
+	}
+
+	@Override
+	public String getCenterVertical()
+	{
+		return viewGroupHelper.getCenterVertical();
+	}
+
+	@Override
+	public void setCenterHorizontal(String value)
+	{
+		viewGroupHelper.setCenterHorizontal(value);
+	}
+
+	@Override
+	public String getCenterHorizontal()
+	{
+		return viewGroupHelper.getCenterHorizontal();
 	}
 	
 	public static class LayoutParams extends RelativeLayout.LayoutParams
