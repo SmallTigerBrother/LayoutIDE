@@ -174,8 +174,12 @@ public class ViewHelper implements IView
 	@Override
 	public void setLayoutWeight(String weight)
 	{
-		LinearLayout.LayoutParams layoutParams = (LinearLayout.LayoutParams) view.getLayoutParams();
+		if(view.getLayoutParams() instanceof RelativeLayout.LayoutParams)
+		{
+			return;
+		}
 		
+		LinearLayout.LayoutParams layoutParams = (LinearLayout.LayoutParams) view.getLayoutParams();
 		if(!TextUtils.isEmpty(weight))
 		{
 			try
@@ -191,7 +195,6 @@ public class ViewHelper implements IView
 		{
 			layoutParams.weight = 0;
 		}
-		
 		view.setLayoutParams(layoutParams);
 	}
 
@@ -462,7 +465,15 @@ public class ViewHelper implements IView
 	public void setAlignParentLeft(String value)
 	{
 		RelativeLayout.LayoutParams layoutParams = (RelativeLayout.LayoutParams) view.getLayoutParams();
-		layoutParams.addRule(RelativeLayout.ALIGN_PARENT_LEFT);
+		if(Constant.TRUE.equals(value))
+		{
+			layoutParams.addRule(RelativeLayout.ALIGN_PARENT_LEFT);
+		}
+		else
+		{
+			//将值置为0，即消除相对位置设置
+			layoutParams.addRule(RelativeLayout.ALIGN_PARENT_LEFT, 0);
+		}
 		view.setLayoutParams(layoutParams);
 	}
 
@@ -473,7 +484,10 @@ public class ViewHelper implements IView
 		if(layoutParams instanceof RelativeLayout.LayoutParams)
 		{
 			RelativeLayout.LayoutParams relativieLayoutParams = (RelativeLayout.LayoutParams)layoutParams;
-			return containsRule(relativieLayoutParams.getRules(), RelativeLayout.ALIGN_PARENT_LEFT) + "";
+			if(containsRule(relativieLayoutParams.getRules(), RelativeLayout.ALIGN_PARENT_LEFT))
+			{
+				return Constant.TRUE;
+			}
 		}
 		return null;
 	}
@@ -482,7 +496,15 @@ public class ViewHelper implements IView
 	public void setAlignParentRight(String value)
 	{
 		RelativeLayout.LayoutParams layoutParams = (RelativeLayout.LayoutParams) view.getLayoutParams();
-		layoutParams.addRule(RelativeLayout.ALIGN_PARENT_RIGHT);
+		if(Constant.TRUE.equals(value))
+		{
+			layoutParams.addRule(RelativeLayout.ALIGN_PARENT_RIGHT);
+		}
+		else
+		{
+			//将值置为0，即消除相对位置设置
+			layoutParams.addRule(RelativeLayout.ALIGN_PARENT_RIGHT, 0);
+		}
 		view.setLayoutParams(layoutParams);
 	}
 	
@@ -493,7 +515,10 @@ public class ViewHelper implements IView
 		if(layoutParams instanceof RelativeLayout.LayoutParams)
 		{
 			RelativeLayout.LayoutParams relativieLayoutParams = (RelativeLayout.LayoutParams)layoutParams;
-			return containsRule(relativieLayoutParams.getRules(), RelativeLayout.ALIGN_PARENT_RIGHT) + "";
+			if(containsRule(relativieLayoutParams.getRules(), RelativeLayout.ALIGN_PARENT_RIGHT))
+			{
+				return Constant.TRUE;
+			}
 		}
 		return null;
 	}
@@ -502,7 +527,15 @@ public class ViewHelper implements IView
 	public void setAlignParentTop(String value)
 	{
 		RelativeLayout.LayoutParams layoutParams = (RelativeLayout.LayoutParams) view.getLayoutParams();
-		layoutParams.addRule(RelativeLayout.ALIGN_PARENT_TOP);
+		if(Constant.TRUE.equals(value))
+		{
+			layoutParams.addRule(RelativeLayout.ALIGN_PARENT_TOP);
+		}
+		else
+		{
+			//将值置为0，即消除相对位置设置
+			layoutParams.addRule(RelativeLayout.ALIGN_PARENT_TOP, 0);
+		}
 		view.setLayoutParams(layoutParams);
 	}
 
@@ -513,7 +546,10 @@ public class ViewHelper implements IView
 		if(layoutParams instanceof RelativeLayout.LayoutParams)
 		{
 			RelativeLayout.LayoutParams relativieLayoutParams = (RelativeLayout.LayoutParams)layoutParams;
-			return containsRule(relativieLayoutParams.getRules(), RelativeLayout.ALIGN_PARENT_TOP) + "";
+			if(containsRule(relativieLayoutParams.getRules(), RelativeLayout.ALIGN_PARENT_TOP))
+			{
+				return Constant.TRUE;
+			}
 		}
 		return null;
 	}
@@ -522,7 +558,15 @@ public class ViewHelper implements IView
 	public void setAlignParentBottom(String value)
 	{
 		RelativeLayout.LayoutParams layoutParams = (RelativeLayout.LayoutParams) view.getLayoutParams();
-		layoutParams.addRule(RelativeLayout.ALIGN_PARENT_BOTTOM);
+		if(Constant.TRUE.equals(value))
+		{
+			layoutParams.addRule(RelativeLayout.ALIGN_PARENT_BOTTOM);
+		}
+		else
+		{
+			//将值置为0，即消除相对位置设置
+			layoutParams.addRule(RelativeLayout.ALIGN_PARENT_BOTTOM, 0);
+		}
 		view.setLayoutParams(layoutParams);
 	}
 	
@@ -533,7 +577,10 @@ public class ViewHelper implements IView
 		if(layoutParams instanceof RelativeLayout.LayoutParams)
 		{
 			RelativeLayout.LayoutParams relativieLayoutParams = (RelativeLayout.LayoutParams)layoutParams;
-			return containsRule(relativieLayoutParams.getRules(), RelativeLayout.ALIGN_PARENT_BOTTOM) + "";
+			if(containsRule(relativieLayoutParams.getRules(), RelativeLayout.ALIGN_PARENT_BOTTOM))
+			{
+				return Constant.TRUE;
+			}
 		}
 		return null;
 	}
@@ -543,15 +590,8 @@ public class ViewHelper implements IView
 	{
 		TGRelativeLayout.LayoutParams layoutParams = (TGRelativeLayout.LayoutParams) view.getLayoutParams();
 		int anchorId = ((TGRelativeLayout)view.getParent()).getChildId(anchorIdName);
-		if(anchorId > 0)
-		{
-			layoutParams.addRule(RelativeLayout.LEFT_OF, anchorId, anchorIdName);
-			view.setLayoutParams(layoutParams);
-		}
-		else
-		{
-			LogTools.w(LOG_TAG, "Can not find child view which id equals " + anchorIdName);
-		}
+		layoutParams.addRule(RelativeLayout.LEFT_OF, anchorId, anchorIdName);
+		view.setLayoutParams(layoutParams);
 	}
 	
 	@Override
@@ -574,15 +614,8 @@ public class ViewHelper implements IView
 	{
 		TGRelativeLayout.LayoutParams layoutParams = (TGRelativeLayout.LayoutParams) view.getLayoutParams();
 		int anchorId = ((TGRelativeLayout)view.getParent()).getChildId(anchorIdName);
-		if(anchorId > 0)
-		{
-			layoutParams.addRule(RelativeLayout.RIGHT_OF, anchorId, anchorIdName);
-			view.setLayoutParams(layoutParams);
-		}
-		else
-		{
-			LogTools.w(LOG_TAG, "Can not find child view which id equals " + anchorIdName);
-		}
+		layoutParams.addRule(RelativeLayout.RIGHT_OF, anchorId, anchorIdName);
+		view.setLayoutParams(layoutParams);
 	}
 	
 	@Override
@@ -605,15 +638,8 @@ public class ViewHelper implements IView
 	{
 		TGRelativeLayout.LayoutParams layoutParams = (TGRelativeLayout.LayoutParams) view.getLayoutParams();
 		int anchorId = ((TGRelativeLayout)view.getParent()).getChildId(anchorIdName);
-		if(anchorId > 0)
-		{
-			layoutParams.addRule(RelativeLayout.BELOW, anchorId, anchorIdName);
-			view.setLayoutParams(layoutParams);
-		}
-		else
-		{
-			LogTools.w(LOG_TAG, "Can not find child view which id equals " + anchorIdName);
-		}
+		layoutParams.addRule(RelativeLayout.BELOW, anchorId, anchorIdName);
+		view.setLayoutParams(layoutParams);
 	}
 
 	@Override
@@ -636,15 +662,8 @@ public class ViewHelper implements IView
 	{
 		TGRelativeLayout.LayoutParams layoutParams = (TGRelativeLayout.LayoutParams) view.getLayoutParams();
 		int anchorId = ((TGRelativeLayout)view.getParent()).getChildId(anchorIdName);
-		if(anchorId > 0)
-		{
-			layoutParams.addRule(RelativeLayout.ABOVE, anchorId, anchorIdName);
-			view.setLayoutParams(layoutParams);
-		}
-		else
-		{
-			LogTools.w(LOG_TAG, "Can not find child view which id equals " + anchorIdName);
-		}
+		layoutParams.addRule(RelativeLayout.ABOVE, anchorId, anchorIdName);
+		view.setLayoutParams(layoutParams);
 	}
 
 	@Override
@@ -667,15 +686,8 @@ public class ViewHelper implements IView
 	{
 		TGRelativeLayout.LayoutParams layoutParams = (TGRelativeLayout.LayoutParams) view.getLayoutParams();
 		int anchorId = ((TGRelativeLayout)view.getParent()).getChildId(anchorIdName);
-		if(anchorId > 0)
-		{
-			layoutParams.addRule(RelativeLayout.ALIGN_LEFT, anchorId, anchorIdName);
-			view.setLayoutParams(layoutParams);
-		}
-		else
-		{
-			LogTools.w(LOG_TAG, "Can not find child view which id equals " + anchorIdName);
-		}
+		layoutParams.addRule(RelativeLayout.ALIGN_LEFT, anchorId, anchorIdName);
+		view.setLayoutParams(layoutParams);
 	}
 
 	@Override
@@ -698,15 +710,8 @@ public class ViewHelper implements IView
 	{
 		TGRelativeLayout.LayoutParams layoutParams = (TGRelativeLayout.LayoutParams) view.getLayoutParams();
 		int anchorId = ((TGRelativeLayout)view.getParent()).getChildId(anchorIdName);
-		if(anchorId > 0)
-		{
-			layoutParams.addRule(RelativeLayout.ALIGN_RIGHT, anchorId, anchorIdName);
-			view.setLayoutParams(layoutParams);
-		}
-		else
-		{
-			LogTools.w(LOG_TAG, "Can not find child view which id equals " + anchorIdName);
-		}
+		layoutParams.addRule(RelativeLayout.ALIGN_RIGHT, anchorId, anchorIdName);
+		view.setLayoutParams(layoutParams);
 	}
 
 	@Override
@@ -729,15 +734,8 @@ public class ViewHelper implements IView
 	{
 		TGRelativeLayout.LayoutParams layoutParams = (TGRelativeLayout.LayoutParams) view.getLayoutParams();
 		int anchorId = ((TGRelativeLayout)view.getParent()).getChildId(anchorIdName);
-		if(anchorId > 0)
-		{
-			layoutParams.addRule(RelativeLayout.ALIGN_TOP, anchorId, anchorIdName);
-			view.setLayoutParams(layoutParams);
-		}
-		else
-		{
-			LogTools.w(LOG_TAG, "Can not find child view which id equals " + anchorIdName);
-		}
+		layoutParams.addRule(RelativeLayout.ALIGN_TOP, anchorId, anchorIdName);
+		view.setLayoutParams(layoutParams);
 	}
 
 	@Override
@@ -760,15 +758,8 @@ public class ViewHelper implements IView
 	{
 		TGRelativeLayout.LayoutParams layoutParams = (TGRelativeLayout.LayoutParams) view.getLayoutParams();
 		int anchorId = ((TGRelativeLayout)view.getParent()).getChildId(anchorIdName);
-		if(anchorId > 0)
-		{
-			layoutParams.addRule(RelativeLayout.ALIGN_BOTTOM, anchorId, anchorIdName);
-			view.setLayoutParams(layoutParams);
-		}
-		else
-		{
-			LogTools.w(LOG_TAG, "Can not find child view which id equals " + anchorIdName);
-		}
+		layoutParams.addRule(RelativeLayout.ALIGN_BOTTOM, anchorId, anchorIdName);
+		view.setLayoutParams(layoutParams);
 	}
 
 	@Override
@@ -781,6 +772,101 @@ public class ViewHelper implements IView
 			if(containsRule(relativieLayoutParams.getRules(), RelativeLayout.ALIGN_BOTTOM))
 			{
 				return relativieLayoutParams.getAlignBottomAnchorId();
+			}
+		}
+		return null;
+	}
+	
+	@Override
+	public void setCenterInParent(String value)
+	{
+		RelativeLayout.LayoutParams layoutParams = (RelativeLayout.LayoutParams) view.getLayoutParams();
+		if(Constant.TRUE.equals(value))
+		{
+			layoutParams.addRule(RelativeLayout.CENTER_IN_PARENT);
+		}
+		else
+		{
+			//将值置为0，即消除相对位置设置
+			layoutParams.addRule(RelativeLayout.CENTER_IN_PARENT, 0);
+		}
+		view.setLayoutParams(layoutParams);
+	}
+	
+	@Override
+	public String getCenterInParent()
+	{
+		ViewGroup.LayoutParams layoutParams = (ViewGroup.LayoutParams) view.getLayoutParams();
+		if(layoutParams instanceof RelativeLayout.LayoutParams)
+		{
+			RelativeLayout.LayoutParams relativieLayoutParams = (RelativeLayout.LayoutParams)layoutParams;
+			if(containsRule(relativieLayoutParams.getRules(), RelativeLayout.CENTER_IN_PARENT))
+			{
+				return Constant.TRUE;
+			}
+		}
+		return null;
+	}
+	
+	@Override
+	public void setCenterHorizontal(String value)
+	{
+		RelativeLayout.LayoutParams layoutParams = (RelativeLayout.LayoutParams) view.getLayoutParams();
+		layoutParams.addRule(RelativeLayout.CENTER_HORIZONTAL);
+		if(Constant.TRUE.equals(value))
+		{
+			layoutParams.addRule(RelativeLayout.CENTER_HORIZONTAL);
+		}
+		else
+		{
+			//将值置为0，即消除相对位置设置
+			layoutParams.addRule(RelativeLayout.CENTER_HORIZONTAL, 0);
+		}
+		view.setLayoutParams(layoutParams);
+	}
+	
+	@Override
+	public String getCenterHorizontal()
+	{
+		ViewGroup.LayoutParams layoutParams = (ViewGroup.LayoutParams) view.getLayoutParams();
+		if(layoutParams instanceof RelativeLayout.LayoutParams)
+		{
+			RelativeLayout.LayoutParams relativieLayoutParams = (RelativeLayout.LayoutParams)layoutParams;
+			if(containsRule(relativieLayoutParams.getRules(), RelativeLayout.CENTER_HORIZONTAL))
+			{
+				return Constant.TRUE;
+			}
+		}
+		return null;
+	}
+	
+	@Override
+	public void setCenterVertical(String value)
+	{
+		RelativeLayout.LayoutParams layoutParams = (RelativeLayout.LayoutParams) view.getLayoutParams();
+		layoutParams.addRule(RelativeLayout.CENTER_VERTICAL);
+		if(Constant.TRUE.equals(value))
+		{
+			layoutParams.addRule(RelativeLayout.CENTER_VERTICAL);
+		}
+		else
+		{
+			//将值置为0，即消除相对位置设置
+			layoutParams.addRule(RelativeLayout.CENTER_VERTICAL, 0);
+		}
+		view.setLayoutParams(layoutParams);
+	}
+	
+	@Override
+	public String getCenterVertical()
+	{
+		ViewGroup.LayoutParams layoutParams = (ViewGroup.LayoutParams) view.getLayoutParams();
+		if(layoutParams instanceof RelativeLayout.LayoutParams)
+		{
+			RelativeLayout.LayoutParams relativieLayoutParams = (RelativeLayout.LayoutParams)layoutParams;
+			if(containsRule(relativieLayoutParams.getRules(), RelativeLayout.CENTER_VERTICAL))
+			{
+				return Constant.TRUE;
 			}
 		}
 		return null;
