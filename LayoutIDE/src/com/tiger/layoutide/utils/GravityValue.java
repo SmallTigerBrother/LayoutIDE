@@ -34,9 +34,9 @@ public class GravityValue
 	
 	public static final String BOTTOM_AND_CENTER_HORIZONTAL = "BOTTOM|CENTER_HORIZONTAL";
 	
-	public static final String LEFT_AND_CENTER_VERTICAL = "TOP|CENTER_HORIZONTAL";
+	public static final String LEFT_AND_CENTER_VERTICAL = "LEFT|CENTER_VERTICAL";
 	
-	public static final String RIGHT_AND_CENTER_VERTICAL = "TOP|CENTER_HORIZONTAL";
+	public static final String RIGHT_AND_CENTER_VERTICAL = "RIGHT|CENTER_VERTICAL";
 	
 	public static int getIntValue(String gravity)
 	{
