@@ -4,14 +4,49 @@
     <string name="app_name">LayoutIDE</string>
     <string name="hello_world">Hello world!</string>
     <string name="action_settings">Settings</string>
+
     <string-array name="align_parent_values">
         <item>false</item>
-        <item >true</item>
+        <item>true</item>
     </string-array>
-    
-     <string-array name="linearlayout_orientation">
+    <string-array name="linearlayout_orientation">
         <item>horizontal</item>
-        <item >vertical</item>
+        <item>vertical</item>
+    </string-array>
+    <string-array name="gravity_values">
+        <item>NO_GRAVITY</item>
+        <item>CENTER</item>
+        <item>TOP</item>
+        <item>BOTTOM</item>
+        <item>LEFT</item>
+        <item>RIGHT</item>
+        <item>CENTER_VERTICAL</item>
+        <item>CENTER_HORIZONTAL</item>
+        <item>LEFT|TOP</item>
+        <item>LEFT|BOTTOM</item>
+        <item>RIGHT|TOP</item>
+        <item>RIGHT|BOTTOM</item>
+        <item>TOP|CENTER_HORIZONTAL</item>
+        <item>BOTTOM|CENTER_HORIZONTAL</item>
+        <item>LEFT|CENTER_VERTICAL</item>
+        <item>RIGHT|CENTER_VERTICAL</item>
+    </string-array>
+    <string-array name="align_parent">
+        <item>NONE</item>
+        <item>left</item>
+        <item>right</item>
+        <item>top</item>
+        <item>bottom</item>
+        <item>left|top</item>
+        <item>left|bottom</item>
+        <item>right|top</item>
+        <item>right|bottom</item>
+    </string-array>
+    <string-array name="center_values">
+        <item>NONE</item>
+        <item>center_in_parent</item>
+        <item>center_vertical</item>
+        <item>center_horizontal</item>
     </string-array>
 
 </resources>
