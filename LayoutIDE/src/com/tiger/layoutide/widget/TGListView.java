@@ -234,15 +234,15 @@ public class TGListView extends ListView implements IViewGroup, IViewTree, OnLon
 	}
 	
 	@Override
-	public String getGravityStringValue()
+	public String getGravityValue()
 	{
-		return viewGroupHelper.getGravityStringValue();
+		return viewGroupHelper.getGravityValue();
 	}
 
 	@Override
-	public String getLayoutGravityStringValue()
+	public String getLayoutGravityValue()
 	{
-		return viewGroupHelper.getLayoutGravityStringValue();
+		return viewGroupHelper.getLayoutGravityValue();
 	}
 	
 	@Override
@@ -519,5 +519,28 @@ public class TGListView extends ListView implements IViewGroup, IViewTree, OnLon
 	public String getCenterHorizontal()
 	{
 		return viewGroupHelper.getCenterHorizontal();
+	}
+
+	@Override
+	public void setOrientationValue(String orientation)
+	{
+	}
+
+	@Override
+	public String getOrientationValue()
+	{
+		return null;
+	}
+
+	@Override
+	public void setGravityValue(String gravity)
+	{
+		
+	}
+
+	@Override
+	public void setLayoutGravityValue(String gravity)
+	{
+		
 	}
 }

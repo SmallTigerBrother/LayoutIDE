@@ -10,6 +10,7 @@ import android.graphics.Paint;
 import android.graphics.Paint.Style;
 import android.text.TextUtils;
 import android.util.AttributeSet;
+import android.view.Gravity;
 import android.view.View;
 import android.view.View.OnLongClickListener;
 import android.view.ViewGroup;
@@ -23,6 +24,7 @@ import com.tiger.layoutide.tree.IViewTree;
 import com.tiger.layoutide.tree.IViewTreeNode;
 import com.tiger.layoutide.tree.ViewTreeImp;
 import com.tiger.layoutide.utils.Constant;
+import com.tiger.layoutide.utils.GravityValue;
 
 /**
  * @author Dalang
@@ -266,15 +268,15 @@ public class TGRelativeLayout extends RelativeLayout implements IViewTree,IViewG
 	}
 	
 	@Override
-	public String getGravityStringValue()
+	public String getGravityValue()
 	{
-		return viewGroupHelper.getGravityStringValue();
+		return viewGroupHelper.getGravityValue();
 	}
 
 	@Override
-	public String getLayoutGravityStringValue()
+	public String getLayoutGravityValue()
 	{
-		return viewGroupHelper.getLayoutGravityStringValue();
+		return viewGroupHelper.getLayoutGravityValue();
 	}
 	
 	@Override
@@ -709,5 +711,38 @@ public class TGRelativeLayout extends RelativeLayout implements IViewTree,IViewG
 		{
 			return alignBottomAnchorId;
 		}
+	}
+
+	@Override
+	public void setOrientationValue(String orientation)
+	{
+	}
+
+	@Override
+	public String getOrientationValue()
+	{
+		return null;
+	}
+
+	@Override
+	public void setGravityValue(String gravity)
+	{
+		int intGravity = GravityValue.getIntValue(gravity);
+		this.setGravity(intGravity);
+		if(intGravity != Gravity.NO_GRAVITY)
+		{
+			viewGroupHelper.setGravityValue(gravity);
+		}
+		else
+		{
+			viewGroupHelper.setGravityValue(null);
+		}
+	}
+
+	@Override
+	public void setLayoutGravityValue(String gravity)
+	{
+		// TODO Auto-generated method stub
+		
 	}
 }

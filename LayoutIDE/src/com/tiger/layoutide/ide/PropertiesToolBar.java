@@ -58,6 +58,9 @@ public class PropertiesToolBar
 	@ViewById(id = R.id.layout_weight_editor)
 	private EditText layoutWeightEditText;
 	
+	@ViewById(id = R.id.layout_orientation_selector)
+	private Spinner OrientationSelector;
+	
 	/*********************************** Background *********************************/
 	
 	@ViewById(id = R.id.background_color_editor)
@@ -175,6 +178,8 @@ public class PropertiesToolBar
 		
 		initCommonPositionPropertyEditors();
 		
+		initLinearPositionPropertyEditors();
+		
 		initBackgroundPropertyEditors();
 		
 		initContentPropertyEditors();
@@ -239,48 +244,6 @@ public class PropertiesToolBar
 					if(null != selectedView)
 					{
 						selectedView.setLayoutHeight(s.toString());
-					}
-					else
-					{
-						Toast.makeText(context, "Please select one View before edit the property", Toast.LENGTH_SHORT).show();
-					}
-				}
-			}
-		});
-		
-		layoutWeightEditText.addTextChangedListener(new TextWatcher()
-		{
-			@Override
-			public void onTextChanged(CharSequence s, int start, int before, int count)
-			{
-				
-			}
-			
-			@Override
-			public void beforeTextChanged(CharSequence s, int start, int count, int after)
-			{
-				
-			}
-			
-			@Override
-			public void afterTextChanged(Editable s)
-			{
-				if(!TextUtils.isEmpty(s))
-				{
-					if(null != selectedView)
-					{
-						selectedView.setLayoutWeight(s.toString());
-					}
-					else
-					{
-						Toast.makeText(context, "Please select one View before edit the property", Toast.LENGTH_SHORT).show();
-					}
-				}
-				else
-				{
-					if(null != selectedView)
-					{
-						selectedView.setLayoutWeight("");
 					}
 					else
 					{
@@ -414,6 +377,86 @@ public class PropertiesToolBar
 			}
 		});
 		
+	}
+	
+	private void initLinearPositionPropertyEditors()
+	{
+		layoutWeightEditText.addTextChangedListener(new TextWatcher()
+		{
+			@Override
+			public void onTextChanged(CharSequence s, int start, int before, int count)
+			{
+				
+			}
+			
+			@Override
+			public void beforeTextChanged(CharSequence s, int start, int count, int after)
+			{
+				
+			}
+			
+			@Override
+			public void afterTextChanged(Editable s)
+			{
+				if(!TextUtils.isEmpty(s))
+				{
+					if(null != selectedView)
+					{
+						selectedView.setLayoutWeight(s.toString());
+					}
+					else
+					{
+						Toast.makeText(context, "Please select one View before edit the property", Toast.LENGTH_SHORT).show();
+					}
+				}
+				else
+				{
+					if(null != selectedView)
+					{
+						selectedView.setLayoutWeight("");
+					}
+					else
+					{
+						Toast.makeText(context, "Please select one View before edit the property", Toast.LENGTH_SHORT).show();
+					}
+				}
+			}
+		});
+		
+		OrientationSelector.setOnItemSelectedListener(new OnItemSelectedListener()
+		{
+			@Override
+			public void onItemSelected(AdapterView<?> parent, View view, int position, long id)
+			{
+				if(Constant.ORIENTATION_HORIZONTAL.equals(parent.getAdapter().getItem(position).toString()))
+				{
+					if(null != selectedView)
+					{
+						selectedView.setOrientationValue(Constant.ORIENTATION_HORIZONTAL);
+					}
+					else
+					{
+						Toast.makeText(context, "Please select one View before edit the property", Toast.LENGTH_SHORT).show();
+					}
+				}
+				else
+				{
+					if(null != selectedView)
+					{
+						selectedView.setOrientationValue(Constant.ORIENTATION_VERTICAL);
+					}
+					else
+					{
+						Toast.makeText(context, "Please select one View before edit the property", Toast.LENGTH_SHORT).show();
+					}
+				}
+			}
+
+			@Override
+			public void onNothingSelected(AdapterView<?> parent)
+			{
+			}
+		});
 	}
 	
 	private void initBackgroundPropertyEditors()
@@ -1036,15 +1079,6 @@ public class PropertiesToolBar
 				layoutHeightEditText.setText("");
 			}
 			
-			if(selectedView.getLayoutWeight() > 0)
-			{
-				layoutWeightEditText.setText(selectedView.getLayoutWeight() + "");
-			}
-			else
-			{
-				layoutWeightEditText.setText("");
-			}
-			
 			if(selectedView.getLayoutMarginLeft() > 0)
 			{
 				marginLeftEditText.setText(selectedView.getLayoutMarginLeft() + "");
@@ -1079,6 +1113,17 @@ public class PropertiesToolBar
 			else
 			{
 				marginBottomEditText.setText("");
+			}
+			
+			/*********************************** Linear Position *********************************/
+			
+			if(selectedView.getLayoutWeight() > 0)
+			{
+				layoutWeightEditText.setText(selectedView.getLayoutWeight() + "");
+			}
+			else
+			{
+				layoutWeightEditText.setText("");
 			}
 			
 			/*********************************** Background *********************************/

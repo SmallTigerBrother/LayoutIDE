@@ -43,6 +43,10 @@ public interface IView extends ISelectable
 	
 	float getLayoutWeight();
 	
+	void setOrientationValue(String orientation);
+	
+	String getOrientationValue();
+	
 	/************************** Background *********************************/
 	
 	String getBackgroundColor();
@@ -63,9 +67,13 @@ public interface IView extends ISelectable
 	
 	String getTextColor();
 	
-	String getGravityStringValue();
+	String getGravityValue();
 	
-	String getLayoutGravityStringValue();
+	void setGravityValue(String gravity);
+	
+	String getLayoutGravityValue();
+	
+	void setLayoutGravityValue(String gravity);
 	
 	
 	/*****************   RelativieLayout  ************************/

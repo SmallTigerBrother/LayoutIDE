@@ -14,8 +14,6 @@ public class Constant
 	
 	public static final String LAYOUT_HEIGHT = "android:layout_height=\"%1$s\"";
 	
-	public static final String LAYOUT_WEIGHT = "android:layout_weight=\"%1$s\"";
-	
 	public static final String LAYOUT_MARGIN_LEFT = "android:layout_marginLeft=\"%1$sdp\"";
 	
 	public static final String LAYOUT_MARGIN_RIGHT = "android:layout_marginRight=\"%1$sdp\"";
@@ -31,9 +29,15 @@ public class Constant
 	public static final String MATCH_PARENT = "match_parent";
 	
 	
+	public static final String LAYOUT_WEIGHT = "android:layout_weight=\"%1$s\"";
+	
+	public static final String LAYOUT_ORIENTATION = "android:orientation=\"%1$s\"";
+	
+	public static final String ORIENTATION_HORIZONTAL = "horizontal";
+	
+	public static final String ORIENTATION_VERTICAL = "vertical";
 	
 	public static final String BACKGROUND_COLOR = "android:background=\"#%1$s\"";
-	
 	
 	
 	public static final String TEXT = "android:text=\"%1$s\"";

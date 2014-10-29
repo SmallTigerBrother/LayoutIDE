@@ -183,15 +183,15 @@ public class TGImageView extends ImageView implements IViewTreeNode, IView, OnLo
 	}
 
 	@Override
-	public String getGravityStringValue()
+	public String getGravityValue()
 	{
-		return viewHelper.getGravityStringValue();
+		return viewHelper.getGravityValue();
 	}
 
 	@Override
-	public String getLayoutGravityStringValue()
+	public String getLayoutGravityValue()
 	{
-		return viewHelper.getLayoutGravityStringValue();
+		return viewHelper.getLayoutGravityValue();
 	}
 
 	@Override
@@ -491,5 +491,28 @@ public class TGImageView extends ImageView implements IViewTreeNode, IView, OnLo
 	public String getCenterHorizontal()
 	{
 		return viewHelper.getCenterHorizontal();
+	}
+
+	@Override
+	public void setOrientationValue(String orientation)
+	{
+	}
+
+	@Override
+	public String getOrientationValue()
+	{
+		return null;
+	}
+
+	@Override
+	public void setGravityValue(String gravity)
+	{
+	}
+
+	@Override
+	public void setLayoutGravityValue(String gravity)
+	{
+		// TODO Auto-generated method stub
+		
 	}
 }

@@ -7,6 +7,7 @@ import android.graphics.Paint;
 import android.graphics.Paint.Style;
 import android.text.TextUtils;
 import android.util.AttributeSet;
+import android.view.Gravity;
 import android.view.View;
 import android.view.View.OnLongClickListener;
 import android.view.ViewGroup;
@@ -17,6 +18,7 @@ import com.tiger.layoutide.ide.Emulator;
 import com.tiger.layoutide.ide.ViewHelper;
 import com.tiger.layoutide.tree.IViewTreeNode;
 import com.tiger.layoutide.tree.ViewTreeNodeImp;
+import com.tiger.layoutide.utils.GravityValue;
 
 /**
  * @author Dalang
@@ -225,15 +227,15 @@ public class TGButton extends Button implements IViewTreeNode, IView, OnLongClic
 	}
 
 	@Override
-	public String getGravityStringValue()
+	public String getGravityValue()
 	{
-		return viewHelper.getGravityStringValue();
+		return viewHelper.getGravityValue();
 	}
 
 	@Override
-	public String getLayoutGravityStringValue()
+	public String getLayoutGravityValue()
 	{
-		return viewHelper.getLayoutGravityStringValue();
+		return viewHelper.getLayoutGravityValue();
 	}
 
 	@Override
@@ -506,5 +508,39 @@ public class TGButton extends Button implements IViewTreeNode, IView, OnLongClic
 	{
 		return viewHelper.getCenterHorizontal();
 	}
+
+	@Override
+	public void setOrientationValue(String orientation)
+	{
+	}
+
+	@Override
+	public String getOrientationValue()
+	{
+		return null;
+	}
+
+	@Override
+	public void setGravityValue(String gravity)
+	{
+		int intGravity = GravityValue.getIntValue(gravity);
+		this.setGravity(intGravity);
+		if(intGravity != Gravity.NO_GRAVITY)
+		{
+			viewHelper.setGravityValue(gravity);
+		}
+		else
+		{
+			viewHelper.setGravityValue(null);
+		}
+	}
+
+	@Override
+	public void setLayoutGravityValue(String gravity)
+	{
+		// TODO Auto-generated method stub
+		
+	}
+
 	
 }

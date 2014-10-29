@@ -30,6 +30,12 @@ public class ViewHelper implements IView
 	
 	private float textSize = 16;
 	
+	private String orientation;
+	
+	private String gravity;
+	
+	private String layoutGravity;
+	
 	private int layoutWidth = Integer.MIN_VALUE;;
 	
 	private int layoutHeight = Integer.MIN_VALUE;
@@ -127,6 +133,37 @@ public class ViewHelper implements IView
 			return "";
 		}
 	}
+	
+	@Override
+	public void setLayoutWidth(String layoutWidth)
+	{
+		ViewGroup.LayoutParams layoutParams = view.getLayoutParams();
+		
+		if(Constant.WRAP_CONTENT.equals(layoutWidth.toString()))
+		{
+			layoutParams.width = ViewGroup.LayoutParams.WRAP_CONTENT;
+			this.layoutWidth = Integer.MIN_VALUE;
+		}
+		else if(Constant.MATCH_PARENT.equals(layoutWidth.toString()))
+		{
+			layoutParams.width = ViewGroup.LayoutParams.MATCH_PARENT;
+			this.layoutWidth = Integer.MIN_VALUE;
+		}
+		else 
+		{
+			try
+			{
+				this.layoutWidth =  Integer.valueOf(layoutWidth);
+				layoutParams.width = DisplayUtils.dip2px(view.getContext(),this.layoutWidth);
+			}
+			catch (Exception e)
+			{
+				LogTools.e(LOG_TAG, "The layoutWidth can not be parsed from value " + layoutWidth);
+			}
+		}
+		
+		view.setLayoutParams(layoutParams);
+	}
 
 	@Override
 	public String getLayoutHeight()
@@ -155,6 +192,36 @@ public class ViewHelper implements IView
 		{
 			return "";
 		}
+	}
+	
+	@Override
+	public void setLayoutHeight(String layoutHeight)
+	{
+		ViewGroup.LayoutParams layoutParams = view.getLayoutParams();
+		if(Constant.WRAP_CONTENT.equals(layoutHeight.toString()))
+		{
+			layoutParams.height = ViewGroup.LayoutParams.WRAP_CONTENT;
+			this.layoutHeight = Integer.MIN_VALUE;
+		}
+		else if(Constant.MATCH_PARENT.equals(layoutHeight.toString()))
+		{
+			layoutParams.height = ViewGroup.LayoutParams.MATCH_PARENT;
+			this.layoutHeight = Integer.MIN_VALUE;
+		}
+		else 
+		{
+			try
+			{
+				this.layoutHeight = Integer.valueOf(layoutHeight);
+				layoutParams.height = DisplayUtils.dip2px(view.getContext(), this.layoutHeight);
+			}
+			catch (Exception e)
+			{
+				LogTools.e(LOG_TAG, "The layoutHeight can not be parsed from value " + layoutHeight);
+			}
+		}
+		
+		view.setLayoutParams(layoutParams);
 	}
 
 	@Override
@@ -216,136 +283,7 @@ public class ViewHelper implements IView
 			return -1;
 		}
 	}
-
-	@Override
-	public int getLayoutMarginRight()
-	{
-		ViewGroup.LayoutParams layoutParams = view.getLayoutParams();
-		if(null != layoutParams && layoutParams instanceof MarginLayoutParams)
-		{
-			return DisplayUtils.px2dip(view.getContext(), ((MarginLayoutParams)layoutParams).rightMargin);
-		}
-		else
-		{
-			return -1;
-		}
-	}
-
-	@Override
-	public int getLayoutMarginTop()
-	{
-		ViewGroup.LayoutParams layoutParams = view.getLayoutParams();
-		if(null != layoutParams && layoutParams instanceof MarginLayoutParams)
-		{
-			return DisplayUtils.px2dip(view.getContext(), ((MarginLayoutParams)layoutParams).topMargin);
-		}
-		else
-		{
-			return -1;
-		}
-	}
-
-	@Override
-	public int getLayoutMarginBottom()
-	{
-		ViewGroup.LayoutParams layoutParams = view.getLayoutParams();
-		if(null != layoutParams && layoutParams instanceof MarginLayoutParams)
-		{
-			return DisplayUtils.px2dip(view.getContext(), ((MarginLayoutParams)layoutParams).bottomMargin);
-		}
-		else
-		{
-			return -1;
-		}
-	}
-
-	@Override
-	public String getBackgroundColor()
-	{
-		return backgroundColor;
-	}
 	
-	@Override
-	public void setBackgroundColor(String color)
-	{
-		this.backgroundColor = color;
-	}
-
-	@Override
-	public String getGravityStringValue()
-	{
-		return null;
-	}
-
-	@Override
-	public String getLayoutGravityStringValue()
-	{
-		return null;
-	}
-
-	@Override
-	public void setText(CharSequence text)
-	{
-		// View 自行返回
-	}
-
-	@Override
-	public void setLayoutWidth(String layoutWidth)
-	{
-		ViewGroup.LayoutParams layoutParams = view.getLayoutParams();
-		
-		if(Constant.WRAP_CONTENT.equals(layoutWidth.toString()))
-		{
-			layoutParams.width = ViewGroup.LayoutParams.WRAP_CONTENT;
-		}
-		else if(Constant.MATCH_PARENT.equals(layoutWidth.toString()))
-		{
-			layoutParams.width = ViewGroup.LayoutParams.MATCH_PARENT;
-		}
-		else 
-		{
-			try
-			{
-				this.layoutWidth =  Integer.valueOf(layoutWidth);
-				layoutParams.width = DisplayUtils.dip2px(view.getContext(),this.layoutWidth);
-			}
-			catch (Exception e)
-			{
-				LogTools.e(LOG_TAG, "The layoutWidth can not be parsed from value " + layoutWidth);
-			}
-		}
-		
-		view.setLayoutParams(layoutParams);
-	}
-
-	@Override
-	public void setLayoutHeight(String layoutHeight)
-	{
-		ViewGroup.LayoutParams layoutParams = view.getLayoutParams();
-		if(Constant.WRAP_CONTENT.equals(layoutHeight.toString()))
-		{
-			layoutParams.height = ViewGroup.LayoutParams.WRAP_CONTENT;
-		}
-		else if(Constant.MATCH_PARENT.equals(layoutHeight.toString()))
-		{
-			layoutParams.height = ViewGroup.LayoutParams.MATCH_PARENT;
-		}
-		else 
-		{
-			try
-			{
-				this.layoutHeight = Integer.valueOf(layoutHeight);
-				layoutParams.height = DisplayUtils.dip2px(view.getContext(), this.layoutHeight);
-			}
-			catch (Exception e)
-			{
-				LogTools.e(LOG_TAG, "The layoutHeight can not be parsed from value " + layoutHeight);
-			}
-		}
-		
-		view.setLayoutParams(layoutParams);
-	}
-
 	@Override
 	public void setLayoutMarginLeft(String marginLeft)
 	{
@@ -361,9 +299,27 @@ public class ViewHelper implements IView
 		}
 		
 		view.setLayoutParams(layoutParams);
-		
 	}
 
+	@Override
+	public int getLayoutMarginRight()
+	{
+		if(rightMargin > Integer.MIN_VALUE)
+		{
+			return rightMargin;
+		}
+		
+		ViewGroup.LayoutParams layoutParams = view.getLayoutParams();
+		if(null != layoutParams && layoutParams instanceof MarginLayoutParams)
+		{
+			return DisplayUtils.px2dip(view.getContext(), ((MarginLayoutParams)layoutParams).rightMargin);
+		}
+		else
+		{
+			return -1;
+		}
+	}
+	
 	public void setLayoutMarginRight(String marginRight)
 	{
 		MarginLayoutParams layoutParams = (MarginLayoutParams)view.getLayoutParams();
@@ -380,6 +336,24 @@ public class ViewHelper implements IView
 		view.setLayoutParams(layoutParams);
 	}
 
+	@Override
+	public int getLayoutMarginTop()
+	{
+		if(topMargin > Integer.MIN_VALUE)
+		{
+			return topMargin;
+		}
+		
+		ViewGroup.LayoutParams layoutParams = view.getLayoutParams();
+		if(null != layoutParams && layoutParams instanceof MarginLayoutParams)
+		{
+			return DisplayUtils.px2dip(view.getContext(), ((MarginLayoutParams)layoutParams).topMargin);
+		}
+		else
+		{
+			return -1;
+		}
+	}
 
 	public void setLayoutMarginTop(String marginTop)
 	{
@@ -397,6 +371,25 @@ public class ViewHelper implements IView
 		view.setLayoutParams(layoutParams);
 	}
 
+	@Override
+	public int getLayoutMarginBottom()
+	{
+		if(bottomMargin > Integer.MIN_VALUE)
+		{
+			return bottomMargin;
+		}
+		
+		ViewGroup.LayoutParams layoutParams = view.getLayoutParams();
+		if(null != layoutParams && layoutParams instanceof MarginLayoutParams)
+		{
+			return DisplayUtils.px2dip(view.getContext(), ((MarginLayoutParams)layoutParams).bottomMargin);
+		}
+		else
+		{
+			return -1;
+		}
+	}
+	
 	public void setLayoutMarginBottom(String marginBottom)
 	{
 		MarginLayoutParams layoutParams = (MarginLayoutParams)view.getLayoutParams();
@@ -413,6 +406,36 @@ public class ViewHelper implements IView
 		view.setLayoutParams(layoutParams);
 	}
 
+	@Override
+	public String getBackgroundColor()
+	{
+		return backgroundColor;
+	}
+	
+	@Override
+	public void setBackgroundColor(String color)
+	{
+		this.backgroundColor = color;
+	}
+
+	@Override
+	public String getGravityValue()
+	{
+		return gravity;
+	}
+
+	@Override
+	public String getLayoutGravityValue()
+	{
+		return layoutGravity;
+	}
+
+	@Override
+	public void setText(CharSequence text)
+	{
+		// View 自行返回
+	}
+	
 	@Override
 	public void setTextSize(String textSize)
 	{
@@ -464,17 +487,20 @@ public class ViewHelper implements IView
 	@Override
 	public void setAlignParentLeft(String value)
 	{
-		RelativeLayout.LayoutParams layoutParams = (RelativeLayout.LayoutParams) view.getLayoutParams();
-		if(Constant.TRUE.equals(value))
+		ViewGroup.LayoutParams layoutParams = (ViewGroup.LayoutParams) view.getLayoutParams();
+		if(layoutParams instanceof RelativeLayout.LayoutParams)
 		{
-			layoutParams.addRule(RelativeLayout.ALIGN_PARENT_LEFT);
+			if(Constant.TRUE.equals(value))
+			{
+				((RelativeLayout.LayoutParams)layoutParams).addRule(RelativeLayout.ALIGN_PARENT_LEFT);
+			}
+			else
+			{
+				//将值置为0，即消除相对位置设置
+				((RelativeLayout.LayoutParams)layoutParams).addRule(RelativeLayout.ALIGN_PARENT_LEFT, 0);
+			}
+			view.setLayoutParams(layoutParams);
 		}
-		else
-		{
-			//将值置为0，即消除相对位置设置
-			layoutParams.addRule(RelativeLayout.ALIGN_PARENT_LEFT, 0);
-		}
-		view.setLayoutParams(layoutParams);
 	}
 
 	@Override
@@ -495,17 +521,20 @@ public class ViewHelper implements IView
 	@Override
 	public void setAlignParentRight(String value)
 	{
-		RelativeLayout.LayoutParams layoutParams = (RelativeLayout.LayoutParams) view.getLayoutParams();
-		if(Constant.TRUE.equals(value))
+		ViewGroup.LayoutParams layoutParams = (ViewGroup.LayoutParams) view.getLayoutParams();
+		if(layoutParams instanceof RelativeLayout.LayoutParams)
 		{
-			layoutParams.addRule(RelativeLayout.ALIGN_PARENT_RIGHT);
+			if(Constant.TRUE.equals(value))
+			{
+				((RelativeLayout.LayoutParams)layoutParams).addRule(RelativeLayout.ALIGN_PARENT_RIGHT);
+			}
+			else
+			{
+				//将值置为0，即消除相对位置设置
+				((RelativeLayout.LayoutParams)layoutParams).addRule(RelativeLayout.ALIGN_PARENT_RIGHT, 0);
+			}
+			view.setLayoutParams(layoutParams);
 		}
-		else
-		{
-			//将值置为0，即消除相对位置设置
-			layoutParams.addRule(RelativeLayout.ALIGN_PARENT_RIGHT, 0);
-		}
-		view.setLayoutParams(layoutParams);
 	}
 	
 	@Override
@@ -526,17 +555,20 @@ public class ViewHelper implements IView
 	@Override
 	public void setAlignParentTop(String value)
 	{
-		RelativeLayout.LayoutParams layoutParams = (RelativeLayout.LayoutParams) view.getLayoutParams();
-		if(Constant.TRUE.equals(value))
+		ViewGroup.LayoutParams layoutParams = (ViewGroup.LayoutParams) view.getLayoutParams();
+		if(layoutParams instanceof RelativeLayout.LayoutParams)
 		{
-			layoutParams.addRule(RelativeLayout.ALIGN_PARENT_TOP);
+			if(Constant.TRUE.equals(value))
+			{
+				((RelativeLayout.LayoutParams)layoutParams).addRule(RelativeLayout.ALIGN_PARENT_TOP);
+			}
+			else
+			{
+				//将值置为0，即消除相对位置设置
+				((RelativeLayout.LayoutParams)layoutParams).addRule(RelativeLayout.ALIGN_PARENT_TOP, 0);
+			}
+			view.setLayoutParams(layoutParams);
 		}
-		else
-		{
-			//将值置为0，即消除相对位置设置
-			layoutParams.addRule(RelativeLayout.ALIGN_PARENT_TOP, 0);
-		}
-		view.setLayoutParams(layoutParams);
 	}
 
 	@Override
@@ -557,17 +589,20 @@ public class ViewHelper implements IView
 	@Override
 	public void setAlignParentBottom(String value)
 	{
-		RelativeLayout.LayoutParams layoutParams = (RelativeLayout.LayoutParams) view.getLayoutParams();
-		if(Constant.TRUE.equals(value))
+		ViewGroup.LayoutParams layoutParams = (ViewGroup.LayoutParams) view.getLayoutParams();
+		if(layoutParams instanceof RelativeLayout.LayoutParams)
 		{
-			layoutParams.addRule(RelativeLayout.ALIGN_PARENT_BOTTOM);
+			if(Constant.TRUE.equals(value))
+			{
+				((RelativeLayout.LayoutParams)layoutParams).addRule(RelativeLayout.ALIGN_PARENT_BOTTOM);
+			}
+			else
+			{
+				//将值置为0，即消除相对位置设置
+				((RelativeLayout.LayoutParams)layoutParams).addRule(RelativeLayout.ALIGN_PARENT_BOTTOM, 0);
+			}
+			view.setLayoutParams(layoutParams);
 		}
-		else
-		{
-			//将值置为0，即消除相对位置设置
-			layoutParams.addRule(RelativeLayout.ALIGN_PARENT_BOTTOM, 0);
-		}
-		view.setLayoutParams(layoutParams);
 	}
 	
 	@Override
@@ -878,6 +913,57 @@ public class ViewHelper implements IView
 		return (rules[verb] != 0);
 	}
 
-	
+	@Override
+	public void setOrientationValue(String orientation)
+	{
+		if(view instanceof LinearLayout)
+		{
+			this.orientation = orientation;
+			if(orientation.equals(Constant.ORIENTATION_HORIZONTAL))
+			{
+				((LinearLayout)view).setOrientation(LinearLayout.HORIZONTAL);
+			}
+			else
+			{
+				((LinearLayout)view).setOrientation(LinearLayout.VERTICAL);
+			}
+		}
+	}
+
+	@Override
+	public String getOrientationValue()
+	{
+		if(!TextUtils.isEmpty(orientation))
+		{
+			return orientation;
+		}
+		
+		if(view instanceof LinearLayout)
+		{
+			int orientation = ((LinearLayout)view).getOrientation();
+			if(orientation == LinearLayout.HORIZONTAL)
+			{
+				this.orientation = Constant.ORIENTATION_HORIZONTAL;
+			}
+			else
+			{
+				this.orientation = Constant.ORIENTATION_VERTICAL;
+			}
+		}
+		
+		return this.orientation;
+	}
+
+	@Override
+	public void setGravityValue(String gravity)
+	{
+		this.gravity = gravity;
+	}
+
+	@Override
+	public void setLayoutGravityValue(String gravity)
+	{
+		this.layoutGravity = gravity;
+	}
 	
 }

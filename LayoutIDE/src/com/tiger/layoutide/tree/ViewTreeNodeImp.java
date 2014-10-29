@@ -67,14 +67,14 @@ public class ViewTreeNodeImp implements IViewTreeNode
 			propertiesStrBuilder.append(String.format(Constant.LAYOUT_WEIGHT, view.getLayoutWeight()) + "\n");
 		}
 		
-		if(!TextUtils.isEmpty(view.getGravityStringValue()))
+		if(!TextUtils.isEmpty(view.getGravityValue()))
 		{
-			propertiesStrBuilder.append(String.format(Constant.GRAVITY, view.getGravityStringValue()) + "\n");
+			propertiesStrBuilder.append(String.format(Constant.GRAVITY, view.getGravityValue()) + "\n");
 		}
 		
-		if(!TextUtils.isEmpty(view.getLayoutGravityStringValue()))
+		if(!TextUtils.isEmpty(view.getLayoutGravityValue()))
 		{
-			propertiesStrBuilder.append(String.format(Constant.LAYOUT_GRAVITY, view.getLayoutGravityStringValue()) + "\n");
+			propertiesStrBuilder.append(String.format(Constant.LAYOUT_GRAVITY, view.getLayoutGravityValue()) + "\n");
 		}
 		
 		/********************************* Content *************************************/
@@ -176,6 +176,11 @@ public class ViewTreeNodeImp implements IViewTreeNode
 		if(!TextUtils.isEmpty(view.getCenterVertical()))
 		{
 			propertiesStrBuilder.append(String.format(Constant.CENTER_VERTICAL, view.getCenterVertical()) + "\n");
+		}
+		
+		if(!TextUtils.isEmpty(view.getOrientationValue()))
+		{
+			propertiesStrBuilder.append(String.format(Constant.LAYOUT_ORIENTATION, view.getOrientationValue()) + "\n");
 		}
 		
 		return propertiesStrBuilder.toString();

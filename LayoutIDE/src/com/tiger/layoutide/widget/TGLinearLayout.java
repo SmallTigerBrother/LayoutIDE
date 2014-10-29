@@ -8,6 +8,7 @@ import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Paint.Style;
 import android.util.AttributeSet;
+import android.view.Gravity;
 import android.view.View;
 import android.view.View.OnLongClickListener;
 import android.view.ViewGroup;
@@ -20,6 +21,7 @@ import com.tiger.layoutide.ide.ViewHelper;
 import com.tiger.layoutide.tree.IViewTree;
 import com.tiger.layoutide.tree.IViewTreeNode;
 import com.tiger.layoutide.tree.ViewTreeImp;
+import com.tiger.layoutide.utils.GravityValue;
 
 /**
  * @author Dalang
@@ -258,15 +260,15 @@ public class TGLinearLayout extends LinearLayout implements IViewGroup, IViewTre
 	}
 	
 	@Override
-	public String getGravityStringValue()
+	public String getGravityValue()
 	{
-		return viewGroupHelper.getGravityStringValue();
+		return viewGroupHelper.getGravityValue();
 	}
 
 	@Override
-	public String getLayoutGravityStringValue()
+	public String getLayoutGravityValue()
 	{
-		return viewGroupHelper.getLayoutGravityStringValue();
+		return viewGroupHelper.getLayoutGravityValue();
 	}
 	
 	@Override
@@ -548,5 +550,54 @@ public class TGLinearLayout extends LinearLayout implements IViewGroup, IViewTre
 	public String getCenterHorizontal()
 	{
 		return viewGroupHelper.getCenterHorizontal();
+	}
+
+	@Override
+	public void setOrientationValue(String orientation)
+	{
+		viewGroupHelper.setOrientationValue(orientation);
+	}
+	
+	@Override
+	public String getOrientationValue()
+	{
+		return viewGroupHelper.getOrientationValue();
+	}
+
+	@Override
+	public void setGravityValue(String gravity)
+	{
+		int intGravity = GravityValue.getIntValue(gravity);
+		this.setGravity(intGravity);
+		if(intGravity != Gravity.NO_GRAVITY)
+		{
+			viewGroupHelper.setGravityValue(gravity);
+		}
+		else
+		{
+			viewGroupHelper.setGravityValue(null);
+		}
+	}
+
+	@Override
+	public void setLayoutGravityValue(String gravity)
+	{
+		int intGravity = GravityValue.getIntValue(gravity);
+		int childCount = getChildCount();
+		for(int i = 0; i < childCount; i++)
+		{
+			LinearLayout.LayoutParams layoutParams = (LayoutParams) getChildAt(i).getLayoutParams();
+			layoutParams.gravity = intGravity;
+			getChildAt(i).setLayoutParams(layoutParams);
+		}
+		
+		if(intGravity != Gravity.NO_GRAVITY)
+		{
+			viewGroupHelper.setLayoutGravityValue(gravity);
+		}
+		else
+		{
+			viewGroupHelper.setLayoutGravityValue(null);
+		}
 	}
 }
