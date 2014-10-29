@@ -67,11 +67,6 @@ public class ViewTreeNodeImp implements IViewTreeNode
 			propertiesStrBuilder.append(String.format(Constant.LAYOUT_WEIGHT, view.getLayoutWeight()) + "\n");
 		}
 		
-		if(!TextUtils.isEmpty(view.getGravityValue()))
-		{
-			propertiesStrBuilder.append(String.format(Constant.GRAVITY, view.getGravityValue()) + "\n");
-		}
-		
 		if(!TextUtils.isEmpty(view.getLayoutGravityValue()))
 		{
 			propertiesStrBuilder.append(String.format(Constant.LAYOUT_GRAVITY, view.getLayoutGravityValue()) + "\n");
@@ -92,6 +87,11 @@ public class ViewTreeNodeImp implements IViewTreeNode
 		if(!TextUtils.isEmpty(view.getTextColor()))
 		{
 			propertiesStrBuilder.append(String.format(Constant.TEXT_COLOR, view.getTextColor()) + "\n");
+		}
+		
+		if(!TextUtils.isEmpty(view.getGravityValue()))
+		{
+			propertiesStrBuilder.append(String.format(Constant.GRAVITY, view.getGravityValue()) + "\n");
 		}
 		
 		/********************************* BackGround *************************************/
