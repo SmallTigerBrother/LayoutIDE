@@ -7,7 +7,11 @@
     <string-array name="align_parent_values">
         <item>false</item>
         <item >true</item>
-        
+    </string-array>
+    
+     <string-array name="linearlayout_orientation">
+        <item>horizontal</item>
+        <item >vertical</item>
     </string-array>
 
 </resources>
