@@ -111,6 +111,12 @@ public class TGListView extends ListView implements IViewGroup, IViewTree, OnLon
 	{
 		return "ListView";
 	}
+	
+	@Override
+	public String getPackageName()
+	{
+		return "android.widget";
+	}
 
 	@Override
 	public void setLayoutWidth(String layoutWidth)

@@ -96,6 +96,12 @@ public class TGImageView extends ImageView implements IViewTreeNode, IView, OnLo
 	{
 		return "ImageView";
 	}
+	
+	@Override
+	public String getPackageName()
+	{
+		return "android.widget";
+	}
 
 	@Override
 	public String getIdName()

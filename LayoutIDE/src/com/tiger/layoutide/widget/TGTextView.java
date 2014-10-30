@@ -171,6 +171,12 @@ public class TGTextView extends TextView implements IViewTreeNode, IView, ISelec
 	{
 		return "TextView";
 	}
+	
+	@Override
+	public String getPackageName()
+	{
+		return "android.widget";
+	}
 
 	@Override
 	public String getIdName()

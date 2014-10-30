@@ -5,6 +5,8 @@ import android.view.View;
 
 public interface IView extends ISelectable
 {
+	String getPackageName();
+	
 	String getClassSimpleName();
 	
 	void setIdName(String idName);

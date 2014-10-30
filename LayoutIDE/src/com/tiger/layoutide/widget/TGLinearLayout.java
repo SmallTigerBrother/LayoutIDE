@@ -139,6 +139,12 @@ public class TGLinearLayout extends LinearLayout implements IViewGroup, IViewTre
 	{
 		return "LinearLayout";
 	}
+	
+	@Override
+	public String getPackageName()
+	{
+		return "android.widget";
+	}
 
 	@Override
 	public void setLayoutWidth(String layoutWidth)

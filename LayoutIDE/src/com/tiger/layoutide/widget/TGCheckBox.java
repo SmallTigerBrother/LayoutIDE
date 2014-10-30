@@ -143,6 +143,12 @@ public class TGCheckBox extends CheckBox implements IViewTreeNode, IView, OnLong
 	}
 
 	@Override
+	public String getPackageName()
+	{
+		return "android.widget";
+	}
+	
+	@Override
 	public String getIdName()
 	{
 		return viewHelper.getIdName();

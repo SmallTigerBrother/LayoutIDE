@@ -147,6 +147,12 @@ public class TGRelativeLayout extends RelativeLayout implements IViewTree,IViewG
 	}
 
 	@Override
+	public String getPackageName()
+	{
+		return "android.widget";
+	}
+	
+	@Override
 	public void setLayoutWidth(String layoutWidth)
 	{
 		viewGroupHelper.setLayoutWidth(layoutWidth);

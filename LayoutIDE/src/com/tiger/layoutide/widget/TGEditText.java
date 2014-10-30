@@ -140,6 +140,12 @@ public class TGEditText extends EditText implements IViewTreeNode, IView, OnLong
 	{
 		return "EditText";
 	}
+	
+	@Override
+	public String getPackageName()
+	{
+		return "android.widget";
+	}
 
 	@Override
 	public String getIdName()

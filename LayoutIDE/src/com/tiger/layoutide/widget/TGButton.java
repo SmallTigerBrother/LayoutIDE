@@ -142,6 +142,12 @@ public class TGButton extends Button implements IViewTreeNode, IView, OnLongClic
 	}
 
 	@Override
+	public String getPackageName()
+	{
+		return "android.widget";
+	}
+	
+	@Override
 	public String getIdName()
 	{
 		return viewHelper.getIdName();
