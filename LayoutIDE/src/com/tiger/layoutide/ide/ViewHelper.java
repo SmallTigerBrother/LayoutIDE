@@ -38,9 +38,9 @@ public class ViewHelper implements IView
 	
 	private String layoutGravity;
 	
-	private int layoutWidth = Integer.MIN_VALUE;;
+	private String layoutWidth = "";
 	
-	private int layoutHeight = Integer.MIN_VALUE;
+	private String layoutHeight = "";
 	
 	private int leftMargin = Integer.MIN_VALUE;
 	
@@ -61,7 +61,7 @@ public class ViewHelper implements IView
 	}
 
 	@Override
-	public String getClassSimpleName()
+	public String getSimpleClassName()
 	{
 		return null;
 	}
@@ -116,29 +116,34 @@ public class ViewHelper implements IView
 	@Override
 	public String getLayoutWidth()
 	{
-		if(layoutWidth > Integer.MIN_VALUE)
+		if(!TextUtils.isEmpty(layoutWidth))
 		{
+			if(layoutWidth.equals(Constant.WRAP_CONTENT))
+			{
+				return layoutWidth;
+			}
+			else if(layoutWidth.equals(Constant.MATCH_PARENT))
+			{
+				return layoutWidth;
+			}
+			
 			return layoutWidth + "dp";
 		}
 		
 		ViewGroup.LayoutParams layoutParams = view.getLayoutParams();
-		if (null != layoutParams)
+		switch (layoutParams.width)
 		{
-			switch (layoutParams.width)
-			{
-				case ViewGroup.LayoutParams.WRAP_CONTENT:
-					return Constant.WRAP_CONTENT;
+			case ViewGroup.LayoutParams.WRAP_CONTENT:
+				layoutWidth = Constant.WRAP_CONTENT;
+				return layoutWidth;
 
-				case ViewGroup.LayoutParams.MATCH_PARENT:
-					return Constant.MATCH_PARENT;
+			case ViewGroup.LayoutParams.MATCH_PARENT:
+				layoutWidth = Constant.MATCH_PARENT;
+				return layoutWidth;
 
-				default:
-					return DisplayUtils.px2dip(view.getContext(), layoutParams.width) + "dp";
-			}
-		}
-		else
-		{
-			return "";
+			default:
+				layoutWidth = DisplayUtils.px2dip(view.getContext(), layoutParams.width) + "";
+				return layoutWidth + "dp";
 		}
 	}
 	
@@ -150,19 +155,20 @@ public class ViewHelper implements IView
 		if(Constant.WRAP_CONTENT.equals(layoutWidth.toString()))
 		{
 			layoutParams.width = ViewGroup.LayoutParams.WRAP_CONTENT;
-			this.layoutWidth = Integer.MIN_VALUE;
+			this.layoutWidth = layoutWidth;
 		}
 		else if(Constant.MATCH_PARENT.equals(layoutWidth.toString()))
 		{
 			layoutParams.width = ViewGroup.LayoutParams.MATCH_PARENT;
-			this.layoutWidth = Integer.MIN_VALUE;
+			this.layoutWidth = layoutWidth;
 		}
 		else 
 		{
 			try
 			{
-				this.layoutWidth =  Integer.valueOf(layoutWidth);
-				layoutParams.width = DisplayUtils.dip2px(view.getContext(),this.layoutWidth);
+				this.layoutWidth =  Integer.valueOf(layoutWidth) + "";
+				layoutParams.width = DisplayUtils.dip2px(view.getContext(),
+						Integer.valueOf(layoutWidth));
 			}
 			catch (Exception e)
 			{
@@ -176,8 +182,17 @@ public class ViewHelper implements IView
 	@Override
 	public String getLayoutHeight()
 	{
-		if(layoutHeight > Integer.MIN_VALUE)
+		if(!TextUtils.isEmpty(layoutHeight))
 		{
+			if(layoutHeight.equals(Constant.WRAP_CONTENT))
+			{
+				return layoutHeight;
+			}
+			else if(layoutHeight.equals(Constant.MATCH_PARENT))
+			{
+				return layoutHeight;
+			}
+			
 			return layoutHeight + "dp";
 		}
 		
@@ -187,13 +202,17 @@ public class ViewHelper implements IView
 			switch (layoutParams.height)
 			{
 				case ViewGroup.LayoutParams.WRAP_CONTENT:
+					layoutHeight = Constant.WRAP_CONTENT;
 					return Constant.WRAP_CONTENT;
 
 				case ViewGroup.LayoutParams.MATCH_PARENT:
+					layoutHeight = Constant.MATCH_PARENT;
 					return Constant.MATCH_PARENT;
 
 				default:
-					return DisplayUtils.px2dip(view.getContext(), layoutParams.height) + "dp";
+					layoutHeight = DisplayUtils.px2dip(view.getContext(), layoutParams.height) + "";
+					
+					return  layoutHeight + "dp";
 			}
 		}
 		else
@@ -209,19 +228,20 @@ public class ViewHelper implements IView
 		if(Constant.WRAP_CONTENT.equals(layoutHeight.toString()))
 		{
 			layoutParams.height = ViewGroup.LayoutParams.WRAP_CONTENT;
-			this.layoutHeight = Integer.MIN_VALUE;
+			this.layoutHeight = layoutHeight;
 		}
 		else if(Constant.MATCH_PARENT.equals(layoutHeight.toString()))
 		{
 			layoutParams.height = ViewGroup.LayoutParams.MATCH_PARENT;
-			this.layoutHeight = Integer.MIN_VALUE;
+			this.layoutHeight = layoutHeight;
 		}
 		else 
 		{
 			try
 			{
-				this.layoutHeight = Integer.valueOf(layoutHeight);
-				layoutParams.height = DisplayUtils.dip2px(view.getContext(), this.layoutHeight);
+				this.layoutHeight = Integer.valueOf(layoutHeight) + "";
+				layoutParams.height = DisplayUtils.dip2px(view.getContext(), 
+						Integer.valueOf(layoutHeight));
 			}
 			catch (Exception e)
 			{
