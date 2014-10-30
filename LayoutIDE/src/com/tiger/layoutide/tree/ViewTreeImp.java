@@ -3,6 +3,7 @@ package com.tiger.layoutide.tree;
 import java.util.LinkedList;
 import java.util.List;
 
+import com.tiger.code.model.constant.JIndentation;
 import com.tiger.layoutide.widget.IViewGroup;
 
 public class ViewTreeImp extends ViewTreeNodeImp implements IViewTree
@@ -49,6 +50,7 @@ public class ViewTreeImp extends ViewTreeNodeImp implements IViewTree
 			xmlOutPutStr.append(viewTreeNodes.get(i).getXMLString());
 		}
 		
+		xmlOutPutStr.append(JIndentation.NEW_LINE);
 		xmlOutPutStr.append("</" + viewGroup.getClassSimpleName() + ">");
 		
 		return xmlOutPutStr.toString();
