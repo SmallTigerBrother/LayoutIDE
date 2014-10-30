@@ -47,6 +47,10 @@ public interface IView extends ISelectable
 	
 	String getOrientationValue();
 	
+	String getLayoutGravityValue();
+	
+	void setLayoutGravityValue(String gravity);
+	
 	/************************** Background *********************************/
 	
 	String getBackgroundColor();
@@ -70,11 +74,6 @@ public interface IView extends ISelectable
 	String getGravityValue();
 	
 	void setGravityValue(String gravity);
-	
-	String getLayoutGravityValue();
-	
-	void setLayoutGravityValue(String gravity);
-	
 	
 	/*****************   RelativieLayout  ************************/
 	void setAlignParentLeft(String value);

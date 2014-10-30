@@ -512,7 +512,6 @@ public class TGImageView extends ImageView implements IViewTreeNode, IView, OnLo
 	@Override
 	public void setLayoutGravityValue(String gravity)
 	{
-		// TODO Auto-generated method stub
-		
+		viewHelper.setLayoutGravityValue(gravity);
 	}
 }

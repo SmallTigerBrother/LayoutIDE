@@ -539,8 +539,7 @@ public class TGCheckBox extends CheckBox implements IViewTreeNode, IView, OnLong
 	@Override
 	public void setLayoutGravityValue(String gravity)
 	{
-		// TODO Auto-generated method stub
-		
+		viewHelper.setLayoutGravityValue(gravity);
 	}
 
 }

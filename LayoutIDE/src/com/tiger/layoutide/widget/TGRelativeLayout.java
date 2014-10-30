@@ -742,7 +742,6 @@ public class TGRelativeLayout extends RelativeLayout implements IViewTree,IViewG
 	@Override
 	public void setLayoutGravityValue(String gravity)
 	{
-		// TODO Auto-generated method stub
-		
+		viewGroupHelper.setLayoutGravityValue(gravity);
 	}
 }

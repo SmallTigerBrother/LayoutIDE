@@ -538,8 +538,7 @@ public class TGEditText extends EditText implements IViewTreeNode, IView, OnLong
 	@Override
 	public void setLayoutGravityValue(String gravity)
 	{
-		// TODO Auto-generated method stub
-		
+		viewHelper.setLayoutGravityValue(gravity);
 	}
 
 }

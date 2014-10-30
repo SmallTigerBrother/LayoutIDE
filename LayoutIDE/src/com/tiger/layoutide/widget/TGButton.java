@@ -538,9 +538,6 @@ public class TGButton extends Button implements IViewTreeNode, IView, OnLongClic
 	@Override
 	public void setLayoutGravityValue(String gravity)
 	{
-		// TODO Auto-generated method stub
-		
+		viewHelper.setLayoutGravityValue(gravity);
 	}
-
-	
 }

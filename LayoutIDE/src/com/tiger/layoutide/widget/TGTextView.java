@@ -538,5 +538,6 @@ public class TGTextView extends TextView implements IViewTreeNode, IView, ISelec
 	@Override
 	public void setLayoutGravityValue(String gravity)
 	{
+		viewHelper.setLayoutGravityValue(gravity);
 	}
 }

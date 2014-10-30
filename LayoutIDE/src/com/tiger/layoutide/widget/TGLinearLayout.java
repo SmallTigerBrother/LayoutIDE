@@ -48,6 +48,8 @@ public class TGLinearLayout extends LinearLayout implements IViewGroup, IViewTre
 	{
 		super(context, attrs);
 		
+		this.setOrientation(HORIZONTAL);
+		
 		viewGroupHelper = new ViewGroupHelper(this);
 		
 		viewTree = new ViewTreeImp(this);
@@ -582,22 +584,6 @@ public class TGLinearLayout extends LinearLayout implements IViewGroup, IViewTre
 	@Override
 	public void setLayoutGravityValue(String gravity)
 	{
-		int intGravity = GravityValue.getIntValue(gravity);
-		int childCount = getChildCount();
-		for(int i = 0; i < childCount; i++)
-		{
-			LinearLayout.LayoutParams layoutParams = (LayoutParams) getChildAt(i).getLayoutParams();
-			layoutParams.gravity = intGravity;
-			getChildAt(i).setLayoutParams(layoutParams);
-		}
-		
-		if(intGravity != Gravity.NO_GRAVITY)
-		{
-			viewGroupHelper.setLayoutGravityValue(gravity);
-		}
-		else
-		{
-			viewGroupHelper.setLayoutGravityValue(null);
-		}
+		viewGroupHelper.setLayoutGravityValue(gravity);
 	}
 }

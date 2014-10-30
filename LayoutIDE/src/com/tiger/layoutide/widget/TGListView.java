@@ -541,6 +541,6 @@ public class TGListView extends ListView implements IViewGroup, IViewTree, OnLon
 	@Override
 	public void setLayoutGravityValue(String gravity)
 	{
-		
+		viewGroupHelper.setLayoutGravityValue(gravity);
 	}
 }
