@@ -1,5 +1,8 @@
 package com.tiger.code.model;
 
+import com.tiger.code.model.constant.JConstant;
+import com.tiger.code.model.constant.JIndentation;
+
 public class JArray extends JField
 {
 	public JArray(String actionScope, JClass valueType, String filedName)

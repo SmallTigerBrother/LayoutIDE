@@ -1,12 +1,8 @@
 package com.tiger.code.model;
 
-import com.tiger.code.model.primary.JBoolean;
-import com.tiger.code.model.primary.JDouble;
-import com.tiger.code.model.primary.JFloat;
-import com.tiger.code.model.primary.JInteger;
-import com.tiger.code.model.primary.JLong;
-import com.tiger.code.model.primary.JString;
-
+import com.tiger.code.model.constant.JConstant;
+import com.tiger.code.model.constant.JIndentation;
+import com.tiger.code.model.primary.Primatives;
 
 public class JImport extends JModel
 {
@@ -20,9 +16,13 @@ public class JImport extends JModel
 	@Override
 	public String toString()
 	{
-		if(!(clazz instanceof JInteger) && !(clazz instanceof JLong) && 
-				!(clazz instanceof JFloat) && !(clazz instanceof JDouble) &&
-				!(clazz instanceof JString) && !(clazz instanceof JBoolean))
+		if(!Primatives.INTEGER.equals(clazz.getSimpleClassName()) && 
+				!Primatives.FLOAT.equals(clazz.getSimpleClassName()) && 
+				!Primatives.DOUBLE.equals(clazz.getSimpleClassName()) && 
+				!Primatives.LONG.equals(clazz.getSimpleClassName()) && 
+				!Primatives.BOOLEAN.equals(clazz.getSimpleClassName()) && 
+				!Primatives.STRING.equals(clazz.getSimpleClassName()) && 
+				!Primatives.VOID.equals(clazz.getSimpleClassName()))
 		{
 			return "import" + JIndentation.BETWEEN + clazz.getClassName() +
 					JConstant.SIMECOLON_AND_NEWLINE;

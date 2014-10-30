@@ -2,15 +2,19 @@ package com.tiger.code.model;
 
 import java.util.ArrayList;
 
+import com.tiger.code.model.constant.JActionScope;
+import com.tiger.code.model.constant.JConstant;
+import com.tiger.code.model.constant.JIndentation;
+
 public class JClass extends JModel
 {
 	public static final String MODEL_NAME = "class";
 	
-	private JPackage jPackage;
+	private JPackage jPackage = new JPackage();
 	
 	private String simpleClazzName = "JClass";
 	
-	private String actionScope = JActionScope.PUBLIC;
+	private String actionScope = JActionScope.DEFAULT;
 	
 	private JClass superClazz;
 	
@@ -25,9 +29,21 @@ public class JClass extends JModel
 	public JClass(JPackage jPackage, String actionScope, String simpleClazzName, 
 			JClass superClaszz)
 	{
-		this.jPackage = jPackage;
-		this.actionScope = actionScope;
-		this.simpleClazzName = simpleClazzName;
+		if(null != jPackage)
+		{
+			this.jPackage = jPackage;
+		}
+		
+		if(null != actionScope)
+		{
+			this.actionScope = actionScope;
+		}
+		
+		if(null != simpleClazzName)
+		{
+			this.simpleClazzName = simpleClazzName;
+		}
+		
 		this.superClazz = superClaszz;
 		
 		imports = new ArrayList<JImport>();
@@ -84,9 +100,9 @@ public class JClass extends JModel
 		
 		//拼接类的声明
 		jCodeBuilder.append(JIndentation.NEW_LINE);
-		jCodeBuilder.append(actionScope + JIndentation.BETWEEN + MODEL_NAME + JIndentation.BETWEEN + simpleClazzName + 
-				JIndentation.NEW_LINE);
-		jCodeBuilder.append(JConstant.BRACE_LEFT + JIndentation.NEW_LINE);
+		jCodeBuilder.append(actionScope + MODEL_NAME + 
+				JIndentation.BETWEEN + simpleClazzName + JIndentation.NEW_LINE);
+		jCodeBuilder.append(JConstant.BRACE_LEFT);
 		
 		//拼接全局变量
 		for (int i = 0; i < fields.size(); i++)
@@ -135,4 +151,6 @@ public class JClass extends JModel
 	{
 		return implementInterfaces;
 	}
+	
+	
 }
