@@ -5,8 +5,8 @@ import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
 import java.util.Map;
-import java.util.Set;
 import java.util.Map.Entry;
+import java.util.Set;
 
 import android.util.Log;
 
@@ -15,17 +15,12 @@ import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import com.google.gson.JsonPrimitive;
-import com.tiger.code.model.JActionScope;
 import com.tiger.code.model.JArray;
 import com.tiger.code.model.JClass;
 import com.tiger.code.model.JField;
 import com.tiger.code.model.JPackage;
-import com.tiger.code.model.primary.JBoolean;
-import com.tiger.code.model.primary.JDouble;
-import com.tiger.code.model.primary.JFloat;
-import com.tiger.code.model.primary.JInteger;
-import com.tiger.code.model.primary.JLong;
-import com.tiger.code.model.primary.JString;
+import com.tiger.code.model.constant.JActionScope;
+import com.tiger.code.model.primary.Primatives;
 
 public class JSONClassGenerator
 {
@@ -90,33 +85,39 @@ public class JSONClassGenerator
 					Number number = jsonPrimitive.getAsNumber();
 					if(number instanceof Integer || number instanceof Short || number instanceof Byte)
 					{
-						JField jField = new JField(JActionScope.PRIVATE, new JInteger(), jsonEntry.getKey());
+						JField jField = new JField(JActionScope.PRIVATE, 
+								Primatives.newIntegerClass(), jsonEntry.getKey());
 						jClass.addField(jField);
 					}
 					else if(number instanceof Long)
 					{
-						JField jField = new JField(JActionScope.PRIVATE, new JLong(), jsonEntry.getKey());
+						JField jField = new JField(JActionScope.PRIVATE, 
+								Primatives.newLongClass(), jsonEntry.getKey());
 						jClass.addField(jField);
 					}
 					else if(number instanceof Float)
 					{
-						JField jField = new JField(JActionScope.PRIVATE, new JFloat(), jsonEntry.getKey());
+						JField jField = new JField(JActionScope.PRIVATE, 
+								Primatives.newFloatClass(), jsonEntry.getKey());
 						jClass.addField(jField);
 					}
 					else if(number instanceof Double || number instanceof BigDecimal)
 					{
-						JField jField = new JField(JActionScope.PRIVATE, new JDouble(), jsonEntry.getKey());
+						JField jField = new JField(JActionScope.PRIVATE, 
+								Primatives.newDoubleClass(), jsonEntry.getKey());
 						jClass.addField(jField);
 					}
 				}
 				else if(jsonPrimitive.isString())
 				{
-					JField jField = new JField(JActionScope.PRIVATE, new JString(), jsonEntry.getKey());
+					JField jField = new JField(JActionScope.PRIVATE, 
+							Primatives.newStringClass(), jsonEntry.getKey());
 					jClass.addField(jField);
 				}
 				else if(jsonPrimitive.isBoolean())
 				{
-					JField jField = new JField(JActionScope.PRIVATE, new JBoolean(), jsonEntry.getKey());
+					JField jField = new JField(JActionScope.PRIVATE, 
+							Primatives.newBooleanClass(), jsonEntry.getKey());
 					jClass.addField(jField);
 				}
 			}
