@@ -30,7 +30,7 @@ public class ViewTreeImp extends ViewTreeNodeImp implements IViewTree
 	@Override
 	public String getXMLString()
 	{
-		StringBuilder xmlOutPutStr = new StringBuilder("<" + viewGroup.getClassSimpleName() + "\n");
+		StringBuilder xmlOutPutStr = new StringBuilder("<" + viewGroup.getSimpleClassName() + "\n");
 		
 		if(viewGroup.isRootViewGroup())
 		{
@@ -51,7 +51,7 @@ public class ViewTreeImp extends ViewTreeNodeImp implements IViewTree
 		}
 		
 		xmlOutPutStr.append(JIndentation.NEW_LINE);
-		xmlOutPutStr.append("</" + viewGroup.getClassSimpleName() + ">");
+		xmlOutPutStr.append("</" + viewGroup.getSimpleClassName() + ">");
 		
 		return xmlOutPutStr.toString();
 	}

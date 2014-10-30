@@ -17,7 +17,7 @@ public class ViewTreeNodeImp implements IViewTreeNode
 	@Override
 	public String getXMLString()
 	{
-		StringBuilder xmlOutputStr = new StringBuilder("<" + view.getClassSimpleName() + "\n");
+		StringBuilder xmlOutputStr = new StringBuilder("<" + view.getSimpleClassName() + "\n");
 		
 		xmlOutputStr.append(getPropertiesString());
 		
