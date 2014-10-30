@@ -65,6 +65,12 @@ public class ViewHelper implements IView
 	{
 		return null;
 	}
+	
+	@Override
+	public String getPackageName()
+	{
+		return null;
+	}
 
 	public void setIdName(String idName)
 	{
