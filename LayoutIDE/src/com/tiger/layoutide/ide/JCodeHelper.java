@@ -3,22 +3,21 @@ package com.tiger.layoutide.ide;
 import java.util.ArrayList;
 import java.util.List;
 
+import android.annotation.SuppressLint;
+import android.text.TextUtils;
+import android.view.View;
+import android.view.ViewGroup;
+import android.widget.EditText;
+
 import com.mn.tiger.annonation.ViewById;
 import com.tiger.code.model.JAnnonation;
 import com.tiger.code.model.JAnnonation.ParamKeyValue;
 import com.tiger.code.model.JClass;
 import com.tiger.code.model.JField;
-import com.tiger.code.model.JStaticFinalField;
+import com.tiger.code.model.JPackage;
 import com.tiger.code.model.constant.JActionScope;
-import com.tiger.code.model.primary.JInteger;
 import com.tiger.layoutide.R;
-import com.tiger.layoutide.utils.Constant;
 import com.tiger.layoutide.widget.IView;
-
-import android.text.TextUtils;
-import android.view.View;
-import android.view.ViewGroup;
-import android.widget.EditText;
 
 public class JCodeHelper
 {
@@ -28,22 +27,7 @@ public class JCodeHelper
 	public static String outputInjectViewById(ViewGroup viewGroup)
 	{
 		JClass jClass = new JClass(null, JActionScope.DEFAULT, "ViewById", null);
-		View view = null;
-		for (int i = 0; i < viewGroup.getChildCount(); i++)
-		{
-			view = viewGroup.getChildAt(i);
-			if(!TextUtils.isEmpty(((IView)view).getIdName()))
-			{
-				jClass.addField(getInjectViewById(((IView)view).getClassSimpleName(),
-						((IView)view).getIdName()));
-			}
-			
-			if(view instanceof ViewGroup)
-			{
-				jcodeStr.append(outputInjectViewById((ViewGroup)view));
-			}
-		}
-		
+		jClass.addFields(getInjectViewFields(viewGroup));
 		return jClass.toString();
 	}
 	
@@ -53,7 +37,8 @@ public class JCodeHelper
 		
 		if(!TextUtils.isEmpty(((IView)view).getIdName()))
 		{
-			JClass valueType = new JClass(null, JActionScope.DEFAULT, 
+			JPackage jPackage = new JPackage(((IView)view).getPackageName());
+			JClass valueType = new JClass(jPackage, JActionScope.DEFAULT, 
 					((IView)view).getClassSimpleName(), null);
 			JField jField = new JField(JActionScope.PRIVATE, valueType, getViewName(
 					((IView)view).getIdName()));
@@ -66,27 +51,20 @@ public class JCodeHelper
 		
 		if(view instanceof ViewGroup)
 		{
-			fields.addAll(getInjectViewFields(view));
-		}
-		
-		for (int i = 0; i < viewGroup.getChildCount(); i++)
-		{
-			view = viewGroup.getChildAt(i);
-			if(!TextUtils.isEmpty(((IView)view).getIdName()))
+			for (int i = 0; i < ((ViewGroup)view).getChildCount(); i++)
 			{
-				jClass.addField(getInjectViewById(((IView)view).getClassSimpleName(),
-						((IView)view).getIdName()));
-			}
-			
-			if(view instanceof ViewGroup)
-			{
-				jcodeStr.append(outputInjectViewById((ViewGroup)view));
+				View childView = ((ViewGroup)view).getChildAt(i);
+				if(!TextUtils.isEmpty(((IView)childView).getIdName()))
+				{
+					fields.addAll(getInjectViewFields(childView));
+				}
 			}
 		}
 		
 		return fields;
 	}
 	
+	@SuppressLint("DefaultLocale")
 	private static String getViewName(String idName)
 	{
 		String[] strings = idName.split("_");
