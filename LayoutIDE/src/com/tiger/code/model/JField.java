@@ -70,7 +70,7 @@ public class JField extends JModel
 		
 		for(int i = 0; i < annonations.size(); i++)
 		{
-			stringBuilder.append(annonations.get(i).toString());
+			stringBuilder.append(JIndentation.FIELD + annonations.get(i).toString());
 		}
 		
 		stringBuilder.append(JIndentation.FIELD + actionScope + 
