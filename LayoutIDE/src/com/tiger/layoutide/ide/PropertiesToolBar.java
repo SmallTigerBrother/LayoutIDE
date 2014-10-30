@@ -122,7 +122,7 @@ public class PropertiesToolBar
 				contentToolBar.setVisibility(View.GONE);
 			}
 			
-			curViewName.setText(selectedView.getClassSimpleName());
+			curViewName.setText(selectedView.getSimpleClassName());
 			
 			if(!TextUtils.isEmpty(selectedView.getIdName()))
 			{

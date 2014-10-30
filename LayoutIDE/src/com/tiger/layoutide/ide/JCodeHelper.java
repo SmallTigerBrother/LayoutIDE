@@ -39,7 +39,7 @@ public class JCodeHelper
 		{
 			JPackage jPackage = new JPackage(((IView)view).getPackageName());
 			JClass valueType = new JClass(jPackage, JActionScope.DEFAULT, 
-					((IView)view).getClassSimpleName(), null);
+					((IView)view).getSimpleClassName(), null);
 			JField jField = new JField(JActionScope.PRIVATE, valueType, getViewName(
 					((IView)view).getIdName()));
 			JAnnonation jAnnonation = new JAnnonation(ViewById.class.getSimpleName());
