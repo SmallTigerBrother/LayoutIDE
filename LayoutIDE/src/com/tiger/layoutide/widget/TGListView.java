@@ -107,7 +107,7 @@ public class TGListView extends ListView implements IViewGroup, IViewTree, OnLon
 	}
 
 	@Override
-	public String getClassSimpleName()
+	public String getSimpleClassName()
 	{
 		return "ListView";
 	}

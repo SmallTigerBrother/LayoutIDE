@@ -137,7 +137,7 @@ public class TGCheckBox extends CheckBox implements IViewTreeNode, IView, OnLong
 	}
 	
 	@Override
-	public String getClassSimpleName()
+	public String getSimpleClassName()
 	{
 		return "CheckBox";
 	}

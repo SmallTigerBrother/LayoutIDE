@@ -136,7 +136,7 @@ public class TGButton extends Button implements IViewTreeNode, IView, OnLongClic
 	}
 	
 	@Override
-	public String getClassSimpleName()
+	public String getSimpleClassName()
 	{
 		return "Button";
 	}

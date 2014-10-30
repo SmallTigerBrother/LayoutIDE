@@ -141,7 +141,7 @@ public class TGRelativeLayout extends RelativeLayout implements IViewTree,IViewG
 	}
 
 	@Override
-	public String getClassSimpleName()
+	public String getSimpleClassName()
 	{
 		return "RelativeLayout";
 	}

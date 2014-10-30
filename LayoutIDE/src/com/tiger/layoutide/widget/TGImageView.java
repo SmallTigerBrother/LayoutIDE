@@ -92,7 +92,7 @@ public class TGImageView extends ImageView implements IViewTreeNode, IView, OnLo
 	}
 	
 	@Override
-	public String getClassSimpleName()
+	public String getSimpleClassName()
 	{
 		return "ImageView";
 	}

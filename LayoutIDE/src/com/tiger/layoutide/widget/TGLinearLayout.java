@@ -135,7 +135,7 @@ public class TGLinearLayout extends LinearLayout implements IViewGroup, IViewTre
 	}
 
 	@Override
-	public String getClassSimpleName()
+	public String getSimpleClassName()
 	{
 		return "LinearLayout";
 	}

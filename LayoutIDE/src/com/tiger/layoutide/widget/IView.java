@@ -7,7 +7,7 @@ public interface IView extends ISelectable
 {
 	String getPackageName();
 	
-	String getClassSimpleName();
+	String getSimpleClassName();
 	
 	void setIdName(String idName);
 	

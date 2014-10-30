@@ -167,7 +167,7 @@ public class TGTextView extends TextView implements IViewTreeNode, IView, ISelec
 	}
 
 	@Override
-	public String getClassSimpleName()
+	public String getSimpleClassName()
 	{
 		return "TextView";
 	}

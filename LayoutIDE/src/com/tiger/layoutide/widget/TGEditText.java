@@ -136,7 +136,7 @@ public class TGEditText extends EditText implements IViewTreeNode, IView, OnLong
 	}
 	
 	@Override
-	public String getClassSimpleName()
+	public String getSimpleClassName()
 	{
 		return "EditText";
 	}
