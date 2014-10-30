@@ -32,7 +32,7 @@ public class JAnnonation extends JModel
 			annonationBuilder.append(paramKeyValues.get(i).toString());
 			if(i != paramKeyValues.size() - 1)
 			{
-				annonationBuilder.append(JConstant.COMMA);
+				annonationBuilder.append(JConstant.COMMA + JIndentation.BETWEEN);
 			}
 		}
 		
@@ -70,7 +70,7 @@ public class JAnnonation extends JModel
 		@Override
 		public String toString()
 		{
-			return key + JConstant.ASSIGNMENT + value+ JIndentation.BETWEEN;
+			return key + JConstant.ASSIGNMENT + value;
 		}
 	}
 }
