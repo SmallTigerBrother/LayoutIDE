@@ -1,6 +1,7 @@
 package com.tiger.code.model;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import com.tiger.code.model.constant.JActionScope;
 import com.tiger.code.model.constant.JConstant;
@@ -69,6 +70,14 @@ public class JClass extends JModel
 		fields.add(field);
 	}
 	
+	public void addFields(List<JField> fields)
+	{
+		for (int i = 0; i < fields.size(); i++)
+		{
+			addField(fields.get(i));
+		}
+	}
+	
 	public void addMethod(JMethod method)
 	{
 		methods.add(method);
@@ -107,7 +116,7 @@ public class JClass extends JModel
 		//拼接全局变量
 		for (int i = 0; i < fields.size(); i++)
 		{
-			jCodeBuilder.append(fields.get(i).toString());
+			jCodeBuilder.append(fields.get(i).toString() + JIndentation.NEW_LINE);
 		}
 		
 		//TODO 拼接方法
