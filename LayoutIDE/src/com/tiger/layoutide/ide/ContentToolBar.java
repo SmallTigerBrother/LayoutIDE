@@ -3,7 +3,6 @@ package com.tiger.layoutide.ide;
 import android.content.Context;
 import android.text.Editable;
 import android.text.TextUtils;
-import android.text.TextWatcher;
 import android.util.AttributeSet;
 import android.view.View;
 import android.widget.AdapterView;
@@ -16,6 +15,8 @@ import android.widget.Toast;
 import com.mn.tiger.annonation.ViewById;
 import com.mn.tiger.utility.ViewInjector;
 import com.tiger.layoutide.R;
+import com.tiger.layoutide.ide.PropertiesToolBar.CustomTextWatcher;
+import com.tiger.layoutide.utils.GravityValue;
 import com.tiger.layoutide.widget.IView;
 
 public class ContentToolBar extends FrameLayout
@@ -45,18 +46,8 @@ public class ContentToolBar extends FrameLayout
 		inflate(getContext(),R.layout.content_tool_bar , this);
 		ViewInjector.initInjectedView(this, this);
 		
-		textEditText.addTextChangedListener(new TextWatcher()
+		textEditText.addTextChangedListener(new CustomTextWatcher()
 		{
-			@Override
-			public void onTextChanged(CharSequence s, int start, int before, int count)
-			{
-			}
-			
-			@Override
-			public void beforeTextChanged(CharSequence s, int start, int count, int after)
-			{
-			}
-			
 			@Override
 			public void afterTextChanged(Editable s)
 			{
@@ -78,18 +69,8 @@ public class ContentToolBar extends FrameLayout
 			}
 		});
 		
-		textColorEditText.addTextChangedListener(new TextWatcher()
+		textColorEditText.addTextChangedListener(new CustomTextWatcher()
 		{
-			@Override
-			public void onTextChanged(CharSequence s, int start, int before, int count)
-			{
-			}
-			
-			@Override
-			public void beforeTextChanged(CharSequence s, int start, int count, int after)
-			{
-			}
-			
 			@Override
 			public void afterTextChanged(Editable s)
 			{
@@ -107,18 +88,8 @@ public class ContentToolBar extends FrameLayout
 			}
 		});
 		
-		textSizeEditText.addTextChangedListener(new TextWatcher()
+		textSizeEditText.addTextChangedListener(new CustomTextWatcher()
 		{
-			@Override
-			public void onTextChanged(CharSequence s, int start, int before, int count)
-			{
-			}
-			
-			@Override
-			public void beforeTextChanged(CharSequence s, int start, int count, int after)
-			{
-			}
-			
 			@Override
 			public void afterTextChanged(Editable s)
 			{
@@ -141,7 +112,14 @@ public class ContentToolBar extends FrameLayout
 			@Override
 			public void onItemSelected(AdapterView<?> parent, View view, int position, long id)
 			{
-				parent.getAdapter().getItem(position).toString();
+				if(null != selectedView)
+				{
+					selectedView.setGravityValue(parent.getAdapter().getItem(position).toString());
+				}
+				else
+				{
+					Toast.makeText(getContext(), "Please select one View before edit the property", Toast.LENGTH_SHORT).show();
+				}
 			}
 
 			@Override
@@ -182,6 +160,77 @@ public class ContentToolBar extends FrameLayout
 			{
 				textColorEditText.setText("");
 			}
+			
+			resetGravity();
+		}
+	}
+	
+	private void resetGravity()
+	{
+		String layoutGravity = selectedView.getLayoutGravityValue();
+		if(TextUtils.isEmpty(layoutGravity))
+		{
+			gravitySelector.setSelection(0);
+		}
+		else if(GravityValue.TOP.equals(layoutGravity))
+		{
+			gravitySelector.setSelection(2);
+		}
+		else if(GravityValue.BOTTOM.equals(layoutGravity))
+		{
+			gravitySelector.setSelection(3);
+		}
+		else if(GravityValue.LEFT.equals(layoutGravity))
+		{
+			gravitySelector.setSelection(4);
+		}
+		else if(GravityValue.RIGHT.equals(layoutGravity))
+		{
+			gravitySelector.setSelection(5);
+		}
+		else if(GravityValue.CENTER.equals(layoutGravity))
+		{
+			gravitySelector.setSelection(1);
+		}
+		else if(GravityValue.CENTER_HORIZONTAL.equals(layoutGravity))
+		{
+			gravitySelector.setSelection(7);
+		}
+		else if(GravityValue.CENTER_VERTICAL.equals(layoutGravity))
+		{
+			gravitySelector.setSelection(6);
+		}
+		else if(GravityValue.LEFT_ADN_BOTTOM.equals(layoutGravity))
+		{
+			gravitySelector.setSelection(9);
+		}
+		else if(GravityValue.LEFT_ADN_TOP.equals(layoutGravity))
+		{
+			gravitySelector.setSelection(8);
+		}
+		else if(GravityValue.LEFT_AND_CENTER_VERTICAL.equals(layoutGravity))
+		{
+			gravitySelector.setSelection(14);
+		}
+		else if(GravityValue.RIGHT_AND_BOTTOM.equals(layoutGravity))
+		{
+			gravitySelector.setSelection(11);
+		}
+		else if(GravityValue.RIGHT_AND_TOP.equals(layoutGravity))
+		{
+			gravitySelector.setSelection(10);
+		}
+		else if(GravityValue.RIGHT_AND_CENTER_VERTICAL.equals(layoutGravity))
+		{
+			gravitySelector.setSelection(15);
+		}
+		else if(GravityValue.TOP_AND_CENTER_HORIZONTAL.equals(layoutGravity))
+		{
+			gravitySelector.setSelection(12);
+		}
+		else if(GravityValue.BOTTOM_AND_CENTER_HORIZONTAL.equals(layoutGravity))
+		{
+			gravitySelector.setSelection(13);
 		}
 	}
 	

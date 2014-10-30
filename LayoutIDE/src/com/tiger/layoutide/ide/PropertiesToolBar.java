@@ -70,18 +70,8 @@ public class PropertiesToolBar
 		
 		this.context = mainView.getContext();
 		
-		idEditText.addTextChangedListener(new TextWatcher()
+		idEditText.addTextChangedListener(new CustomTextWatcher()
 		{
-			@Override
-			public void onTextChanged(CharSequence s, int start, int before, int count)
-			{
-			}
-			
-			@Override
-			public void beforeTextChanged(CharSequence s, int start, int count, int after)
-			{
-			}
-			
 			@Override
 			public void afterTextChanged(Editable s)
 			{
@@ -194,5 +184,19 @@ public class PropertiesToolBar
 	public static interface OnSelectedViewChanagedListener
 	{
 		void onSelectedViewChanaged(IView lastSelectedView, IView curSelectedView);
+	}
+	
+	public static abstract class CustomTextWatcher implements TextWatcher
+	{
+		@Override
+		public void beforeTextChanged(CharSequence s, int start, int count, int after)
+		{
+		}
+
+		@Override
+		public void onTextChanged(CharSequence s, int start, int before, int count)
+		{
+			
+		}
 	}
 }

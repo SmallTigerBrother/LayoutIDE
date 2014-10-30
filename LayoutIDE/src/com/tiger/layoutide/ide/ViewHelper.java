@@ -2,6 +2,7 @@ package com.tiger.layoutide.ide;
 
 import android.graphics.Color;
 import android.text.TextUtils;
+import android.view.Gravity;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.ViewGroup.MarginLayoutParams;
@@ -11,6 +12,7 @@ import android.widget.RelativeLayout;
 import com.mn.tiger.utility.DisplayUtils;
 import com.mn.tiger.utility.LogTools;
 import com.tiger.layoutide.utils.Constant;
+import com.tiger.layoutide.utils.GravityValue;
 import com.tiger.layoutide.widget.IView;
 import com.tiger.layoutide.widget.TGRelativeLayout;
 
@@ -423,11 +425,36 @@ public class ViewHelper implements IView
 	{
 		return gravity;
 	}
+	
+	@Override
+	public void setGravityValue(String gravity)
+	{
+		this.gravity = gravity;
+	}
 
 	@Override
 	public String getLayoutGravityValue()
 	{
 		return layoutGravity;
+	}
+	
+	@Override
+	public void setLayoutGravityValue(String gravity)
+	{
+		if(view.getLayoutParams() instanceof LinearLayout.LayoutParams)
+		{
+			LinearLayout.LayoutParams layoutParams = (LinearLayout.LayoutParams) view.getLayoutParams();
+			layoutParams.gravity = GravityValue.getIntValue(gravity);
+			view.setLayoutParams(layoutParams);
+			if(layoutParams.gravity == Gravity.NO_GRAVITY)
+			{
+				this.layoutGravity = null;
+			}
+			else
+			{
+				this.layoutGravity = gravity;
+			}
+		}
 	}
 
 	@Override
@@ -952,18 +979,6 @@ public class ViewHelper implements IView
 		}
 		
 		return this.orientation;
-	}
-
-	@Override
-	public void setGravityValue(String gravity)
-	{
-		this.gravity = gravity;
-	}
-
-	@Override
-	public void setLayoutGravityValue(String gravity)
-	{
-		this.layoutGravity = gravity;
 	}
 	
 }

@@ -1,38 +1,43 @@
 package com.tiger.layoutide.ide;
 
-import com.mn.tiger.annonation.ViewById;
-import com.mn.tiger.utility.ViewInjector;
-import com.tiger.layoutide.R;
-import com.tiger.layoutide.widget.IView;
-
 import android.content.Context;
 import android.text.Editable;
 import android.text.TextUtils;
-import android.text.TextWatcher;
 import android.util.AttributeSet;
-import android.widget.EditText;
+import android.view.View;
+import android.view.View.OnClickListener;
+import android.view.View.OnFocusChangeListener;
+import android.widget.ArrayAdapter;
+import android.widget.AutoCompleteTextView;
+import android.widget.Filter;
 import android.widget.FrameLayout;
 import android.widget.Toast;
 
-public class CommonPositionToolBar extends FrameLayout
+import com.mn.tiger.annonation.ViewById;
+import com.mn.tiger.utility.ViewInjector;
+import com.tiger.layoutide.R;
+import com.tiger.layoutide.ide.PropertiesToolBar.CustomTextWatcher;
+import com.tiger.layoutide.widget.IView;
+
+public class CommonPositionToolBar extends FrameLayout implements OnClickListener, OnFocusChangeListener
 {
 	@ViewById(id = R.id.layout_width_editor)
-	private EditText layoutWidthEditText;
+	private AutoCompleteTextView layoutWidthEditText;
 	
 	@ViewById(id = R.id.layout_height_eidtor)
-	private EditText layoutHeightEditText;
+	private AutoCompleteTextView layoutHeightEditText;
 	
 	@ViewById(id = R.id.layout_marginleft_editor)
-	private EditText marginLeftEditText;
+	private AutoCompleteTextView marginLeftEditText;
 	
 	@ViewById(id = R.id.layout_marginRight_editor)
-	private EditText marginRightEditText;
+	private AutoCompleteTextView marginRightEditText;
 	
 	@ViewById(id = R.id.layout_marginTop_editor)
-	private EditText marginTopEditText;
+	private AutoCompleteTextView marginTopEditText;
 	
 	@ViewById(id = R.id.layout_marginBottom_editor)
-	private EditText marginBottomEditText;
+	private AutoCompleteTextView marginBottomEditText;
 	
 	private IView selectedView = null;
 	
@@ -47,18 +52,36 @@ public class CommonPositionToolBar extends FrameLayout
 		inflate(getContext(),R.layout.common_position_tool_bar , this);
 		ViewInjector.initInjectedView(this, this);
 		
-		layoutWidthEditText.addTextChangedListener(new TextWatcher()
+		final CharSequence[] selfAdaptions = {"match_parent","wrap_content"}; 
+		final ArrayAdapter<CharSequence> widthAndHeightadapter = new ArrayAdapter<CharSequence>(
+				getContext(), android.R.layout.simple_spinner_item, selfAdaptions)
 		{
+			private Filter filter;
 			@Override
-			public void onTextChanged(CharSequence s, int start, int before, int count)
+			public Filter getFilter()
 			{
+				if(null == filter)
+				{
+					filter = new Filter()
+					{
+						@Override
+						protected FilterResults performFiltering(CharSequence constraint)
+						{
+							return null;
+						}
+
+						@Override
+						protected void publishResults(CharSequence constraint, FilterResults results)
+						{
+						}
+					};
+				}
+				return filter; 
 			}
-			
-			@Override
-			public void beforeTextChanged(CharSequence s, int start, int count, int after)
-			{
-			}
-			
+		};
+		
+		layoutWidthEditText.addTextChangedListener(new CustomTextWatcher()
+		{
 			@Override
 			public void afterTextChanged(Editable s)
 			{
@@ -75,19 +98,13 @@ public class CommonPositionToolBar extends FrameLayout
 				}
 			}
 		});
+		layoutWidthEditText.setAdapter(widthAndHeightadapter);
+		layoutWidthEditText.setOnClickListener(this);
+		layoutWidthEditText.setOnFocusChangeListener(this);
+		layoutWidthEditText.setThreshold(1);
 		
-		layoutHeightEditText.addTextChangedListener(new TextWatcher()
+		layoutHeightEditText.addTextChangedListener(new CustomTextWatcher()
 		{
-			@Override
-			public void onTextChanged(CharSequence s, int start, int before, int count)
-			{
-			}
-			
-			@Override
-			public void beforeTextChanged(CharSequence s, int start, int count, int after)
-			{
-			}
-			
 			@Override
 			public void afterTextChanged(Editable s)
 			{
@@ -104,19 +121,42 @@ public class CommonPositionToolBar extends FrameLayout
 				}
 			}
 		});
+		layoutHeightEditText.setAdapter(widthAndHeightadapter);
+		layoutHeightEditText.setThreshold(1);
+		layoutHeightEditText.setOnClickListener(this);
+		layoutHeightEditText.setOnFocusChangeListener(this);
 		
-		marginLeftEditText.addTextChangedListener(new TextWatcher()
+		//TODO 可自行替换显示内容
+		CharSequence[] customMargins = {"5","10","15","20","30"}; 
+		ArrayAdapter<CharSequence> marginAdapter = new ArrayAdapter<CharSequence>(getContext(),
+				android.R.layout.simple_spinner_item, customMargins)
 		{
+			private Filter filter;
 			@Override
-			public void onTextChanged(CharSequence s, int start, int before, int count)
+			public Filter getFilter()
 			{
+				if (null == filter)
+				{
+					filter = new Filter()
+					{
+						@Override
+						protected FilterResults performFiltering(CharSequence constraint)
+						{
+							return null;
+						}
+
+						@Override
+						protected void publishResults(CharSequence constraint, FilterResults results)
+						{
+						}
+					};
+				}
+				return filter;
 			}
-			
-			@Override
-			public void beforeTextChanged(CharSequence s, int start, int count, int after)
-			{
-			}
-			
+		};
+				
+		marginLeftEditText.addTextChangedListener(new CustomTextWatcher()
+		{
 			@Override
 			public void afterTextChanged(Editable s)
 			{
@@ -133,19 +173,14 @@ public class CommonPositionToolBar extends FrameLayout
 				}
 			}
 		});
+		marginLeftEditText.setAdapter(marginAdapter);
+		marginLeftEditText.setThreshold(1);
+		marginLeftEditText.setOnClickListener(this);
+		marginLeftEditText.setOnFocusChangeListener(this);
 		
-		marginRightEditText.addTextChangedListener(new TextWatcher()
+		
+		marginRightEditText.addTextChangedListener(new CustomTextWatcher()
 		{
-			@Override
-			public void onTextChanged(CharSequence s, int start, int before, int count)
-			{
-			}
-			
-			@Override
-			public void beforeTextChanged(CharSequence s, int start, int count, int after)
-			{
-			}
-			
 			@Override
 			public void afterTextChanged(Editable s)
 			{
@@ -162,19 +197,13 @@ public class CommonPositionToolBar extends FrameLayout
 				}
 			}
 		});
+		marginRightEditText.setAdapter(marginAdapter);
+		marginRightEditText.setThreshold(1);
+		marginRightEditText.setOnClickListener(this);
+		marginRightEditText.setOnFocusChangeListener(this);
 		
-		marginTopEditText.addTextChangedListener(new TextWatcher()
+		marginTopEditText.addTextChangedListener(new CustomTextWatcher()
 		{
-			@Override
-			public void onTextChanged(CharSequence s, int start, int before, int count)
-			{
-			}
-			
-			@Override
-			public void beforeTextChanged(CharSequence s, int start, int count, int after)
-			{
-			}
-			
 			@Override
 			public void afterTextChanged(Editable s)
 			{
@@ -191,19 +220,13 @@ public class CommonPositionToolBar extends FrameLayout
 				}
 			}
 		});
+		marginTopEditText.setAdapter(marginAdapter);
+		marginTopEditText.setThreshold(1);
+		marginTopEditText.setOnClickListener(this);
+		marginTopEditText.setOnFocusChangeListener(this);
 		
-		marginBottomEditText.addTextChangedListener(new TextWatcher()
+		marginBottomEditText.addTextChangedListener(new CustomTextWatcher()
 		{
-			@Override
-			public void onTextChanged(CharSequence s, int start, int before, int count)
-			{
-			}
-			
-			@Override
-			public void beforeTextChanged(CharSequence s, int start, int count, int after)
-			{
-			}
-			
 			@Override
 			public void afterTextChanged(Editable s)
 			{
@@ -220,6 +243,10 @@ public class CommonPositionToolBar extends FrameLayout
 				}
 			}
 		});
+		marginBottomEditText.setAdapter(marginAdapter);
+		marginBottomEditText.setThreshold(1);
+		marginBottomEditText.setOnClickListener(this);
+		marginBottomEditText.setOnFocusChangeListener(this);
 	}
 	
 	public void resetCommonPosition(IView selectedView)
@@ -291,6 +318,116 @@ public class CommonPositionToolBar extends FrameLayout
 			{
 				marginBottomEditText.setText("");
 			}
+		}
+	}
+
+	@Override
+	public void onFocusChange(View v, boolean hasFocus)
+	{
+		switch (v.getId())
+		{
+			case R.id.layout_width_editor:
+				if(hasFocus)
+				{
+					layoutWidthEditText.showDropDown();
+				}
+				else
+				{
+					layoutWidthEditText.dismissDropDown();
+				}
+				break;
+
+			case R.id.layout_height_eidtor:
+				if(hasFocus)
+				{
+					layoutHeightEditText.showDropDown();
+				}
+				else
+				{
+					layoutHeightEditText.dismissDropDown();
+				}
+				break;
+
+			case R.id.layout_marginleft_editor:
+				if(hasFocus)
+				{
+					marginLeftEditText.showDropDown();
+				}
+				else
+				{
+					marginLeftEditText.dismissDropDown();
+				}
+				break;
+
+			case R.id.layout_marginRight_editor:
+				if(hasFocus)
+				{
+					marginRightEditText.showDropDown();
+				}
+				else
+				{
+					marginRightEditText.dismissDropDown();
+				}
+				break;
+
+			case R.id.layout_marginTop_editor:
+				if(hasFocus)
+				{
+					marginTopEditText.showDropDown();
+				}
+				else
+				{
+					marginTopEditText.dismissDropDown();
+				}
+				break;
+
+			case R.id.layout_marginBottom_editor:
+				if(hasFocus)
+				{
+					marginBottomEditText.showDropDown();
+				}
+				else
+				{
+					marginBottomEditText.dismissDropDown();
+				}
+				break;
+
+			default:
+				break;
+		}
+	}
+
+	@Override
+	public void onClick(View v)
+	{
+		switch (v.getId())
+		{
+			case R.id.layout_width_editor:
+				layoutWidthEditText.showDropDown();
+				break;
+
+			case R.id.layout_height_eidtor:
+				layoutHeightEditText.showDropDown();
+				break;
+
+			case R.id.layout_marginleft_editor:
+				marginLeftEditText.showDropDown();
+				break;
+
+			case R.id.layout_marginRight_editor:
+				marginRightEditText.showDropDown();
+				break;
+
+			case R.id.layout_marginTop_editor:
+				marginTopEditText.showDropDown();
+				break;
+
+			case R.id.layout_marginBottom_editor:
+				marginBottomEditText.showDropDown();
+				break;
+
+			default:
+				break;
 		}
 	}
 }

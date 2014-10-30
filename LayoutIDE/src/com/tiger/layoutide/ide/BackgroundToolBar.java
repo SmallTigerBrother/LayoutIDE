@@ -1,18 +1,18 @@
 package com.tiger.layoutide.ide;
 
-import com.mn.tiger.annonation.ViewById;
-import com.mn.tiger.utility.ViewInjector;
-import com.tiger.layoutide.R;
-import com.tiger.layoutide.widget.IView;
-
 import android.content.Context;
 import android.text.Editable;
 import android.text.TextUtils;
-import android.text.TextWatcher;
 import android.util.AttributeSet;
 import android.widget.EditText;
 import android.widget.FrameLayout;
 import android.widget.Toast;
+
+import com.mn.tiger.annonation.ViewById;
+import com.mn.tiger.utility.ViewInjector;
+import com.tiger.layoutide.R;
+import com.tiger.layoutide.ide.PropertiesToolBar.CustomTextWatcher;
+import com.tiger.layoutide.widget.IView;
 
 public class BackgroundToolBar extends FrameLayout
 {
@@ -32,18 +32,8 @@ public class BackgroundToolBar extends FrameLayout
 		inflate(getContext(),R.layout.background_tool_bar , this);
 		ViewInjector.initInjectedView(this, this);
 		
-		backgroundColorEditText.addTextChangedListener(new TextWatcher()
+		backgroundColorEditText.addTextChangedListener(new CustomTextWatcher()
 		{
-			@Override
-			public void onTextChanged(CharSequence s, int start, int before, int count)
-			{
-			}
-			
-			@Override
-			public void beforeTextChanged(CharSequence s, int start, int count, int after)
-			{
-			}
-			
 			@Override
 			public void afterTextChanged(Editable s)
 			{

@@ -529,26 +529,25 @@ public class RelativiePositionToolBar extends FrameLayout
 	
 	private void resetCenterWhereSelector()
 	{
-
 		if(TextUtils.isEmpty(selectedView.getCenterInParent()) && TextUtils.isEmpty(selectedView.getCenterHorizontal()) &&
 				TextUtils.isEmpty(selectedView.getCenterVertical()))
 		{
-			alignParentSelector.setSelection(0);
+			centerWhereSelector.setSelection(0);
 		}
 		else if(!TextUtils.isEmpty(selectedView.getCenterInParent()) && TextUtils.isEmpty(selectedView.getCenterHorizontal()) &&
 				TextUtils.isEmpty(selectedView.getCenterVertical()))
 		{
-			alignParentSelector.setSelection(1);
+			centerWhereSelector.setSelection(1);
 		}
 		else if(TextUtils.isEmpty(selectedView.getCenterInParent()) && TextUtils.isEmpty(selectedView.getCenterHorizontal()) &&
 				!TextUtils.isEmpty(selectedView.getCenterVertical()))
 		{
-			alignParentSelector.setSelection(2);
+			centerWhereSelector.setSelection(2);
 		}
 		else if(TextUtils.isEmpty(selectedView.getCenterInParent()) && !TextUtils.isEmpty(selectedView.getCenterHorizontal()) &&
 				TextUtils.isEmpty(selectedView.getCenterVertical()))
 		{
-			alignParentSelector.setSelection(3);
+			centerWhereSelector.setSelection(3);
 		}
 	}
 }
