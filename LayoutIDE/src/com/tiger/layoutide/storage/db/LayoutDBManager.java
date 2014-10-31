@@ -5,14 +5,26 @@ import java.util.List;
 
 import android.content.Context;
 import android.text.TextUtils;
+import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 
 import com.mn.tiger.datastorage.TGDBManager;
 import com.mn.tiger.datastorage.db.exception.DbException;
 import com.mn.tiger.utility.LogTools;
 import com.tiger.layoutide.storage.model.ViewDBModel;
+import com.tiger.layoutide.utils.WidgetSimpleName;
 import com.tiger.layoutide.widget.IView;
 import com.tiger.layoutide.widget.IViewGroup;
+import com.tiger.layoutide.widget.TGButton;
+import com.tiger.layoutide.widget.TGCheckBox;
+import com.tiger.layoutide.widget.TGEditText;
+import com.tiger.layoutide.widget.TGImageView;
+import com.tiger.layoutide.widget.TGLinearLayout;
+import com.tiger.layoutide.widget.TGListView;
+import com.tiger.layoutide.widget.TGRelativeLayout;
+import com.tiger.layoutide.widget.TGTextView;
 
 public class LayoutDBManager
 {
@@ -35,9 +47,38 @@ public class LayoutDBManager
 		}
 	}
 	
-	public static IViewGroup getLayout(Context context,String projectName)
+	public static IView getLayout(Context context,String projectName)
 	{
-		return null;
+		List<ViewDBModel> viewDBModels = getViewDBModels(context, projectName);
+		if(viewDBModels.size() == 0)
+		{
+			return parseView(context, viewDBModels.get(0));
+		}
+		else
+		{
+			return (IView) parseViewGroup(context, viewDBModels);
+		}
+	}
+	
+	private static ViewGroup parseViewGroup(Context context, List<ViewDBModel> viewDBModels)
+	{
+		ViewGroup rootViewGroup = (ViewGroup) parseView(context, viewDBModels.get(0));
+		viewDBModels.remove(0);
+		while (viewDBModels.size() > 0)
+		{
+			IView view = parseView(context, viewDBModels.get(0));
+			if(view instanceof ViewGroup)
+			{
+				rootViewGroup.addView(parseViewGroup(context, viewDBModels));
+			}
+			else 
+			{
+				rootViewGroup.addView((View)view);
+			}
+			viewDBModels.remove(0);
+		}
+		
+		return rootViewGroup;
 	}
 	
 	private static List<ViewDBModel> getViewDBModels(Context context,String projectName)
@@ -74,6 +115,19 @@ public class LayoutDBManager
 	{
 		ViewDBModel viewDBModel = new ViewDBModel();
 		viewDBModel.setSimpleClassName(view.getSimpleClassName());
+		if(((View)view).getParent() instanceof LinearLayout)
+		{
+			viewDBModel.setParentViewClassName(WidgetSimpleName.LINEAR_LAYOUT);
+		}
+		else if(((View)view).getParent() instanceof RelativeLayout)
+		{
+			viewDBModel.setParentViewClassName(WidgetSimpleName.RELATIVE_LAYOUT);
+		}
+		else
+		{
+			viewDBModel.setParentViewClassName(WidgetSimpleName.VIEWGROUP);
+		}
+		
 		viewDBModel.setIdName(view.getIdName());
 		
 		if(!TextUtils.isEmpty(view.getLayoutWidth()))
@@ -124,7 +178,15 @@ public class LayoutDBManager
 		viewDBModel.setCenterHorizontal(view.getCenterHorizontal());
 		viewDBModel.setCenterVertical(view.getCenterVertical());
 		
-		viewDBModel.setText(view.getText().toString());
+		if(TextUtils.isEmpty(view.getText()))
+		{
+			viewDBModel.setText("");
+		}
+		else
+		{
+			viewDBModel.setText(view.getText().toString());
+		}
+		
 		viewDBModel.setTextSize(view.getTextSize());
 		viewDBModel.setTextColor(view.getTextColor());
 		viewDBModel.setGravity(view.getGravityValue());
@@ -134,8 +196,128 @@ public class LayoutDBManager
 		return viewDBModel;
 	}
 	
-	private static IView parseView(ViewDBModel viewDBModel)
+	private static IView parseView(Context context, ViewDBModel viewDBModel)
 	{
-		return null;
+		IView view = createNewView(context, viewDBModel);
+		
+		view.setIdName(viewDBModel.getIdName());
+		
+		if(!TextUtils.isEmpty(viewDBModel.getLayoutWidth()))
+		{
+			String width = viewDBModel.getLayoutWidth();
+			if(width.contains("dp"))
+			{
+				width = width.replace("dp", "");
+			}
+			view.setLayoutWidth(width);
+		}
+		
+		if(!TextUtils.isEmpty(viewDBModel.getLayoutHeight()))
+		{
+			String height = viewDBModel.getLayoutHeight();
+			if(height.contains("dp"))
+			{
+				height = height.replace("dp", "");
+			}
+			view.setLayoutHeight(height);
+		}
+		
+		view.setLayoutMarginLeft(viewDBModel.getLeftMargin() + "");
+		view.setLayoutMarginRight(viewDBModel.getRightMargin() + "");
+		view.setLayoutMarginTop(viewDBModel.getTopMargin() + "");
+		view.setLayoutMarginBottom(viewDBModel.getBottomMargin() + "'");
+		
+		view.setLayoutWeight(viewDBModel.getLayoutWeight() + "");
+		view.setLayoutGravityValue(viewDBModel.getLayoutGravity());
+		view.setOrientationValue(viewDBModel.getOrientation());
+		
+		view.setAlignParentLeft(viewDBModel.getAlignParentLeft());
+		view.setAlignParentRight(viewDBModel.getAlignParentRight());
+		view.setAlignParentTop(viewDBModel.getAlignParentTop());
+		view.setAlignParentBottom(viewDBModel.getAlignParentBottom());
+		
+		view.setAbove(viewDBModel.getAbove());
+		view.setBelow(viewDBModel.getBelow());
+		view.setToLeftOf(viewDBModel.getToLeftOf());
+		view.setToRightOf(viewDBModel.getToRightOf());
+		
+		view.setAlignLeft(viewDBModel.getAlignLeft());
+		view.setAlignRight(viewDBModel.getAlignRight());
+		view.setAlignTop(viewDBModel.getAlignTop());
+		view.setAlignBottom(viewDBModel.getAlignBottom());
+		
+		view.setCenterInParent(viewDBModel.getCenterInParent());
+		view.setCenterHorizontal(viewDBModel.getCenterHorizontal());
+		view.setCenterVertical(viewDBModel.getCenterVertical());
+		
+		view.setText(viewDBModel.getText());
+		view.setTextSize(viewDBModel.getTextSize() + "");
+		view.setTextColor(viewDBModel.getTextColor());
+		view.setGravityValue(viewDBModel.getGravity());
+		
+		view.setBackgroundColor(viewDBModel.getBackgroundColor());
+		
+		return view;
+	}
+	
+	private static IView createNewView(Context context, ViewDBModel viewDBModel)
+	{
+		View view = null;
+		if(WidgetSimpleName.TEXT_VIEW.equals(viewDBModel.getSimpleClassName()))
+		{
+			view = new TGTextView(context);
+		}
+		else if(WidgetSimpleName.BUTTON.equals(viewDBModel.getSimpleClassName()))
+		{
+			view = new TGButton(context);
+		}
+		else if(WidgetSimpleName.EDIT_TEXT.equals(viewDBModel.getSimpleClassName()))
+		{
+			view = new TGEditText(context);
+		}
+		else if(WidgetSimpleName.IMAGE_VIEW.equals(viewDBModel.getSimpleClassName()))
+		{
+			view = new TGImageView(context);
+		}
+		else if(WidgetSimpleName.CHECK_BOX.equals(viewDBModel.getSimpleClassName()))
+		{
+			view = new TGCheckBox(context);
+		}
+		else if(WidgetSimpleName.LINEAR_LAYOUT.equals(viewDBModel.getSimpleClassName()))
+		{
+			view = new TGLinearLayout(context);
+		}
+		else if(WidgetSimpleName.RELATIVE_LAYOUT.equals(viewDBModel.getSimpleClassName()))
+		{
+			view = new TGRelativeLayout(context);
+		}
+		else if(WidgetSimpleName.LISTVIEW.equals(viewDBModel.getSimpleClassName()))
+		{
+			view = new TGListView(context);
+		}
+		
+		if(WidgetSimpleName.LINEAR_LAYOUT.equals(viewDBModel.getParentViewClassName()))
+		{
+			LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams
+					(LinearLayout.LayoutParams.WRAP_CONTENT, 
+							LinearLayout.LayoutParams.WRAP_CONTENT);
+			view.setLayoutParams(layoutParams);
+		}
+		else if(WidgetSimpleName.RELATIVE_LAYOUT.equals(viewDBModel.getParentViewClassName()))
+		{
+			RelativeLayout.LayoutParams layoutParams = new RelativeLayout.LayoutParams
+					(RelativeLayout.LayoutParams.WRAP_CONTENT, 
+							RelativeLayout.LayoutParams.WRAP_CONTENT);
+			view.setLayoutParams(layoutParams);
+		}
+		else
+		{
+			ViewGroup.LayoutParams layoutParams = new ViewGroup.LayoutParams
+					(ViewGroup.LayoutParams.WRAP_CONTENT, 
+							ViewGroup.LayoutParams.WRAP_CONTENT);
+			view.setLayoutParams(layoutParams);
+		}
+		
+		return (IView) view;
 	}
 }
