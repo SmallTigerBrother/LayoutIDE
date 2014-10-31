@@ -1,12 +1,16 @@
 package com.tiger.layoutide.storage.model;
 
-import com.tiger.layoutide.utils.Constant;
+import com.tiger.layoutide.utils.XmlOutputConstant;
 
 public class ViewDBModel
 {
+	private int _id;
+	
 	private String simpleClassName = "";
 	
 	private String idName = "";
+	
+	private String parentViewClassName = "";
 
 	private String textColor = "";
 
@@ -36,13 +40,13 @@ public class ViewDBModel
 	
 	private float layoutWeight = 0;
 	
-	private String alignParentLeft = Constant.FALSE;
+	private String alignParentLeft = XmlOutputConstant.FALSE;
 	
-	private String alignParentRight = Constant.FALSE;
+	private String alignParentRight = XmlOutputConstant.FALSE;
 	
-	private String alignParentTop = Constant.FALSE;
+	private String alignParentTop = XmlOutputConstant.FALSE;
 	
-	private String alignParentBottom = Constant.FALSE;
+	private String alignParentBottom = XmlOutputConstant.FALSE;
 	
 	private String toLeftOf = "";
 	
@@ -374,5 +378,25 @@ public class ViewDBModel
 	public void setLayoutWeight(float layoutWeight)
 	{
 		this.layoutWeight = layoutWeight;
+	}
+
+	public String getParentViewClassName()
+	{
+		return parentViewClassName;
+	}
+
+	public void setParentViewClassName(String parentViewClassName)
+	{
+		this.parentViewClassName = parentViewClassName;
+	}
+
+	public int get_id()
+	{
+		return _id;
+	}
+
+	public void set_id(int _id)
+	{
+		this._id = _id;
 	}
 }
