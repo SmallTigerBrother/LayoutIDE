@@ -16,7 +16,7 @@ import android.widget.Toast;
 import com.mn.tiger.annonation.ViewById;
 import com.mn.tiger.utility.ViewInjector;
 import com.tiger.layoutide.R;
-import com.tiger.layoutide.utils.Constant;
+import com.tiger.layoutide.utils.XmlOutputConstant;
 import com.tiger.layoutide.utils.RelativeValues;
 import com.tiger.layoutide.widget.IView;
 import com.tiger.layoutide.widget.TGRelativeLayout;
@@ -281,66 +281,66 @@ public class RelativiePositionToolBar extends FrameLayout
 	{
 		if(RelativeValues.ALIGN_PARENT_NONE.equals(curValue))
 		{
-			selectedView.setAlignParentLeft(Constant.FALSE);
-			selectedView.setAlignParentBottom(Constant.FALSE);
-			selectedView.setAlignParentTop(Constant.FALSE);
-			selectedView.setAlignParentRight(Constant.FALSE);
+			selectedView.setAlignParentLeft(XmlOutputConstant.FALSE);
+			selectedView.setAlignParentBottom(XmlOutputConstant.FALSE);
+			selectedView.setAlignParentTop(XmlOutputConstant.FALSE);
+			selectedView.setAlignParentRight(XmlOutputConstant.FALSE);
 		}
 		else if(RelativeValues.ALIGN_PARENT_LEFT.equals(curValue))
 		{
-			selectedView.setAlignParentLeft(Constant.TRUE);
-			selectedView.setAlignParentBottom(Constant.FALSE);
-			selectedView.setAlignParentTop(Constant.FALSE);
-			selectedView.setAlignParentRight(Constant.FALSE);
+			selectedView.setAlignParentLeft(XmlOutputConstant.TRUE);
+			selectedView.setAlignParentBottom(XmlOutputConstant.FALSE);
+			selectedView.setAlignParentTop(XmlOutputConstant.FALSE);
+			selectedView.setAlignParentRight(XmlOutputConstant.FALSE);
 		}
 		else if(RelativeValues.ALIGN_PARENT_RIGHT.equals(curValue))
 		{
-			selectedView.setAlignParentLeft(Constant.FALSE);
-			selectedView.setAlignParentBottom(Constant.FALSE);
-			selectedView.setAlignParentTop(Constant.FALSE);
-			selectedView.setAlignParentRight(Constant.TRUE);
+			selectedView.setAlignParentLeft(XmlOutputConstant.FALSE);
+			selectedView.setAlignParentBottom(XmlOutputConstant.FALSE);
+			selectedView.setAlignParentTop(XmlOutputConstant.FALSE);
+			selectedView.setAlignParentRight(XmlOutputConstant.TRUE);
 		}
 		else if(RelativeValues.ALIGN_PARENT_TOP.equals(curValue))
 		{
-			selectedView.setAlignParentLeft(Constant.FALSE);
-			selectedView.setAlignParentBottom(Constant.FALSE);
-			selectedView.setAlignParentTop(Constant.TRUE);
-			selectedView.setAlignParentRight(Constant.FALSE);
+			selectedView.setAlignParentLeft(XmlOutputConstant.FALSE);
+			selectedView.setAlignParentBottom(XmlOutputConstant.FALSE);
+			selectedView.setAlignParentTop(XmlOutputConstant.TRUE);
+			selectedView.setAlignParentRight(XmlOutputConstant.FALSE);
 		}
 		else if(RelativeValues.ALIGN_PARENT_BOTTOM.equals(curValue))
 		{
-			selectedView.setAlignParentLeft(Constant.FALSE);
-			selectedView.setAlignParentBottom(Constant.TRUE);
-			selectedView.setAlignParentTop(Constant.FALSE);
-			selectedView.setAlignParentRight(Constant.FALSE);
+			selectedView.setAlignParentLeft(XmlOutputConstant.FALSE);
+			selectedView.setAlignParentBottom(XmlOutputConstant.TRUE);
+			selectedView.setAlignParentTop(XmlOutputConstant.FALSE);
+			selectedView.setAlignParentRight(XmlOutputConstant.FALSE);
 		}
 		else if(RelativeValues.ALIGN_PARENT_LEFT_AND_TOP.equals(curValue))
 		{
-			selectedView.setAlignParentLeft(Constant.TRUE);
-			selectedView.setAlignParentBottom(Constant.FALSE);
-			selectedView.setAlignParentTop(Constant.TRUE);
-			selectedView.setAlignParentRight(Constant.FALSE);
+			selectedView.setAlignParentLeft(XmlOutputConstant.TRUE);
+			selectedView.setAlignParentBottom(XmlOutputConstant.FALSE);
+			selectedView.setAlignParentTop(XmlOutputConstant.TRUE);
+			selectedView.setAlignParentRight(XmlOutputConstant.FALSE);
 		}
 		else if(RelativeValues.ALIGN_PARENT_LEFT_AND_BOTTOM.equals(curValue))
 		{
-			selectedView.setAlignParentLeft(Constant.TRUE);
-			selectedView.setAlignParentBottom(Constant.TRUE);
-			selectedView.setAlignParentTop(Constant.FALSE);
-			selectedView.setAlignParentRight(Constant.FALSE);
+			selectedView.setAlignParentLeft(XmlOutputConstant.TRUE);
+			selectedView.setAlignParentBottom(XmlOutputConstant.TRUE);
+			selectedView.setAlignParentTop(XmlOutputConstant.FALSE);
+			selectedView.setAlignParentRight(XmlOutputConstant.FALSE);
 		}
 		else if(RelativeValues.ALIGN_PARENT_RIGHT_AND_TOP.equals(curValue))
 		{
-			selectedView.setAlignParentLeft(Constant.FALSE);
-			selectedView.setAlignParentBottom(Constant.FALSE);
-			selectedView.setAlignParentTop(Constant.TRUE);
-			selectedView.setAlignParentRight(Constant.TRUE);
+			selectedView.setAlignParentLeft(XmlOutputConstant.FALSE);
+			selectedView.setAlignParentBottom(XmlOutputConstant.FALSE);
+			selectedView.setAlignParentTop(XmlOutputConstant.TRUE);
+			selectedView.setAlignParentRight(XmlOutputConstant.TRUE);
 		}
 		else if(RelativeValues.ALIGN_PARENT_RIGHT_AND_BOTTOM.equals(curValue))
 		{
-			selectedView.setAlignParentLeft(Constant.FALSE);
-			selectedView.setAlignParentBottom(Constant.TRUE);
-			selectedView.setAlignParentTop(Constant.FALSE);
-			selectedView.setAlignParentRight(Constant.TRUE);
+			selectedView.setAlignParentLeft(XmlOutputConstant.FALSE);
+			selectedView.setAlignParentBottom(XmlOutputConstant.TRUE);
+			selectedView.setAlignParentTop(XmlOutputConstant.FALSE);
+			selectedView.setAlignParentRight(XmlOutputConstant.TRUE);
 		}
 	}
 	
@@ -348,27 +348,27 @@ public class RelativiePositionToolBar extends FrameLayout
 	{
 		if(RelativeValues.CENTER_NONE.equals(curValue))
 		{
-			selectedView.setCenterInParent(Constant.FALSE);
-			selectedView.setCenterHorizontal(Constant.FALSE);
-			selectedView.setCenterVertical(Constant.FALSE);
+			selectedView.setCenterInParent(XmlOutputConstant.FALSE);
+			selectedView.setCenterHorizontal(XmlOutputConstant.FALSE);
+			selectedView.setCenterVertical(XmlOutputConstant.FALSE);
 		}
 		else if(RelativeValues.CENTER_IN_PARENT.equals(curValue))
 		{
-			selectedView.setCenterInParent(Constant.TRUE);
-			selectedView.setCenterHorizontal(Constant.FALSE);
-			selectedView.setCenterVertical(Constant.FALSE);
+			selectedView.setCenterInParent(XmlOutputConstant.TRUE);
+			selectedView.setCenterHorizontal(XmlOutputConstant.FALSE);
+			selectedView.setCenterVertical(XmlOutputConstant.FALSE);
 		}
 		else if(RelativeValues.CENTER_HORIZONTAL.equals(curValue))
 		{
-			selectedView.setCenterInParent(Constant.FALSE);
-			selectedView.setCenterHorizontal(Constant.TRUE);
-			selectedView.setCenterVertical(Constant.FALSE);
+			selectedView.setCenterInParent(XmlOutputConstant.FALSE);
+			selectedView.setCenterHorizontal(XmlOutputConstant.TRUE);
+			selectedView.setCenterVertical(XmlOutputConstant.FALSE);
 		}
 		else if(RelativeValues.CENTER_VERTICAL.equals(curValue))
 		{
-			selectedView.setCenterInParent(Constant.FALSE);
-			selectedView.setCenterHorizontal(Constant.FALSE);
-			selectedView.setCenterVertical(Constant.TRUE);
+			selectedView.setCenterInParent(XmlOutputConstant.FALSE);
+			selectedView.setCenterHorizontal(XmlOutputConstant.FALSE);
+			selectedView.setCenterVertical(XmlOutputConstant.TRUE);
 		}
 	}
 	

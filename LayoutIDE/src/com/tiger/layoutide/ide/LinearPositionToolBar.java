@@ -17,7 +17,7 @@ import com.mn.tiger.annonation.ViewById;
 import com.mn.tiger.utility.ViewInjector;
 import com.tiger.layoutide.R;
 import com.tiger.layoutide.ide.PropertiesToolBar.CustomTextWatcher;
-import com.tiger.layoutide.utils.Constant;
+import com.tiger.layoutide.utils.XmlOutputConstant;
 import com.tiger.layoutide.utils.GravityValue;
 import com.tiger.layoutide.widget.IView;
 
@@ -81,13 +81,13 @@ public class LinearPositionToolBar extends FrameLayout
 			{
 				if(null != selectedView)
 				{
-					if(Constant.ORIENTATION_HORIZONTAL.equals(parent.getAdapter().getItem(position).toString()))
+					if(XmlOutputConstant.ORIENTATION_HORIZONTAL.equals(parent.getAdapter().getItem(position).toString()))
 					{
-						selectedView.setOrientationValue(Constant.ORIENTATION_HORIZONTAL);
+						selectedView.setOrientationValue(XmlOutputConstant.ORIENTATION_HORIZONTAL);
 					}
 					else
 					{
-						selectedView.setOrientationValue(Constant.ORIENTATION_VERTICAL);
+						selectedView.setOrientationValue(XmlOutputConstant.ORIENTATION_VERTICAL);
 					}
 				}
 				else
@@ -133,7 +133,7 @@ public class LinearPositionToolBar extends FrameLayout
 			{
 				orientationProperty.setVisibility(View.VISIBLE);
 				
-				if(selectedView.getOrientationValue().equals(Constant.ORIENTATION_HORIZONTAL))
+				if(selectedView.getOrientationValue().equals(XmlOutputConstant.ORIENTATION_HORIZONTAL))
 				{
 					orientationSelector.setSelection(0);
 				}
