@@ -3,6 +3,7 @@ package com.tiger.layoutide;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
+import java.util.List;
 
 import android.app.Activity;
 import android.os.Bundle;
@@ -20,10 +21,14 @@ import android.widget.TextView;
 import com.mn.tiger.annonation.ViewById;
 import com.mn.tiger.utility.LogTools;
 import com.mn.tiger.utility.ViewInjector;
+import com.tiger.code.json.JSONClassGenerator;
+import com.tiger.code.model.JClass;
 import com.tiger.layoutide.ide.Emulator;
 import com.tiger.layoutide.ide.ExampleViewPanel;
 import com.tiger.layoutide.ide.JCodeHelper;
 import com.tiger.layoutide.ide.PropertiesToolBar;
+import com.tiger.layoutide.storage.db.LayoutDBManager;
+import com.tiger.layoutide.widget.IViewGroup;
 
 public class MainActivity extends Activity
 {
@@ -66,8 +71,24 @@ public class MainActivity extends Activity
 			@Override
 			public void onClick(View v)
 			{
+				String json = "{\"count\":1,\"name\":\"tiger\",\"textSize\":0.1,\"isVisible\":true,\"time\":92233720368547758,\"Child\":{\"childcount\":1}," + 
+			                   "\"array\":[{\"text\":\"text1\"},{\"text\":\"text2\"}]}";
+				
+				List<JClass> clazzes = new JSONClassGenerator().json2Classes(json);
+				
+//				LayoutDBManager.saveLayout(MainActivity.this, "emulatorLayout", (IViewGroup)emulatorLayout);
+				LayoutDBManager.getLayout(MainActivity.this, "emulatorLayout");
+				
 				try
 				{
+//					FileOutputStream outputStream = MainActivity.this.openFileOutput("Test.java", MODE_WORLD_WRITEABLE);
+//					
+//					outputStream.write(clazzes.get(0).toString().getBytes());
+//					
+//					outputStream.flush();
+//					
+//					outputStream.close();
+					
 					FileOutputStream outputStream = MainActivity.this.openFileOutput("AAAAAAA.xml", MODE_WORLD_WRITEABLE);
 					
 					outputStream.write(emulatorLayout.getXMLString().getBytes());
@@ -92,7 +113,7 @@ public class MainActivity extends Activity
 				{
 					e.printStackTrace();
 				}
-				LogTools.d(emulatorLayout.getXMLString());
+//				LogTools.d(emulatorLayout.getXMLString());
 			}
 		});
 		
