@@ -19,6 +19,7 @@ import com.tiger.layoutide.ide.ViewHelper;
 import com.tiger.layoutide.tree.IViewTreeNode;
 import com.tiger.layoutide.tree.ViewTreeNodeImp;
 import com.tiger.layoutide.utils.GravityValue;
+import com.tiger.layoutide.utils.WidgetSimpleName;
 
 /**
  * @author Dalang
@@ -138,7 +139,7 @@ public class TGButton extends Button implements IViewTreeNode, IView, OnLongClic
 	@Override
 	public String getSimpleClassName()
 	{
-		return "Button";
+		return WidgetSimpleName.BUTTON;
 	}
 
 	@Override

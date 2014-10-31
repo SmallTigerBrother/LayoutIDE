@@ -23,7 +23,8 @@ import com.tiger.layoutide.ide.ViewHelper;
 import com.tiger.layoutide.tree.IViewTree;
 import com.tiger.layoutide.tree.IViewTreeNode;
 import com.tiger.layoutide.tree.ViewTreeImp;
-import com.tiger.layoutide.utils.Constant;
+import com.tiger.layoutide.utils.WidgetSimpleName;
+import com.tiger.layoutide.utils.XmlOutputConstant;
 import com.tiger.layoutide.utils.GravityValue;
 
 /**
@@ -143,7 +144,7 @@ public class TGRelativeLayout extends RelativeLayout implements IViewTree,IViewG
 	@Override
 	public String getSimpleClassName()
 	{
-		return "RelativeLayout";
+		return WidgetSimpleName.RELATIVE_LAYOUT;
 	}
 
 	@Override
@@ -404,7 +405,7 @@ public class TGRelativeLayout extends RelativeLayout implements IViewTree,IViewG
 	public ArrayList<CharSequence> getChildIdList()
 	{
 		ArrayList<CharSequence> childIdList = new ArrayList<CharSequence>();
-		childIdList.add(Constant.ANCHOR_NONE);
+		childIdList.add(XmlOutputConstant.ANCHOR_NONE);
 		View view = null;
 		for(int i = 0; i < getChildCount(); i++)
 		{

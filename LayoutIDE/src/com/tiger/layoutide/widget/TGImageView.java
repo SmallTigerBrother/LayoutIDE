@@ -18,6 +18,7 @@ import com.tiger.layoutide.ide.Emulator;
 import com.tiger.layoutide.ide.ViewHelper;
 import com.tiger.layoutide.tree.IViewTreeNode;
 import com.tiger.layoutide.tree.ViewTreeNodeImp;
+import com.tiger.layoutide.utils.WidgetSimpleName;
 
 /**
  * @author Dalang
@@ -94,7 +95,7 @@ public class TGImageView extends ImageView implements IViewTreeNode, IView, OnLo
 	@Override
 	public String getSimpleClassName()
 	{
-		return "ImageView";
+		return WidgetSimpleName.IMAGE_VIEW;
 	}
 	
 	@Override

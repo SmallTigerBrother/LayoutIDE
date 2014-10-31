@@ -19,6 +19,7 @@ import com.tiger.layoutide.ide.ViewHelper;
 import com.tiger.layoutide.tree.IViewTreeNode;
 import com.tiger.layoutide.tree.ViewTreeNodeImp;
 import com.tiger.layoutide.utils.GravityValue;
+import com.tiger.layoutide.utils.WidgetSimpleName;
 
 /**
  * @author Dalang
@@ -169,7 +170,7 @@ public class TGTextView extends TextView implements IViewTreeNode, IView, ISelec
 	@Override
 	public String getSimpleClassName()
 	{
-		return "TextView";
+		return WidgetSimpleName.TEXT_VIEW;
 	}
 	
 	@Override

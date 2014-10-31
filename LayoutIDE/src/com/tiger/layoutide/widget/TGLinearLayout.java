@@ -22,6 +22,7 @@ import com.tiger.layoutide.tree.IViewTree;
 import com.tiger.layoutide.tree.IViewTreeNode;
 import com.tiger.layoutide.tree.ViewTreeImp;
 import com.tiger.layoutide.utils.GravityValue;
+import com.tiger.layoutide.utils.WidgetSimpleName;
 
 /**
  * @author Dalang
@@ -137,7 +138,7 @@ public class TGLinearLayout extends LinearLayout implements IViewGroup, IViewTre
 	@Override
 	public String getSimpleClassName()
 	{
-		return "LinearLayout";
+		return WidgetSimpleName.LINEAR_LAYOUT;
 	}
 	
 	@Override
