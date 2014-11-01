@@ -5,7 +5,6 @@ import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Paint.Style;
-import android.text.TextUtils;
 import android.util.AttributeSet;
 import android.view.Gravity;
 import android.view.View;
@@ -38,6 +37,8 @@ public class TGCheckBox extends CheckBox implements IViewTreeNode, IView, OnLong
 	
 	private Paint paint = null;
 	
+	private String textColor = "";
+	
 	public TGCheckBox(Context context)
 	{
 		this(context, null);
@@ -66,16 +67,6 @@ public class TGCheckBox extends CheckBox implements IViewTreeNode, IView, OnLong
 	}
 	
 	@Override
-	public void setText(CharSequence text, BufferType type)
-	{
-		super.setText(text, type);
-		if(!TextUtils.isEmpty(text) && null != viewHelper)
-		{
-			viewHelper.setText(text.toString());
-		}
-	}
-	
-	@Override
 	public void dump()
 	{
 		viewTreeNode.dump();
@@ -86,13 +77,11 @@ public class TGCheckBox extends CheckBox implements IViewTreeNode, IView, OnLong
 		viewHelper.setIdName(idName);
 	}
 	
-	@Override
 	public String getTextColor()
 	{
-		return viewHelper.getTextColor();
+		return textColor;
 	}
 	
-	@Override
 	public void setTextColor(String color)
 	{
 		try
@@ -110,7 +99,7 @@ public class TGCheckBox extends CheckBox implements IViewTreeNode, IView, OnLong
 			if(rgbColorInt > Integer.MIN_VALUE)
 			{
 				super.setTextColor(rgbColorInt);
-				viewHelper.setTextColor(color);
+				this.textColor = color;
 			}
 			else
 			{
@@ -123,13 +112,11 @@ public class TGCheckBox extends CheckBox implements IViewTreeNode, IView, OnLong
 		}
 	}
 	
-	@Override
 	public void setTextSize(String textSize)
 	{
 		try
 		{
 			super.setTextSize(Float.valueOf(textSize));
-			viewHelper.setTextSize(textSize);
 		}
 		catch (Exception e)
 		{
@@ -518,17 +505,6 @@ public class TGCheckBox extends CheckBox implements IViewTreeNode, IView, OnLong
 	}
 
 	@Override
-	public void setOrientationValue(String orientation)
-	{
-	}
-
-	@Override
-	public String getOrientationValue()
-	{
-		return null;
-	}
-
-	@Override
 	public void setGravityValue(String gravity)
 	{
 		int intGravity = GravityValue.getIntValue(gravity);
@@ -548,5 +524,4 @@ public class TGCheckBox extends CheckBox implements IViewTreeNode, IView, OnLong
 	{
 		viewHelper.setLayoutGravityValue(gravity);
 	}
-
 }

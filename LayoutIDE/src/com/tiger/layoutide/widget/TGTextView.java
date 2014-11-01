@@ -5,13 +5,12 @@ import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Paint.Style;
-import android.text.TextUtils;
 import android.util.AttributeSet;
 import android.view.Gravity;
 import android.view.View;
+import android.view.View.OnLongClickListener;
 import android.view.ViewGroup;
 import android.widget.TextView;
-import android.view.View.OnLongClickListener;
 
 import com.mn.tiger.utility.LogTools;
 import com.tiger.layoutide.ide.Emulator;
@@ -36,6 +35,8 @@ public class TGTextView extends TextView implements IViewTreeNode, IView, ISelec
 	private boolean isSelected = false;
 	
 	private Paint paint = null;
+	
+	private String textColor = "";
 	
 	public TGTextView(Context context)
 	{
@@ -65,16 +66,6 @@ public class TGTextView extends TextView implements IViewTreeNode, IView, ISelec
 	}
 	
 	@Override
-	public void setText(CharSequence text, BufferType type)
-	{
-		super.setText(text, type);
-		if(!TextUtils.isEmpty(text) && null != viewHelper)
-		{
-			viewHelper.setText(text.toString());
-		}
-	}
-	
-	@Override
 	public void dump()
 	{
 		viewTreeNode.dump();
@@ -85,13 +76,11 @@ public class TGTextView extends TextView implements IViewTreeNode, IView, ISelec
 		viewHelper.setIdName(idName);
 	}
 	
-	@Override
 	public String getTextColor()
 	{
-		return viewHelper.getTextColor();
+		return textColor;
 	}
 	
-	@Override
 	public void setTextColor(String color)
 	{
 		try
@@ -109,7 +98,7 @@ public class TGTextView extends TextView implements IViewTreeNode, IView, ISelec
 			if(rgbColorInt > Integer.MIN_VALUE)
 			{
 				super.setTextColor(rgbColorInt);
-				viewHelper.setTextColor(color);
+				this.textColor = color;
 			}
 			else
 			{
@@ -122,13 +111,11 @@ public class TGTextView extends TextView implements IViewTreeNode, IView, ISelec
 		}
 	}
 	
-	@Override
 	public void setTextSize(String textSize)
 	{
 		try
 		{
 			super.setTextSize(Float.valueOf(textSize));
-			viewHelper.setTextSize(textSize);
 		}
 		catch (Exception e)
 		{
@@ -514,17 +501,6 @@ public class TGTextView extends TextView implements IViewTreeNode, IView, ISelec
 	public String getCenterHorizontal()
 	{
 		return viewHelper.getCenterHorizontal();
-	}
-
-	@Override
-	public void setOrientationValue(String orientation)
-	{
-	}
-
-	@Override
-	public String getOrientationValue()
-	{
-		return null;
 	}
 
 	@Override

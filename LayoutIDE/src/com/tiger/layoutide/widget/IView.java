@@ -45,10 +45,6 @@ public interface IView extends ISelectable
 	
 	float getLayoutWeight();
 	
-	void setOrientationValue(String orientation);
-	
-	String getOrientationValue();
-	
 	String getLayoutGravityValue();
 	
 	void setLayoutGravityValue(String gravity);
@@ -60,18 +56,6 @@ public interface IView extends ISelectable
 	void setBackgroundColor(String color);
 	
 	/************************** Content *********************************/
-	
-	void setText(CharSequence text);
-	
-	CharSequence getText();
-	
-	void setTextSize(String textSize);
-	
-	float getTextSize();
-	
-	void setTextColor(String textColor);
-	
-	String getTextColor();
 	
 	String getGravityValue();
 	

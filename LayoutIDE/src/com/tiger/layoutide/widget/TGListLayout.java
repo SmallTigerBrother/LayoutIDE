@@ -1,6 +1,5 @@
 package com.tiger.layoutide.widget;
 
-import java.util.ArrayList;
 import java.util.List;
 
 import android.content.Context;
@@ -44,6 +43,8 @@ public class TGListLayout extends ScrollView implements IViewGroup, IViewTree, O
 	private Paint paint = null;
 	
 	private LinearLayout mainLayout;
+	
+	private String listItemLayout = "";
 	
 	public TGListLayout(Context context)
 	{
@@ -300,40 +301,6 @@ public class TGListLayout extends ScrollView implements IViewGroup, IViewTree, O
 	}
 
 	@Override
-	public void setText(CharSequence text)
-	{
-		
-	}
-
-	@Override
-	public CharSequence getText()
-	{
-		return null;
-	}
-
-	@Override
-	public void setTextSize(String textSize)
-	{
-	}
-
-	@Override
-	public float getTextSize()
-	{
-		return 0;
-	}
-
-	@Override
-	public void setTextColor(String textColor)
-	{
-	}
-
-	@Override
-	public String getTextColor()
-	{
-		return null;
-	}
-
-	@Override
 	public boolean isRootViewGroup()
 	{
 		return viewGroupHelper.isRootViewGroup();
@@ -575,17 +542,6 @@ public class TGListLayout extends ScrollView implements IViewGroup, IViewTree, O
 	}
 
 	@Override
-	public void setOrientationValue(String orientation)
-	{
-	}
-
-	@Override
-	public String getOrientationValue()
-	{
-		return null;
-	}
-
-	@Override
 	public void setGravityValue(String gravity)
 	{
 		
@@ -597,7 +553,7 @@ public class TGListLayout extends ScrollView implements IViewGroup, IViewTree, O
 		viewGroupHelper.setLayoutGravityValue(gravity);
 	}
 	
-	public void setAdapter(ListAdapter adapter)
+	private void setAdapter(ListAdapter adapter)
 	{
 		//清空所有子视图
 		mainLayout.removeAllViews();
@@ -622,8 +578,14 @@ public class TGListLayout extends ScrollView implements IViewGroup, IViewTree, O
 		
 		public DefaultAdapter(Context context, String listItemLayoutName)
 		{
-			super(context, new ArrayList<Void>(10));
+			super(context, null);
 			this.listItemLayoutName = listItemLayoutName;
+		}
+		
+		@Override
+		public int getCount()
+		{
+			return 10;
 		}
 		
 		public View getView(int position, View convertView, ViewGroup parent)
@@ -632,7 +594,18 @@ public class TGListLayout extends ScrollView implements IViewGroup, IViewTree, O
 			return (View) LayoutDBManager.getLayout(getContext(), listItemLayoutName);
 		};
 	}
-	
-	
-	
+
+	public void setListItemLayout(String layoutName)
+	{
+		// 替换当前的Adapter
+		DefaultAdapter adapter = new DefaultAdapter(getContext(), layoutName);
+		this.setAdapter(adapter);
+
+		this.listItemLayout = layoutName;
+	}
+
+	public String getListItemLayout()
+	{
+		return listItemLayout;
+	}
 }

@@ -7,6 +7,7 @@ import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Paint.Style;
+import android.text.TextUtils;
 import android.util.AttributeSet;
 import android.view.Gravity;
 import android.view.View;
@@ -23,6 +24,7 @@ import com.tiger.layoutide.tree.IViewTreeNode;
 import com.tiger.layoutide.tree.ViewTreeImp;
 import com.tiger.layoutide.utils.GravityValue;
 import com.tiger.layoutide.utils.WidgetSimpleName;
+import com.tiger.layoutide.utils.XmlOutputConstant;
 
 /**
  * @author Dalang
@@ -39,6 +41,8 @@ public class TGLinearLayout extends LinearLayout implements IViewGroup, IViewTre
 	private boolean isSelected = false;
 	
 	private Paint paint = null;
+	
+	private String orientation = "";
 	
 	public TGLinearLayout(Context context)
 	{
@@ -287,40 +291,6 @@ public class TGLinearLayout extends LinearLayout implements IViewGroup, IViewTre
 	}
 
 	@Override
-	public void setText(CharSequence text)
-	{
-		
-	}
-
-	@Override
-	public CharSequence getText()
-	{
-		return null;
-	}
-
-	@Override
-	public void setTextSize(String textSize)
-	{
-	}
-
-	@Override
-	public float getTextSize()
-	{
-		return 0;
-	}
-
-	@Override
-	public void setTextColor(String textColor)
-	{
-	}
-
-	@Override
-	public String getTextColor()
-	{
-		return null;
-	}
-
-	@Override
 	public boolean isRootViewGroup()
 	{
 		return viewGroupHelper.isRootViewGroup();
@@ -561,16 +531,37 @@ public class TGLinearLayout extends LinearLayout implements IViewGroup, IViewTre
 		return viewGroupHelper.getCenterHorizontal();
 	}
 
-	@Override
 	public void setOrientationValue(String orientation)
 	{
-		viewGroupHelper.setOrientationValue(orientation);
+		this.orientation = orientation;
+		if(orientation.equals(XmlOutputConstant.ORIENTATION_HORIZONTAL))
+		{
+			this.setOrientation(LinearLayout.HORIZONTAL);
+		}
+		else
+		{
+			this.setOrientation(LinearLayout.VERTICAL);
+		}
 	}
 	
-	@Override
 	public String getOrientationValue()
 	{
-		return viewGroupHelper.getOrientationValue();
+		if(!TextUtils.isEmpty(orientation))
+		{
+			return orientation;
+		}
+		
+		int orientation = this.getOrientation();
+		if(orientation == LinearLayout.HORIZONTAL)
+		{
+			this.orientation = XmlOutputConstant.ORIENTATION_HORIZONTAL;
+		}
+		else
+		{
+			this.orientation = XmlOutputConstant.ORIENTATION_VERTICAL;
+		}
+		
+		return this.orientation;
 	}
 
 	@Override

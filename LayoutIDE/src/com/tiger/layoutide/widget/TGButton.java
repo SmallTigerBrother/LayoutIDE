@@ -5,7 +5,6 @@ import android.graphics.Canvas;
 import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Paint.Style;
-import android.text.TextUtils;
 import android.util.AttributeSet;
 import android.view.Gravity;
 import android.view.View;
@@ -37,6 +36,8 @@ public class TGButton extends Button implements IViewTreeNode, IView, OnLongClic
 	
 	private Paint paint = null;
 	
+	private String textColor = "";
+	
 	public TGButton(Context context)
 	{
 		this(context, null);
@@ -65,16 +66,6 @@ public class TGButton extends Button implements IViewTreeNode, IView, OnLongClic
 	}
 	
 	@Override
-	public void setText(CharSequence text, BufferType type)
-	{
-		super.setText(text, type);
-		if(!TextUtils.isEmpty(text) && null != viewHelper)
-		{
-			viewHelper.setText(text.toString());
-		}
-	}
-	
-	@Override
 	public void dump()
 	{
 		viewTreeNode.dump();
@@ -85,7 +76,11 @@ public class TGButton extends Button implements IViewTreeNode, IView, OnLongClic
 		viewHelper.setIdName(idName);
 	}
 	
-	@Override
+	public String getTextColor()
+	{
+		return textColor;
+	}
+	
 	public void setTextColor(String color)
 	{
 		try
@@ -103,7 +98,7 @@ public class TGButton extends Button implements IViewTreeNode, IView, OnLongClic
 			if(rgbColorInt > Integer.MIN_VALUE)
 			{
 				super.setTextColor(rgbColorInt);
-				viewHelper.setTextColor(color);
+				this.textColor = color;
 			}
 			else
 			{
@@ -116,24 +111,16 @@ public class TGButton extends Button implements IViewTreeNode, IView, OnLongClic
 		}
 	}
 	
-	@Override
 	public void setTextSize(String textSize)
 	{
 		try
 		{
 			super.setTextSize(Float.valueOf(textSize));
-			viewHelper.setTextSize(textSize);
 		}
 		catch (Exception e)
 		{
 			LogTools.e(LOG_TAG, "The textSize can not be parsed from value " + textSize);
 		}
-	}
-	
-	@Override
-	public String getTextColor()
-	{
-		return viewHelper.getTextColor();
 	}
 	
 	@Override
@@ -514,17 +501,6 @@ public class TGButton extends Button implements IViewTreeNode, IView, OnLongClic
 	public String getCenterHorizontal()
 	{
 		return viewHelper.getCenterHorizontal();
-	}
-
-	@Override
-	public void setOrientationValue(String orientation)
-	{
-	}
-
-	@Override
-	public String getOrientationValue()
-	{
-		return null;
 	}
 
 	@Override

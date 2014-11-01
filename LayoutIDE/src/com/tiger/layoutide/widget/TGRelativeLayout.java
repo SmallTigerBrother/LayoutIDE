@@ -293,40 +293,6 @@ public class TGRelativeLayout extends RelativeLayout implements IViewTree,IViewG
 	}
 
 	@Override
-	public void setText(CharSequence text)
-	{
-		
-	}
-
-	@Override
-	public CharSequence getText()
-	{
-		return null;
-	}
-
-	@Override
-	public void setTextSize(String textSize)
-	{
-	}
-
-	@Override
-	public float getTextSize()
-	{
-		return 0;
-	}
-
-	@Override
-	public void setTextColor(String textColor)
-	{
-	}
-
-	@Override
-	public String getTextColor()
-	{
-		return null;
-	}
-
-	@Override
 	public boolean isRootViewGroup()
 	{
 		return viewGroupHelper.isRootViewGroup();
@@ -718,17 +684,6 @@ public class TGRelativeLayout extends RelativeLayout implements IViewTree,IViewG
 		{
 			return alignBottomAnchorId;
 		}
-	}
-
-	@Override
-	public void setOrientationValue(String orientation)
-	{
-	}
-
-	@Override
-	public String getOrientationValue()
-	{
-		return null;
 	}
 
 	@Override
