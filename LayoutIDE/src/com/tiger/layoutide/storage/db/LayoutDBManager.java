@@ -50,14 +50,20 @@ public class LayoutDBManager
 	public static IView getLayout(Context context,String projectName)
 	{
 		List<ViewDBModel> viewDBModels = getViewDBModels(context, projectName);
-		if(viewDBModels.size() == 0)
+		
+		if(null != viewDBModels)
 		{
-			return parseView(context, viewDBModels.get(0));
+			if(viewDBModels.size() == 1)
+			{
+				return parseView(context, viewDBModels.get(0));
+			}
+			else if(viewDBModels.size() > 1)
+			{
+				return (IView) parseViewGroup(context, viewDBModels);
+			}
 		}
-		else
-		{
-			return (IView) parseViewGroup(context, viewDBModels);
-		}
+		
+		return null;
 	}
 	
 	private static ViewGroup parseViewGroup(Context context, List<ViewDBModel> viewDBModels)
@@ -74,8 +80,8 @@ public class LayoutDBManager
 			else 
 			{
 				rootViewGroup.addView((View)view);
+				viewDBModels.remove(0);
 			}
-			viewDBModels.remove(0);
 		}
 		
 		return rootViewGroup;
@@ -225,7 +231,7 @@ public class LayoutDBManager
 		view.setLayoutMarginLeft(viewDBModel.getLeftMargin() + "");
 		view.setLayoutMarginRight(viewDBModel.getRightMargin() + "");
 		view.setLayoutMarginTop(viewDBModel.getTopMargin() + "");
-		view.setLayoutMarginBottom(viewDBModel.getBottomMargin() + "'");
+		view.setLayoutMarginBottom(viewDBModel.getBottomMargin() + "");
 		
 		view.setLayoutWeight(viewDBModel.getLayoutWeight() + "");
 		view.setLayoutGravityValue(viewDBModel.getLayoutGravity());
