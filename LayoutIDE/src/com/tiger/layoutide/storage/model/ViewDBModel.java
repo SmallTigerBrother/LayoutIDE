@@ -70,6 +70,10 @@ public class ViewDBModel
 	
 	private String centerVertical = "";
 	
+	private String listItemLayout = "";
+	
+	private String pageItemLayout = "";
+	
 	public String getAlignParentLeft()
 	{
 		return alignParentLeft;
@@ -398,5 +402,25 @@ public class ViewDBModel
 	public void set_id(int _id)
 	{
 		this._id = _id;
+	}
+	
+	public void setListItemLayout(String layoutName)
+	{
+		this.listItemLayout = layoutName;
+	}
+
+	public String getListItemLayout()
+	{
+		return listItemLayout;
+	}
+
+	public String getPageItemLayout()
+	{
+		return pageItemLayout;
+	}
+
+	public void setPageItemLayout(String pageItemLayout)
+	{
+		this.pageItemLayout = pageItemLayout;
 	}
 }
