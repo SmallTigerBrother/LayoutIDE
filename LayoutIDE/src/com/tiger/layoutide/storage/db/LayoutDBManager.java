@@ -207,18 +207,15 @@ public class LayoutDBManager
 		{
 			viewDBModel.setTextColor(((TGTextView)view).getTextColor());
 		}
-		
-		if(view instanceof TGButton)
+		else if(view instanceof TGButton)
 		{
 			viewDBModel.setTextColor(((TGButton)view).getTextColor());
 		}
-		
-		if(view instanceof TGEditText)
+		else if(view instanceof TGEditText)
 		{
 			viewDBModel.setTextColor(((TGEditText)view).getTextColor());
 		}
-		
-		if(view instanceof TGCheckBox)
+		else if(view instanceof TGCheckBox)
 		{
 			viewDBModel.setTextColor(((TGCheckBox)view).getTextColor());
 		}
@@ -299,20 +296,17 @@ public class LayoutDBManager
 			((TGTextView)view).setTextSize(viewDBModel.getTextSize() + "");
 			((TGTextView)view).setTextColor(viewDBModel.getTextColor());
 		}
-		
-		if(view instanceof TGButton)
+		else if(view instanceof TGButton)
 		{
 			((TGButton)view).setTextSize(viewDBModel.getTextSize() + "");
 			((TGButton)view).setTextColor(viewDBModel.getTextColor());
 		}
-		
-		if(view instanceof TGEditText)
+		else if(view instanceof TGEditText)
 		{
 			((TGEditText)view).setTextSize(viewDBModel.getTextSize() + "");
 			((TGEditText)view).setTextColor(viewDBModel.getTextColor());
 		}
-		
-		if(view instanceof TGCheckBox)
+		else if(view instanceof TGCheckBox)
 		{
 			((TGCheckBox)view).setTextSize(viewDBModel.getTextSize() + "");
 			((TGCheckBox)view).setTextColor(viewDBModel.getTextColor());
