@@ -24,15 +24,7 @@ public class ViewHelper implements IView
 	
 	private String idName = "";
 
-	private String textColor = "";
-
 	private String backgroundColor = "";
-	
-	private String text = "";
-	
-	private float textSize = 16;
-	
-	private String orientation;
 	
 	private String gravity;
 	
@@ -49,7 +41,7 @@ public class ViewHelper implements IView
 	private int topMargin = Integer.MIN_VALUE;
 	
 	private int bottomMargin = Integer.MIN_VALUE;
-
+	
 	public ViewHelper(View view)
 	{
 		this.view = view;
@@ -82,35 +74,6 @@ public class ViewHelper implements IView
 	public String getIdName()
 	{
 		return idName;
-	}
-
-	public void setText(String text)
-	{
-		this.text = text;
-	}
-	
-	@Override
-	public CharSequence getText()
-	{
-		return text;
-	}
-	
-	@Override
-	public float getTextSize()
-	{
-		return textSize;
-	}
-
-	@Override
-	public String getTextColor()
-	{
-		return textColor;
-	}
-	
-	@Override
-	public void setTextColor(String textColor)
-	{
-		this.textColor = textColor;
 	}
 
 	@Override
@@ -480,25 +443,6 @@ public class ViewHelper implements IView
 			{
 				this.layoutGravity = gravity;
 			}
-		}
-	}
-
-	@Override
-	public void setText(CharSequence text)
-	{
-		// View 自行返回
-	}
-	
-	@Override
-	public void setTextSize(String textSize)
-	{
-		try
-		{
-			this.textSize = Float.valueOf(textSize);
-		}
-		catch (Exception e)
-		{
-			LogTools.w(LOG_TAG, "The textSize can not be parsed from value " + textSize);
 		}
 	}
 
@@ -996,46 +940,4 @@ public class ViewHelper implements IView
 		//未添加该属性时，值为0
 		return (rules[verb] != 0);
 	}
-
-	@Override
-	public void setOrientationValue(String orientation)
-	{
-		if(view instanceof LinearLayout)
-		{
-			this.orientation = orientation;
-			if(orientation.equals(XmlOutputConstant.ORIENTATION_HORIZONTAL))
-			{
-				((LinearLayout)view).setOrientation(LinearLayout.HORIZONTAL);
-			}
-			else
-			{
-				((LinearLayout)view).setOrientation(LinearLayout.VERTICAL);
-			}
-		}
-	}
-
-	@Override
-	public String getOrientationValue()
-	{
-		if(!TextUtils.isEmpty(orientation))
-		{
-			return orientation;
-		}
-		
-		if(view instanceof LinearLayout)
-		{
-			int orientation = ((LinearLayout)view).getOrientation();
-			if(orientation == LinearLayout.HORIZONTAL)
-			{
-				this.orientation = XmlOutputConstant.ORIENTATION_HORIZONTAL;
-			}
-			else
-			{
-				this.orientation = XmlOutputConstant.ORIENTATION_VERTICAL;
-			}
-		}
-		
-		return this.orientation;
-	}
-	
 }
