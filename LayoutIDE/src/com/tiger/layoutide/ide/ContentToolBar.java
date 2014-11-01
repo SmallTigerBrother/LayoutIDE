@@ -10,6 +10,7 @@ import android.widget.AdapterView.OnItemSelectedListener;
 import android.widget.EditText;
 import android.widget.FrameLayout;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.mn.tiger.annonation.ViewById;
@@ -18,6 +19,7 @@ import com.tiger.layoutide.R;
 import com.tiger.layoutide.ide.PropertiesToolBar.CustomTextWatcher;
 import com.tiger.layoutide.utils.GravityValue;
 import com.tiger.layoutide.widget.IView;
+import com.tiger.layoutide.widget.TGTextView;
 
 public class ContentToolBar extends FrameLayout
 {
@@ -53,13 +55,16 @@ public class ContentToolBar extends FrameLayout
 			{
 				if(null != selectedView)
 				{
-					if(!TextUtils.isEmpty(s))
+					if(selectedView instanceof TextView)
 					{
-						selectedView.setText(s.toString());
-					}
-					else
-					{
-						selectedView.setText("");
+						if(!TextUtils.isEmpty(s))
+						{
+							((TGTextView)selectedView).setText(s.toString());
+						}
+						else
+						{
+							((TGTextView)selectedView).setText("");
+						}
 					}
 				}
 				else
@@ -78,7 +83,10 @@ public class ContentToolBar extends FrameLayout
 				{
 					if(null != selectedView)
 					{
-						selectedView.setTextColor(s.toString());
+						if(selectedView instanceof TextView )
+						{
+							((TGTextView)selectedView).setTextColor(s.toString());
+						}
 					}
 					else
 					{
@@ -97,7 +105,10 @@ public class ContentToolBar extends FrameLayout
 				{
 					if(null != selectedView)
 					{
-						selectedView.setTextSize(s.toString());
+						if(selectedView instanceof TextView )
+						{
+							((TGTextView)selectedView).setTextSize(s.toString());
+						}
 					}
 					else
 					{
@@ -134,31 +145,34 @@ public class ContentToolBar extends FrameLayout
 		this.selectedView = selectedView;
 		if(null != selectedView)
 		{
-			if(!TextUtils.isEmpty(selectedView.getText()))
+			if(selectedView instanceof TextView)
 			{
-				textEditText.setText(selectedView.getText());
-			}
-			else
-			{
-				textEditText.setText("");
-			}
-			
-			if(selectedView.getTextSize() > 0)
-			{
-				textSizeEditText.setText(selectedView.getTextSize() + "");
-			}
-			else
-			{
-				textSizeEditText.setText("");
-			}
-			
-			if(!TextUtils.isEmpty(selectedView.getTextColor()))
-			{
-				textColorEditText.setText(selectedView.getTextColor());
-			}
-			else
-			{
-				textColorEditText.setText("");
+				if(!TextUtils.isEmpty(((TGTextView)selectedView).getText()))
+				{
+					textEditText.setText(((TGTextView)selectedView).getText());
+				}
+				else
+				{
+					textEditText.setText("");
+				}
+				
+				if(((TGTextView)selectedView).getTextSize() > 0)
+				{
+					textSizeEditText.setText(((TGTextView)selectedView).getTextSize() + "");
+				}
+				else
+				{
+					textSizeEditText.setText("");
+				}
+				
+				if(!TextUtils.isEmpty(((TGTextView)selectedView).getTextColor()))
+				{
+					textColorEditText.setText(((TGTextView)selectedView).getTextColor());
+				}
+				else
+				{
+					textColorEditText.setText("");
+				}
 			}
 			
 			resetGravity();
