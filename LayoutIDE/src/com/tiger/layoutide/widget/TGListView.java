@@ -10,21 +10,27 @@ import android.graphics.Paint.Style;
 import android.util.AttributeSet;
 import android.view.View;
 import android.view.View.OnLongClickListener;
-import android.widget.ListView;
+import android.view.ViewGroup;
+import android.widget.LinearLayout;
+import android.widget.ListAdapter;
+import android.widget.ScrollView;
 
 import com.mn.tiger.utility.LogTools;
+import com.mn.tiger.widget.adpter.TGListAdapter;
 import com.tiger.layoutide.ide.Emulator;
 import com.tiger.layoutide.ide.ViewGroupHelper;
 import com.tiger.layoutide.ide.ViewHelper;
+import com.tiger.layoutide.storage.db.LayoutDBManager;
 import com.tiger.layoutide.tree.IViewTree;
 import com.tiger.layoutide.tree.IViewTreeNode;
 import com.tiger.layoutide.tree.ViewTreeImp;
+import com.tiger.layoutide.utils.WidgetSimpleName;
 
 /**
+ * ListView实现，使用ScrollView伪装成列表进行展示，代码输出时，输出成ListView
  * @author Dalang
- *
  */
-public class TGListView extends ListView implements IViewGroup, IViewTree, OnLongClickListener
+public class TGListView extends ScrollView implements IViewGroup, IViewTree, OnLongClickListener
 {
 	private static String LOG_TAG = TGListView.class.getSimpleName();
 	
@@ -35,6 +41,10 @@ public class TGListView extends ListView implements IViewGroup, IViewTree, OnLon
 	private boolean isSelected = false;
 	
 	private Paint paint = null;
+	
+	private LinearLayout mainLayout;
+	
+	private String listItemLayout = "";
 	
 	public TGListView(Context context)
 	{
@@ -55,6 +65,18 @@ public class TGListView extends ListView implements IViewGroup, IViewTree, OnLon
 		paint.setStrokeWidth(10);
 		
 		this.setOnLongClickListener(this);
+		
+		initView();
+	}
+	
+	private void initView()
+	{
+		mainLayout = new LinearLayout(getContext());
+		mainLayout.setOrientation(LinearLayout.VERTICAL);
+		ViewGroup.LayoutParams layoutParams = new ViewGroup.LayoutParams(
+				ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.MATCH_PARENT);
+		mainLayout.setLayoutParams(layoutParams);
+		this.addView(mainLayout);
 	}
 
 	@Override
@@ -87,29 +109,50 @@ public class TGListView extends ListView implements IViewGroup, IViewTree, OnLon
 	{
 		viewTree.addViewTreeNode(viewTreeNode);
 	}
+	
+	@Override
+	public void removeAllViews()
+	{
+		super.removeAllViews();
+		viewTree.clearViewTreeNode();
+	}
+	
+	@Override
+	public void removeView(View view)
+	{
+		super.removeView(view);
+		viewTree.removeViewTreeNode((IViewTreeNode)view);
+	}
+	
+	@Override
+	public void removeViewAt(int index)
+	{
+		viewTree.removeViewTreeNode((IViewTreeNode)getChildAt(index));
+		super.removeViewAt(index);
+	}
 
 	@Override
 	public void removeViewTreeNode(IViewTreeNode viewTreeNode)
 	{
-		
+		viewTree.removeViewTreeNode(viewTreeNode);
 	}
 
 	@Override
 	public void clearViewTreeNode()
 	{
-		
+		viewTree.clearViewTreeNode();
 	}
-
+	
 	@Override
 	public List<IViewTreeNode> getViewTreeNodes()
 	{
-		return null;
+		return viewTree.getViewTreeNodes();
 	}
-
+	
 	@Override
 	public String getSimpleClassName()
 	{
-		return "ListView";
+		return WidgetSimpleName.LISTVIEW;
 	}
 	
 	@Override
@@ -310,7 +353,12 @@ public class TGListView extends ListView implements IViewGroup, IViewTree, OnLon
 	@Override
 	public View newInstance()
 	{
-		return null;
+		TGLinearLayout linearLayout = new TGLinearLayout(getContext());
+		ViewGroup.LayoutParams layoutParams = new ViewGroup.LayoutParams(
+				100, 100);
+		linearLayout.setLayoutParams(layoutParams);
+		linearLayout.setBackgroundColor(Color.GREEN);
+		return linearLayout;
 	}
 	
 	@Override
@@ -503,5 +551,61 @@ public class TGListView extends ListView implements IViewGroup, IViewTree, OnLon
 	public void setLayoutGravityValue(String gravity)
 	{
 		viewGroupHelper.setLayoutGravityValue(gravity);
+	}
+	
+	private void setAdapter(ListAdapter adapter)
+	{
+		//清空所有子视图
+		mainLayout.removeAllViews();
+		
+		//添加新视图
+		int count = adapter.getCount();
+		View view = null;
+		LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(
+				LinearLayout.LayoutParams.MATCH_PARENT, 
+				LinearLayout.LayoutParams.WRAP_CONTENT);
+		for(int i = 0; i < count; i++)
+		{
+			view = adapter.getView(i, null, null);
+			view.setLayoutParams(layoutParams);
+			mainLayout.addView(view);
+		}
+	}
+	
+	public static class DefaultAdapter extends TGListAdapter<Void>
+	{
+		private String listItemLayoutName = "";
+		
+		public DefaultAdapter(Context context, String listItemLayoutName)
+		{
+			super(context, null);
+			this.listItemLayoutName = listItemLayoutName;
+		}
+		
+		@Override
+		public int getCount()
+		{
+			return 10;
+		}
+		
+		public View getView(int position, View convertView, ViewGroup parent)
+		{
+			//TODO 自动装配View
+			return (View) LayoutDBManager.getLayout(getContext(), listItemLayoutName);
+		};
+	}
+
+	public void setListItemLayout(String layoutName)
+	{
+		// 替换当前的Adapter
+		DefaultAdapter adapter = new DefaultAdapter(getContext(), layoutName);
+		this.setAdapter(adapter);
+
+		this.listItemLayout = layoutName;
+	}
+
+	public String getListItemLayout()
+	{
+		return listItemLayout;
 	}
 }
