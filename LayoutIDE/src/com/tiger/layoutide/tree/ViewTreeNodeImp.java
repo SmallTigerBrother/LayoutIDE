@@ -1,9 +1,16 @@
 package com.tiger.layoutide.tree;
 
 import android.text.TextUtils;
+import android.widget.LinearLayout;
+import android.widget.TextView;
 
 import com.tiger.layoutide.utils.XmlOutputConstant;
 import com.tiger.layoutide.widget.IView;
+import com.tiger.layoutide.widget.TGButton;
+import com.tiger.layoutide.widget.TGCheckBox;
+import com.tiger.layoutide.widget.TGEditText;
+import com.tiger.layoutide.widget.TGLinearLayout;
+import com.tiger.layoutide.widget.TGTextView;
 
 public class ViewTreeNodeImp implements IViewTreeNode
 {
@@ -73,21 +80,6 @@ public class ViewTreeNodeImp implements IViewTreeNode
 		}
 		
 		/********************************* Content *************************************/
-		
-		if(!TextUtils.isEmpty(view.getText()))
-		{
-			propertiesStrBuilder.append(String.format(XmlOutputConstant.TEXT, view.getText()) + "\n");
-		}
-		
-		if(view.getTextSize() > 0)
-		{
-			propertiesStrBuilder.append(String.format(XmlOutputConstant.TEXT_SIZE, view.getTextSize()) + "\n");
-		}
-		
-		if(!TextUtils.isEmpty(view.getTextColor()))
-		{
-			propertiesStrBuilder.append(String.format(XmlOutputConstant.TEXT_COLOR, view.getTextColor()) + "\n");
-		}
 		
 		if(!TextUtils.isEmpty(view.getGravityValue()))
 		{
@@ -178,14 +170,89 @@ public class ViewTreeNodeImp implements IViewTreeNode
 			propertiesStrBuilder.append(String.format(XmlOutputConstant.CENTER_VERTICAL, view.getCenterVertical()) + "\n");
 		}
 		
-		if(!TextUtils.isEmpty(view.getOrientationValue()))
-		{
-			propertiesStrBuilder.append(String.format(XmlOutputConstant.LAYOUT_ORIENTATION, view.getOrientationValue()) + "\n");
-		}
+		
+		propertiesStrBuilder = appendLinearLayoutProperties(propertiesStrBuilder);
+		
+		propertiesStrBuilder = appendTextViewProperties(propertiesStrBuilder);
 		
 		return propertiesStrBuilder.toString();
 	}
+	
+	private StringBuilder appendLinearLayoutProperties(StringBuilder propertiesStrBuilder)
+	{
+		if(view instanceof LinearLayout)
+		{
+			if(!TextUtils.isEmpty(((TGLinearLayout)view).getOrientationValue()))
+			{
+				propertiesStrBuilder.append(String.format(XmlOutputConstant.LAYOUT_ORIENTATION, ((TGLinearLayout)view).getOrientationValue()) + "\n");
+			}
+		}
+		
+		return propertiesStrBuilder;
+	}
 
+	private StringBuilder appendTextViewProperties(StringBuilder propertiesStrBuilder)
+	{
+		if(view instanceof TextView)
+		{
+			if(!TextUtils.isEmpty(((TextView)view).getText()))
+			{
+				propertiesStrBuilder.append(String.format(XmlOutputConstant.TEXT, ((TextView)view).getText()) + "\n");
+			}
+		}
+		
+		if(view instanceof TGTextView)
+		{
+			if(((TGTextView)view).getTextSize() > 0)
+			{
+				propertiesStrBuilder.append(String.format(XmlOutputConstant.TEXT_SIZE, ((TGTextView)view).getTextSize()) + "\n");
+			}
+			
+			if(!TextUtils.isEmpty(((TGTextView)view).getTextColor()))
+			{
+				propertiesStrBuilder.append(String.format(XmlOutputConstant.TEXT_COLOR, ((TGTextView)view).getTextColor()) + "\n");
+			}
+		}
+		else if(view instanceof TGButton)
+		{
+			if(((TGButton)view).getTextSize() > 0)
+			{
+				propertiesStrBuilder.append(String.format(XmlOutputConstant.TEXT_SIZE, ((TGButton)view).getTextSize()) + "\n");
+			}
+			
+			if(!TextUtils.isEmpty(((TGButton)view).getTextColor()))
+			{
+				propertiesStrBuilder.append(String.format(XmlOutputConstant.TEXT_COLOR, ((TGButton)view).getTextColor()) + "\n");
+			}
+		}
+		else if(view instanceof TGEditText)
+		{
+			if(((TGEditText)view).getTextSize() > 0)
+			{
+				propertiesStrBuilder.append(String.format(XmlOutputConstant.TEXT_SIZE, ((TGEditText)view).getTextSize()) + "\n");
+			}
+			
+			if(!TextUtils.isEmpty(((TGEditText)view).getTextColor()))
+			{
+				propertiesStrBuilder.append(String.format(XmlOutputConstant.TEXT_COLOR, ((TGEditText)view).getTextColor()) + "\n");
+			}
+		}
+		else if(view instanceof TGCheckBox)
+		{
+			if(((TGCheckBox)view).getTextSize() > 0)
+			{
+				propertiesStrBuilder.append(String.format(XmlOutputConstant.TEXT_SIZE, ((TGCheckBox)view).getTextSize()) + "\n");
+			}
+			
+			if(!TextUtils.isEmpty(((TGCheckBox)view).getTextColor()))
+			{
+				propertiesStrBuilder.append(String.format(XmlOutputConstant.TEXT_COLOR, ((TGCheckBox)view).getTextColor()) + "\n");
+			}
+		}
+		
+		return propertiesStrBuilder;
+	}
+	
 	@Override
 	public void dump()
 	{
