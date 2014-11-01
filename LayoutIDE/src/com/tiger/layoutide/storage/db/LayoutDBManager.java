@@ -9,6 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
 
 import com.mn.tiger.datastorage.TGDBManager;
 import com.mn.tiger.datastorage.db.exception.DbException;
@@ -163,7 +164,11 @@ public class LayoutDBManager
 		
 		viewDBModel.setLayoutWeight(view.getLayoutWeight());
 		viewDBModel.setLayoutGravity(view.getLayoutGravityValue());
-		viewDBModel.setOrientation(view.getOrientationValue());
+		
+		if(view instanceof LinearLayout)
+		{
+			viewDBModel.setOrientation(((TGLinearLayout)view).getOrientationValue());
+		}
 		
 		viewDBModel.setAlignParentLeft(view.getAlignParentLeft());
 		viewDBModel.setAlignParentRight(view.getAlignParentRight());
@@ -184,17 +189,41 @@ public class LayoutDBManager
 		viewDBModel.setCenterHorizontal(view.getCenterHorizontal());
 		viewDBModel.setCenterVertical(view.getCenterVertical());
 		
-		if(TextUtils.isEmpty(view.getText()))
+		if(view instanceof TextView)
 		{
-			viewDBModel.setText("");
-		}
-		else
-		{
-			viewDBModel.setText(view.getText().toString());
+			if(TextUtils.isEmpty(((TextView)view).getText()))
+			{
+				viewDBModel.setText("");
+			}
+			else
+			{
+				viewDBModel.setText(((TextView)view).getText().toString());
+			}
+			
+			viewDBModel.setTextSize(((TextView)view).getTextSize());
 		}
 		
-		viewDBModel.setTextSize(view.getTextSize());
-		viewDBModel.setTextColor(view.getTextColor());
+		if(view instanceof TGTextView)
+		{
+			viewDBModel.setTextColor(((TGTextView)view).getTextColor());
+		}
+		
+		if(view instanceof TGButton)
+		{
+			viewDBModel.setTextColor(((TGButton)view).getTextColor());
+		}
+		
+		if(view instanceof TGEditText)
+		{
+			viewDBModel.setTextColor(((TGEditText)view).getTextColor());
+		}
+		
+		if(view instanceof TGCheckBox)
+		{
+			viewDBModel.setTextColor(((TGCheckBox)view).getTextColor());
+		}
+		
+		
 		viewDBModel.setGravity(view.getGravityValue());
 		
 		viewDBModel.setBackgroundColor(view.getBackgroundColor());
@@ -235,7 +264,11 @@ public class LayoutDBManager
 		
 		view.setLayoutWeight(viewDBModel.getLayoutWeight() + "");
 		view.setLayoutGravityValue(viewDBModel.getLayoutGravity());
-		view.setOrientationValue(viewDBModel.getOrientation());
+		
+		if(view instanceof LinearLayout)
+		{
+			((TGLinearLayout)view).setOrientationValue(viewDBModel.getOrientation());
+		}
 		
 		view.setAlignParentLeft(viewDBModel.getAlignParentLeft());
 		view.setAlignParentRight(viewDBModel.getAlignParentRight());
@@ -256,9 +289,35 @@ public class LayoutDBManager
 		view.setCenterHorizontal(viewDBModel.getCenterHorizontal());
 		view.setCenterVertical(viewDBModel.getCenterVertical());
 		
-		view.setText(viewDBModel.getText());
-		view.setTextSize(viewDBModel.getTextSize() + "");
-		view.setTextColor(viewDBModel.getTextColor());
+		if(view instanceof TextView)
+		{
+			((TextView)view).setText(viewDBModel.getText());
+		}
+		
+		if(view instanceof TGTextView)
+		{
+			((TGTextView)view).setTextSize(viewDBModel.getTextSize() + "");
+			((TGTextView)view).setTextColor(viewDBModel.getTextColor());
+		}
+		
+		if(view instanceof TGButton)
+		{
+			((TGButton)view).setTextSize(viewDBModel.getTextSize() + "");
+			((TGButton)view).setTextColor(viewDBModel.getTextColor());
+		}
+		
+		if(view instanceof TGEditText)
+		{
+			((TGEditText)view).setTextSize(viewDBModel.getTextSize() + "");
+			((TGEditText)view).setTextColor(viewDBModel.getTextColor());
+		}
+		
+		if(view instanceof TGCheckBox)
+		{
+			((TGCheckBox)view).setTextSize(viewDBModel.getTextSize() + "");
+			((TGCheckBox)view).setTextColor(viewDBModel.getTextColor());
+		}
+		
 		view.setGravityValue(viewDBModel.getGravity());
 		
 		view.setBackgroundColor(viewDBModel.getBackgroundColor());
