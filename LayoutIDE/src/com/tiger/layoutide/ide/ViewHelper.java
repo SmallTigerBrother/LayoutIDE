@@ -11,8 +11,8 @@ import android.widget.RelativeLayout;
 
 import com.mn.tiger.utility.DisplayUtils;
 import com.mn.tiger.utility.LogTools;
-import com.tiger.layoutide.utils.Constant;
 import com.tiger.layoutide.utils.GravityValue;
+import com.tiger.layoutide.utils.XmlOutputConstant;
 import com.tiger.layoutide.widget.IView;
 import com.tiger.layoutide.widget.TGRelativeLayout;
 
@@ -118,11 +118,11 @@ public class ViewHelper implements IView
 	{
 		if(!TextUtils.isEmpty(layoutWidth))
 		{
-			if(layoutWidth.equals(Constant.WRAP_CONTENT))
+			if(layoutWidth.equals(XmlOutputConstant.WRAP_CONTENT))
 			{
 				return layoutWidth;
 			}
-			else if(layoutWidth.equals(Constant.MATCH_PARENT))
+			else if(layoutWidth.equals(XmlOutputConstant.MATCH_PARENT))
 			{
 				return layoutWidth;
 			}
@@ -134,11 +134,11 @@ public class ViewHelper implements IView
 		switch (layoutParams.width)
 		{
 			case ViewGroup.LayoutParams.WRAP_CONTENT:
-				layoutWidth = Constant.WRAP_CONTENT;
+				layoutWidth = XmlOutputConstant.WRAP_CONTENT;
 				return layoutWidth;
 
 			case ViewGroup.LayoutParams.MATCH_PARENT:
-				layoutWidth = Constant.MATCH_PARENT;
+				layoutWidth = XmlOutputConstant.MATCH_PARENT;
 				return layoutWidth;
 
 			default:
@@ -152,12 +152,12 @@ public class ViewHelper implements IView
 	{
 		ViewGroup.LayoutParams layoutParams = view.getLayoutParams();
 		
-		if(Constant.WRAP_CONTENT.equals(layoutWidth.toString()))
+		if(XmlOutputConstant.WRAP_CONTENT.equals(layoutWidth.toString()))
 		{
 			layoutParams.width = ViewGroup.LayoutParams.WRAP_CONTENT;
 			this.layoutWidth = layoutWidth;
 		}
-		else if(Constant.MATCH_PARENT.equals(layoutWidth.toString()))
+		else if(XmlOutputConstant.MATCH_PARENT.equals(layoutWidth.toString()))
 		{
 			layoutParams.width = ViewGroup.LayoutParams.MATCH_PARENT;
 			this.layoutWidth = layoutWidth;
@@ -184,11 +184,11 @@ public class ViewHelper implements IView
 	{
 		if(!TextUtils.isEmpty(layoutHeight))
 		{
-			if(layoutHeight.equals(Constant.WRAP_CONTENT))
+			if(layoutHeight.equals(XmlOutputConstant.WRAP_CONTENT))
 			{
 				return layoutHeight;
 			}
-			else if(layoutHeight.equals(Constant.MATCH_PARENT))
+			else if(layoutHeight.equals(XmlOutputConstant.MATCH_PARENT))
 			{
 				return layoutHeight;
 			}
@@ -202,12 +202,12 @@ public class ViewHelper implements IView
 			switch (layoutParams.height)
 			{
 				case ViewGroup.LayoutParams.WRAP_CONTENT:
-					layoutHeight = Constant.WRAP_CONTENT;
-					return Constant.WRAP_CONTENT;
+					layoutHeight = XmlOutputConstant.WRAP_CONTENT;
+					return XmlOutputConstant.WRAP_CONTENT;
 
 				case ViewGroup.LayoutParams.MATCH_PARENT:
-					layoutHeight = Constant.MATCH_PARENT;
-					return Constant.MATCH_PARENT;
+					layoutHeight = XmlOutputConstant.MATCH_PARENT;
+					return XmlOutputConstant.MATCH_PARENT;
 
 				default:
 					layoutHeight = DisplayUtils.px2dip(view.getContext(), layoutParams.height) + "";
@@ -225,12 +225,12 @@ public class ViewHelper implements IView
 	public void setLayoutHeight(String layoutHeight)
 	{
 		ViewGroup.LayoutParams layoutParams = view.getLayoutParams();
-		if(Constant.WRAP_CONTENT.equals(layoutHeight.toString()))
+		if(XmlOutputConstant.WRAP_CONTENT.equals(layoutHeight.toString()))
 		{
 			layoutParams.height = ViewGroup.LayoutParams.WRAP_CONTENT;
 			this.layoutHeight = layoutHeight;
 		}
-		else if(Constant.MATCH_PARENT.equals(layoutHeight.toString()))
+		else if(XmlOutputConstant.MATCH_PARENT.equals(layoutHeight.toString()))
 		{
 			layoutParams.height = ViewGroup.LayoutParams.MATCH_PARENT;
 			this.layoutHeight = layoutHeight;
@@ -543,7 +543,7 @@ public class ViewHelper implements IView
 		ViewGroup.LayoutParams layoutParams = (ViewGroup.LayoutParams) view.getLayoutParams();
 		if(layoutParams instanceof RelativeLayout.LayoutParams)
 		{
-			if(Constant.TRUE.equals(value))
+			if(XmlOutputConstant.TRUE.equals(value))
 			{
 				((RelativeLayout.LayoutParams)layoutParams).addRule(RelativeLayout.ALIGN_PARENT_LEFT);
 			}
@@ -565,7 +565,7 @@ public class ViewHelper implements IView
 			RelativeLayout.LayoutParams relativieLayoutParams = (RelativeLayout.LayoutParams)layoutParams;
 			if(containsRule(relativieLayoutParams.getRules(), RelativeLayout.ALIGN_PARENT_LEFT))
 			{
-				return Constant.TRUE;
+				return XmlOutputConstant.TRUE;
 			}
 		}
 		return null;
@@ -577,7 +577,7 @@ public class ViewHelper implements IView
 		ViewGroup.LayoutParams layoutParams = (ViewGroup.LayoutParams) view.getLayoutParams();
 		if(layoutParams instanceof RelativeLayout.LayoutParams)
 		{
-			if(Constant.TRUE.equals(value))
+			if(XmlOutputConstant.TRUE.equals(value))
 			{
 				((RelativeLayout.LayoutParams)layoutParams).addRule(RelativeLayout.ALIGN_PARENT_RIGHT);
 			}
@@ -599,7 +599,7 @@ public class ViewHelper implements IView
 			RelativeLayout.LayoutParams relativieLayoutParams = (RelativeLayout.LayoutParams)layoutParams;
 			if(containsRule(relativieLayoutParams.getRules(), RelativeLayout.ALIGN_PARENT_RIGHT))
 			{
-				return Constant.TRUE;
+				return XmlOutputConstant.TRUE;
 			}
 		}
 		return null;
@@ -611,7 +611,7 @@ public class ViewHelper implements IView
 		ViewGroup.LayoutParams layoutParams = (ViewGroup.LayoutParams) view.getLayoutParams();
 		if(layoutParams instanceof RelativeLayout.LayoutParams)
 		{
-			if(Constant.TRUE.equals(value))
+			if(XmlOutputConstant.TRUE.equals(value))
 			{
 				((RelativeLayout.LayoutParams)layoutParams).addRule(RelativeLayout.ALIGN_PARENT_TOP);
 			}
@@ -633,7 +633,7 @@ public class ViewHelper implements IView
 			RelativeLayout.LayoutParams relativieLayoutParams = (RelativeLayout.LayoutParams)layoutParams;
 			if(containsRule(relativieLayoutParams.getRules(), RelativeLayout.ALIGN_PARENT_TOP))
 			{
-				return Constant.TRUE;
+				return XmlOutputConstant.TRUE;
 			}
 		}
 		return null;
@@ -645,7 +645,7 @@ public class ViewHelper implements IView
 		ViewGroup.LayoutParams layoutParams = (ViewGroup.LayoutParams) view.getLayoutParams();
 		if(layoutParams instanceof RelativeLayout.LayoutParams)
 		{
-			if(Constant.TRUE.equals(value))
+			if(XmlOutputConstant.TRUE.equals(value))
 			{
 				((RelativeLayout.LayoutParams)layoutParams).addRule(RelativeLayout.ALIGN_PARENT_BOTTOM);
 			}
@@ -667,7 +667,7 @@ public class ViewHelper implements IView
 			RelativeLayout.LayoutParams relativieLayoutParams = (RelativeLayout.LayoutParams)layoutParams;
 			if(containsRule(relativieLayoutParams.getRules(), RelativeLayout.ALIGN_PARENT_BOTTOM))
 			{
-				return Constant.TRUE;
+				return XmlOutputConstant.TRUE;
 			}
 		}
 		return null;
@@ -869,7 +869,7 @@ public class ViewHelper implements IView
 	public void setCenterInParent(String value)
 	{
 		RelativeLayout.LayoutParams layoutParams = (RelativeLayout.LayoutParams) view.getLayoutParams();
-		if(Constant.TRUE.equals(value))
+		if(XmlOutputConstant.TRUE.equals(value))
 		{
 			layoutParams.addRule(RelativeLayout.CENTER_IN_PARENT);
 		}
@@ -890,7 +890,7 @@ public class ViewHelper implements IView
 			RelativeLayout.LayoutParams relativieLayoutParams = (RelativeLayout.LayoutParams)layoutParams;
 			if(containsRule(relativieLayoutParams.getRules(), RelativeLayout.CENTER_IN_PARENT))
 			{
-				return Constant.TRUE;
+				return XmlOutputConstant.TRUE;
 			}
 		}
 		return null;
@@ -901,7 +901,7 @@ public class ViewHelper implements IView
 	{
 		RelativeLayout.LayoutParams layoutParams = (RelativeLayout.LayoutParams) view.getLayoutParams();
 		layoutParams.addRule(RelativeLayout.CENTER_HORIZONTAL);
-		if(Constant.TRUE.equals(value))
+		if(XmlOutputConstant.TRUE.equals(value))
 		{
 			layoutParams.addRule(RelativeLayout.CENTER_HORIZONTAL);
 		}
@@ -922,7 +922,7 @@ public class ViewHelper implements IView
 			RelativeLayout.LayoutParams relativieLayoutParams = (RelativeLayout.LayoutParams)layoutParams;
 			if(containsRule(relativieLayoutParams.getRules(), RelativeLayout.CENTER_HORIZONTAL))
 			{
-				return Constant.TRUE;
+				return XmlOutputConstant.TRUE;
 			}
 		}
 		return null;
@@ -933,7 +933,7 @@ public class ViewHelper implements IView
 	{
 		RelativeLayout.LayoutParams layoutParams = (RelativeLayout.LayoutParams) view.getLayoutParams();
 		layoutParams.addRule(RelativeLayout.CENTER_VERTICAL);
-		if(Constant.TRUE.equals(value))
+		if(XmlOutputConstant.TRUE.equals(value))
 		{
 			layoutParams.addRule(RelativeLayout.CENTER_VERTICAL);
 		}
@@ -954,7 +954,7 @@ public class ViewHelper implements IView
 			RelativeLayout.LayoutParams relativieLayoutParams = (RelativeLayout.LayoutParams)layoutParams;
 			if(containsRule(relativieLayoutParams.getRules(), RelativeLayout.CENTER_VERTICAL))
 			{
-				return Constant.TRUE;
+				return XmlOutputConstant.TRUE;
 			}
 		}
 		return null;
@@ -972,7 +972,7 @@ public class ViewHelper implements IView
 		if(view instanceof LinearLayout)
 		{
 			this.orientation = orientation;
-			if(orientation.equals(Constant.ORIENTATION_HORIZONTAL))
+			if(orientation.equals(XmlOutputConstant.ORIENTATION_HORIZONTAL))
 			{
 				((LinearLayout)view).setOrientation(LinearLayout.HORIZONTAL);
 			}
@@ -996,11 +996,11 @@ public class ViewHelper implements IView
 			int orientation = ((LinearLayout)view).getOrientation();
 			if(orientation == LinearLayout.HORIZONTAL)
 			{
-				this.orientation = Constant.ORIENTATION_HORIZONTAL;
+				this.orientation = XmlOutputConstant.ORIENTATION_HORIZONTAL;
 			}
 			else
 			{
-				this.orientation = Constant.ORIENTATION_VERTICAL;
+				this.orientation = XmlOutputConstant.ORIENTATION_VERTICAL;
 			}
 		}
 		
