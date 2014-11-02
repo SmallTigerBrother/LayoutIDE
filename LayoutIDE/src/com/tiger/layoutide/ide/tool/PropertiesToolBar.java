@@ -50,7 +50,7 @@ public class PropertiesToolBar
 	/*********************************** Relativie Position *********************************/
 	
 	@ViewById(id = R.id.relative_position_properties)
-	private RelativiePositionToolBar relativiePositionToolBar;
+	private RelativePositionToolBar relativiePositionToolBar;
 	
 	
 	private IView selectedView = null;
