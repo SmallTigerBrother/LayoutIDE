@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical" >
+
+    <GridLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:columnCount="4"
+        android:rowCount="3"
+        android:orientation="horizontal"
+        android:layout_gravity="center_horizontal"
+        
+         >
+
+        <com.tiger.layoutide.ide.ui.template.LinearBlankTemplate
+            android:id="@+id/linear_blank_template"
+            android:layout_width="300dp"
+            android:layout_height="300dp" >
+        </com.tiger.layoutide.ide.ui.template.LinearBlankTemplate>
+        
+        <com.tiger.layoutide.ide.ui.template.RelativeBlankTemplate
+             android:id="@+id/relative_blank_template"
+            android:layout_width="300dp"
+            android:layout_height="300dp" >
+        </com.tiger.layoutide.ide.ui.template.RelativeBlankTemplate>
+        
+    </GridLayout>
+
+</LinearLayout>
