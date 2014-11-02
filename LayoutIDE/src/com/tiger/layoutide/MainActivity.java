@@ -10,9 +10,9 @@ import android.content.Intent;
 import android.os.Bundle;
 import android.view.DragEvent;
 import android.view.View;
-import android.view.ViewGroup;
 import android.view.View.OnClickListener;
 import android.view.View.OnDragListener;
+import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
@@ -20,7 +20,6 @@ import android.widget.ScrollView;
 import android.widget.TextView;
 
 import com.mn.tiger.annonation.ViewById;
-import com.mn.tiger.utility.LogTools;
 import com.mn.tiger.utility.ViewInjector;
 import com.tiger.code.json.JSONClassGenerator;
 import com.tiger.code.model.JClass;
@@ -85,7 +84,7 @@ public class MainActivity extends Activity
 				
 				List<JClass> clazzes = new JSONClassGenerator().json2Classes(json);
 				
-				LayoutDBManager.saveLayout(MainActivity.this, "emulatorLayout", (IViewGroup)emulator);
+				LayoutDBManager.saveLayout(MainActivity.this, "emulatorLayout", (IViewGroup)emulator.getChildAt(0));
 				LayoutDBManager.getLayout(MainActivity.this, "emulatorLayout");
 				
 				try
