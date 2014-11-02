@@ -9,13 +9,13 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
-import android.widget.TextView;
 
 import com.mn.tiger.datastorage.TGDBManager;
 import com.mn.tiger.datastorage.db.exception.DbException;
 import com.mn.tiger.utility.LogTools;
 import com.tiger.layoutide.storage.model.ViewDBModel;
 import com.tiger.layoutide.utils.WidgetSimpleName;
+import com.tiger.layoutide.widget.ITextView;
 import com.tiger.layoutide.widget.IView;
 import com.tiger.layoutide.widget.IViewGroup;
 import com.tiger.layoutide.widget.TGButton;
@@ -196,35 +196,20 @@ public class LayoutDBManager
 		viewDBModel.setCenterHorizontal(view.getCenterHorizontal());
 		viewDBModel.setCenterVertical(view.getCenterVertical());
 		
-		if(view instanceof TextView)
+		if(view instanceof ITextView)
 		{
-			if(TextUtils.isEmpty(((TextView)view).getText()))
+			if(TextUtils.isEmpty(((ITextView)view).getText()))
 			{
 				viewDBModel.setText("");
 			}
 			else
 			{
-				viewDBModel.setText(((TextView)view).getText().toString());
+				viewDBModel.setText(((ITextView)view).getText().toString());
 			}
 			
-			viewDBModel.setTextSize(((TextView)view).getTextSize());
-		}
-		
-		if(view instanceof TGTextView)
-		{
-			viewDBModel.setTextColor(((TGTextView)view).getTextColor());
-		}
-		else if(view instanceof TGButton)
-		{
-			viewDBModel.setTextColor(((TGButton)view).getTextColor());
-		}
-		else if(view instanceof TGEditText)
-		{
-			viewDBModel.setTextColor(((TGEditText)view).getTextColor());
-		}
-		else if(view instanceof TGCheckBox)
-		{
-			viewDBModel.setTextColor(((TGCheckBox)view).getTextColor());
+			viewDBModel.setTextSize(((ITextView)view).getTextSize());
+			
+			viewDBModel.setTextColor(((ITextView)view).getTextColor());
 		}
 		else if(view instanceof TGLinearLayout)
 		{
@@ -301,30 +286,11 @@ public class LayoutDBManager
 		view.setCenterHorizontal(viewDBModel.getCenterHorizontal());
 		view.setCenterVertical(viewDBModel.getCenterVertical());
 		
-		if(view instanceof TextView)
+		if(view instanceof ITextView)
 		{
-			((TextView)view).setText(viewDBModel.getText());
-		}
-		
-		if(view instanceof TGTextView)
-		{
-			((TGTextView)view).setTextSize(viewDBModel.getTextSize() + "");
-			((TGTextView)view).setTextColor(viewDBModel.getTextColor());
-		}
-		else if(view instanceof TGButton)
-		{
-			((TGButton)view).setTextSize(viewDBModel.getTextSize() + "");
-			((TGButton)view).setTextColor(viewDBModel.getTextColor());
-		}
-		else if(view instanceof TGEditText)
-		{
-			((TGEditText)view).setTextSize(viewDBModel.getTextSize() + "");
-			((TGEditText)view).setTextColor(viewDBModel.getTextColor());
-		}
-		else if(view instanceof TGCheckBox)
-		{
-			((TGCheckBox)view).setTextSize(viewDBModel.getTextSize() + "");
-			((TGCheckBox)view).setTextColor(viewDBModel.getTextColor());
+			((ITextView)view).setText(viewDBModel.getText());
+			((ITextView)view).setTextSize(viewDBModel.getTextSize() + "");
+			((ITextView)view).setTextColor(viewDBModel.getTextColor());
 		}
 		else if(view instanceof TGLinearLayout)
 		{
