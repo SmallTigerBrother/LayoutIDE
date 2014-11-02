@@ -1,7 +1,5 @@
 package com.tiger.layoutide.ide.ui.template;
 
-import com.tiger.layoutide.widget.TGLinearLayout;
-
 import android.app.Activity;
 import android.content.Context;
 import android.graphics.Color;
@@ -11,6 +9,10 @@ import android.view.View;
 import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 import android.widget.TextView;
+
+import com.tiger.layoutide.ide.tool.PropertiesToolBar;
+import com.tiger.layoutide.widget.IView;
+import com.tiger.layoutide.widget.TGLinearLayout;
 
 public class LinearBlankTemplate extends TemplateLayout
 {
@@ -49,6 +51,15 @@ public class LinearBlankTemplate extends TemplateLayout
 		TGLinearLayout realView = new TGLinearLayout(activity);
 		realView.setRootViewGroup(true);
 		realView.setLayoutParams(layoutParams);
+		realView.setBackgroundColor(Color.GREEN);
+		realView.setOnClickListener(new OnClickListener()
+		{
+			@Override
+			public void onClick(View v)
+			{
+				PropertiesToolBar.getSingleInstance().setSelectedView((IView)v);
+			}
+		});
 		return realView;
 	}
 	

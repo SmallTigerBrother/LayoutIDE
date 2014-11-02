@@ -10,6 +10,8 @@ import android.widget.FrameLayout;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
+import com.tiger.layoutide.ide.tool.PropertiesToolBar;
+import com.tiger.layoutide.widget.IView;
 import com.tiger.layoutide.widget.TGRelativeLayout;
 
 public class RelativeBlankTemplate extends TemplateLayout
@@ -50,6 +52,15 @@ public class RelativeBlankTemplate extends TemplateLayout
 		TGRelativeLayout realView = new TGRelativeLayout(activity);
 		realView.setRootViewGroup(true);
 		realView.setLayoutParams(layoutParams);
+		realView.setBackgroundColor(Color.BLUE);
+		realView.setOnClickListener(new OnClickListener()
+		{
+			@Override
+			public void onClick(View v)
+			{
+				PropertiesToolBar.getSingleInstance().setSelectedView((IView)v);
+			}
+		});
 		return realView;
 	}
 }
