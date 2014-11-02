@@ -6,6 +6,8 @@ public class ViewDBModel
 {
 	private int _id;
 	
+	private boolean isRootViewGroup = false;
+	
 	private String simpleClassName = "";
 	
 	private String idName = "";
@@ -422,5 +424,15 @@ public class ViewDBModel
 	public void setPageItemLayout(String pageItemLayout)
 	{
 		this.pageItemLayout = pageItemLayout;
+	}
+
+	public boolean isRootViewGroup()
+	{
+		return isRootViewGroup;
+	}
+
+	public void setRootViewGroup(boolean isRootViewGroup)
+	{
+		this.isRootViewGroup = isRootViewGroup;
 	}
 }

@@ -48,6 +48,18 @@ public class LayoutDBManager
 		}
 	}
 	
+	public static void removeLayout(Context context,String projectName)
+	{
+		try
+		{
+			getDBManager(context, projectName).deleteAll(ViewDBModel.class);;
+		}
+		catch (DbException e)
+		{
+			LogTools.e(LOG_TAG, e);
+		}
+	}
+	
 	public static IView getLayout(Context context,String projectName)
 	{
 		List<ViewDBModel> viewDBModels = getViewDBModels(context, projectName);
@@ -165,11 +177,6 @@ public class LayoutDBManager
 		viewDBModel.setLayoutWeight(view.getLayoutWeight());
 		viewDBModel.setLayoutGravity(view.getLayoutGravityValue());
 		
-		if(view instanceof LinearLayout)
-		{
-			viewDBModel.setOrientation(((TGLinearLayout)view).getOrientationValue());
-		}
-		
 		viewDBModel.setAlignParentLeft(view.getAlignParentLeft());
 		viewDBModel.setAlignParentRight(view.getAlignParentRight());
 		viewDBModel.setAlignParentTop(view.getAlignParentTop());
@@ -219,7 +226,15 @@ public class LayoutDBManager
 		{
 			viewDBModel.setTextColor(((TGCheckBox)view).getTextColor());
 		}
-		
+		else if(view instanceof TGLinearLayout)
+		{
+			viewDBModel.setOrientation(((TGLinearLayout)view).getOrientationValue());
+			viewDBModel.setRootViewGroup(((TGLinearLayout)view).isRootViewGroup());
+		}
+		else if(view instanceof TGRelativeLayout)
+		{
+			viewDBModel.setRootViewGroup(((TGRelativeLayout)view).isRootViewGroup());
+		}
 		
 		viewDBModel.setGravity(view.getGravityValue());
 		
@@ -310,6 +325,15 @@ public class LayoutDBManager
 		{
 			((TGCheckBox)view).setTextSize(viewDBModel.getTextSize() + "");
 			((TGCheckBox)view).setTextColor(viewDBModel.getTextColor());
+		}
+		else if(view instanceof TGLinearLayout)
+		{
+			((TGLinearLayout)view).setOrientationValue(viewDBModel.getOrientation());
+			((TGLinearLayout)view).setRootViewGroup(viewDBModel.isRootViewGroup());
+		}
+		else if(view instanceof TGRelativeLayout)
+		{
+			((TGRelativeLayout)view).setRootViewGroup(viewDBModel.isRootViewGroup());
 		}
 		
 		view.setGravityValue(viewDBModel.getGravity());
