@@ -61,7 +61,7 @@ public class TemplateActivity extends Activity implements OnClickListener
 		Intent intent = new Intent();
 		intent.putExtra(IntentKeys.SELECTED_TEMPLATE_TYPE, selectedTemplateType);
 		
-		setResult(REQUEST_CODE_LANCH, intent);
+		setResult(RESULT_CODE_MAIN, intent);
 		this.finish();
 	}
 	
