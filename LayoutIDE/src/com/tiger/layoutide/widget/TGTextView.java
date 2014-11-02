@@ -23,7 +23,7 @@ import com.tiger.layoutide.widget.tree.ViewTreeNodeImp;
  * @author Dalang
  *
  */
-public class TGTextView extends TextView implements IViewTreeNode, IView, ISelectable, OnLongClickListener
+public class TGTextView extends TextView implements IViewTreeNode, ISelectable, OnLongClickListener, ITextView
 {
 	private static String LOG_TAG = TGTextView.class.getSimpleName();
 	
@@ -75,11 +75,13 @@ public class TGTextView extends TextView implements IViewTreeNode, IView, ISelec
 		viewHelper.setIdName(idName);
 	}
 	
+	@Override
 	public String getTextColor()
 	{
 		return textColor;
 	}
 	
+	@Override
 	public void setTextColor(String color)
 	{
 		try
@@ -110,6 +112,7 @@ public class TGTextView extends TextView implements IViewTreeNode, IView, ISelec
 		}
 	}
 	
+	@Override
 	public void setTextSize(String textSize)
 	{
 		try
@@ -120,6 +123,12 @@ public class TGTextView extends TextView implements IViewTreeNode, IView, ISelec
 		{
 			LogTools.e(LOG_TAG, "The textSize can not be parsed from value " + textSize);
 		}
+	}
+	
+	@Override
+	public void setText(String text)
+	{
+		super.setText(text);
 	}
 	
 	@Override

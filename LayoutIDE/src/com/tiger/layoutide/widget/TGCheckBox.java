@@ -23,7 +23,7 @@ import com.tiger.layoutide.widget.tree.ViewTreeNodeImp;
  * @author Dalang
  *
  */
-public class TGCheckBox extends CheckBox implements IViewTreeNode, IView, OnLongClickListener
+public class TGCheckBox extends CheckBox implements IViewTreeNode, ITextView, OnLongClickListener
 {
 	
 	private static String LOG_TAG = TGCheckBox.class.getSimpleName();
@@ -76,11 +76,13 @@ public class TGCheckBox extends CheckBox implements IViewTreeNode, IView, OnLong
 		viewHelper.setIdName(idName);
 	}
 	
+	@Override
 	public String getTextColor()
 	{
 		return textColor;
 	}
 	
+	@Override
 	public void setTextColor(String color)
 	{
 		try
@@ -111,6 +113,7 @@ public class TGCheckBox extends CheckBox implements IViewTreeNode, IView, OnLong
 		}
 	}
 	
+	@Override
 	public void setTextSize(String textSize)
 	{
 		try
@@ -121,6 +124,12 @@ public class TGCheckBox extends CheckBox implements IViewTreeNode, IView, OnLong
 		{
 			LogTools.e(LOG_TAG, "The textSize can not be parsed from value " + textSize);
 		}
+	}
+	
+	@Override
+	public void setText(String text)
+	{
+		super.setText(text);
 	}
 	
 	@Override
