@@ -13,12 +13,11 @@ import android.view.ViewGroup;
 import android.widget.CheckBox;
 
 import com.mn.tiger.utility.LogTools;
-import com.tiger.layoutide.ide.Emulator;
-import com.tiger.layoutide.ide.ViewHelper;
-import com.tiger.layoutide.tree.IViewTreeNode;
-import com.tiger.layoutide.tree.ViewTreeNodeImp;
+import com.tiger.layoutide.ide.tool.Emulator;
 import com.tiger.layoutide.utils.GravityValue;
 import com.tiger.layoutide.utils.WidgetSimpleName;
+import com.tiger.layoutide.widget.tree.IViewTreeNode;
+import com.tiger.layoutide.widget.tree.ViewTreeNodeImp;
 
 /**
  * @author Dalang

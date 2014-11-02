@@ -16,15 +16,13 @@ import android.view.ViewGroup;
 import android.widget.LinearLayout;
 
 import com.mn.tiger.utility.LogTools;
-import com.tiger.layoutide.ide.Emulator;
-import com.tiger.layoutide.ide.ViewGroupHelper;
-import com.tiger.layoutide.ide.ViewHelper;
-import com.tiger.layoutide.tree.IViewTree;
-import com.tiger.layoutide.tree.IViewTreeNode;
-import com.tiger.layoutide.tree.ViewTreeImp;
+import com.tiger.layoutide.ide.tool.Emulator;
 import com.tiger.layoutide.utils.GravityValue;
 import com.tiger.layoutide.utils.WidgetSimpleName;
 import com.tiger.layoutide.utils.XmlOutputConstant;
+import com.tiger.layoutide.widget.tree.IViewTree;
+import com.tiger.layoutide.widget.tree.IViewTreeNode;
+import com.tiger.layoutide.widget.tree.ViewTreeImp;
 
 /**
  * @author Dalang

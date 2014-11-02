@@ -59,27 +59,27 @@
                         android:hint="请输入id" />
                 </LinearLayout>
 
-                <com.tiger.layoutide.ide.CommonPositionToolBar
+                <com.tiger.layoutide.ide.tool.CommonPositionToolBar
                     android:id="@+id/common_positin_properties"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content" />
 
-                <com.tiger.layoutide.ide.LinearPositionToolBar
+                <com.tiger.layoutide.ide.tool.LinearPositionToolBar
                     android:id="@+id/linear_position_properties"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content" />
 
-                <com.tiger.layoutide.ide.RelativiePositionToolBar
+            <com.tiger.layoutide.ide.tool.RelativiePositionToolBarolBar
                     android:id="@+id/relative_position_properties"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content" />
 
-                <com.tiger.layoutide.ide.BackgroundToolBar
+                <com.tiger.layoutide.ide.tool.BackgroundToolBar
                     android:id="@+id/background_properties"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content" />
 
-                <com.tiger.layoutide.ide.ContentToolBar
+       <com.tiger.layoutide.ide.tool.ContentToolBarentToolBar
                     android:id="@+id/content_properties"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content" />
@@ -87,7 +87,7 @@
         </LinearLayout>
     </ScrollView>
 
-    <com.tiger.layoutide.ide.Emulator
+    <com.tiger.layoutide.ide.tool.Emulator
         android:id="@+id/emulator_screen"
         android:layout_width="400dp"
         android:layout_height="600dp"
@@ -95,7 +95,7 @@
         android:layout_marginRight="20dp"
         android:layout_toLeftOf="@+id/properties_tool_bar"
         android:background="@android:color/holo_green_light" >
-    </com.tiger.layoutide.ide.Emulator>
+    </com.tiger.layoutide.ide.tool.Emulator>
 
     <LinearLayout
         android:id="@+id/example_panel"

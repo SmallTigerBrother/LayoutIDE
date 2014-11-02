@@ -23,10 +23,10 @@ import com.mn.tiger.utility.LogTools;
 import com.mn.tiger.utility.ViewInjector;
 import com.tiger.code.json.JSONClassGenerator;
 import com.tiger.code.model.JClass;
-import com.tiger.layoutide.ide.Emulator;
-import com.tiger.layoutide.ide.ExampleViewPanel;
-import com.tiger.layoutide.ide.JCodeHelper;
-import com.tiger.layoutide.ide.PropertiesToolBar;
+import com.tiger.layoutide.ide.code.JCodeHelper;
+import com.tiger.layoutide.ide.tool.Emulator;
+import com.tiger.layoutide.ide.tool.ExampleViewPanel;
+import com.tiger.layoutide.ide.tool.PropertiesToolBar;
 import com.tiger.layoutide.storage.db.LayoutDBManager;
 import com.tiger.layoutide.widget.IViewGroup;
 
@@ -76,7 +76,7 @@ public class MainActivity extends Activity
 				
 				List<JClass> clazzes = new JSONClassGenerator().json2Classes(json);
 				
-//				LayoutDBManager.saveLayout(MainActivity.this, "emulatorLayout", (IViewGroup)emulatorLayout);
+				LayoutDBManager.saveLayout(MainActivity.this, "emulatorLayout", (IViewGroup)emulatorLayout);
 				LayoutDBManager.getLayout(MainActivity.this, "emulatorLayout");
 				
 				try

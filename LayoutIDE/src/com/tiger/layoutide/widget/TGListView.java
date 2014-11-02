@@ -17,14 +17,12 @@ import android.widget.ScrollView;
 
 import com.mn.tiger.utility.LogTools;
 import com.mn.tiger.widget.adpter.TGListAdapter;
-import com.tiger.layoutide.ide.Emulator;
-import com.tiger.layoutide.ide.ViewGroupHelper;
-import com.tiger.layoutide.ide.ViewHelper;
+import com.tiger.layoutide.ide.tool.Emulator;
 import com.tiger.layoutide.storage.db.LayoutDBManager;
-import com.tiger.layoutide.tree.IViewTree;
-import com.tiger.layoutide.tree.IViewTreeNode;
-import com.tiger.layoutide.tree.ViewTreeImp;
 import com.tiger.layoutide.utils.WidgetSimpleName;
+import com.tiger.layoutide.widget.tree.IViewTree;
+import com.tiger.layoutide.widget.tree.IViewTreeNode;
+import com.tiger.layoutide.widget.tree.ViewTreeImp;
 
 /**
  * ListView实现，使用ScrollView伪装成列表进行展示，代码输出时，输出成ListView
