@@ -145,6 +145,7 @@
             android:layout_width="80dp"
             android:layout_height="40dp"
             android:background="@android:color/holo_blue_light" />
+
     </LinearLayout>
 
     <Button
@@ -164,5 +165,14 @@
         android:layout_toLeftOf="@+id/emulator_screen"
         android:text="我是垃圾箱"
         android:textSize="40sp" />
+
+    <Button
+        android:id="@+id/select_template"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_above="@+id/garbage_bin"
+        android:layout_alignLeft="@+id/garbage_bin"
+        android:layout_marginBottom="50dp"
+        android:text="SelectTemplate" />
 
 </RelativeLayout>
