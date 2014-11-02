@@ -69,7 +69,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content" />
 
-            <com.tiger.layoutide.ide.tool.RelativiePositionToolBarolBar
+            <com.tiger.layoutide.ide.tool.RelativePositionToolBar
                     android:id="@+id/relative_position_properties"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content" />
@@ -79,7 +79,7 @@
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content" />
 
-       <com.tiger.layoutide.ide.tool.ContentToolBarentToolBar
+       <com.tiger.layoutide.ide.tool.ContentToolBar
                     android:id="@+id/content_properties"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content" />
