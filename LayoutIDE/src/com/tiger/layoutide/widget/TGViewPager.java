@@ -10,8 +10,10 @@ import android.graphics.Paint;
 import android.graphics.Paint.Style;
 import android.support.v4.view.ViewPager;
 import android.util.AttributeSet;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.View.OnLongClickListener;
+import android.view.ViewConfiguration;
 import android.view.ViewGroup;
 
 import com.mn.tiger.utility.LogTools;
@@ -23,7 +25,7 @@ import com.tiger.layoutide.widget.tree.IViewTree;
 import com.tiger.layoutide.widget.tree.IViewTreeNode;
 import com.tiger.layoutide.widget.tree.ViewTreeImp;
 
-public class TGViewPager extends ViewPager implements IViewGroup, IViewTree, OnLongClickListener
+public class TGViewPager extends ViewPager implements IAdapterView, IViewTree, OnLongClickListener
 {
 	private static String LOG_TAG = TGLinearLayout.class.getSimpleName();
 	
@@ -36,6 +38,12 @@ public class TGViewPager extends ViewPager implements IViewGroup, IViewTree, OnL
 	private Paint paint = null;
 	
 	private String pageItemLayout = "";
+	
+	private CheckForLongPress mPendingCheckForLongPress;
+	
+	private boolean mHasPerformedLongPress;
+	 
+	private PerformClick mPerformClick;
 	
 	public TGViewPager(Context context)
 	{
@@ -55,9 +63,8 @@ public class TGViewPager extends ViewPager implements IViewGroup, IViewTree, OnL
 		paint.setStyle(Style.STROKE);
 		paint.setStrokeWidth(10);
 		
-		this.setOnDragListener(viewGroupHelper);
-		
 		this.setOnLongClickListener(this);
+		this.setLongClickable(true);
 	}
 	
 	@Override
@@ -334,12 +341,14 @@ public class TGViewPager extends ViewPager implements IViewGroup, IViewTree, OnL
 	@Override
 	public View newInstance()
 	{
-		TGLinearLayout linearLayout = new TGLinearLayout(getContext());
+		TGViewPager viewPager = new TGViewPager(getContext());
 		ViewGroup.LayoutParams layoutParams = new ViewGroup.LayoutParams(
-				100, 100);
-		linearLayout.setLayoutParams(layoutParams);
-		linearLayout.setBackgroundColor(Color.GREEN);
-		return linearLayout;
+				ViewGroup.LayoutParams.MATCH_PARENT, 
+				ViewGroup.LayoutParams.MATCH_PARENT);
+		
+		viewPager.setLayoutParams(layoutParams);
+		viewPager.setBackgroundColor(Color.YELLOW);
+		return viewPager;
 	}
 	
 	@Override
@@ -531,10 +540,10 @@ public class TGViewPager extends ViewPager implements IViewGroup, IViewTree, OnL
 	@Override
 	public void setLayoutGravityValue(String gravity)
 	{
-		viewGroupHelper.setLayoutGravityValue(gravity);
+		
 	}
 	
-	private  class DefaultAdapter extends TGPagerAdapter
+	private class DefaultAdapter extends TGPagerAdapter
 	{
 		private String listItemLayoutName = "";
 		
@@ -552,15 +561,106 @@ public class TGViewPager extends ViewPager implements IViewGroup, IViewTree, OnL
 		}
 	}
 	
-	public String getPageItemLayout()
+	@Override
+	public String getItemLayout()
 	{
 		return pageItemLayout;
 	}
-
-	public void setPageItemLayout(String pageItemLayout)
+	
+	@Override
+	public void setItemLayout(String itemLayout)
 	{
-		this.pageItemLayout = pageItemLayout;
-		
+		this.pageItemLayout = itemLayout;
 		this.setAdapter(new DefaultAdapter(pageItemLayout));
 	}
+	
+	@Override
+	public boolean onTouchEvent(MotionEvent motionEvent)
+	{
+		switch (motionEvent.getAction())
+		{
+            case MotionEvent.ACTION_UP:
+				if (!mHasPerformedLongPress)
+				{
+					// This is a tap, so remove the longpress check
+					removeLongPressCallback();
+
+					if (mPerformClick == null)
+					{
+						mPerformClick = new PerformClick();
+					}
+					if (!post(mPerformClick))
+					{
+						performClick();
+					}
+					
+					return true;
+				}
+				break;
+
+            case MotionEvent.ACTION_DOWN:
+                mHasPerformedLongPress = false;
+
+                setPressed(true);
+                checkForLongClick(0);
+                
+                return true;
+
+            case MotionEvent.ACTION_CANCEL:
+                setPressed(false);
+                removeLongPressCallback();
+                break;
+
+            case MotionEvent.ACTION_MOVE:
+            	removeLongPressCallback();
+                setPressed(false);
+                break;
+        }
+		 
+		
+		return super.onTouchEvent(motionEvent);
+	}
+	
+	private void checkForLongClick(int delayOffset)
+	{
+		mHasPerformedLongPress = false;
+		
+		if (mPendingCheckForLongPress == null)
+		{
+			mPendingCheckForLongPress = new CheckForLongPress();
+		}
+		
+		postDelayed(mPendingCheckForLongPress, ViewConfiguration.getLongPressTimeout() - delayOffset);
+	}
+	
+	private final class PerformClick implements Runnable 
+	{
+        public void run()
+        {
+            performClick();
+        }
+    }
+	
+	private void removeLongPressCallback()
+	{
+        if (mPendingCheckForLongPress != null) 
+        {
+          removeCallbacks(mPendingCheckForLongPress);
+        }
+    }
+
+	class CheckForLongPress implements Runnable
+	{
+		public void run()
+		{
+			if (isPressed() && (getParent() != null))
+			{
+				if(performLongClick())
+				{
+					mHasPerformedLongPress = true;
+				}
+			}
+		}
+	}
+	
 }
