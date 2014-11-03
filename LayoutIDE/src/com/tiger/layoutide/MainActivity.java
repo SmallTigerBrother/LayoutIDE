@@ -61,6 +61,9 @@ public class MainActivity extends Activity
 	@ViewById(id = R.id.select_template)
 	private Button selectTemplate;
 	
+	private int templateType;
+	
+	private String layoutName;
 	
 	@Override
 	protected void onCreate(Bundle savedInstanceState)
@@ -79,13 +82,13 @@ public class MainActivity extends Activity
 			@Override
 			public void onClick(View v)
 			{
-				String json = "{\"count\":1,\"name\":\"tiger\",\"textSize\":0.1,\"isVisible\":true,\"time\":92233720368547758,\"Child\":{\"childcount\":1}," + 
-			                   "\"array\":[{\"text\":\"text1\"},{\"text\":\"text2\"}]}";
+//				String json = "{\"count\":1,\"name\":\"tiger\",\"textSize\":0.1,\"isVisible\":true,\"time\":92233720368547758,\"Child\":{\"childcount\":1}," + 
+//			                   "\"array\":[{\"text\":\"text1\"},{\"text\":\"text2\"}]}";
+//				
+//				List<JClass> clazzes = new JSONClassGenerator().json2Classes(json);
 				
-				List<JClass> clazzes = new JSONClassGenerator().json2Classes(json);
-				
-				LayoutDBManager.saveLayout(MainActivity.this, "emulatorLayout", (IViewGroup)emulator.getChildAt(0));
-				LayoutDBManager.getLayout(MainActivity.this, "emulatorLayout");
+				LayoutDBManager.saveLayout(MainActivity.this, layoutName, (IViewGroup)emulator.getChildAt(0));
+//				LayoutDBManager.getLayout(MainActivity.this, "emulatorLayout");
 				
 				try
 				{
@@ -97,7 +100,8 @@ public class MainActivity extends Activity
 //					
 //					outputStream.close();
 					
-					FileOutputStream outputStream = MainActivity.this.openFileOutput("AAAAAAA.xml", MODE_WORLD_WRITEABLE);
+					FileOutputStream outputStream = MainActivity.this.openFileOutput(
+							layoutName + ".xml", MODE_WORLD_WRITEABLE);
 					
 					outputStream.write(emulator.getXMLString().getBytes());
 					
@@ -105,7 +109,8 @@ public class MainActivity extends Activity
 					
 					outputStream.close();
 					
-					FileOutputStream outputStream2 = MainActivity.this.openFileOutput("BBBB.java", MODE_WORLD_WRITEABLE);
+					FileOutputStream outputStream2 = MainActivity.this.openFileOutput(
+							layoutName + ".java", MODE_WORLD_WRITEABLE);
 					
 					outputStream2.write(JCodeHelper.outputInjectViewById(emulator).getBytes());
 					
@@ -161,19 +166,32 @@ public class MainActivity extends Activity
 				startActivityForResult(intent, 0);
 			}
 		});
+		
+		templateType = getIntent().getIntExtra(IntentKeys.TEMPLATE_TYPE, 
+				TemplateLayout.RELATIVE_BLANK_TEMPLATE);
+		layoutName = getIntent().getStringExtra(IntentKeys.LAYOUT_NAME);
+		
+		fillEmulatorByTemplate(templateType);
 	}
 	
 	@Override
 	protected void onActivityResult(int requestCode, int resultCode, Intent data)
 	{
-		if(requestCode == 0 && resultCode == TemplateActivity.RESULT_CODE_MAIN)
+		if(requestCode == 0 && resultCode == TemplateActivity.REQUEST_CODE)
 		{
-			int selecteTemplateType = data.getIntExtra(IntentKeys.SELECTED_TEMPLATE_TYPE, TemplateLayout.LINEAR_BLANK_TEMPLATE);
-			View rootView = TemplateFactory.getInstance().createRealViewOfTemplate(this, selecteTemplateType);
-			emulator.removeAllViews();
-			emulator.addView(rootView);
-			//ÒÆ³ý±£´æ¼ÇÂ¼
-			LayoutDBManager.removeLayout(this, "emulatorLayout");
+			templateType = data.getIntExtra(IntentKeys.TEMPLATE_TYPE, 
+					TemplateLayout.RELATIVE_BLANK_TEMPLATE);
+			fillEmulatorByTemplate(templateType);
 		}
+	}
+	
+	private void fillEmulatorByTemplate(int templateType)
+	{
+		View rootView = TemplateFactory.getInstance().createRealViewOfTemplate(this,
+				templateType);
+		emulator.removeAllViews();
+		emulator.addView(rootView);
+		//ÒÆ³ý±£´æ¼ÇÂ¼
+		LayoutDBManager.removeLayout(this, layoutName);
 	}
 }
