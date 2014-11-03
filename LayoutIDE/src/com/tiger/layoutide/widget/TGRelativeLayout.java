@@ -88,7 +88,19 @@ public class TGRelativeLayout extends RelativeLayout implements IViewTree,IViewG
 	public void addView(View child, int index, ViewGroup.LayoutParams params)
 	{
 		child.setId(createChildViewId());
-		params = new TGRelativeLayout.LayoutParams(params);
+		if(!(params instanceof TGRelativeLayout.LayoutParams))
+		{
+			
+			if(params instanceof MarginLayoutParams)
+			{
+				params = new TGRelativeLayout.LayoutParams((MarginLayoutParams)params);
+			}
+			else
+			{
+				params = new TGRelativeLayout.LayoutParams(params);
+			}
+		}
+		
 		super.addView(child, index, params);
 		
 		addViewTreeNode((IViewTreeNode) child);
