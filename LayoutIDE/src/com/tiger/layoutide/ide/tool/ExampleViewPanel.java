@@ -15,6 +15,7 @@ import com.tiger.layoutide.widget.TGImageView;
 import com.tiger.layoutide.widget.TGLinearLayout;
 import com.tiger.layoutide.widget.TGRelativeLayout;
 import com.tiger.layoutide.widget.TGTextView;
+import com.tiger.layoutide.widget.TGViewPager;
 
 public class ExampleViewPanel implements OnLongClickListener
 {
@@ -38,6 +39,9 @@ public class ExampleViewPanel implements OnLongClickListener
 	
 	@ViewById(id = R.id.relativelayout_model)
 	private TGRelativeLayout relativeLayout;
+	
+	@ViewById(id = R.id.viewpager_model)
+	private TGViewPager viewPager;
 	
 	private static ExampleViewPanel exampleViewPanel;
 	
@@ -64,6 +68,7 @@ public class ExampleViewPanel implements OnLongClickListener
 		checkBox.setOnLongClickListener(this);
 		linearLayout.setOnLongClickListener(this);
 		relativeLayout.setOnLongClickListener(this);
+		viewPager.setOnLongClickListener(this);
 	}
 
 	@Override
