@@ -12,7 +12,9 @@ import android.widget.RelativeLayout;
 
 import com.mn.tiger.datastorage.TGDBManager;
 import com.mn.tiger.datastorage.db.exception.DbException;
+import com.mn.tiger.datastorage.db.sqlite.WhereBuilder;
 import com.mn.tiger.utility.LogTools;
+import com.tiger.layoutide.storage.model.LayoutDBModel;
 import com.tiger.layoutide.storage.model.ViewDBModel;
 import com.tiger.layoutide.utils.WidgetSimpleName;
 import com.tiger.layoutide.widget.IAdapterView;
@@ -32,9 +34,52 @@ public class LayoutDBManager
 {
 	public static final String LOG_TAG = LayoutDBManager.class.getSimpleName();
 	
+	public static final String ALL_LAYOUT = "layouts";
+	
 	private static TGDBManager getDBManager(Context context, String projectName)
 	{
 		return TGDBManager.create(context, projectName, 1, null);
+	}
+	
+	public static List<LayoutDBModel> getAllLayout(Context context)
+	{
+		try
+		{
+			return TGDBManager.create(context, ALL_LAYOUT, 1, null).findAll(LayoutDBModel.class);
+		}
+		catch (DbException e)
+		{
+			LogTools.e(LOG_TAG, e);
+		}
+		return null;
+	}
+	
+	public static List<LayoutDBModel> getAllCustomViewLayout(Context context)
+	{
+		try
+		{
+			WhereBuilder whereBuilder = WhereBuilder.b("layoutType", "=", 
+					LayoutDBModel.CUSTOM_VIEW_LAYOUT);
+			return TGDBManager.create(context, ALL_LAYOUT, 1, null).findAll(LayoutDBModel.class, 
+					whereBuilder);
+		}
+		catch (DbException e)
+		{
+			LogTools.e(LOG_TAG, e);
+		}
+		return null;
+	}
+	
+	public static void saveLayout(Context context, LayoutDBModel layoutDBModel)
+	{
+		try
+		{
+			TGDBManager.create(context, ALL_LAYOUT, 1, null).save(layoutDBModel);
+		}
+		catch (DbException e)
+		{
+			LogTools.e(LOG_TAG, e);
+		}
 	}
 	
 	public static void saveLayout(Context context,String projectName,IViewGroup viewGroup)
