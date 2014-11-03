@@ -6,6 +6,7 @@ import java.util.List;
 import android.content.Context;
 import android.text.TextUtils;
 import android.view.View;
+import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
@@ -14,6 +15,7 @@ import com.mn.tiger.datastorage.TGDBManager;
 import com.mn.tiger.datastorage.db.exception.DbException;
 import com.mn.tiger.datastorage.db.sqlite.WhereBuilder;
 import com.mn.tiger.utility.LogTools;
+import com.tiger.layoutide.ide.tool.PropertiesToolBar;
 import com.tiger.layoutide.storage.model.LayoutDBModel;
 import com.tiger.layoutide.storage.model.ViewDBModel;
 import com.tiger.layoutide.utils.WidgetSimpleName;
@@ -131,7 +133,8 @@ public class LayoutDBManager
 		viewDBModels.remove(0);
 		while (viewDBModels.size() > 0)
 		{
-			IView view = parseView(context, viewDBModels.get(0));
+			ViewDBModel viewDBModel = viewDBModels.get(0);
+			IView view = parseView(context, viewDBModel);
 			if(view instanceof ViewGroup)
 			{
 				rootViewGroup.addView(parseViewGroup(context, viewDBModels));
@@ -141,6 +144,8 @@ public class LayoutDBManager
 				rootViewGroup.addView((View)view);
 				viewDBModels.remove(0);
 			}
+			
+			setRelativePostions(view, viewDBModel);
 		}
 		
 		return rootViewGroup;
@@ -312,30 +317,6 @@ public class LayoutDBManager
 		view.setLayoutWeight(viewDBModel.getLayoutWeight() + "");
 		view.setLayoutGravityValue(viewDBModel.getLayoutGravity());
 		
-		if(view instanceof LinearLayout)
-		{
-			((TGLinearLayout)view).setOrientationValue(viewDBModel.getOrientation());
-		}
-		
-		view.setAlignParentLeft(viewDBModel.getAlignParentLeft());
-		view.setAlignParentRight(viewDBModel.getAlignParentRight());
-		view.setAlignParentTop(viewDBModel.getAlignParentTop());
-		view.setAlignParentBottom(viewDBModel.getAlignParentBottom());
-		
-		view.setAbove(viewDBModel.getAbove());
-		view.setBelow(viewDBModel.getBelow());
-		view.setToLeftOf(viewDBModel.getToLeftOf());
-		view.setToRightOf(viewDBModel.getToRightOf());
-		
-		view.setAlignLeft(viewDBModel.getAlignLeft());
-		view.setAlignRight(viewDBModel.getAlignRight());
-		view.setAlignTop(viewDBModel.getAlignTop());
-		view.setAlignBottom(viewDBModel.getAlignBottom());
-		
-		view.setCenterInParent(viewDBModel.getCenterInParent());
-		view.setCenterHorizontal(viewDBModel.getCenterHorizontal());
-		view.setCenterVertical(viewDBModel.getCenterVertical());
-		
 		if(view instanceof ITextView)
 		{
 			((ITextView)view).setText(viewDBModel.getText());
@@ -361,6 +342,28 @@ public class LayoutDBManager
 		view.setBackgroundColor(viewDBModel.getBackgroundColor());
 		
 		return view;
+	}
+	
+	private static void setRelativePostions(IView view, ViewDBModel viewDBModel)
+	{
+		view.setAlignParentLeft(viewDBModel.getAlignParentLeft());
+		view.setAlignParentRight(viewDBModel.getAlignParentRight());
+		view.setAlignParentTop(viewDBModel.getAlignParentTop());
+		view.setAlignParentBottom(viewDBModel.getAlignParentBottom());
+		
+		view.setAbove(viewDBModel.getAbove());
+		view.setBelow(viewDBModel.getBelow());
+		view.setToLeftOf(viewDBModel.getToLeftOf());
+		view.setToRightOf(viewDBModel.getToRightOf());
+		
+		view.setAlignLeft(viewDBModel.getAlignLeft());
+		view.setAlignRight(viewDBModel.getAlignRight());
+		view.setAlignTop(viewDBModel.getAlignTop());
+		view.setAlignBottom(viewDBModel.getAlignBottom());
+		
+		view.setCenterInParent(viewDBModel.getCenterInParent());
+		view.setCenterHorizontal(viewDBModel.getCenterHorizontal());
+		view.setCenterVertical(viewDBModel.getCenterVertical());
 	}
 	
 	private static IView createNewView(Context context, ViewDBModel viewDBModel)
@@ -408,7 +411,7 @@ public class LayoutDBManager
 		}
 		else if(WidgetSimpleName.RELATIVE_LAYOUT.equals(viewDBModel.getParentViewClassName()))
 		{
-			RelativeLayout.LayoutParams layoutParams = new RelativeLayout.LayoutParams
+			TGRelativeLayout.LayoutParams layoutParams = new TGRelativeLayout.LayoutParams
 					(RelativeLayout.LayoutParams.WRAP_CONTENT, 
 							RelativeLayout.LayoutParams.WRAP_CONTENT);
 			view.setLayoutParams(layoutParams);
@@ -420,6 +423,15 @@ public class LayoutDBManager
 							ViewGroup.LayoutParams.WRAP_CONTENT);
 			view.setLayoutParams(layoutParams);
 		}
+		
+		view.setOnClickListener(new OnClickListener()
+		{
+			@Override
+			public void onClick(View v)
+			{
+				PropertiesToolBar.getSingleInstance().setSelectedView((IView) v);
+			}
+		});
 		
 		return (IView) view;
 	}
