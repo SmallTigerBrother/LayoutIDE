@@ -48,5 +48,11 @@
         <item>center_vertical</item>
         <item>center_horizontal</item>
     </string-array>
+    
+    <string-array name="layout_types">
+        <item>For Activity</item>
+        <item>For Fragment</item>
+        <item>For Custom View</item>
+    </string-array>
 
 </resources>
