@@ -72,9 +72,7 @@ public class ViewDBModel
 	
 	private String centerVertical = "";
 	
-	private String listItemLayout = "";
-	
-	private String pageItemLayout = "";
+	private String itemLayout = "";
 	
 	public String getAlignParentLeft()
 	{
@@ -406,26 +404,6 @@ public class ViewDBModel
 		this._id = _id;
 	}
 	
-	public void setListItemLayout(String layoutName)
-	{
-		this.listItemLayout = layoutName;
-	}
-
-	public String getListItemLayout()
-	{
-		return listItemLayout;
-	}
-
-	public String getPageItemLayout()
-	{
-		return pageItemLayout;
-	}
-
-	public void setPageItemLayout(String pageItemLayout)
-	{
-		this.pageItemLayout = pageItemLayout;
-	}
-
 	public boolean isRootViewGroup()
 	{
 		return isRootViewGroup;
@@ -434,5 +412,15 @@ public class ViewDBModel
 	public void setRootViewGroup(boolean isRootViewGroup)
 	{
 		this.isRootViewGroup = isRootViewGroup;
+	}
+
+	public String getItemLayout()
+	{
+		return itemLayout;
+	}
+
+	public void setItemLayout(String itemLayout)
+	{
+		this.itemLayout = itemLayout;
 	}
 }

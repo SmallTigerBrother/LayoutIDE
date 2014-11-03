@@ -15,6 +15,7 @@ import com.mn.tiger.datastorage.db.exception.DbException;
 import com.mn.tiger.utility.LogTools;
 import com.tiger.layoutide.storage.model.ViewDBModel;
 import com.tiger.layoutide.utils.WidgetSimpleName;
+import com.tiger.layoutide.widget.IAdapterView;
 import com.tiger.layoutide.widget.ITextView;
 import com.tiger.layoutide.widget.IView;
 import com.tiger.layoutide.widget.IViewGroup;
@@ -220,6 +221,10 @@ public class LayoutDBManager
 		{
 			viewDBModel.setRootViewGroup(((TGRelativeLayout)view).isRootViewGroup());
 		}
+		else if(view instanceof IAdapterView)
+		{
+			viewDBModel.setItemLayout(((IAdapterView)view).getItemLayout());
+		}
 		
 		viewDBModel.setGravity(view.getGravityValue());
 		
@@ -300,6 +305,10 @@ public class LayoutDBManager
 		else if(view instanceof TGRelativeLayout)
 		{
 			((TGRelativeLayout)view).setRootViewGroup(viewDBModel.isRootViewGroup());
+		}
+		else if(view instanceof IAdapterView)
+		{
+			((IAdapterView)view).setItemLayout(viewDBModel.getItemLayout());
 		}
 		
 		view.setGravityValue(viewDBModel.getGravity());
