@@ -15,9 +15,7 @@ import com.tiger.layoutide.ide.ui.template.TemplateLayout;
 
 public class TemplateActivity extends Activity implements OnClickListener
 {
-	public static final int REQUEST_CODE_LANCH = 1;
-	
-	public static final int RESULT_CODE_MAIN = 2;
+	public static final int REQUEST_CODE = 1;
 	
 	@ViewById(id = R.id.linear_blank_template)
 	private LinearBlankTemplate linearBlankTemplate;
@@ -59,9 +57,9 @@ public class TemplateActivity extends Activity implements OnClickListener
 		}
 		//返回上一界面
 		Intent intent = new Intent();
-		intent.putExtra(IntentKeys.SELECTED_TEMPLATE_TYPE, selectedTemplateType);
+		intent.putExtra(IntentKeys.TEMPLATE_TYPE, selectedTemplateType);
 		
-		setResult(RESULT_CODE_MAIN, intent);
+		setResult(REQUEST_CODE, intent);
 		this.finish();
 	}
 	
