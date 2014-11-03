@@ -63,9 +63,9 @@ public class XmlOutputConstant
 	
 	public static final String TO_RIGHT_OF = "android:layout_toRightOf=\"@id/%1$s\"";
 	
-	public static final String ABOVE = "android:layout_below=\"@id/%1$s\"";
+	public static final String ABOVE = "android:layout_above=\"@id/%1$s\"";
 	
-	public static final String BELOW = "android:layout_above=\"@id/%1$s\"";
+	public static final String BELOW = "android:layout_below=\"@id/%1$s\"";
 	
 	public static final String ALIGN_LEFT = "android:layout_alignLeft=\"@id/\"";
 	
