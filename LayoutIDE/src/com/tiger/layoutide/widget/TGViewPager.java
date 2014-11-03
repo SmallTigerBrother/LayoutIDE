@@ -9,6 +9,7 @@ import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Paint.Style;
 import android.support.v4.view.ViewPager;
+import android.text.TextUtils;
 import android.util.AttributeSet;
 import android.view.MotionEvent;
 import android.view.View;
@@ -47,7 +48,7 @@ public class TGViewPager extends ViewPager implements IAdapterView, IViewTree, O
 	
 	public TGViewPager(Context context)
 	{
-		super(context);
+		this(context, null);
 	}
 
 	public TGViewPager(Context context, AttributeSet attrs)
@@ -140,13 +141,13 @@ public class TGViewPager extends ViewPager implements IAdapterView, IViewTree, O
 	@Override
 	public String getSimpleClassName()
 	{
-		return WidgetSimpleName.LISTVIEW;
+		return WidgetSimpleName.VIEWPAGER;
 	}
 	
 	@Override
 	public String getPackageName()
 	{
-		return "android.widget";
+		return "android.support.v4.view";
 	}
 
 	@Override
@@ -553,7 +554,7 @@ public class TGViewPager extends ViewPager implements IAdapterView, IViewTree, O
 			this.listItemLayoutName = listItemlayoutName;
 			//初始化自定义子视图
 			ArrayList<View> views = new ArrayList<View>(4);
-			for(int i = 0; i < views.size(); i++)
+			for(int i = 0; i < 4; i++)
 			{
 				views.add((View) LayoutDBManager.getLayout(getContext(), listItemLayoutName));
 			}
@@ -571,7 +572,10 @@ public class TGViewPager extends ViewPager implements IAdapterView, IViewTree, O
 	public void setItemLayout(String itemLayout)
 	{
 		this.pageItemLayout = itemLayout;
-		this.setAdapter(new DefaultAdapter(pageItemLayout));
+		if(!TextUtils.isEmpty(itemLayout) && !itemLayout.equals("NONE"))
+		{
+			this.setAdapter(new DefaultAdapter(pageItemLayout));
+		}
 	}
 	
 	@Override
