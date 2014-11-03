@@ -1,12 +1,18 @@
 package com.tiger.layoutide.ide.tool;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import android.content.Context;
+import android.content.Intent;
 import android.text.Editable;
 import android.text.TextUtils;
 import android.util.AttributeSet;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.AdapterView.OnItemSelectedListener;
+import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.FrameLayout;
 import android.widget.Spinner;
@@ -16,7 +22,11 @@ import com.mn.tiger.annonation.ViewById;
 import com.mn.tiger.utility.ViewInjector;
 import com.tiger.layoutide.R;
 import com.tiger.layoutide.ide.tool.PropertiesToolBar.CustomTextWatcher;
+import com.tiger.layoutide.ide.ui.IntentKeys;
+import com.tiger.layoutide.storage.db.LayoutDBManager;
+import com.tiger.layoutide.storage.model.LayoutDBModel;
 import com.tiger.layoutide.utils.GravityValue;
+import com.tiger.layoutide.widget.IAdapterView;
 import com.tiger.layoutide.widget.ITextView;
 import com.tiger.layoutide.widget.IView;
 
@@ -33,6 +43,12 @@ public class ContentToolBar extends FrameLayout
 	
 	@ViewById(id = R.id.gravity_selector)
 	private Spinner gravitySelector;
+	
+	@ViewById(id = R.id.adapter_item_layout_name)
+	private Spinner adapterLayoutSelector;
+	
+	@ViewById(id = R.id.create_adapter_item_layout)
+	private Button createAdapterLayoutBtn;
 	
 	private IView selectedView = null;
 	
@@ -137,6 +153,42 @@ public class ContentToolBar extends FrameLayout
 			{
 			}
 		});
+		
+		adapterLayoutSelector.setOnItemSelectedListener(new OnItemSelectedListener()
+		{
+			@Override
+			public void onItemSelected(AdapterView<?> parent, View view, int position, long id)
+			{
+				if(null != selectedView)
+				{
+					if(selectedView instanceof IAdapterView)
+					{
+						((IAdapterView)selectedView).setItemLayout(parent.getAdapter().getItem(position).toString());
+					}
+				}
+				else
+				{
+					Toast.makeText(getContext(), "Please select one View before edit the property", Toast.LENGTH_SHORT).show();
+				}
+			}
+
+			@Override
+			public void onNothingSelected(AdapterView<?> parent)
+			{
+			}
+		});
+		
+		createAdapterLayoutBtn.setOnClickListener(new OnClickListener()
+		{
+			@Override
+			public void onClick(View v)
+			{
+				Intent intent = new Intent();
+				intent.putExtra(IntentKeys.LAYOUT_TYPE, LayoutDBModel.CUSTOM_VIEW_LAYOUT);
+				getContext().startActivity(intent);
+			}
+		});
+		
 	}
 	
 	public void resetContent(IView selectedView)
@@ -146,6 +198,13 @@ public class ContentToolBar extends FrameLayout
 		{
 			if(selectedView instanceof ITextView)
 			{
+				textEditText.setVisibility(View.VISIBLE);
+				textSizeEditText.setVisibility(View.VISIBLE);
+				textColorEditText.setVisibility(View.VISIBLE);
+				
+				adapterLayoutSelector.setVisibility(View.GONE);
+				createAdapterLayoutBtn.setVisibility(View.GONE);
+				
 				if(!TextUtils.isEmpty(((ITextView)selectedView).getText()))
 				{
 					textEditText.setText(((ITextView)selectedView).getText());
@@ -173,8 +232,31 @@ public class ContentToolBar extends FrameLayout
 					textColorEditText.setText("");
 				}
 			}
+			else if(selectedView instanceof IAdapterView)
+			{
+				textEditText.setVisibility(View.GONE);
+				textSizeEditText.setVisibility(View.GONE);
+				textColorEditText.setVisibility(View.GONE);
+				
+				adapterLayoutSelector.setVisibility(View.VISIBLE);
+				createAdapterLayoutBtn.setVisibility(View.VISIBLE);
+				
+				textEditText.setText("");
+				textSizeEditText.setText("");
+				textColorEditText.setText("");
+				
+				//Ìî³äadapterSelector
+				resetAdapterSelector();
+			}
 			else
 			{
+				textEditText.setVisibility(View.GONE);
+				textSizeEditText.setVisibility(View.GONE);
+				textColorEditText.setVisibility(View.GONE);
+				
+				adapterLayoutSelector.setVisibility(View.GONE);
+				createAdapterLayoutBtn.setVisibility(View.GONE);
+				
 				textEditText.setText("");
 				textSizeEditText.setText("");
 				textColorEditText.setText("");
@@ -182,6 +264,35 @@ public class ContentToolBar extends FrameLayout
 			
 			resetGravity();
 		}
+	}
+	
+	private void resetAdapterSelector()
+	{
+		List<LayoutDBModel> layoutDBModels = LayoutDBManager.getAllCustomViewLayout(getContext());
+		List<String> layoutNameList = new ArrayList<String>();
+		layoutNameList.add("NONE");
+		String layoutName = "NONE";
+		int curSelectIndex = 0;
+		for(int i = 0; i < layoutNameList.size(); i++)
+		{
+			layoutName = layoutDBModels.get(i).getLayoutName();
+			layoutNameList.add(layoutName);
+			
+			if(((IAdapterView)selectedView).getItemLayout().equals(layoutName))
+			{
+				curSelectIndex = i;
+			}
+		}
+		
+		CharSequence[] layoutNames = new CharSequence[layoutNameList.size()];
+		layoutNameList.toArray(layoutNames);
+		
+		ArrayAdapter<CharSequence> adapter = new ArrayAdapter<CharSequence>(getContext(),
+				android.R.layout.simple_spinner_item, layoutNames);
+		adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+		
+		adapterLayoutSelector.setAdapter(adapter);
+		adapterLayoutSelector.setSelection(curSelectIndex);
 	}
 	
 	private void resetGravity()
