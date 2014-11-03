@@ -21,4 +21,6 @@ public class WidgetSimpleName
 	public static final String RELATIVE_LAYOUT = "RelativeLayout";
 	
 	public static final String LISTVIEW = "ListView";
+	
+	public static final String VIEWPAGER = "ViewPager";
 }
