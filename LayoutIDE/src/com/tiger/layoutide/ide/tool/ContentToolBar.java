@@ -22,6 +22,7 @@ import com.mn.tiger.annonation.ViewById;
 import com.mn.tiger.utility.ViewInjector;
 import com.tiger.layoutide.R;
 import com.tiger.layoutide.ide.tool.PropertiesToolBar.CustomTextWatcher;
+import com.tiger.layoutide.ide.ui.CreateLayoutActivity;
 import com.tiger.layoutide.ide.ui.IntentKeys;
 import com.tiger.layoutide.storage.db.LayoutDBManager;
 import com.tiger.layoutide.storage.model.LayoutDBModel;
@@ -183,7 +184,7 @@ public class ContentToolBar extends FrameLayout
 			@Override
 			public void onClick(View v)
 			{
-				Intent intent = new Intent();
+				Intent intent = new Intent(getContext(), CreateLayoutActivity.class);
 				intent.putExtra(IntentKeys.LAYOUT_TYPE, LayoutDBModel.CUSTOM_VIEW_LAYOUT);
 				getContext().startActivity(intent);
 			}
@@ -269,11 +270,17 @@ public class ContentToolBar extends FrameLayout
 	private void resetAdapterSelector()
 	{
 		List<LayoutDBModel> layoutDBModels = LayoutDBManager.getAllCustomViewLayout(getContext());
+		
+		if(null == layoutDBModels)
+		{
+			return;
+		}
+		
 		List<String> layoutNameList = new ArrayList<String>();
 		layoutNameList.add("NONE");
 		String layoutName = "NONE";
 		int curSelectIndex = 0;
-		for(int i = 0; i < layoutNameList.size(); i++)
+		for(int i = 0; i < layoutDBModels.size(); i++)
 		{
 			layoutName = layoutDBModels.get(i).getLayoutName();
 			layoutNameList.add(layoutName);
@@ -297,7 +304,7 @@ public class ContentToolBar extends FrameLayout
 	
 	private void resetGravity()
 	{
-		String layoutGravity = selectedView.getLayoutGravityValue();
+		String layoutGravity = selectedView.getGravityValue();
 		if(TextUtils.isEmpty(layoutGravity))
 		{
 			gravitySelector.setSelection(0);
