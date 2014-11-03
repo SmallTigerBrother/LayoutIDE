@@ -6,6 +6,7 @@ import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Paint.Style;
 import android.util.AttributeSet;
+import android.view.DragEvent;
 import android.view.Gravity;
 import android.view.View;
 import android.view.View.OnLongClickListener;
@@ -530,5 +531,19 @@ public class TGEditText extends EditText implements IViewTreeNode, ITextView, On
 	public void setLayoutGravityValue(String gravity)
 	{
 		viewHelper.setLayoutGravityValue(gravity);
+	}
+	
+	@Override
+	public boolean onDragEvent(DragEvent event)
+	{
+		try
+		{
+			return super.onDragEvent(event);
+		}
+		catch (Exception e)
+		{
+			LogTools.e(LOG_TAG, e);
+			return false;
+		}
 	}
 }
