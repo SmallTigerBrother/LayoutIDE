@@ -74,7 +74,7 @@ public class JField extends JModel
 		}
 		
 		stringBuilder.append(JIndentation.FIELD + actionScope + 
-				valueType.getSimpleClassName() + JIndentation.BETWEEN + filedName);
+				valueType.getSimpleName() + JIndentation.BETWEEN + filedName);
 		if(null != initValue)
 		{
 			stringBuilder.append(JConstant.ASSIGNMENT + initValue);
