@@ -16,13 +16,13 @@ public class JImport extends JModel
 	@Override
 	public String toString()
 	{
-		if(!Primatives.INTEGER.equals(clazz.getSimpleClassName()) && 
-				!Primatives.FLOAT.equals(clazz.getSimpleClassName()) && 
-				!Primatives.DOUBLE.equals(clazz.getSimpleClassName()) && 
-				!Primatives.LONG.equals(clazz.getSimpleClassName()) && 
-				!Primatives.BOOLEAN.equals(clazz.getSimpleClassName()) && 
-				!Primatives.STRING.equals(clazz.getSimpleClassName()) && 
-				!Primatives.VOID.equals(clazz.getSimpleClassName()))
+		if(!Primatives.INTEGER.equals(clazz.getSimpleName()) && 
+				!Primatives.FLOAT.equals(clazz.getSimpleName()) && 
+				!Primatives.DOUBLE.equals(clazz.getSimpleName()) && 
+				!Primatives.LONG.equals(clazz.getSimpleName()) && 
+				!Primatives.BOOLEAN.equals(clazz.getSimpleName()) && 
+				!Primatives.STRING.equals(clazz.getSimpleName()) && 
+				!Primatives.VOID.equals(clazz.getSimpleName()))
 		{
 			return "import" + JIndentation.BETWEEN + clazz.getClassName() +
 					JConstant.SIMECOLON_AND_NEWLINE;
