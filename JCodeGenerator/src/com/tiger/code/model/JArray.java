@@ -15,7 +15,7 @@ public class JArray extends JField
 	{
 		StringBuilder stringBuilder = new StringBuilder();
 		stringBuilder.append(JIndentation.FIELD + getActionScope() + 
-				JIndentation.BETWEEN + getValueType().getSimpleClassName() + 
+				JIndentation.BETWEEN + getValueType().getSimpleName() + 
 				JConstant.BRACKET_LEFT + JConstant.BRACKET_RIGHT + 
 				JIndentation.BETWEEN + getFiledName());
 		if(null != getInitValue())

@@ -13,7 +13,7 @@ public class JClass extends JModel
 	
 	private JPackage jPackage = new JPackage();
 	
-	private String simpleClazzName = "JClass";
+	private String simpleName = "JClass";
 	
 	private String actionScope = JActionScope.DEFAULT;
 	
@@ -42,7 +42,7 @@ public class JClass extends JModel
 		
 		if(null != simpleClazzName)
 		{
-			this.simpleClazzName = simpleClazzName;
+			this.simpleName = simpleClazzName;
 		}
 		
 		this.superClazz = superClaszz;
@@ -110,7 +110,7 @@ public class JClass extends JModel
 		//拼接类的声明
 		jCodeBuilder.append(JIndentation.NEW_LINE);
 		jCodeBuilder.append(actionScope + MODEL_NAME + 
-				JIndentation.BETWEEN + simpleClazzName + JIndentation.NEW_LINE);
+				JIndentation.BETWEEN + simpleName + JIndentation.NEW_LINE);
 		jCodeBuilder.append(JConstant.BRACE_LEFT);
 		
 		//拼接全局变量
@@ -141,14 +141,14 @@ public class JClass extends JModel
 		return actionScope;
 	}
 
-	public String getSimpleClassName()
+	public String getSimpleName()
 	{
-		return simpleClazzName;
+		return simpleName;
 	}
 	
 	public String getClassName()
 	{
-		return jPackage.getPackageName() + JConstant.POINT + simpleClazzName;
+		return jPackage.getPackageName() + JConstant.POINT + simpleName;
 	}
 
 	public JClass getSuperClazz()
