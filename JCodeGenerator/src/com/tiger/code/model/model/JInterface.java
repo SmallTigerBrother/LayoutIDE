@@ -1,12 +1,12 @@
-package com.tiger.code.model;
+package com.tiger.code.model.model;
 
 import java.util.ArrayList;
 
-import com.tiger.code.model.JClass.ImportList;
-import com.tiger.code.model.JMethod.Parameter;
 import com.tiger.code.model.constant.JActionScope;
 import com.tiger.code.model.constant.JConstant;
 import com.tiger.code.model.constant.JIndentation;
+import com.tiger.code.model.model.JClass.ImportList;
+import com.tiger.code.model.model.JMethod.Parameter;
 import com.tiger.code.model.output.JCodeBuilder;
 
 public class JInterface extends JModel

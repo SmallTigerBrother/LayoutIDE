@@ -1,4 +1,4 @@
-package com.tiger.code.model;
+package com.tiger.code.model.model;
 
 import com.tiger.code.model.output.JCodeBuilder;
 

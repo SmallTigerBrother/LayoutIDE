@@ -1,11 +1,11 @@
-package com.tiger.code.model;
+package com.tiger.code.model.model;
 
 import java.util.ArrayList;
 
 import com.tiger.code.model.constant.JActionScope;
 import com.tiger.code.model.constant.JConstant;
 import com.tiger.code.model.constant.JIndentation;
-import com.tiger.code.model.constant.JModifier;
+import com.tiger.code.model.constant.JKeyWords;
 import com.tiger.code.model.output.JCodeBuilder;
 
 public class JMethod extends JModel
@@ -24,9 +24,13 @@ public class JMethod extends JModel
 	
 	private boolean isFinal = false;
 	
+	private boolean overrideSuper = false;
+	
 	private Parameter[]  parameters;
 	
 	private ArrayList<JAnnonation> annonations;
+	
+	private JCodeBlock jCodeBlock;
 	
 	public JMethod(String actionScope, String methodName, 
 			Parameter... parameters)
@@ -126,17 +130,17 @@ public class JMethod extends JModel
 		
 		if(isSynchronized)
 		{
-			jCodeBuilder.append(JModifier.SYNCHRONIZED);
+			jCodeBuilder.append(JKeyWords.SYNCHRONIZED);
 		}
 		
 		if(isStatic)
 		{
-			jCodeBuilder.append(JModifier.STATIC);
+			jCodeBuilder.append(JKeyWords.STATIC);
 		}
 		
 		if(isFinal)
 		{
-			jCodeBuilder.append(JModifier.FINAL);
+			jCodeBuilder.append(JKeyWords.FINAL);
 		}
 		
 		jCodeBuilder.append(methodName + JConstant.PARENTHESES_LEFT);
@@ -166,7 +170,14 @@ public class JMethod extends JModel
 			jCodeBuilder.append(JIndentation.NEW_LINE);
 			jCodeBuilder.appendWithIndentation(JConstant.BRACE_LEFT + 
 					JIndentation.NEW_LINE);
-			
+			if(overrideSuper)
+			{
+				jCodeBuilder.setIndentation(getIndentation() + JIndentation.METHOD);
+				
+				jCodeBuilder = overrideSuper(jCodeBuilder);
+				
+				jCodeBuilder.setIndentation(getIndentation());
+			}
 			
 			jCodeBuilder.appendWithIndentation(JConstant.BRACE_RIGHT + JIndentation.NEW_LINE);
 		}
@@ -174,6 +185,53 @@ public class JMethod extends JModel
 		return jCodeBuilder;
 	}
 	
+	private JCodeBuilder overrideSuper(JCodeBuilder jCodeBuilder)
+	{
+		jCodeBuilder.appendWithIndentation(JKeyWords.SUPER + JConstant.POINT + 
+				methodName + JConstant.PARENTHESES_LEFT);
+		//拼接所有参数
+		if(null != parameters)
+		{
+			for (int i = 0; i < parameters.length; i++)
+			{
+				jCodeBuilder.append(parameters[i].getParameterName());
+				if(i < parameters.length - 1)
+				{
+					jCodeBuilder.append(JConstant.COMMA + JIndentation.BETWEEN);
+				}
+			}
+		}
+		
+		if(null != jCodeBlock)
+		{
+			jCodeBlock.setIndentation(getIndentation());
+			jCodeBuilder.append(jCodeBlock.toString());
+		}
+				
+		jCodeBuilder.append(JConstant.PARENTHESES_RIGHT + JConstant.SIMECOLON_AND_NEWLINE);
+		return jCodeBuilder;
+	}
+	
+	public boolean isOverrideSuper()
+	{
+		return overrideSuper;
+	}
+
+	public void setOverrideSuper(boolean overrideSuper)
+	{
+		this.overrideSuper = overrideSuper;
+	}
+
+	public JCodeBlock getjCodeBlock()
+	{
+		return jCodeBlock;
+	}
+
+	public void setjCodeBlock(JCodeBlock jCodeBlock)
+	{
+		this.jCodeBlock = jCodeBlock;
+	}
+
 	public static class Parameter extends JModel
 	{
 		private boolean isFinal = false;
@@ -213,7 +271,7 @@ public class JMethod extends JModel
 		{
 			if(isFinal)
 			{
-				jCodeBuilder.append(JModifier.FINAL);
+				jCodeBuilder.append(JKeyWords.FINAL);
 			}
 			
 			jCodeBuilder.append(parameterType.getSimpleName() + JIndentation.BETWEEN + 

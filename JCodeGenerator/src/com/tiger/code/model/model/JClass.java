@@ -1,13 +1,13 @@
-package com.tiger.code.model;
+package com.tiger.code.model.model;
 
 import java.util.ArrayList;
 import java.util.List;
 
-import com.tiger.code.model.JMethod.Parameter;
 import com.tiger.code.model.constant.JActionScope;
 import com.tiger.code.model.constant.JConstant;
 import com.tiger.code.model.constant.JIndentation;
-import com.tiger.code.model.constant.JModifier;
+import com.tiger.code.model.constant.JKeyWords;
+import com.tiger.code.model.model.JMethod.Parameter;
 import com.tiger.code.model.output.JCodeBuilder;
 
 public class JClass extends JModel
@@ -143,14 +143,14 @@ public class JClass extends JModel
 		//拼接基类
 		if(null != superClazz)
 		{
-			jCodeBuilder.append(JIndentation.BETWEEN + JModifier.EXTENDS + 
+			jCodeBuilder.append(JIndentation.BETWEEN + JKeyWords.EXTENDS + 
 					superClazz.getSimpleName());
 		}
 		
 		//拼接实现的接口
 		if(implementInterfaces.size() > 0)
 		{
-			jCodeBuilder.append(JIndentation.BETWEEN + JModifier.IMPLEMENTS);
+			jCodeBuilder.append(JIndentation.BETWEEN + JKeyWords.IMPLEMENTS);
 			for(int i = 0; i < implementInterfaces.size(); i++)
 			{
 				jCodeBuilder.append(implementInterfaces.get(i).getSimpleName());
