@@ -5,6 +5,7 @@ import java.util.List;
 
 import android.annotation.SuppressLint;
 import android.text.TextUtils;
+import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.EditText;
@@ -14,9 +15,16 @@ import com.tiger.code.model.JAnnonation;
 import com.tiger.code.model.JAnnonation.ParamKeyValue;
 import com.tiger.code.model.JClass;
 import com.tiger.code.model.JField;
+import com.tiger.code.model.JInterface;
+import com.tiger.code.model.JMethod;
+import com.tiger.code.model.JMethod.Parameter;
 import com.tiger.code.model.JPackage;
 import com.tiger.code.model.constant.JActionScope;
 import com.tiger.layoutide.R;
+import com.tiger.layoutide.ide.code.library.interfaces.AndroidClass;
+import com.tiger.layoutide.ide.code.library.interfaces.AndroidInterface;
+import com.tiger.layoutide.ide.code.library.interfaces.ClassDictionary;
+import com.tiger.layoutide.ide.code.library.interfaces.InterfaceDictionary;
 import com.tiger.layoutide.widget.IView;
 
 public class JCodeHelper
@@ -54,10 +62,7 @@ public class JCodeHelper
 			for (int i = 0; i < ((ViewGroup)view).getChildCount(); i++)
 			{
 				View childView = ((ViewGroup)view).getChildAt(i);
-				if(!TextUtils.isEmpty(((IView)childView).getIdName()))
-				{
-					fields.addAll(getInjectViewFields(childView));
-				}
+				fields.addAll(getInjectViewFields(childView));
 			}
 		}
 		
@@ -74,5 +79,34 @@ public class JCodeHelper
 			viewName = viewName + strings[i].substring(0, 1).toUpperCase() + strings[i].substring(1); 
 		}
 		return viewName;
+	}
+	
+	public static String outputActivityCode(String activityName, ViewGroup viewGroup)
+	{
+		JClass superClaszz = ClassDictionary.getClass(AndroidClass.Activity);
+		JClass jClazz = new JClass(null, JActionScope.PUBLIC, activityName, superClaszz);
+		
+//		jClazz.addFields(getInjectViewFields(viewGroup));
+		jClazz.addMethods(getMethods(viewGroup));
+		
+		JInterface jInterface = InterfaceDictionary.getInterface(
+				AndroidInterface.OnClickListener4View);
+		jClazz.implementInterface(jInterface);
+		
+		Log.d("outputActivityCode", jClazz.toString());
+		return jClazz.toString();
+	}
+	
+	private static List<JMethod> getMethods(ViewGroup viewGroup)
+	{
+		List<JMethod> methods = new ArrayList<JMethod>();
+		
+		Parameter parameter = new Parameter("savedInstanceState", 
+				ClassDictionary.getClass(AndroidClass.Bundle));
+		JMethod method = new JMethod(JActionScope.PROTECTED, "onCreate", parameter);
+		method.addAnnonation(JAnnonation.createOverrideAnnonation());
+		methods.add(method);
+		
+		return methods;
 	}
 }
