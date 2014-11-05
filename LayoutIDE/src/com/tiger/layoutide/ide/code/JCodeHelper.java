@@ -15,16 +15,18 @@ import com.tiger.code.constant.JActionScope;
 import com.tiger.code.model.JAnnonation;
 import com.tiger.code.model.JAnnonation.ParamKeyValue;
 import com.tiger.code.model.JClass;
+import com.tiger.code.model.JCodeBlock;
 import com.tiger.code.model.JField;
 import com.tiger.code.model.JInterface;
 import com.tiger.code.model.JMethod;
 import com.tiger.code.model.JMethod.Parameter;
 import com.tiger.code.model.JPackage;
 import com.tiger.layoutide.R;
-import com.tiger.layoutide.ide.code.library.interfaces.AndroidClass;
-import com.tiger.layoutide.ide.code.library.interfaces.AndroidInterface;
-import com.tiger.layoutide.ide.code.library.interfaces.ClassDictionary;
-import com.tiger.layoutide.ide.code.library.interfaces.InterfaceDictionary;
+import com.tiger.layoutide.ide.code.library.AndroidClass;
+import com.tiger.layoutide.ide.code.library.AndroidInterface;
+import com.tiger.layoutide.ide.code.library.ClassDictionary;
+import com.tiger.layoutide.ide.code.library.InterfaceDictionary;
+import com.tiger.layoutide.ide.code.library.JActivity;
 import com.tiger.layoutide.widget.IView;
 
 public class JCodeHelper
@@ -87,27 +89,26 @@ public class JCodeHelper
 		JClass jClazz = new JClass(null, JActionScope.PUBLIC, activityName, superClaszz);
 		
 //		jClazz.addFields(getInjectViewFields(viewGroup));
-		jClazz.addMethods(getMethods(viewGroup));
 		
 		JInterface jInterface = InterfaceDictionary.getInterface(
 				AndroidInterface.OnClickListener4View);
+		
 		jClazz.implementInterface(jInterface);
 		
 		Log.d("outputActivityCode", jClazz.toString());
 		return jClazz.toString();
 	}
 	
-	private static List<JMethod> getMethods(ViewGroup viewGroup)
+	public static String outputActivityCode(String activityName, ViewGroup viewGroup, OutputParams params)
 	{
-		List<JMethod> methods = new ArrayList<JMethod>();
+		JClass superClaszz = ClassDictionary.getClass(AndroidClass.Activity);
+		JActivity jActivity = new JActivity(null, JActionScope.PUBLIC, activityName, superClaszz);
 		
-		Parameter parameter = new Parameter("savedInstanceState", 
-				ClassDictionary.getClass(AndroidClass.Bundle));
-		JMethod method = new JMethod(JActionScope.PROTECTED, "onCreate", parameter);
-		method.addAnnonation(JAnnonation.createOverrideAnnonation());
-		method.setOverrideSuper(true);
-		methods.add(method);
+		//添加所有 注入的View声明
+		jActivity.addFields(getInjectViewFields(viewGroup));
 		
-		return methods;
+		
+		return jActivity.toString();
 	}
+	
 }

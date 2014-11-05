@@ -1,12 +1,15 @@
-package com.tiger.layoutide.ide.code.library.interfaces;
+package com.tiger.layoutide.ide.code.library;
 
 import java.util.WeakHashMap;
 
 import com.tiger.code.constant.JActionScope;
+import com.tiger.code.constant.JConstant;
+import com.tiger.code.model.JCodeBlock;
 import com.tiger.code.model.JInterface;
 import com.tiger.code.model.JMethod;
 import com.tiger.code.model.JMethod.Parameter;
 import com.tiger.code.model.JPackage;
+import com.tiger.code.operator.JSwitch;
 
 public class InterfaceDictionary extends WeakHashMap<AndroidInterface, JInterface>
 {
@@ -51,6 +54,13 @@ public class InterfaceDictionary extends WeakHashMap<AndroidInterface, JInterfac
 						AndroidClass.View));
 				JMethod method = new JMethod(JActionScope.PUBLIC, "onClick", parameter);
 				jInterface.addMethod(method);
+				JCodeBlock jCodeBlock = new JCodeBlock();
+				
+				//TODO ÐèÒªÇ¨ÒÆ´úÂë
+				JSwitch jSwitch = new JSwitch(method.getParameters()[0].getParameterName() + JConstant.POINT + 
+						"getId()");
+				
+				jCodeBlock.addCode(jSwitch);
 				
 				break;
 

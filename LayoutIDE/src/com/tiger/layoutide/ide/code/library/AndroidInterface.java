@@ -1,4 +1,4 @@
-package com.tiger.layoutide.ide.code.library.interfaces;
+package com.tiger.layoutide.ide.code.library;
 
 import com.tiger.code.constant.JConstant;
 
