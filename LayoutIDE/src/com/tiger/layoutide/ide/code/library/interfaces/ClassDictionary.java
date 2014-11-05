@@ -2,9 +2,9 @@ package com.tiger.layoutide.ide.code.library.interfaces;
 
 import java.util.WeakHashMap;
 
-import com.tiger.code.model.JClass;
-import com.tiger.code.model.JPackage;
 import com.tiger.code.model.constant.JActionScope;
+import com.tiger.code.model.model.JClass;
+import com.tiger.code.model.model.JPackage;
 
 public class ClassDictionary extends WeakHashMap<AndroidClass, JClass>
 {
