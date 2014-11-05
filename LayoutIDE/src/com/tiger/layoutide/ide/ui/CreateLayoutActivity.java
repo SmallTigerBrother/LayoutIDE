@@ -18,6 +18,7 @@ import com.mn.tiger.annonation.ViewById;
 import com.mn.tiger.utility.ViewInjector;
 import com.tiger.layoutide.MainActivity;
 import com.tiger.layoutide.R;
+import com.tiger.layoutide.ide.code.JCodeHelper;
 import com.tiger.layoutide.ide.ui.template.TemplateLayout;
 import com.tiger.layoutide.storage.db.LayoutDBManager;
 import com.tiger.layoutide.storage.model.LayoutDBModel;
@@ -105,8 +106,9 @@ public class CreateLayoutActivity extends Activity implements OnClickListener
 		switch (v.getId())
 		{
 			case R.id.select_template_btn:
-				intent.setClass(this, TemplateActivity.class);
-				startActivityForResult(intent, 0);
+				JCodeHelper.outputActivityCode("test", null);
+//				intent.setClass(this, TemplateActivity.class);
+//				startActivityForResult(intent, 0);
 				break;
 				
 			case R.id.create_layout_btn:
