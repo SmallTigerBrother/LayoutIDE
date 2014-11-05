@@ -3,7 +3,6 @@ package com.tiger.layoutide;
 import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.util.List;
 
 import android.app.Activity;
 import android.content.Intent;
@@ -21,8 +20,6 @@ import android.widget.TextView;
 
 import com.mn.tiger.annonation.ViewById;
 import com.mn.tiger.utility.ViewInjector;
-import com.tiger.code.json.JSONClassGenerator;
-import com.tiger.code.model.JClass;
 import com.tiger.layoutide.ide.code.JCodeHelper;
 import com.tiger.layoutide.ide.tool.Emulator;
 import com.tiger.layoutide.ide.tool.ExampleViewPanel;
