@@ -5,18 +5,22 @@ import java.util.ArrayList;
 import com.tiger.code.constant.JConstant;
 import com.tiger.code.constant.JIndentation;
 import com.tiger.code.constant.JKeyWords;
-import com.tiger.code.model.JModel;
+import com.tiger.code.model.JCodeBlock;
+import com.tiger.code.model.JCodeModel;
 import com.tiger.code.output.JCodeBuilder;
 
-public class JSwitch extends JModel
+public class JSwitch extends JCodeModel
 {
 	private String keyValue = "";
 	
 	private ArrayList<String> caseValues;
 	
+	private JCodeBlock jCodeBlock;
+	
 	public JSwitch(String keyValue)
 	{
 		this.keyValue = keyValue;
+		caseValues = new ArrayList<String>();
 	}
 	
 	public void addCase(String caseValue)
@@ -40,22 +44,28 @@ public class JSwitch extends JModel
 					caseValues.get(i) + JConstant.COLON + JIndentation.NEW_LINE + 
 					JIndentation.NEW_LINE);
 			
-			//TODO 插入具体代码
+			//插入具体代码
+			if(null != jCodeBlock)
+			{
+				jCodeBlock.setIndentation(jCodeBuilder.getIndentation() + JIndentation.METHOD);
+				jCodeBuilder.append(jCodeBlock.toString());
+			}
 			
-			jCodeBuilder.appendWithIndentation(JKeyWords.BREAK + JConstant.SIMECOLON_AND_NEWLINE +
-					JIndentation.NEW_LINE);
+			jCodeBuilder.appendWithIndentation(JIndentation.METHOD + JKeyWords.BREAK + 
+					JConstant.SIMECOLON_AND_NEWLINE + JIndentation.NEW_LINE);
 		}
 		
 		//写入default语句
 		jCodeBuilder.appendWithIndentation(JKeyWords.DEFAULT + JConstant.COLON + 
 				JIndentation.NEW_LINE);
-		jCodeBuilder.appendWithIndentation(JKeyWords.BREAK + JConstant.SIMECOLON_AND_NEWLINE);
+		jCodeBuilder.appendWithIndentation(JIndentation.METHOD + JKeyWords.BREAK + 
+				JConstant.SIMECOLON_AND_NEWLINE);
 		
 		jCodeBuilder.setIndentation(getIndentation());
 		
-		jCodeBuilder.appendWithIndentation(JConstant.BRACKET_RIGHT + JIndentation.NEW_LINE);
+		jCodeBuilder.appendWithIndentation(JConstant.BRACE_RIGHT + JIndentation.NEW_LINE);
 		
-		return null;
+		return jCodeBuilder;
 	}
 
 	public String getSwitchValue()
@@ -76,6 +86,16 @@ public class JSwitch extends JModel
 	public void setCaseValues(ArrayList<String> caseValues)
 	{
 		this.caseValues = caseValues;
+	}
+
+	public JCodeBlock getjCodeBlock()
+	{
+		return jCodeBlock;
+	}
+
+	public void setjCodeBlock(JCodeBlock jCodeBlock)
+	{
+		this.jCodeBlock = jCodeBlock;
 	}
 
 }
