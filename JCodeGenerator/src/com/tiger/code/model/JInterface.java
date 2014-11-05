@@ -2,9 +2,12 @@ package com.tiger.code.model;
 
 import java.util.ArrayList;
 
+import com.tiger.code.model.JClass.ImportList;
+import com.tiger.code.model.JMethod.Parameter;
 import com.tiger.code.model.constant.JActionScope;
 import com.tiger.code.model.constant.JConstant;
 import com.tiger.code.model.constant.JIndentation;
+import com.tiger.code.model.output.JCodeBuilder;
 
 public class JInterface extends JModel
 {
@@ -16,9 +19,7 @@ public class JInterface extends JModel
 	
 	private String actionScope = JActionScope.DEFAULT;
 	
-	private String interfaceName;
-	
-	private ArrayList<JImport> imports;
+	private ImportList imports;
 	
 	private ArrayList<JMethod> methods;
 	
@@ -44,13 +45,13 @@ public class JInterface extends JModel
 		
 		this.superInterface = superInterface;
 		
-		imports = new ArrayList<JImport>();
+		imports = new ImportList();
 		methods = new ArrayList<JMethod>();
 	}
 
 	public String getInterfaceName()
 	{
-		return interfaceName;
+		return jPackage.getPackageName() + JConstant.POINT + simpleName;
 	}
 
 	public JPackage getjPackage()
@@ -72,6 +73,19 @@ public class JInterface extends JModel
 	{
 		return methods;
 	}
+	
+	public void addMethod(JMethod jMethod)
+	{
+		Parameter[] parameters = jMethod.getParameters();
+		if(null != parameters)
+		{
+			for(int i = 0; i < parameters.length; i++)
+			{
+				imports.add(new JImport(parameters[i].getParameterType()));
+			}
+		}
+		methods.add(jMethod);
+	}
 
 	public ArrayList<JImport> getImports()
 	{
@@ -84,9 +98,9 @@ public class JInterface extends JModel
 	}
 
 	@Override
-	public String toString()
+	public JCodeBuilder write2Code(JCodeBuilder jCodeBuilder)
 	{
-		StringBuilder jCodeBuilder = new StringBuilder();
+		setIndentation(JIndentation.FIELD);
 		//拼接包名
 		jCodeBuilder.append(jPackage.toString());
 		
@@ -105,12 +119,13 @@ public class JInterface extends JModel
 		//拼接方法
 		for(int i = 0; i < methods.size(); i++)
 		{
+			methods.get(i).setIndentation(getIndentation());
 			jCodeBuilder.append(methods.get(i).toString());
 			jCodeBuilder.append(JIndentation.NEW_LINE);
 		}
 		
 		jCodeBuilder.append(JConstant.BRACE_RIGHT);
 		
-		return jCodeBuilder.toString();
+		return jCodeBuilder;
 	}
 }

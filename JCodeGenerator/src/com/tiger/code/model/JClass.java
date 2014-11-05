@@ -3,9 +3,12 @@ package com.tiger.code.model;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.tiger.code.model.JMethod.Parameter;
 import com.tiger.code.model.constant.JActionScope;
 import com.tiger.code.model.constant.JConstant;
 import com.tiger.code.model.constant.JIndentation;
+import com.tiger.code.model.constant.JModifier;
+import com.tiger.code.model.output.JCodeBuilder;
 
 public class JClass extends JModel
 {
@@ -21,7 +24,7 @@ public class JClass extends JModel
 	
 	private ArrayList<JInterface> implementInterfaces;
 	
-	private ArrayList<JImport> imports;
+	private ImportList imports;
 	
 	private ArrayList<JField> fields;
 	
@@ -47,7 +50,7 @@ public class JClass extends JModel
 		
 		this.superClazz = superClaszz;
 		
-		imports = new ArrayList<JImport>();
+		imports = new ImportList();
 		implementInterfaces = new ArrayList<JInterface>();
 		fields = new ArrayList<JField>();
 		methods = new ArrayList<JMethod>();
@@ -56,6 +59,14 @@ public class JClass extends JModel
 	public void implementInterface(JInterface jInterface)
 	{
 		implementInterfaces.add(jInterface);
+		//插入接口声明的所有方法
+		JMethod jMethod = null;
+		for(int i = 0; i < jInterface.getMethods().size(); i++)
+		{
+			jMethod = jInterface.getMethods().get(i);
+			jMethod.addAnnonation(JAnnonation.createOverrideAnnonation());
+			methods.add(jMethod);
+		}
 	}
 	
 	public void addImport(JImport jImport)
@@ -80,7 +91,23 @@ public class JClass extends JModel
 	
 	public void addMethod(JMethod method)
 	{
+		Parameter[] parameters = method.getParameters();
+		if(null != parameters)
+		{
+			for(int i = 0; i < parameters.length; i++)
+			{
+				imports.add(new JImport(parameters[i].getParameterType()));
+			}
+		}
 		methods.add(method);
+	}
+	
+	public void addMethods(List<JMethod> methods)
+	{
+		for (int i = 0; i < methods.size(); i++)
+		{
+			addMethod(methods.get(i));
+		}
 	}
 	
 	public void addInterface(JInterface jInterface)
@@ -93,11 +120,12 @@ public class JClass extends JModel
 		
 	}
 	
-
 	@Override
-	public String toString()
+	public JCodeBuilder write2Code(JCodeBuilder jCodeBuilder)
 	{
-		StringBuilder jCodeBuilder = new StringBuilder();
+		//设置缩进
+		setIndentation(JIndentation.FIELD);
+		
 		//拼接包名
 		jCodeBuilder.append(jPackage.toString());
 		
@@ -110,16 +138,45 @@ public class JClass extends JModel
 		//拼接类的声明
 		jCodeBuilder.append(JIndentation.NEW_LINE);
 		jCodeBuilder.append(actionScope + MODEL_NAME + 
-				JIndentation.BETWEEN + simpleName + JIndentation.NEW_LINE);
+				JIndentation.BETWEEN + simpleName);
+		
+		//拼接基类
+		if(null != superClazz)
+		{
+			jCodeBuilder.append(JIndentation.BETWEEN + JModifier.EXTENDS + 
+					superClazz.getSimpleName());
+		}
+		
+		//拼接实现的接口
+		if(implementInterfaces.size() > 0)
+		{
+			jCodeBuilder.append(JIndentation.BETWEEN + JModifier.IMPLEMENTS);
+			for(int i = 0; i < implementInterfaces.size(); i++)
+			{
+				jCodeBuilder.append(implementInterfaces.get(i).getSimpleName());
+				if(i != implementInterfaces.size() - 1)
+				{
+					jCodeBuilder.append(JConstant.COMMA + JIndentation.BETWEEN);
+				}
+			}
+		}
+		
+		jCodeBuilder.append(JIndentation.NEW_LINE);
 		jCodeBuilder.append(JConstant.BRACE_LEFT);
 		
 		//拼接全局变量
 		for (int i = 0; i < fields.size(); i++)
 		{
+			fields.get(i).setIndentation(getIndentation());
 			jCodeBuilder.append(fields.get(i).toString() + JIndentation.NEW_LINE);
 		}
 		
-		//TODO 拼接方法
+		//拼接方法(接口方法已在加入接口时插入到methods中)
+		for(int i = 0; i < methods.size(); i++)
+		{
+			methods.get(i).setIndentation(getIndentation());
+			jCodeBuilder.append(methods.get(i).toString() + JIndentation.NEW_LINE);
+		}
 		
 		//TODO 拼接内部类
 		
@@ -128,7 +185,7 @@ public class JClass extends JModel
 		
 		jCodeBuilder.append(JConstant.BRACE_RIGHT);
 		
-		return jCodeBuilder.toString();
+		return jCodeBuilder;
 	}
 
 	public JPackage getjPackage()
@@ -161,5 +218,21 @@ public class JClass extends JModel
 		return implementInterfaces;
 	}
 	
-	
+	public static class ImportList extends ArrayList<JImport>
+	{
+		private static final long serialVersionUID = 1L;
+
+		@Override
+		public boolean add(JImport object)
+		{
+			for(int i = 0; i < this.size(); i++)
+			{
+				if(this.get(i).toString().equals(object.toString()))
+				{
+					return true;
+				}
+			}
+			return super.add(object);
+		}
+	}
 }

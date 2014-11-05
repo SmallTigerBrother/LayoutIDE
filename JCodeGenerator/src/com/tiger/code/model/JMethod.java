@@ -6,6 +6,7 @@ import com.tiger.code.model.constant.JActionScope;
 import com.tiger.code.model.constant.JConstant;
 import com.tiger.code.model.constant.JIndentation;
 import com.tiger.code.model.constant.JModifier;
+import com.tiger.code.model.output.JCodeBuilder;
 
 public class JMethod extends JModel
 {
@@ -23,18 +24,17 @@ public class JMethod extends JModel
 	
 	private boolean isFinal = false;
 	
-	private ArrayList<Parameter> parameters;
+	private Parameter[]  parameters;
 	
-	private JMethod(String actionScope, String methodName, 
-			ArrayList<Parameter> parameters)
+	private ArrayList<JAnnonation> annonations;
+	
+	public JMethod(String actionScope, String methodName, 
+			Parameter... parameters)
 	{
 		this.actionScope = actionScope;
 		this.methodName = methodName;
-		this.parameters = new ArrayList<JMethod.Parameter>();
-		if(null != parameters)
-		{
-			this.parameters.addAll(parameters);
-		}
+		this.parameters = parameters;
+		annonations = new ArrayList<JAnnonation>();
 	}
 	
 	public String getActionScope()
@@ -82,7 +82,7 @@ public class JMethod extends JModel
 		this.isForInterface = isForInterface;
 	}
 
-	public ArrayList<Parameter> getParameters()
+	public Parameter[] getParameters()
 	{
 		return parameters;
 	}
@@ -102,13 +102,27 @@ public class JMethod extends JModel
 		this.isFinal = isFinal;
 	}
 	
-	@Override
-	public String toString()
+	public ArrayList<JAnnonation> getAnnonations()
 	{
-		StringBuilder jCodeBuilder = new StringBuilder();
+		return annonations;
+	}
+	
+	public void addAnnonation(JAnnonation annonation)
+	{
+		annonations.add(annonation);
+	}
+
+	@Override
+	public JCodeBuilder write2Code(JCodeBuilder jCodeBuilder)
+	{
+		//拼接注解
+		for(int i = 0; i < annonations.size(); i++)
+		{
+			jCodeBuilder.appendWithIndentation(annonations.get(i).toString());
+		}
 		
 		//拼接方法的声明
-		jCodeBuilder.append(actionScope);
+		jCodeBuilder.appendWithIndentation(actionScope);
 		
 		if(isSynchronized)
 		{
@@ -128,16 +142,19 @@ public class JMethod extends JModel
 		jCodeBuilder.append(methodName + JConstant.PARENTHESES_LEFT);
 		
 		//拼接所有参数
-		for (int i = 0; i < parameters.size(); i++)
+		if(null != parameters)
 		{
-			jCodeBuilder.append(parameters.get(i).toString());
-			if(i < parameters.size() - 1)
+			for (int i = 0; i < parameters.length; i++)
 			{
-				jCodeBuilder.append(JConstant.COMMA);
+				jCodeBuilder.append(parameters[i].toString());
+				if(i < parameters.length - 1)
+				{
+					jCodeBuilder.append(JConstant.COMMA + JIndentation.BETWEEN);
+				}
 			}
 		}
 		
-		jCodeBuilder.append(methodName + JConstant.PARENTHESES_RIGHT);
+		jCodeBuilder.append(JConstant.PARENTHESES_RIGHT);
 		
 		if(isAbstract || isForInterface)
 		{
@@ -146,15 +163,17 @@ public class JMethod extends JModel
 		else
 		{
 			//拼接方法体
-			jCodeBuilder.append(JIndentation.NEW_LINE + JIndentation.METHOD + 
-					JConstant.BRACE_LEFT);
+			jCodeBuilder.append(JIndentation.NEW_LINE);
+			jCodeBuilder.appendWithIndentation(JConstant.BRACE_LEFT + 
+					JIndentation.NEW_LINE);
 			
-			jCodeBuilder.append(JIndentation.METHOD + JConstant.BRACE_RIGHT);
+			
+			jCodeBuilder.appendWithIndentation(JConstant.BRACE_RIGHT + JIndentation.NEW_LINE);
 		}
 		
-		return jCodeBuilder.toString();
+		return jCodeBuilder;
 	}
-
+	
 	public static class Parameter extends JModel
 	{
 		private boolean isFinal = false;
@@ -190,18 +209,17 @@ public class JMethod extends JModel
 		}
 		
 		@Override
-		public String toString()
+		public JCodeBuilder write2Code(JCodeBuilder jCodeBuilder)
 		{
-			StringBuilder jCodeBuilder = new StringBuilder();
 			if(isFinal)
 			{
 				jCodeBuilder.append(JModifier.FINAL);
 			}
 			
-			jCodeBuilder.append(JIndentation.BETWEEN + parameterType.getSimpleName() + 
-					JIndentation.BETWEEN + parameterName);
+			jCodeBuilder.append(parameterType.getSimpleName() + JIndentation.BETWEEN + 
+					parameterName);
 			
-			return jCodeBuilder.toString();
+			return jCodeBuilder;
 		}
 	}
 }
