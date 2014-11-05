@@ -21,4 +21,6 @@ public class JKeyWords
 	public static final String CASE = "case";
 	
 	public static final String DEFAULT = "default";
+	
+	public static final String ABSTRACT = "abstract ";
 }
