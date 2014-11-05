@@ -11,15 +11,15 @@ import android.view.ViewGroup;
 import android.widget.EditText;
 
 import com.mn.tiger.annonation.ViewById;
-import com.tiger.code.model.JAnnonation;
-import com.tiger.code.model.JAnnonation.ParamKeyValue;
-import com.tiger.code.model.JClass;
-import com.tiger.code.model.JField;
-import com.tiger.code.model.JInterface;
-import com.tiger.code.model.JMethod;
-import com.tiger.code.model.JMethod.Parameter;
-import com.tiger.code.model.JPackage;
 import com.tiger.code.model.constant.JActionScope;
+import com.tiger.code.model.model.JAnnonation;
+import com.tiger.code.model.model.JAnnonation.ParamKeyValue;
+import com.tiger.code.model.model.JClass;
+import com.tiger.code.model.model.JField;
+import com.tiger.code.model.model.JInterface;
+import com.tiger.code.model.model.JMethod;
+import com.tiger.code.model.model.JMethod.Parameter;
+import com.tiger.code.model.model.JPackage;
 import com.tiger.layoutide.R;
 import com.tiger.layoutide.ide.code.library.interfaces.AndroidClass;
 import com.tiger.layoutide.ide.code.library.interfaces.AndroidInterface;
@@ -105,6 +105,7 @@ public class JCodeHelper
 				ClassDictionary.getClass(AndroidClass.Bundle));
 		JMethod method = new JMethod(JActionScope.PROTECTED, "onCreate", parameter);
 		method.addAnnonation(JAnnonation.createOverrideAnnonation());
+		method.setOverrideSuper(true);
 		methods.add(method);
 		
 		return methods;
