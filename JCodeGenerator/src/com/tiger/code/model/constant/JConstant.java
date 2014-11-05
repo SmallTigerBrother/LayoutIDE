@@ -25,4 +25,6 @@ public class JConstant
 	public static final String PARENTHESES_RIGHT = ")";
 	
 	public static final String PARENTHESES_LEFT = "(";
+	
+	public static final String COLON = ":";
 }

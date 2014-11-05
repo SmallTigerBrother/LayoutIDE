@@ -13,4 +13,12 @@ public class JKeyWords
 	public static final String IMPLEMENTS = "implements ";
 	
 	public static final String SUPER = "super";
+	
+	public static final String SWITCH = "switch";
+	
+	public static final String BREAK = "break";
+	
+	public static final String CASE = "case";
+	
+	public static final String DEFAULT = "default";
 }
