@@ -4,6 +4,7 @@ import java.util.ArrayList;
 
 import com.tiger.code.model.constant.JConstant;
 import com.tiger.code.model.constant.JIndentation;
+import com.tiger.code.model.output.JCodeBuilder;
 
 public class JAnnonation extends JModel
 {
@@ -22,27 +23,36 @@ public class JAnnonation extends JModel
 		paramKeyValues.add(keyValue);
 	}
 	
-	@Override
-	public String toString()
-	{
-		StringBuilder annonationBuilder = new StringBuilder("@" + annonationName +
-				JConstant.PARENTHESES_LEFT);
-		for(int i = 0; i < paramKeyValues.size(); i++)
-		{
-			annonationBuilder.append(paramKeyValues.get(i).toString());
-			if(i != paramKeyValues.size() - 1)
-			{
-				annonationBuilder.append(JConstant.COMMA + JIndentation.BETWEEN);
-			}
-		}
-		
-		annonationBuilder.append(JConstant.PARENTHESES_RIGHT + JIndentation.NEW_LINE);
-		return annonationBuilder.toString();
-	}
-	
 	public String getAnnonationName()
 	{
 		return annonationName;
+	}
+	
+	public static JAnnonation createOverrideAnnonation()
+	{
+		return new JAnnonation("Override");
+	}
+	
+	@Override
+	public JCodeBuilder write2Code(JCodeBuilder jCodeBuilder)
+	{
+		jCodeBuilder.append("@" + annonationName);
+		if(paramKeyValues.size() > 0)
+		{
+			jCodeBuilder.append(JConstant.PARENTHESES_LEFT);
+			for(int i = 0; i < paramKeyValues.size(); i++)
+			{
+				jCodeBuilder.append(paramKeyValues.get(i).toString());
+				if(i != paramKeyValues.size() - 1)
+				{
+					jCodeBuilder.append(JConstant.COMMA + JIndentation.BETWEEN);
+				}
+			}
+			jCodeBuilder.append(JConstant.PARENTHESES_RIGHT);
+		}
+		jCodeBuilder.append(JIndentation.NEW_LINE);
+		
+		return jCodeBuilder;
 	}
 
 	public static class ParamKeyValue

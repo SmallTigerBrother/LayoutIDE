@@ -2,6 +2,7 @@ package com.tiger.code.model;
 
 import com.tiger.code.model.constant.JConstant;
 import com.tiger.code.model.constant.JIndentation;
+import com.tiger.code.model.output.JCodeBuilder;
 
 
 public class JPackage extends JModel
@@ -24,9 +25,11 @@ public class JPackage extends JModel
 	}
 
 	@Override
-	public String toString()
+	public JCodeBuilder write2Code(JCodeBuilder jCodeBuilder)
 	{
-		return "package" + JIndentation.BETWEEN + packageName + JConstant.SIMECOLON_AND_NEWLINE;
+		jCodeBuilder.append("package" + JIndentation.BETWEEN + packageName + 
+				JConstant.SIMECOLON_AND_NEWLINE);
+		return jCodeBuilder;
 	}
 
 }

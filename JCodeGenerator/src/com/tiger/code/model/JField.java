@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import com.tiger.code.model.constant.JActionScope;
 import com.tiger.code.model.constant.JConstant;
 import com.tiger.code.model.constant.JIndentation;
+import com.tiger.code.model.output.JCodeBuilder;
 
 
 public class JField extends JModel
@@ -64,23 +65,21 @@ public class JField extends JModel
 	}
 
 	@Override
-	public String toString()
+	public JCodeBuilder write2Code(JCodeBuilder jCodeBuilder)
 	{
-		StringBuilder stringBuilder = new StringBuilder();
-		
 		for(int i = 0; i < annonations.size(); i++)
 		{
-			stringBuilder.append(JIndentation.FIELD + annonations.get(i).toString());
+			jCodeBuilder.appendWithIndentation(annonations.get(i).toString());
 		}
 		
-		stringBuilder.append(JIndentation.FIELD + actionScope + 
+		jCodeBuilder.appendWithIndentation(actionScope + 
 				valueType.getSimpleName() + JIndentation.BETWEEN + filedName);
 		if(null != initValue)
 		{
-			stringBuilder.append(JConstant.ASSIGNMENT + initValue);
+			jCodeBuilder.append(JConstant.ASSIGNMENT + initValue);
 		}
-		stringBuilder.append(JConstant.SIMECOLON_AND_NEWLINE);
+		jCodeBuilder.append(JConstant.SIMECOLON_AND_NEWLINE);
 		
-		return stringBuilder.toString();
+		return jCodeBuilder;
 	}
 }

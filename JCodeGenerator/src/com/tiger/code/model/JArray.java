@@ -2,6 +2,7 @@ package com.tiger.code.model;
 
 import com.tiger.code.model.constant.JConstant;
 import com.tiger.code.model.constant.JIndentation;
+import com.tiger.code.model.output.JCodeBuilder;
 
 public class JArray extends JField
 {
@@ -11,20 +12,19 @@ public class JArray extends JField
 	}
 	
 	@Override
-	public String toString()
+	public JCodeBuilder write2Code(JCodeBuilder jCodeBuilder)
 	{
-		StringBuilder stringBuilder = new StringBuilder();
-		stringBuilder.append(JIndentation.FIELD + getActionScope() + 
+		jCodeBuilder.append(JIndentation.FIELD + getActionScope() + 
 				JIndentation.BETWEEN + getValueType().getSimpleName() + 
 				JConstant.BRACKET_LEFT + JConstant.BRACKET_RIGHT + 
 				JIndentation.BETWEEN + getFiledName());
 		if(null != getInitValue())
 		{
-			stringBuilder.append(JConstant.EQUAL + getInitValue());
+			jCodeBuilder.append(JConstant.EQUAL + getInitValue());
 		}
-		stringBuilder.append(JConstant.SIMECOLON_AND_NEWLINE);
+		jCodeBuilder.append(JConstant.SIMECOLON_AND_NEWLINE);
 		
-		return stringBuilder.toString();
+		return jCodeBuilder;
 	}
 
 }

@@ -1,6 +1,7 @@
 package com.tiger.code.model.primary;
 
 import com.tiger.code.model.JClass;
+import com.tiger.code.model.output.JCodeBuilder;
 
 public class Primatives
 {
@@ -23,9 +24,10 @@ public class Primatives
 		return new JClass(null, null, "int", null)
 		{
 			@Override
-			public String toString()
+			public JCodeBuilder write2Code(JCodeBuilder jCodeBuilder)
 			{
-				return "int";
+				jCodeBuilder.append("int");
+				return jCodeBuilder;
 			}
 		};
 	}
@@ -35,9 +37,10 @@ public class Primatives
 		return new JClass(null, null, "long", null)
 		{
 			@Override
-			public String toString()
+			public JCodeBuilder write2Code(JCodeBuilder jCodeBuilder)
 			{
-				return "long";
+				jCodeBuilder.append("long");
+				return jCodeBuilder;
 			}
 		};
 	}
@@ -47,9 +50,10 @@ public class Primatives
 		return new JClass(null, null, "float", null)
 		{
 			@Override
-			public String toString()
+			public JCodeBuilder write2Code(JCodeBuilder jCodeBuilder)
 			{
-				return "float";
+				jCodeBuilder.append("float");
+				return jCodeBuilder;
 			}
 		};
 	}
@@ -59,9 +63,10 @@ public class Primatives
 		return new JClass(null, null, "double", null)
 		{
 			@Override
-			public String toString()
+			public JCodeBuilder write2Code(JCodeBuilder jCodeBuilder)
 			{
-				return "double";
+				jCodeBuilder.append("double");
+				return jCodeBuilder;
 			}
 		};
 	}
@@ -71,9 +76,10 @@ public class Primatives
 		return new JClass(null, null, "boolean", null)
 		{
 			@Override
-			public String toString()
+			public JCodeBuilder write2Code(JCodeBuilder jCodeBuilder)
 			{
-				return "boolean";
+				jCodeBuilder.append("boolean");
+				return jCodeBuilder;
 			}
 		};
 	}
@@ -83,9 +89,10 @@ public class Primatives
 		return new JClass(null, null, "String", null)
 		{
 			@Override
-			public String toString()
+			public JCodeBuilder write2Code(JCodeBuilder jCodeBuilder)
 			{
-				return "String";
+				jCodeBuilder.append("String");
+				return jCodeBuilder;
 			}
 		};
 	}
@@ -95,9 +102,10 @@ public class Primatives
 		return new JClass(null, null, "void", null)
 		{
 			@Override
-			public String toString()
+			public JCodeBuilder write2Code(JCodeBuilder jCodeBuilder)
 			{
-				return "void";
+				jCodeBuilder.append("void");
+				return jCodeBuilder;
 			}
 		};
 	}
