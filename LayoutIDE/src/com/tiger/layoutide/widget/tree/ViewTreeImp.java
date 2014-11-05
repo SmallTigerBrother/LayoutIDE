@@ -3,7 +3,7 @@ package com.tiger.layoutide.widget.tree;
 import java.util.LinkedList;
 import java.util.List;
 
-import com.tiger.code.model.constant.JIndentation;
+import com.tiger.code.constant.JIndentation;
 import com.tiger.layoutide.widget.IViewGroup;
 
 public class ViewTreeImp extends ViewTreeNodeImp implements IViewTree

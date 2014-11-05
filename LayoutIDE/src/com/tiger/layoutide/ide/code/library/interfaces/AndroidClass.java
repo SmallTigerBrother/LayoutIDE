@@ -1,6 +1,6 @@
 package com.tiger.layoutide.ide.code.library.interfaces;
 
-import com.tiger.code.model.constant.JConstant;
+import com.tiger.code.constant.JConstant;
 
 public enum AndroidClass
 {

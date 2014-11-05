@@ -2,11 +2,11 @@ package com.tiger.layoutide.ide.code.library.interfaces;
 
 import java.util.WeakHashMap;
 
-import com.tiger.code.model.constant.JActionScope;
-import com.tiger.code.model.model.JInterface;
-import com.tiger.code.model.model.JMethod;
-import com.tiger.code.model.model.JMethod.Parameter;
-import com.tiger.code.model.model.JPackage;
+import com.tiger.code.constant.JActionScope;
+import com.tiger.code.model.JInterface;
+import com.tiger.code.model.JMethod;
+import com.tiger.code.model.JMethod.Parameter;
+import com.tiger.code.model.JPackage;
 
 public class InterfaceDictionary extends WeakHashMap<AndroidInterface, JInterface>
 {

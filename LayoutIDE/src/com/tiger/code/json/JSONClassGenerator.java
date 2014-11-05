@@ -15,12 +15,12 @@ import com.google.gson.JsonElement;
 import com.google.gson.JsonObject;
 import com.google.gson.JsonParser;
 import com.google.gson.JsonPrimitive;
-import com.tiger.code.model.constant.JActionScope;
-import com.tiger.code.model.model.JArray;
-import com.tiger.code.model.model.JClass;
-import com.tiger.code.model.model.JField;
-import com.tiger.code.model.model.JPackage;
-import com.tiger.code.model.model.Primatives;
+import com.tiger.code.constant.JActionScope;
+import com.tiger.code.model.JArray;
+import com.tiger.code.model.JClass;
+import com.tiger.code.model.JField;
+import com.tiger.code.model.JPackage;
+import com.tiger.code.model.Primatives;
 
 public class JSONClassGenerator
 {
