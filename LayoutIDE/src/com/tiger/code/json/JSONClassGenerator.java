@@ -20,7 +20,7 @@ import com.tiger.code.model.model.JArray;
 import com.tiger.code.model.model.JClass;
 import com.tiger.code.model.model.JField;
 import com.tiger.code.model.model.JPackage;
-import com.tiger.code.model.primary.Primatives;
+import com.tiger.code.model.model.Primatives;
 
 public class JSONClassGenerator
 {
