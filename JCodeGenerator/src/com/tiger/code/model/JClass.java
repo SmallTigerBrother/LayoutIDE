@@ -10,7 +10,7 @@ import com.tiger.code.constant.JKeyWords;
 import com.tiger.code.model.JMethod.Parameter;
 import com.tiger.code.output.JCodeBuilder;
 
-public class JClass extends JModel
+public class JClass extends JCodeModel
 {
 	public static final String MODEL_NAME = "class";
 	
@@ -48,9 +48,14 @@ public class JClass extends JModel
 			this.simpleName = simpleClazzName;
 		}
 		
-		this.superClazz = superClaszz;
-		
 		imports = new ImportList();
+		if(null != superClaszz)
+		{
+			this.superClazz = superClaszz;
+			//import基类
+			imports.add(new JImport(superClaszz));
+		}
+		
 		implementInterfaces = new ArrayList<JInterface>();
 		fields = new ArrayList<JField>();
 		methods = new ArrayList<JMethod>();
@@ -59,13 +64,15 @@ public class JClass extends JModel
 	public void implementInterface(JInterface jInterface)
 	{
 		implementInterfaces.add(jInterface);
+		//import接口
+		imports.add(new JImport(jInterface));
 		//插入接口声明的所有方法
 		JMethod jMethod = null;
 		for(int i = 0; i < jInterface.getMethods().size(); i++)
 		{
 			jMethod = jInterface.getMethods().get(i);
 			jMethod.addAnnonation(JAnnonation.createOverrideAnnonation());
-			methods.add(jMethod);
+			addMethod(jMethod);
 		}
 	}
 	
@@ -124,7 +131,7 @@ public class JClass extends JModel
 	public JCodeBuilder write2Code(JCodeBuilder jCodeBuilder)
 	{
 		//设置缩进
-		setIndentation(JIndentation.FIELD);
+		jCodeBuilder.setIndentation(JIndentation.FIELD);
 		
 		//拼接包名
 		jCodeBuilder.append(jPackage.toString());
@@ -165,18 +172,10 @@ public class JClass extends JModel
 		jCodeBuilder.append(JConstant.BRACE_LEFT);
 		
 		//拼接全局变量
-		for (int i = 0; i < fields.size(); i++)
-		{
-			fields.get(i).setIndentation(getIndentation());
-			jCodeBuilder.append(fields.get(i).toString() + JIndentation.NEW_LINE);
-		}
+		jCodeBuilder = appendFields(jCodeBuilder);
 		
 		//拼接方法(接口方法已在加入接口时插入到methods中)
-		for(int i = 0; i < methods.size(); i++)
-		{
-			methods.get(i).setIndentation(getIndentation());
-			jCodeBuilder.append(methods.get(i).toString() + JIndentation.NEW_LINE);
-		}
+		jCodeBuilder = appendMethods(jCodeBuilder);
 		
 		//TODO 拼接内部类
 		
@@ -188,6 +187,26 @@ public class JClass extends JModel
 		return jCodeBuilder;
 	}
 
+	protected JCodeBuilder appendFields(JCodeBuilder jCodeBuilder)
+	{
+		for (int i = 0; i < fields.size(); i++)
+		{
+			fields.get(i).setIndentation(jCodeBuilder.getIndentation());
+			jCodeBuilder.append(fields.get(i).toString() + JIndentation.NEW_LINE);
+		}
+		return jCodeBuilder;
+	}
+	
+	protected JCodeBuilder appendMethods(JCodeBuilder jCodeBuilder)
+	{
+		for (int i = 0; i < methods.size(); i++)
+		{
+			methods.get(i).setIndentation(jCodeBuilder.getIndentation());
+			jCodeBuilder.append(methods.get(i).toString() + JIndentation.NEW_LINE);
+		}
+		return jCodeBuilder;
+	}
+	
 	public JPackage getjPackage()
 	{
 		return jPackage;

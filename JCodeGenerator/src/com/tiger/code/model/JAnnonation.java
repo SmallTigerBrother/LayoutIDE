@@ -6,7 +6,7 @@ import com.tiger.code.constant.JConstant;
 import com.tiger.code.constant.JIndentation;
 import com.tiger.code.output.JCodeBuilder;
 
-public class JAnnonation extends JModel
+public class JAnnonation extends JCodeModel
 {
 	private String annonationName = "";
 	

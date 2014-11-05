@@ -8,7 +8,7 @@ import com.tiger.code.constant.JIndentation;
 import com.tiger.code.output.JCodeBuilder;
 
 
-public class JField extends JModel
+public class JField extends JCodeModel
 {
 	private String filedName = "JClass";
 	

@@ -5,7 +5,7 @@ import com.tiger.code.constant.JIndentation;
 import com.tiger.code.output.JCodeBuilder;
 
 
-public class JPackage extends JModel
+public class JPackage extends JCodeModel
 {
 	private String packageName = "com.tiger.code";
 	

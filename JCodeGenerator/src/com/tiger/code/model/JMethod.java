@@ -8,7 +8,7 @@ import com.tiger.code.constant.JIndentation;
 import com.tiger.code.constant.JKeyWords;
 import com.tiger.code.output.JCodeBuilder;
 
-public class JMethod extends JModel
+public class JMethod extends JCodeModel
 {
 	private String methodName = "method";
 	
@@ -23,8 +23,6 @@ public class JMethod extends JModel
 	private boolean isForInterface = false;
 	
 	private boolean isFinal = false;
-	
-	private boolean overrideSuper = false;
 	
 	private Parameter[]  parameters;
 	
@@ -160,6 +158,7 @@ public class JMethod extends JModel
 		
 		jCodeBuilder.append(JConstant.PARENTHESES_RIGHT);
 		
+		//抽象方法、接口方法无方法体
 		if(isAbstract || isForInterface)
 		{
 			jCodeBuilder.append(JConstant.SIMECOLON);
@@ -170,12 +169,12 @@ public class JMethod extends JModel
 			jCodeBuilder.append(JIndentation.NEW_LINE);
 			jCodeBuilder.appendWithIndentation(JConstant.BRACE_LEFT + 
 					JIndentation.NEW_LINE);
-			if(overrideSuper)
+			
+			//拼接方法体
+			if(null != jCodeBlock)
 			{
-				jCodeBuilder.setIndentation(getIndentation() + JIndentation.METHOD);
-				
-				jCodeBuilder = overrideSuper(jCodeBuilder);
-				
+				jCodeBlock.setIndentation(getIndentation() + JIndentation.METHOD);
+				jCodeBuilder.append(jCodeBlock.toString());
 				jCodeBuilder.setIndentation(getIndentation());
 			}
 			
@@ -185,9 +184,10 @@ public class JMethod extends JModel
 		return jCodeBuilder;
 	}
 	
-	private JCodeBuilder overrideSuper(JCodeBuilder jCodeBuilder)
+	public JCodeModel getCallSuperCode()
 	{
-		jCodeBuilder.appendWithIndentation(JKeyWords.SUPER + JConstant.POINT + 
+		JCodeBuilder jCodeBuilder = new JCodeBuilder();
+		jCodeBuilder.append(JKeyWords.SUPER + JConstant.POINT + 
 				methodName + JConstant.PARENTHESES_LEFT);
 		//拼接所有参数
 		if(null != parameters)
@@ -201,38 +201,25 @@ public class JMethod extends JModel
 				}
 			}
 		}
+		jCodeBuilder.append(JConstant.PARENTHESES_RIGHT + JConstant.SIMECOLON);
 		
-		if(null != jCodeBlock)
-		{
-			jCodeBlock.setIndentation(getIndentation());
-			jCodeBuilder.append(jCodeBlock.toString());
-		}
-				
-		jCodeBuilder.append(JConstant.PARENTHESES_RIGHT + JConstant.SIMECOLON_AND_NEWLINE);
-		return jCodeBuilder;
+		JCodeModel jCodeModel = new JCodeModel();
+		jCodeModel.setCodeString(jCodeBuilder.toString());
+		
+		return jCodeModel;
 	}
 	
-	public boolean isOverrideSuper()
-	{
-		return overrideSuper;
-	}
-
-	public void setOverrideSuper(boolean overrideSuper)
-	{
-		this.overrideSuper = overrideSuper;
-	}
-
-	public JCodeBlock getjCodeBlock()
+	public JCodeBlock getCodeBlock()
 	{
 		return jCodeBlock;
 	}
 
-	public void setjCodeBlock(JCodeBlock jCodeBlock)
+	public void setCodeBlock(JCodeBlock jCodeBlock)
 	{
 		this.jCodeBlock = jCodeBlock;
 	}
 
-	public static class Parameter extends JModel
+	public static class Parameter extends JCodeModel
 	{
 		private boolean isFinal = false;
 		

@@ -9,7 +9,7 @@ import com.tiger.code.model.JClass.ImportList;
 import com.tiger.code.model.JMethod.Parameter;
 import com.tiger.code.output.JCodeBuilder;
 
-public class JInterface extends JModel
+public class JInterface extends JCodeModel
 {
 	public static final String MODEL_NAME = "interface";
 	
@@ -100,7 +100,7 @@ public class JInterface extends JModel
 	@Override
 	public JCodeBuilder write2Code(JCodeBuilder jCodeBuilder)
 	{
-		setIndentation(JIndentation.FIELD);
+		jCodeBuilder.setIndentation(JIndentation.FIELD);
 		//拼接包名
 		jCodeBuilder.append(jPackage.toString());
 		
@@ -119,7 +119,7 @@ public class JInterface extends JModel
 		//拼接方法
 		for(int i = 0; i < methods.size(); i++)
 		{
-			methods.get(i).setIndentation(getIndentation());
+			methods.get(i).setIndentation(jCodeBuilder.getIndentation());
 			jCodeBuilder.append(methods.get(i).toString());
 			jCodeBuilder.append(JIndentation.NEW_LINE);
 		}

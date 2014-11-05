@@ -2,30 +2,40 @@ package com.tiger.code.model;
 
 import java.util.ArrayList;
 
+import com.tiger.code.constant.JIndentation;
 import com.tiger.code.output.JCodeBuilder;
 
-public class JCodeBlock extends JModel
+public class JCodeBlock extends JCodeModel
 {
-	private ArrayList<String> codeStrings = new ArrayList<String>();
+	private ArrayList<JCodeModel> codeModels;
 	
 	public JCodeBlock()
 	{
-		
+		codeModels = new ArrayList<JCodeModel>();
 	}
 	
-	public void addCode(String code)
+	public void addCode(JCodeModel code)
 	{
-		codeStrings.add(code);
+		codeModels.add(code);
+	}
+	
+	public void addCode(String codeString)
+	{
+		JCodeModel jCodeModel = new JCodeModel();
+		jCodeModel.setCodeString(codeString);
+		codeModels.add(jCodeModel);
 	}
 	
 	@Override
 	public JCodeBuilder write2Code(JCodeBuilder jCodeBuilder)
 	{
-		return null;
+		for(int i = 0; i < codeModels.size(); i++)
+		{
+			codeModels.get(i).setIndentation(getIndentation());
+			jCodeBuilder.append(codeModels.get(i).toString() + JIndentation.NEW_LINE);
+		}
+		
+		return jCodeBuilder;
 	}
 
-	public ArrayList<String> getCodeStrings()
-	{
-		return codeStrings;
-	}
 }
