@@ -3,7 +3,6 @@ package com.tiger.code.model.model;
 import com.tiger.code.model.constant.JConstant;
 import com.tiger.code.model.constant.JIndentation;
 import com.tiger.code.model.output.JCodeBuilder;
-import com.tiger.code.model.primary.Primatives;
 
 public class JImport extends JModel
 {
