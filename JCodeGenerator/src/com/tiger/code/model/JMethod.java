@@ -212,6 +212,31 @@ public class JMethod extends JCodeModel
 		return jCodeModel;
 	}
 	
+	public JCodeModel getCallCode(String... params)
+	{
+		JCodeBuilder jCodeBuilder = new JCodeBuilder();
+		jCodeBuilder.append(methodName + JConstant.PARENTHESES_LEFT);
+		if(null != params && params.length > 0)
+		{
+			//拼接所有参数
+			for (int i = 0; i < params.length; i++)
+			{
+				jCodeBuilder.append(params[i]);
+				if(i < params.length - 1)
+				{
+					jCodeBuilder.append(JConstant.COMMA + JIndentation.BETWEEN);
+				}
+			}
+		}
+		
+		jCodeBuilder.append(JConstant.PARENTHESES_RIGHT + JConstant.SIMECOLON);
+		
+		JCodeModel jCodeModel = new JCodeModel();
+		jCodeModel.setCodeString(jCodeBuilder.toString());
+		
+		return jCodeModel;
+	}
+	
 	public JCodeBlock getCodeBlock()
 	{
 		return jCodeBlock;
