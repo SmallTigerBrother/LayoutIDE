@@ -18,14 +18,12 @@ import com.tiger.code.model.JClass;
 import com.tiger.code.model.JCodeBlock;
 import com.tiger.code.model.JField;
 import com.tiger.code.model.JInterface;
-import com.tiger.code.model.JMethod;
-import com.tiger.code.model.JMethod.Parameter;
 import com.tiger.code.model.JPackage;
 import com.tiger.layoutide.R;
 import com.tiger.layoutide.ide.code.library.AndroidClass;
 import com.tiger.layoutide.ide.code.library.AndroidInterface;
-import com.tiger.layoutide.ide.code.library.ClassDictionary;
-import com.tiger.layoutide.ide.code.library.InterfaceDictionary;
+import com.tiger.layoutide.ide.code.library.ClassFactory;
+import com.tiger.layoutide.ide.code.library.InterfaceFactory;
 import com.tiger.layoutide.ide.code.library.JActivity;
 import com.tiger.layoutide.widget.IView;
 
@@ -85,12 +83,12 @@ public class JCodeHelper
 	
 	public static String outputActivityCode(String activityName, ViewGroup viewGroup)
 	{
-		JClass superClaszz = ClassDictionary.getClass(AndroidClass.Activity);
+		JClass superClaszz = ClassFactory.getClass(AndroidClass.Activity);
 		JClass jClazz = new JClass(null, JActionScope.PUBLIC, activityName, superClaszz);
 		
 //		jClazz.addFields(getInjectViewFields(viewGroup));
 		
-		JInterface jInterface = InterfaceDictionary.getInterface(
+		JInterface jInterface = InterfaceFactory.createInterface(
 				AndroidInterface.OnClickListener4View);
 		
 		jClazz.implementInterface(jInterface);
@@ -99,16 +97,39 @@ public class JCodeHelper
 		return jClazz.toString();
 	}
 	
-	public static String outputActivityCode(String activityName, ViewGroup viewGroup, OutputParams params)
+	public static JActivity outputActivityCode(String activityName, ViewGroup viewGroup,
+			OutputParams params)
 	{
-		JClass superClaszz = ClassDictionary.getClass(AndroidClass.Activity);
+		JClass superClaszz = ClassFactory.getClass(AndroidClass.Activity);
 		JActivity jActivity = new JActivity(null, JActionScope.PUBLIC, activityName, superClaszz);
+		
+		//实现接口
+		jActivity.implementInterfaces(params.getInterfaces());
 		
 		//添加所有 注入的View声明
 		jActivity.addFields(getInjectViewFields(viewGroup));
 		
+		//setContentView
+		if(!TextUtils.isEmpty(params.getLayoutName()))
+		{
+			JCodeBlock onCreateCodeBlock = jActivity.getOnCreateMethod().getCodeBlock();
+			//添加setContentView方法
+			onCreateCodeBlock.addCode("setContentView(R.layout." + params.getLayoutName() +");");
+		}
 		
-		return jActivity.toString();
+		//注册事件总线
+		if(params.isRegisterEventBus())
+		{
+			//注册事件总线
+			JCodeBlock onCreateCodeBlock = jActivity.getOnCreateMethod().getCodeBlock();
+			onCreateCodeBlock.addCode("QuizUpApplication.getBus().register(this);");
+			
+			//取消注册事件总线
+			JCodeBlock onDestroyCodeBlock = jActivity.getOnDestroyMethod().getCodeBlock();
+			onDestroyCodeBlock.addCode("QuizUpApplication.getBus().unregister(this);");
+		}
+		
+		return jActivity;
 	}
 	
 }
