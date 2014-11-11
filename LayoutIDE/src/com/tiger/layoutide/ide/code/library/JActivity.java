@@ -7,6 +7,7 @@ import com.tiger.code.model.JCodeBlock;
 import com.tiger.code.model.JMethod;
 import com.tiger.code.model.JMethod.Parameter;
 import com.tiger.code.model.JPackage;
+import com.tiger.code.model.Primatives;
 import com.tiger.code.output.JCodeBuilder;
 
 public class JActivity extends JClass
@@ -19,6 +20,12 @@ public class JActivity extends JClass
 	
 	private JMethod onDestroyMethod;
 	
+	private JMethod processArgsMethod;
+	
+	private JMethod setupViewsMethod;
+	
+	private JMethod onActivityResultMethod;
+	
 	public JActivity(JPackage jPackage, String actionScope, 
 			String simpleClazzName, JClass superClaszz)
 	{
@@ -26,7 +33,7 @@ public class JActivity extends JClass
 		
 		//加入onCreate方法
 		Parameter parameter = new Parameter("savedInstanceState", 
-				ClassDictionary.getClass(AndroidClass.Bundle));
+				ClassFactory.getClass(AndroidClass.Bundle));
 		onCreateMethod = initSuperMethod("onCreate", parameter);
 		
 		//加入onResume方法
@@ -38,6 +45,10 @@ public class JActivity extends JClass
 		
 		//加入onDestroy方法
 		onDestroyMethod = initSuperMethod("onDestroy", new Parameter[]{});
+		
+		processArgsMethod = initProcessArgsMethod();
+		
+		setupViewsMethod = initSetupViewsMethod();
 	}
 	
 	private JMethod initSuperMethod(String methodName, Parameter... parameters)
@@ -52,6 +63,22 @@ public class JActivity extends JClass
 		return method;
 	}
 	
+	private JMethod initProcessArgsMethod()
+	{
+		JMethod method = new JMethod(JActionScope.PRIVATE, "processArgs", new Parameter[]{});
+		JCodeBlock jCodeBlock = new JCodeBlock();
+		jCodeBlock.addCode("Bundle args = this.getIntent().getExtras();");
+		method.setCodeBlock(jCodeBlock);
+		return method;
+	}
+	
+	private JMethod initSetupViewsMethod()
+	{
+		JMethod method = new JMethod(JActionScope.PRIVATE, "setupViews", new Parameter[]{});
+		method.setCodeBlock(new JCodeBlock());
+		return method;
+	}
+	
 	@Override
 	protected JCodeBuilder appendMethods(JCodeBuilder jCodeBuilder)
 	{
@@ -59,8 +86,20 @@ public class JActivity extends JClass
 		onCreateMethod.setIndentation(jCodeBuilder.getIndentation());
 		jCodeBuilder.append(onCreateMethod.toString());
 		
+		processArgsMethod.setIndentation(jCodeBuilder.getIndentation());
+		jCodeBuilder.append(onCreateMethod.toString());
+		
+		setupViewsMethod.setIndentation(jCodeBuilder.getIndentation());
+		jCodeBuilder.append(setupViewsMethod.toString());
+		
 		onResumeMethod.setIndentation(jCodeBuilder.getIndentation());
 		jCodeBuilder.append(onResumeMethod.toString());
+		
+		if(null != onActivityResultMethod)
+		{
+			onActivityResultMethod.setIndentation(jCodeBuilder.getIndentation());
+			jCodeBuilder.append(onActivityResultMethod.toString());
+		}
 		
 		onStopMethod.setIndentation(jCodeBuilder.getIndentation());
 		jCodeBuilder.append(onStopMethod.toString());
@@ -89,5 +128,24 @@ public class JActivity extends JClass
 	public JMethod getOnDestroyMethod()
 	{
 		return onDestroyMethod;
+	}
+
+	public JMethod getProcessArgsMethod()
+	{
+		return processArgsMethod;
+	}
+
+	public JMethod getOnActivityResultMethod()
+	{
+		if(null == onActivityResultMethod)
+		{
+			Parameter requestCode = new Parameter("requestCode", Primatives.newIntegerClass());
+			Parameter resultCode = new Parameter("resultCode", Primatives.newIntegerClass());
+			Parameter intent = new Parameter("intent", ClassFactory.getClass(AndroidClass.Intent));
+			
+			onActivityResultMethod = new JMethod(JActionScope.PUBLIC, "onActivityResult", 
+					requestCode, resultCode, intent);
+		}
+		return onActivityResultMethod;
 	}
 }
