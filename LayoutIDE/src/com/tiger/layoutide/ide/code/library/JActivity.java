@@ -40,7 +40,6 @@ public class JActivity extends JClass
 		onResumeMethod = initSuperMethod("onResume", new Parameter[]{});
 		
 		//加入onStop方法
-		
 		onStopMethod = initSuperMethod("onStop", new Parameter[]{});
 		
 		//加入onDestroy方法
@@ -82,6 +81,9 @@ public class JActivity extends JClass
 	@Override
 	protected JCodeBuilder appendMethods(JCodeBuilder jCodeBuilder)
 	{
+		onCreateMethod.getCodeBlock().addCode(processArgsMethod.getCallCode(new String[]{}));
+		onCreateMethod.getCodeBlock().addCode(setupViewsMethod.getCallCode(new String[]{}));
+		
 		//先写入基类的方法，再写入其他方法
 		onCreateMethod.setIndentation(jCodeBuilder.getIndentation());
 		jCodeBuilder.append(onCreateMethod.toString());
