@@ -30,6 +30,8 @@ public class JMethod extends JCodeModel
 	
 	private JCodeBlock jCodeBlock;
 	
+	private JClass returnType;
+	
 	public JMethod(String actionScope, String methodName, 
 			Parameter... parameters)
 	{
@@ -37,6 +39,7 @@ public class JMethod extends JCodeModel
 		this.methodName = methodName;
 		this.parameters = parameters;
 		annonations = new ArrayList<JAnnonation>();
+		returnType = Primatives.newVoidClass();
 	}
 	
 	public String getActionScope()
@@ -141,7 +144,7 @@ public class JMethod extends JCodeModel
 			jCodeBuilder.append(JKeyWords.FINAL);
 		}
 		
-		jCodeBuilder.append(methodName + JConstant.PARENTHESES_LEFT);
+		jCodeBuilder.append(returnType.toString() + methodName + JConstant.PARENTHESES_LEFT);
 		
 		//拼接所有参数
 		if(null != parameters)
@@ -217,6 +220,16 @@ public class JMethod extends JCodeModel
 	public void setCodeBlock(JCodeBlock jCodeBlock)
 	{
 		this.jCodeBlock = jCodeBlock;
+	}
+
+	public JClass getReturnType()
+	{
+		return returnType;
+	}
+
+	public void setReturnType(JClass returnType)
+	{
+		this.returnType = returnType;
 	}
 
 	public static class Parameter extends JCodeModel
