@@ -20,10 +20,10 @@ public enum AndroidClass
 	LinearLayout("LinearLayout","android.widget"),
 	RelativeLayout("RelativeLayout","android.widget"),
 	
-	SharedPreferences("SharedPreferences", "android.content");
+	SharedPreferences("SharedPreferences", "android.content"),
 	
-	
-	
+	MotionEvent("MotionEvent","android.view"),
+	AdapterView("AdapterView","android.widget");
 	
 	private final String classSimpleName;
 
