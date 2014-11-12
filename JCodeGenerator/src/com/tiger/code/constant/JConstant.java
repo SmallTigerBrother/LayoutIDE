@@ -27,4 +27,8 @@ public class JConstant
 	public static final String PARENTHESES_LEFT = "(";
 	
 	public static final String COLON = ":";
+	
+	public static final String ANGLE_BRACKET_LEFT = "<";
+	
+	public static final String ANGLE_BRACKET_RIGHT = ">";
 }
