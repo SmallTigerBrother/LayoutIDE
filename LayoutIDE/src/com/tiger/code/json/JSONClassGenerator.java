@@ -69,7 +69,7 @@ public class JSONClassGenerator
 		rootClassName = getJsonClassName(rootClassName);
 		
 		ArrayList<JClass> clazzes = new ArrayList<JClass>();
-		JClass jClass = new JClass(new JPackage(), JActionScope.PUBLIC, rootClassName, null);;
+		JClass jClass = new JClass(new JPackage(), rootClassName);;
 		
 		Set<Entry<String, JsonElement>> setEntries = jsonObject.entrySet();
 		Iterator<Map.Entry<String,JsonElement>> jsonIterator = setEntries.iterator();
