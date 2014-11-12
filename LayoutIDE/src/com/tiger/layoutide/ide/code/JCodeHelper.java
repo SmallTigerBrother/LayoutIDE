@@ -14,15 +14,18 @@ import com.mn.tiger.annonation.ViewById;
 import com.tiger.code.constant.JActionScope;
 import com.tiger.code.model.JAnnonation;
 import com.tiger.code.model.JAnnonation.ParamKeyValue;
+import com.tiger.code.model.JGeneric.WildCardType;
 import com.tiger.code.model.JClass;
 import com.tiger.code.model.JCodeBlock;
 import com.tiger.code.model.JField;
+import com.tiger.code.model.JGeneric;
 import com.tiger.code.model.JInterface;
 import com.tiger.code.model.JPackage;
 import com.tiger.layoutide.R;
 import com.tiger.layoutide.ide.code.library.AndroidClass;
 import com.tiger.layoutide.ide.code.library.AndroidInterface;
 import com.tiger.layoutide.ide.code.library.ClassFactory;
+import com.tiger.layoutide.ide.code.library.CustomAdapters;
 import com.tiger.layoutide.ide.code.library.InterfaceFactory;
 import com.tiger.layoutide.ide.code.library.JActivity;
 import com.tiger.layoutide.widget.IView;
@@ -34,7 +37,7 @@ public class JCodeHelper
 	
 	public static String outputInjectViewById(ViewGroup viewGroup)
 	{
-		JClass jClass = new JClass(null, JActionScope.DEFAULT, "ViewById", null);
+		JClass jClass = new JClass(null, "ViewById");
 		jClass.addFields(getInjectViewFields(viewGroup));
 		return jClass.toString();
 	}
@@ -46,8 +49,7 @@ public class JCodeHelper
 		if(!TextUtils.isEmpty(((IView)view).getIdName()))
 		{
 			JPackage jPackage = new JPackage(((IView)view).getPackageName());
-			JClass valueType = new JClass(jPackage, JActionScope.DEFAULT, 
-					((IView)view).getSimpleClassName(), null);
+			JClass valueType = new JClass(jPackage, ((IView)view).getSimpleClassName());
 			JField jField = new JField(JActionScope.PRIVATE, valueType, getViewName(
 					((IView)view).getIdName()));
 			JAnnonation jAnnonation = new JAnnonation(ViewById.class.getSimpleName());
@@ -84,7 +86,8 @@ public class JCodeHelper
 	public static String outputActivityCode(String activityName, ViewGroup viewGroup)
 	{
 		JClass superClaszz = ClassFactory.getClass(AndroidClass.Activity);
-		JClass jClazz = new JClass(null, JActionScope.PUBLIC, activityName, superClaszz);
+		JClass jClazz = new JClass(null, activityName);
+		jClazz.setSuperClass(superClaszz);
 		
 //		jClazz.addFields(getInjectViewFields(viewGroup));
 		
@@ -100,8 +103,7 @@ public class JCodeHelper
 	public static JActivity outputActivityCode(String activityName, ViewGroup viewGroup,
 			OutputParams params)
 	{
-		JClass superClaszz = ClassFactory.getClass(AndroidClass.Activity);
-		JActivity jActivity = new JActivity(null, JActionScope.PUBLIC, activityName, superClaszz);
+		JActivity jActivity = new JActivity(null, activityName);
 		
 		//实现接口
 		jActivity.implementInterfaces(params.getInterfaces());
@@ -130,6 +132,22 @@ public class JCodeHelper
 		}
 		
 		return jActivity;
+	}
+	
+	public JClass createNewViewHolder(String packageName, String simpleClazzName, String requestType)
+	{
+		JClass superClass = CustomAdapters.newQuizUpViewHolder();
+		JGeneric generic = new JGeneric();
+		WildCardType wildCardType = new WildCardType();
+		wildCardType.setName(requestType);
+		generic.addWildCard(wildCardType);
+		
+		superClass.setGeneric(generic);
+		
+		JClass viewholder = new JClass(new JPackage(packageName), simpleClazzName);
+		viewholder.setSuperClass(superClass);
+		
+		return viewholder;
 	}
 	
 }
