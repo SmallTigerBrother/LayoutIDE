@@ -142,7 +142,7 @@ public class JClass extends JCodeModel
 		//Æ´½Ó»ùÀà
 		if(null != superClazz)
 		{
-			jCodeBuilder.append(JIndentation.BETWEEN + JKeyWords.EXTENDS + 
+			jCodeBuilder.append(JKeyWords.EXTENDS + 
 					superClazz.getSimpleName());
 		}
 		
