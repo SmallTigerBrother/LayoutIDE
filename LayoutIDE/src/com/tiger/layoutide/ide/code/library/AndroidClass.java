@@ -23,7 +23,9 @@ public enum AndroidClass
 	SharedPreferences("SharedPreferences", "android.content"),
 	
 	MotionEvent("MotionEvent","android.view"),
-	AdapterView("AdapterView","android.widget");
+	AdapterView("AdapterView","android.widget"),
+	
+	LayoutInflater("LayoutInflater","android.view");
 	
 	private final String classSimpleName;
 
