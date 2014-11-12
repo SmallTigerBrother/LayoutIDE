@@ -88,12 +88,12 @@ public class JSwitch extends JCodeModel
 		this.caseValues = caseValues;
 	}
 
-	public JCodeBlock getjCodeBlock()
+	public JCodeBlock getCodeBlock()
 	{
 		return jCodeBlock;
 	}
 
-	public void setjCodeBlock(JCodeBlock jCodeBlock)
+	public void setCodeBlock(JCodeBlock jCodeBlock)
 	{
 		this.jCodeBlock = jCodeBlock;
 	}
