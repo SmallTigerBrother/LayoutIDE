@@ -52,12 +52,12 @@ public class JGeneric extends JCodeModel
 		
 		private String name = "?";
 
-		public JClass getSuperClazz()
+		public JClass getSuperClass()
 		{
 			return superClazz;
 		}
 
-		public void setSuperClazz(JClass superClazz)
+		public void setSuperClass(JClass superClazz)
 		{
 			this.superClazz = superClazz;
 		}
