@@ -11,6 +11,7 @@ import android.view.ViewGroup;
 import android.widget.EditText;
 
 import com.mn.tiger.annonation.ViewById;
+import com.mn.tiger.utility.ViewInjector;
 import com.tiger.code.constant.JActionScope;
 import com.tiger.code.model.JAnnonation;
 import com.tiger.code.model.JAnnonation.ParamKeyValue;
@@ -28,6 +29,7 @@ import com.tiger.layoutide.ide.code.library.ClassFactory;
 import com.tiger.layoutide.ide.code.library.CustomAdapters;
 import com.tiger.layoutide.ide.code.library.InterfaceFactory;
 import com.tiger.layoutide.ide.code.library.JActivity;
+import com.tiger.layoutide.ide.code.library.JFragment;
 import com.tiger.layoutide.widget.IView;
 
 public class JCodeHelper
@@ -111,12 +113,14 @@ public class JCodeHelper
 		//添加所有 注入的View声明
 		jActivity.addFields(getInjectViewFields(viewGroup));
 		
-		//setContentView
+		//setContentView、injectView
 		if(!TextUtils.isEmpty(params.getLayoutName()))
 		{
 			JCodeBlock onCreateCodeBlock = jActivity.getOnCreateMethod().getCodeBlock();
 			//添加setContentView方法
 			onCreateCodeBlock.addCode("setContentView(R.layout." + params.getLayoutName() +");");
+			//添加injectView方法
+			onCreateCodeBlock.addCode("ViewInjector.initInjectedView(this, this);");
 		}
 		
 		//注册事件总线
@@ -132,6 +136,27 @@ public class JCodeHelper
 		}
 		
 		return jActivity;
+	}
+	
+	public static JFragment outputFragmentCode(String packageName,String fragmentName,String layoutName, 
+			ViewGroup viewGroup, OutputParams outputParams)
+	{
+		JFragment jFragment = new JFragment(new JPackage(packageName), fragmentName);
+		
+		//实现接口
+		jFragment.implementInterfaces(outputParams.getInterfaces());
+		
+		//添加所有注入的View的声明
+		jFragment.addFields(getInjectViewFields(viewGroup));
+		
+		//添加主视图
+		JField mainView = new JField(JActionScope.PRIVATE, ClassFactory.getClass(AndroidClass.View), "mainView");
+		jFragment.addField(mainView);
+		
+		//onCreateView添加视图
+		JCodeBlock onCreateViewBlock = jFragment.getOnCreateViewMethod().getCodeBlock();
+		
+		
 	}
 	
 	public JClass createNewViewHolder(String packageName, String simpleClazzName, String requestType)
