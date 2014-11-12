@@ -108,4 +108,19 @@ public class Primatives
 			}
 		};
 	}
+	
+	public static JClass newGenericClass(final String name)
+	{
+		JClass jClass = new JClass(null, name)
+		{
+			@Override
+			public JCodeBuilder write2Code(JCodeBuilder jCodeBuilder)
+			{
+				jCodeBuilder.append(name);
+				return jCodeBuilder;
+			}
+		};
+		
+		return jClass;
+	}
 }
