@@ -23,4 +23,10 @@ public class JKeyWords
 	public static final String DEFAULT = "default";
 	
 	public static final String ABSTRACT = "abstract ";
+	
+	public static final String IF = "if";
+	
+	public static final String ELSE = "else";
+	
+	public static final String ELSE_IF = "else if";
 }
