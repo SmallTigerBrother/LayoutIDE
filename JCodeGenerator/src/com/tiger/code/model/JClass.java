@@ -285,6 +285,11 @@ public class JClass extends JCodeModel
 		@Override
 		public boolean add(JImport object)
 		{
+			if(null == object.getPackage())
+			{
+				return true;
+			}
+			
 			for(int i = 0; i < this.size(); i++)
 			{
 				if(this.get(i).toString().equals(object.toString()))
