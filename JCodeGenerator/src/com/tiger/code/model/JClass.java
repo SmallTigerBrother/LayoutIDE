@@ -30,6 +30,8 @@ public class JClass extends JCodeModel
 	
 	private ArrayList<JMethod> methods;
 	
+	private JGeneric generic;
+	
 	public JClass(JPackage jPackage, String simpleClazzName)
 	{
 		if(null != jPackage)
@@ -139,6 +141,11 @@ public class JClass extends JCodeModel
 		jCodeBuilder.append(actionScope + MODEL_NAME + 
 				JIndentation.BETWEEN + simpleName);
 		
+		if(null != generic)
+		{
+			jCodeBuilder.append(generic.toString());
+		}
+		
 		//Æ´½Ó»ùÀà
 		if(null != superClazz)
 		{
@@ -211,11 +218,19 @@ public class JClass extends JCodeModel
 
 	public String getSimpleName()
 	{
+		if(null != generic)
+		{
+			return simpleName + generic.toString();
+		}
 		return simpleName;
 	}
 	
 	public String getClassName()
 	{
+		if(null != generic)
+		{
+			return jPackage.getPackageName() + JConstant.POINT + simpleName + generic.toString();
+		}
 		return jPackage.getPackageName() + JConstant.POINT + simpleName;
 	}
 
@@ -234,6 +249,16 @@ public class JClass extends JCodeModel
 	public ArrayList<JInterface> getImplementInterfaces()
 	{
 		return implementInterfaces;
+	}
+	
+	public JGeneric getGeneric()
+	{
+		return generic;
+	}
+	
+	public void setGeneric(JGeneric generic)
+	{
+		this.generic = generic;
 	}
 	
 	public static class ImportList extends ArrayList<JImport>
