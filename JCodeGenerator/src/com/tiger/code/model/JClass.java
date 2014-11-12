@@ -259,6 +259,13 @@ public class JClass extends JCodeModel
 	public void setGeneric(JGeneric generic)
 	{
 		this.generic = generic;
+		for(int i = 0; i < generic.getWildCards().size(); i++)
+		{
+			if(null != generic.getWildCards().get(i).getSuperClass())
+			{
+				imports.add(new JImport(generic.getWildCards().get(i).getSuperClass()));
+			}
+		}
 	}
 	
 	public static class ImportList extends ArrayList<JImport>
