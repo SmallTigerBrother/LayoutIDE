@@ -1,10 +1,14 @@
 package com.tiger.layoutide.ide.code.library;
 
+import android.view.MotionEvent;
+
+import com.tiger.code.model.JCodeBlock;
 import com.tiger.code.model.JInterface;
 import com.tiger.code.model.JMethod;
 import com.tiger.code.model.JMethod.Parameter;
 import com.tiger.code.model.JPackage;
 import com.tiger.code.model.Primatives;
+import com.tiger.code.operator.JSwitch;
 
 public class InterfaceFactory
 {
@@ -45,6 +49,18 @@ public class InterfaceFactory
 			case OnTouchListener:
 				JMethod onTouch = new JMethod("onTouch");
 				onTouch.setParameters(viewParam, motionEventParam);
+				
+				JSwitch jSwitch = new JSwitch("event.getAction()");
+				jSwitch.addCase("MotionEvent.ACTION_DOWN");
+				jSwitch.addCase("MotionEvent.ACTION_MOVE");
+				jSwitch.addCase("MotionEvent.ACTION_UP");
+				jSwitch.addCase("MotionEvent.ACTION_CANCEL");
+				
+				JCodeBlock jCodeBlock = new JCodeBlock();
+				jCodeBlock.addCode(jSwitch);
+				jCodeBlock.addCode("\n + return false");
+				onTouch.setCodeBlock(jCodeBlock);
+				
 				jInterface.addMethod(onTouch);
 				break;
 				
