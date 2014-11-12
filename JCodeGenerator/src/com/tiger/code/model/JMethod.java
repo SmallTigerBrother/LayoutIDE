@@ -32,12 +32,10 @@ public class JMethod extends JCodeModel
 	
 	private JClass returnType;
 	
-	public JMethod(String actionScope, String methodName, 
-			Parameter... parameters)
+	public JMethod(String actionScope, String methodName)
 	{
 		this.actionScope = actionScope;
 		this.methodName = methodName;
-		this.parameters = parameters;
 		annonations = new ArrayList<JAnnonation>();
 		returnType = Primatives.newVoidClass();
 	}
@@ -85,6 +83,11 @@ public class JMethod extends JCodeModel
 	public void setForInterface(boolean isForInterface)
 	{
 		this.isForInterface = isForInterface;
+	}
+	
+	public void setParameters(Parameter... parameters)
+	{
+		this.parameters = parameters;
 	}
 
 	public Parameter[] getParameters()

@@ -17,7 +17,7 @@ public class JInterface extends JCodeModel
 	
 	private JPackage jPackage = new JPackage();
 	
-	private String actionScope = JActionScope.DEFAULT;
+	private String actionScope = JActionScope.PUBLIC;
 	
 	private ImportList imports;
 	
@@ -25,29 +25,25 @@ public class JInterface extends JCodeModel
 	
 	private String simpleName = "JClass";
 	
-	public JInterface(JPackage jPackage, String actionScope, String simpleName, 
-			JInterface superInterface)
+	public JInterface(JPackage jPackage, String simpleName)
 	{
 		if(null != jPackage)
 		{
 			this.jPackage = jPackage;
 		}
 		
-		if(null != actionScope)
+		if(null == simpleName)
 		{
-			this.actionScope = actionScope;
+			throw new NullPointerException("simpleName can not be null");
 		}
 		
-		if(null != simpleName)
-		{
-			this.simpleName = simpleName;
-		}
-		
-		this.superInterface = superInterface;
+		this.simpleName = simpleName;
 		
 		imports = new ImportList();
 		methods = new ArrayList<JMethod>();
 	}
+	
+	
 
 	public String getInterfaceName()
 	{
@@ -57,6 +53,11 @@ public class JInterface extends JCodeModel
 	public JPackage getjPackage()
 	{
 		return jPackage;
+	}
+	
+	public void setActionScope(String actionScope)
+	{
+		this.actionScope = actionScope;
 	}
 
 	public String getActionScope()
@@ -90,6 +91,11 @@ public class JInterface extends JCodeModel
 	public ArrayList<JImport> getImports()
 	{
 		return imports;
+	}
+	
+	public void setSuperInterface(JInterface superInterface)
+	{
+		this.superInterface = superInterface;
 	}
 
 	public JInterface getSuperInterface()

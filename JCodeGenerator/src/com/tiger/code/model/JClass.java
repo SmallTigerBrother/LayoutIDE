@@ -30,8 +30,7 @@ public class JClass extends JCodeModel
 	
 	private ArrayList<JMethod> methods;
 	
-	public JClass(JPackage jPackage, String actionScope, String simpleClazzName, 
-			JClass superClaszz)
+	public JClass(JPackage jPackage, String actionScope, String simpleClazzName)
 	{
 		if(null != jPackage)
 		{
@@ -49,13 +48,6 @@ public class JClass extends JCodeModel
 		}
 		
 		imports = new ImportList();
-		if(null != superClaszz)
-		{
-			this.superClazz = superClaszz;
-			//import基类
-			imports.add(new JImport(superClaszz));
-		}
-		
 		implementInterfaces = new ArrayList<JInterface>();
 		fields = new ArrayList<JField>();
 		methods = new ArrayList<JMethod>();
@@ -73,6 +65,14 @@ public class JClass extends JCodeModel
 			jMethod = jInterface.getMethods().get(i);
 			jMethod.addAnnonation(JAnnonation.createOverrideAnnonation());
 			addMethod(jMethod);
+		}
+	}
+	
+	public void implementInterfaces(List<JInterface> jInterfaces)
+	{
+		for(int i = 0; i < jInterfaces.size(); i++)
+		{
+			implementInterface(jInterfaces.get(i));
 		}
 	}
 	
@@ -227,6 +227,13 @@ public class JClass extends JCodeModel
 		return jPackage.getPackageName() + JConstant.POINT + simpleName;
 	}
 
+	public void setSuperClazz(JClass superClazz)
+	{
+		this.superClazz = superClazz;
+		//import基类
+		imports.add(new JImport(superClazz));
+	}
+	
 	public JClass getSuperClazz()
 	{
 		return superClazz;
