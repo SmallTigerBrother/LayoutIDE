@@ -32,12 +32,16 @@ public class JMethod extends JCodeModel
 	
 	private JClass returnType;
 	
-	public JMethod(String actionScope, String methodName)
+	public JMethod(String methodName)
 	{
-		this.actionScope = actionScope;
 		this.methodName = methodName;
 		annonations = new ArrayList<JAnnonation>();
 		returnType = Primatives.newVoidClass();
+	}
+	
+	public void setActionScope(String actionScope)
+	{
+		this.actionScope = actionScope;
 	}
 	
 	public String getActionScope()
