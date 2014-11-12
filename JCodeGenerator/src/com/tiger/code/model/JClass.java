@@ -14,7 +14,7 @@ public class JClass extends JCodeModel
 {
 	public static final String MODEL_NAME = "class";
 	
-	private JPackage jPackage = new JPackage();
+	private JPackage jPackage;
 	
 	private String simpleName = "JClass";
 	
@@ -34,10 +34,7 @@ public class JClass extends JCodeModel
 	
 	public JClass(JPackage jPackage, String simpleClazzName)
 	{
-		if(null != jPackage)
-		{
-			this.jPackage = jPackage;
-		}
+		this.jPackage = jPackage;
 		
 		this.simpleName = simpleClazzName;
 		
@@ -128,7 +125,10 @@ public class JClass extends JCodeModel
 		jCodeBuilder.setIndentation(JIndentation.FIELD);
 		
 		//拼接包名
-		jCodeBuilder.append(jPackage.toString());
+		if(null != jPackage)
+		{
+			jCodeBuilder.append(jPackage.toString());
+		}
 		
 		//拼接import
 		for (int i = 0; i < imports.size(); i++)
@@ -227,11 +227,21 @@ public class JClass extends JCodeModel
 	
 	public String getClassName()
 	{
+		String className;
+		if(null != jPackage)
+		{
+			className = jPackage.getPackageName() + JConstant.POINT + simpleName;
+		}
+		else
+		{
+			className = simpleName;
+		}
+		
 		if(null != generic)
 		{
-			return jPackage.getPackageName() + JConstant.POINT + simpleName + generic.toString();
+			return className + generic.toString();
 		}
-		return jPackage.getPackageName() + JConstant.POINT + simpleName;
+		return className;
 	}
 
 	public void setSuperClass(JClass superClazz)
