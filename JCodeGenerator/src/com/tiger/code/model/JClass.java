@@ -149,7 +149,7 @@ public class JClass extends JCodeModel
 		//拼接实现的接口
 		if(implementInterfaces.size() > 0)
 		{
-			jCodeBuilder.append(JIndentation.BETWEEN + JKeyWords.IMPLEMENTS);
+			jCodeBuilder.append(JKeyWords.IMPLEMENTS);
 			for(int i = 0; i < implementInterfaces.size(); i++)
 			{
 				jCodeBuilder.append(implementInterfaces.get(i).getSimpleName());
