@@ -18,7 +18,7 @@ public class JClass extends JCodeModel
 	
 	private String simpleName = "JClass";
 	
-	private String actionScope = JActionScope.DEFAULT;
+	private String actionScope = JActionScope.PUBLIC;
 	
 	private JClass superClazz;
 	
@@ -30,22 +30,14 @@ public class JClass extends JCodeModel
 	
 	private ArrayList<JMethod> methods;
 	
-	public JClass(JPackage jPackage, String actionScope, String simpleClazzName)
+	public JClass(JPackage jPackage, String simpleClazzName)
 	{
 		if(null != jPackage)
 		{
 			this.jPackage = jPackage;
 		}
 		
-		if(null != actionScope)
-		{
-			this.actionScope = actionScope;
-		}
-		
-		if(null != simpleClazzName)
-		{
-			this.simpleName = simpleClazzName;
-		}
+		this.simpleName = simpleClazzName;
 		
 		imports = new ImportList();
 		implementInterfaces = new ArrayList<JInterface>();

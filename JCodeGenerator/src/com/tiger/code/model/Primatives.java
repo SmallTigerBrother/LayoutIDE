@@ -20,7 +20,7 @@ public class Primatives
 	
 	public static JClass newIntegerClass()
 	{
-		return new JClass(null, null, "int")
+		return new JClass(null, "int")
 		{
 			@Override
 			public JCodeBuilder write2Code(JCodeBuilder jCodeBuilder)
@@ -33,7 +33,7 @@ public class Primatives
 	
 	public static JClass newLongClass()
 	{
-		return new JClass(null, null, "long")
+		return new JClass(null, "long")
 		{
 			@Override
 			public JCodeBuilder write2Code(JCodeBuilder jCodeBuilder)
@@ -46,7 +46,7 @@ public class Primatives
 	
 	public static JClass newFloatClass()
 	{
-		return new JClass(null, null, "float")
+		return new JClass(null, "float")
 		{
 			@Override
 			public JCodeBuilder write2Code(JCodeBuilder jCodeBuilder)
@@ -59,7 +59,7 @@ public class Primatives
 	
 	public static JClass newDoubleClass()
 	{
-		return new JClass(null, null, "double")
+		return new JClass(null, "double")
 		{
 			@Override
 			public JCodeBuilder write2Code(JCodeBuilder jCodeBuilder)
@@ -72,7 +72,7 @@ public class Primatives
 	
 	public static JClass newBooleanClass()
 	{
-		return new JClass(null, null, "boolean")
+		return new JClass(null, "boolean")
 		{
 			@Override
 			public JCodeBuilder write2Code(JCodeBuilder jCodeBuilder)
@@ -85,7 +85,7 @@ public class Primatives
 	
 	public static JClass newStringClass()
 	{
-		return new JClass(null, null, "String")
+		return new JClass(null, "String")
 		{
 			@Override
 			public JCodeBuilder write2Code(JCodeBuilder jCodeBuilder)
@@ -98,7 +98,7 @@ public class Primatives
 	
 	public static JClass newVoidClass()
 	{
-		return new JClass(null, null, "void")
+		return new JClass(null, "void")
 		{
 			@Override
 			public JCodeBuilder write2Code(JCodeBuilder jCodeBuilder)
