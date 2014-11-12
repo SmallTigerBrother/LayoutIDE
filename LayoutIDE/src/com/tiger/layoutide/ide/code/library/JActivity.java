@@ -51,6 +51,16 @@ public class JActivity extends JClass
 		processArgsMethod = initProcessArgsMethod();
 		
 		setupViewsMethod = initSetupViewsMethod();
+		
+		onCreateMethod.getCodeBlock().addCode(processArgsMethod.getCallCode(new String[]{}));
+		onCreateMethod.getCodeBlock().addCode(setupViewsMethod.getCallCode(new String[]{}));
+		
+		this.addMethod(onCreateMethod);
+		this.addMethod(processArgsMethod);
+		this.addMethod(setupViewsMethod);
+		this.addMethod(onResumeMethod);
+		this.addMethod(onStopMethod);
+		this.addMethod(onDestroyMethod);
 	}
 	
 	private JMethod initSuperMethod(String methodName, Parameter... parameters)
@@ -82,40 +92,6 @@ public class JActivity extends JClass
 		method.setActionScope(JActionScope.PRIVATE);
 		method.setCodeBlock(new JCodeBlock());
 		return method;
-	}
-	
-	@Override
-	protected JCodeBuilder appendMethods(JCodeBuilder jCodeBuilder)
-	{
-		onCreateMethod.getCodeBlock().addCode(processArgsMethod.getCallCode(new String[]{}));
-		onCreateMethod.getCodeBlock().addCode(setupViewsMethod.getCallCode(new String[]{}));
-		
-		//先写入基类的方法，再写入其他方法
-		onCreateMethod.setIndentation(jCodeBuilder.getIndentation());
-		jCodeBuilder.append(onCreateMethod.toString());
-		
-		processArgsMethod.setIndentation(jCodeBuilder.getIndentation());
-		jCodeBuilder.append(onCreateMethod.toString());
-		
-		setupViewsMethod.setIndentation(jCodeBuilder.getIndentation());
-		jCodeBuilder.append(setupViewsMethod.toString());
-		
-		onResumeMethod.setIndentation(jCodeBuilder.getIndentation());
-		jCodeBuilder.append(onResumeMethod.toString());
-		
-		if(null != onActivityResultMethod)
-		{
-			onActivityResultMethod.setIndentation(jCodeBuilder.getIndentation());
-			jCodeBuilder.append(onActivityResultMethod.toString());
-		}
-		
-		onStopMethod.setIndentation(jCodeBuilder.getIndentation());
-		jCodeBuilder.append(onStopMethod.toString());
-		
-		onDestroyMethod.setIndentation(jCodeBuilder.getIndentation());
-		jCodeBuilder.append(onDestroyMethod.toString());
-		
-		return super.appendMethods(jCodeBuilder);
 	}
 	
 	public JMethod getOnCreateMethod()
@@ -153,6 +129,8 @@ public class JActivity extends JClass
 			
 			onActivityResultMethod = new JMethod("onActivityResult");
 			onActivityResultMethod.setParameters(requestCode, resultCode, intent);
+			
+			this.addMethod(onActivityResultMethod);
 		}
 		return onActivityResultMethod;
 	}
