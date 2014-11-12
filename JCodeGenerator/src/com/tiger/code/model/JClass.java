@@ -32,6 +32,8 @@ public class JClass extends JCodeModel
 	
 	private JGeneric generic;
 	
+	private boolean isAbstract = false;
+	
 	public JClass(JPackage jPackage, String simpleClazzName)
 	{
 		this.jPackage = jPackage;
@@ -206,6 +208,11 @@ public class JClass extends JCodeModel
 		return jCodeBuilder;
 	}
 	
+	public ArrayList<JMethod> getMethods()
+	{
+		return methods;
+	}
+	
 	public JPackage getPackage()
 	{
 		return jPackage;
@@ -249,6 +256,24 @@ public class JClass extends JCodeModel
 		this.superClazz = superClazz;
 		//import基类
 		imports.add(new JImport(superClazz));
+		
+		if(superClazz.isAbstract())
+		{
+			//写入abstract方法
+			ArrayList<JMethod> jMethods = superClazz.getMethods();
+			JMethod method;
+			for(int i = 0; i < jMethods.size(); i++)
+			{
+				if(jMethods.get(i).isAbstract())
+				{
+					method = jMethods.get(i);
+					method.setAbstract(false);
+					this.methods.add(method);
+				}
+			}
+		}
+		
+		//TODO 写入未实现的接口方法
 	}
 	
 	public JClass getSuperClazz()
@@ -278,6 +303,16 @@ public class JClass extends JCodeModel
 		}
 	}
 	
+	public boolean isAbstract()
+	{
+		return isAbstract;
+	}
+
+	public void setAbstract(boolean isAbstract)
+	{
+		this.isAbstract = isAbstract;
+	}
+
 	public static class ImportList extends ArrayList<JImport>
 	{
 		private static final long serialVersionUID = 1L;
