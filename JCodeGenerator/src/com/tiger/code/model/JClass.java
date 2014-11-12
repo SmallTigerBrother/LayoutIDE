@@ -227,7 +227,7 @@ public class JClass extends JCodeModel
 		return jPackage.getPackageName() + JConstant.POINT + simpleName;
 	}
 
-	public void setSuperClazz(JClass superClazz)
+	public void setSuperClass(JClass superClazz)
 	{
 		this.superClazz = superClazz;
 		//import»ùÀà
