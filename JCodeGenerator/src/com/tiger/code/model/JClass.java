@@ -206,7 +206,7 @@ public class JClass extends JCodeModel
 		return jCodeBuilder;
 	}
 	
-	public JPackage getjPackage()
+	public JPackage getPackage()
 	{
 		return jPackage;
 	}

@@ -50,7 +50,7 @@ public class JInterface extends JCodeModel
 		return jPackage.getPackageName() + JConstant.POINT + simpleName;
 	}
 
-	public JPackage getjPackage()
+	public JPackage getPackage()
 	{
 		return jPackage;
 	}
