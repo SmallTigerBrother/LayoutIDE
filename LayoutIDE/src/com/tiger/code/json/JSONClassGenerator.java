@@ -19,7 +19,6 @@ import com.tiger.code.constant.JActionScope;
 import com.tiger.code.model.JArray;
 import com.tiger.code.model.JClass;
 import com.tiger.code.model.JField;
-import com.tiger.code.model.JPackage;
 import com.tiger.code.model.Primatives;
 
 public class JSONClassGenerator
@@ -69,7 +68,7 @@ public class JSONClassGenerator
 		rootClassName = getJsonClassName(rootClassName);
 		
 		ArrayList<JClass> clazzes = new ArrayList<JClass>();
-		JClass jClass = new JClass(new JPackage(), rootClassName);;
+		JClass jClass = new JClass("com.tiger.code", rootClassName);;
 		
 		Set<Entry<String, JsonElement>> setEntries = jsonObject.entrySet();
 		Iterator<Map.Entry<String,JsonElement>> jsonIterator = setEntries.iterator();
