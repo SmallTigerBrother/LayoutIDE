@@ -20,6 +20,21 @@ public class JImport extends JCodeModel
 		this.jInterface = jInterface;
 	}
 	
+	public JPackage getPackage()
+	{
+		if(null != clazz)
+		{
+			return clazz.getPackage();
+		}
+		
+		if(null != jInterface)
+		{
+			return jInterface.getPackage();
+		}
+		
+		return null;
+	}
+	
 	@Override
 	public JCodeBuilder write2Code(JCodeBuilder jCodeBuilder)
 	{
