@@ -1,7 +1,6 @@
 package com.tiger.layoutide.ide.code.library;
 
 import com.tiger.code.model.JClass;
-import com.tiger.code.model.JInterface;
 import com.tiger.code.model.JMethod;
 import com.tiger.code.model.JMethod.Parameter;
 import com.tiger.code.model.Primatives;
@@ -40,18 +39,9 @@ public class CustomAdapters
 		return viewHolder;
 	}
 	
-	public static JInterface newQuizupListAdapter()
+	public static JClass newQuizupListAdapter()
 	{
-		JInterface xlistviewListener = new JInterface("com.medialab.ui.xlistview", 
-				"IXListViewListener");
-		
-		JMethod onRefresh = new JMethod("onRefresh");
-		xlistviewListener.addMethod(onRefresh);
-		
-		JMethod onLoadMore = new JMethod("onLoadMore");
-		xlistviewListener.addMethod(onLoadMore);
-		
-		return xlistviewListener;
+		return null;
 	}
 	
 }
