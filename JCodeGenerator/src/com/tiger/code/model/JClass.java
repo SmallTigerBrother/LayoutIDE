@@ -34,9 +34,9 @@ public class JClass extends JCodeModel
 	
 	private boolean isAbstract = false;
 	
-	public JClass(JPackage jPackage, String simpleClazzName)
+	public JClass(String packageName, String simpleClazzName)
 	{
-		this.jPackage = jPackage;
+		this.jPackage = new JPackage(packageName);
 		
 		this.simpleName = simpleClazzName;
 		
