@@ -25,12 +25,9 @@ public class JInterface extends JCodeModel
 	
 	private String simpleName = "JClass";
 	
-	public JInterface(JPackage jPackage, String simpleName)
+	public JInterface(String packageName, String simpleName)
 	{
-		if(null != jPackage)
-		{
-			this.jPackage = jPackage;
-		}
+		this.jPackage = new JPackage(packageName);
 		
 		if(null == simpleName)
 		{
