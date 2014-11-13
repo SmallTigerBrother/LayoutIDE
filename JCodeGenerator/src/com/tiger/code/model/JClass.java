@@ -312,6 +312,30 @@ public class JClass extends JCodeModel
 	{
 		this.isAbstract = isAbstract;
 	}
+	
+	public ArrayList<JField> findFieldsByType(JClass type)
+	{
+		ArrayList<JField> results = new ArrayList<JField>();
+		for (int i = 0; i < fields.size(); i++)
+		{
+			if(fields.get(i).getValueType().isSampeType(type))
+			{
+				results.add(fields.get(i));
+			}
+		}
+		
+		return results;
+	}
+	
+	public boolean isSampeType(JClass jClass)
+	{
+		if(this.getClassName().equals(jClass.getClassName()))
+		{
+			return true;
+		}
+		
+		return false;
+	}
 
 	public static class ImportList extends ArrayList<JImport>
 	{
