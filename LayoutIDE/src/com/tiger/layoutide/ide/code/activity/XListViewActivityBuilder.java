@@ -31,6 +31,7 @@ public class XListViewActivityBuilder extends JActivityBuilder
 	{
 		enablePullLoad = enable;
 	}
+	
 	@Override
 	public void buildOnCreate(JActivity activity, JCodeBlock onCreateBlock, String layoutName)
 	{
@@ -87,6 +88,11 @@ public class XListViewActivityBuilder extends JActivityBuilder
 	public JMethod buildOnRequestSuccess(JActivity activity)
 	{
 		JMethod requestListData = new JMethod("requestListData");
+		JCodeBlock requestDataCode = new JCodeBlock();
+		//TODO 添加网络请求方法
+//		requestDataCode.addCode(codeString);
+		
+		requestListData.setCodeBlock(requestDataCode);
 		activity.addMethod(requestListData);
 		
 		return null;
