@@ -3,16 +3,15 @@ package com.tiger.layoutide.ide.code.library;
 import com.tiger.code.model.JClass;
 import com.tiger.code.model.JInterface;
 import com.tiger.code.model.JMethod;
-import com.tiger.code.model.JPackage;
-import com.tiger.code.model.Primatives;
 import com.tiger.code.model.JMethod.Parameter;
+import com.tiger.code.model.Primatives;
 
 public class CustomAdapters
 {
 	public static JClass newQuizUpViewHolder()
 	{
-		JPackage jPackage = new JPackage("com.medialab.quizup.adapter");
-		JClass viewHolder = new JClass(jPackage, "QuizUpBaseViewHolder");
+		JClass viewHolder = new JClass("com.medialab.quizup.adapter", 
+				"QuizUpBaseViewHolder");
 		
 		//–¥»ÎonInit∑Ω∑®
 		Parameter itemView = new Parameter("itemView", ClassFactory.getClass(AndroidClass.View));
@@ -43,8 +42,8 @@ public class CustomAdapters
 	
 	public static JInterface newQuizupListAdapter()
 	{
-		JPackage jPackage = new JPackage("com.medialab.ui.xlistview");
-		JInterface xlistviewListener = new JInterface(jPackage, "IXListViewListener");
+		JInterface xlistviewListener = new JInterface("com.medialab.ui.xlistview", 
+				"IXListViewListener");
 		
 		JMethod onRefresh = new JMethod("onRefresh");
 		xlistviewListener.addMethod(onRefresh);

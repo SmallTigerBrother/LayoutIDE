@@ -11,7 +11,6 @@ import android.view.ViewGroup;
 import android.widget.EditText;
 
 import com.mn.tiger.annonation.ViewById;
-import com.mn.tiger.utility.ViewInjector;
 import com.tiger.code.constant.JActionScope;
 import com.tiger.code.model.JAnnonation;
 import com.tiger.code.model.JAnnonation.ParamKeyValue;
@@ -29,7 +28,6 @@ import com.tiger.layoutide.ide.code.library.ClassFactory;
 import com.tiger.layoutide.ide.code.library.CustomAdapters;
 import com.tiger.layoutide.ide.code.library.InterfaceFactory;
 import com.tiger.layoutide.ide.code.library.JActivity;
-import com.tiger.layoutide.ide.code.library.JFragment;
 import com.tiger.layoutide.widget.IView;
 
 public class JCodeHelper
@@ -50,8 +48,8 @@ public class JCodeHelper
 		
 		if(!TextUtils.isEmpty(((IView)view).getIdName()))
 		{
-			JPackage jPackage = new JPackage(((IView)view).getPackageName());
-			JClass valueType = new JClass(jPackage, ((IView)view).getSimpleClassName());
+			JClass valueType = new JClass(((IView)view).getPackageName(), 
+					((IView)view).getSimpleClassName());
 			JField jField = new JField(JActionScope.PRIVATE, valueType, getViewName(
 					((IView)view).getIdName()));
 			JAnnonation jAnnonation = new JAnnonation(ViewById.class.getSimpleName());
@@ -107,56 +105,20 @@ public class JCodeHelper
 	{
 		JActivity jActivity = new JActivity(null, activityName);
 		
-		//实现接口
-		jActivity.implementInterfaces(params.getInterfaces());
-		
-		//添加所有 注入的View声明
-		jActivity.addFields(getInjectViewFields(viewGroup));
-		
-		//setContentView、injectView
-		if(!TextUtils.isEmpty(params.getLayoutName()))
-		{
-			JCodeBlock onCreateCodeBlock = jActivity.getOnCreateMethod().getCodeBlock();
-			//添加setContentView方法
-			onCreateCodeBlock.addCode("setContentView(R.layout." + params.getLayoutName() +");");
-			//添加injectView方法
-			onCreateCodeBlock.addCode("ViewInjector.initInjectedView(this, this);");
-		}
-		
 		//注册事件总线
 		if(params.isRegisterEventBus())
 		{
-			//注册事件总线
-			JCodeBlock onCreateCodeBlock = jActivity.getOnCreateMethod().getCodeBlock();
-			onCreateCodeBlock.addCode("QuizUpApplication.getBus().register(this);");
-			
-			//取消注册事件总线
-			JCodeBlock onDestroyCodeBlock = jActivity.getOnDestroyMethod().getCodeBlock();
-			onDestroyCodeBlock.addCode("QuizUpApplication.getBus().unregister(this);");
+			//装饰一下
 		}
 		
-		return jActivity;
-	}
-	
-	public static JFragment outputFragmentCode(String packageName,String fragmentName,String layoutName, 
-			ViewGroup viewGroup, OutputParams outputParams)
-	{
-		JFragment jFragment = new JFragment(new JPackage(packageName), fragmentName);
 		
 		//实现接口
-		jFragment.implementInterfaces(outputParams.getInterfaces());
+				jActivity.implementInterfaces(params.getInterfaces());
+				
+				//添加所有 注入的View声明
+				jActivity.addFields(getInjectViewFields(viewGroup));
 		
-		//添加所有注入的View的声明
-		jFragment.addFields(getInjectViewFields(viewGroup));
-		
-		//添加主视图
-		JField mainView = new JField(JActionScope.PRIVATE, ClassFactory.getClass(AndroidClass.View), "mainView");
-		jFragment.addField(mainView);
-		
-		//onCreateView添加视图
-		JCodeBlock onCreateViewBlock = jFragment.getOnCreateViewMethod().getCodeBlock();
-		
-		
+		return jActivity;
 	}
 	
 	public JClass createNewViewHolder(String packageName, String simpleClazzName, String requestType)
@@ -169,7 +131,7 @@ public class JCodeHelper
 		
 		superClass.setGeneric(generic);
 		
-		JClass viewholder = new JClass(new JPackage(packageName), simpleClazzName);
+		JClass viewholder = new JClass(packageName, simpleClazzName);
 		viewholder.setSuperClass(superClass);
 		
 		return viewholder;

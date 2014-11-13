@@ -4,15 +4,14 @@ import com.tiger.code.model.JClass;
 import com.tiger.code.model.JCodeBlock;
 import com.tiger.code.model.JMethod;
 import com.tiger.code.model.JMethod.Parameter;
-import com.tiger.code.model.JPackage;
 
 public class JFragment extends JClass
 {
 	private JMethod onCreateViewMethod;
 	
-	public JFragment(JPackage jPackage,String simpleClazzName)
+	public JFragment(String packageName, String simpleClazzName)
 	{
-		super(jPackage, simpleClazzName);
+		super(packageName, simpleClazzName);
 		
 		JClass superClass = ClassFactory.getClass(AndroidClass.Fragment);
 		this.setSuperClass(superClass);

@@ -1,12 +1,9 @@
 package com.tiger.layoutide.ide.code.library;
 
-import android.view.MotionEvent;
-
 import com.tiger.code.model.JCodeBlock;
 import com.tiger.code.model.JInterface;
 import com.tiger.code.model.JMethod;
 import com.tiger.code.model.JMethod.Parameter;
-import com.tiger.code.model.JPackage;
 import com.tiger.code.model.Primatives;
 import com.tiger.code.operator.JSwitch;
 
@@ -14,8 +11,7 @@ public class InterfaceFactory
 {
 	public static JInterface createInterface(AndroidInterface classDeclare)
 	{
-		JPackage jPackage = new JPackage((classDeclare).getPackageName());
-		JInterface jInterface = new JInterface(jPackage,
+		JInterface jInterface = new JInterface((classDeclare).getPackageName(),
 				(classDeclare).getSimpleName());
 		jInterface = addMethods(jInterface, classDeclare);
 		return jInterface;
