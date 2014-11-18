@@ -22,7 +22,7 @@ public class XmlOutputConstant
 	
 	public static final String LAYOUT_MARGIN_BOTTOM = "android:layout_marginBottom=\"%1$sdp\"";
 	
-	public static final String LAYOUT_GRAVITY = "android:layout_gravity=\"#%1$s\"";
+	public static final String LAYOUT_GRAVITY = "android:layout_gravity=\"%1$s\"";
 	
 	public static final String WRAP_CONTENT = "wrap_content";
 	
