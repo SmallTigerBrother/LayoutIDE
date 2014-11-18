@@ -95,81 +95,7 @@ public class ViewTreeNodeImp implements IViewTreeNode
 		
 		/********************************* RelativeLayout *************************************/
 		
-		if(!TextUtils.isEmpty(view.getAlignParentLeft()))
-		{
-			propertiesStrBuilder.append(String.format(XmlOutputConstant.ALIGN_PARENT_LEFT, view.getAlignParentLeft()) + "\n");
-		}
-		
-		if(!TextUtils.isEmpty(view.getAlignParentRight()))
-		{
-			propertiesStrBuilder.append(String.format(XmlOutputConstant.ALIGN_PARENT_RIGHT, view.getAlignParentRight()) + "\n");
-		}
-		
-		if(!TextUtils.isEmpty(view.getAlignParentTop()))
-		{
-			propertiesStrBuilder.append(String.format(XmlOutputConstant.ALIGN_PARENT_TOP, view.getAlignParentTop()) + "\n");
-		}
-		
-		if(!TextUtils.isEmpty(view.getAlignParentBottom()))
-		{
-			propertiesStrBuilder.append(String.format(XmlOutputConstant.ALIGN_PARENT_BOTTOM, view.getAlignParentBottom()) + "\n");
-		}
-		
-		if(!TextUtils.isEmpty(view.getToLeftOf()))
-		{
-			propertiesStrBuilder.append(String.format(XmlOutputConstant.TO_LEFT_OF, view.getToLeftOf()) + "\n");
-		}
-		
-		if(!TextUtils.isEmpty(view.getToRightOf()))
-		{
-			propertiesStrBuilder.append(String.format(XmlOutputConstant.TO_RIGHT_OF, view.getToRightOf()) + "\n");
-		}
-		
-		if(!TextUtils.isEmpty(view.getBelow()))
-		{
-			propertiesStrBuilder.append(String.format(XmlOutputConstant.BELOW, view.getBelow()) + "\n");
-		}
-		
-		if(!TextUtils.isEmpty(view.getAbove()))
-		{
-			propertiesStrBuilder.append(String.format(XmlOutputConstant.ABOVE, view.getAbove()) + "\n");
-		}
-		
-		if(!TextUtils.isEmpty(view.getAlignLeft()))
-		{
-			propertiesStrBuilder.append(String.format(XmlOutputConstant.ALIGN_LEFT, view.getAlignLeft()) + "\n");
-		}
-		
-		if(!TextUtils.isEmpty(view.getAlignRight()))
-		{
-			propertiesStrBuilder.append(String.format(XmlOutputConstant.ALIGN_RIGHT, view.getAlignRight()) + "\n");
-		}
-		
-		if(!TextUtils.isEmpty(view.getAlignTop()))
-		{
-			propertiesStrBuilder.append(String.format(XmlOutputConstant.ALIGN_TOP, view.getAlignTop()) + "\n");
-		}
-		
-		if(!TextUtils.isEmpty(view.getAlignBottom()))
-		{
-			propertiesStrBuilder.append(String.format(XmlOutputConstant.ALIGN_BOTTOM, view.getAlignBottom()) + "\n");
-		}
-		
-		if(!TextUtils.isEmpty(view.getCenterInParent()))
-		{
-			propertiesStrBuilder.append(String.format(XmlOutputConstant.CENTER_IN_PARENT, view.getCenterInParent()) + "\n");
-		}
-		
-		if(!TextUtils.isEmpty(view.getCenterHorizontal()))
-		{
-			propertiesStrBuilder.append(String.format(XmlOutputConstant.CENTER_HORIZONTAL, view.getCenterHorizontal()) + "\n");
-		}
-		
-		if(!TextUtils.isEmpty(view.getCenterVertical()))
-		{
-			propertiesStrBuilder.append(String.format(XmlOutputConstant.CENTER_VERTICAL, view.getCenterVertical()) + "\n");
-		}
-		
+		propertiesStrBuilder = appendRelativePositionProperties(propertiesStrBuilder);
 		
 		propertiesStrBuilder = appendLinearLayoutProperties(propertiesStrBuilder);
 		
@@ -248,6 +174,86 @@ public class ViewTreeNodeImp implements IViewTreeNode
 			{
 				propertiesStrBuilder.append(String.format(XmlOutputConstant.TEXT_COLOR, ((TGCheckBox)view).getTextColor()) + "\n");
 			}
+		}
+		
+		return propertiesStrBuilder;
+	}
+	
+	private StringBuilder appendRelativePositionProperties(StringBuilder propertiesStrBuilder)
+	{
+		if(!TextUtils.isEmpty(view.getAlignParentLeft()))
+		{
+			propertiesStrBuilder.append(String.format(XmlOutputConstant.ALIGN_PARENT_LEFT, view.getAlignParentLeft()) + "\n");
+		}
+		
+		if(!TextUtils.isEmpty(view.getAlignParentRight()))
+		{
+			propertiesStrBuilder.append(String.format(XmlOutputConstant.ALIGN_PARENT_RIGHT, view.getAlignParentRight()) + "\n");
+		}
+		
+		if(!TextUtils.isEmpty(view.getAlignParentTop()))
+		{
+			propertiesStrBuilder.append(String.format(XmlOutputConstant.ALIGN_PARENT_TOP, view.getAlignParentTop()) + "\n");
+		}
+		
+		if(!TextUtils.isEmpty(view.getAlignParentBottom()))
+		{
+			propertiesStrBuilder.append(String.format(XmlOutputConstant.ALIGN_PARENT_BOTTOM, view.getAlignParentBottom()) + "\n");
+		}
+		
+		if(!TextUtils.isEmpty(view.getToLeftOf()))
+		{
+			propertiesStrBuilder.append(String.format(XmlOutputConstant.TO_LEFT_OF, view.getToLeftOf()) + "\n");
+		}
+		
+		if(!TextUtils.isEmpty(view.getToRightOf()))
+		{
+			propertiesStrBuilder.append(String.format(XmlOutputConstant.TO_RIGHT_OF, view.getToRightOf()) + "\n");
+		}
+		
+		if(!TextUtils.isEmpty(view.getBelow()))
+		{
+			propertiesStrBuilder.append(String.format(XmlOutputConstant.BELOW, view.getBelow()) + "\n");
+		}
+		
+		if(!TextUtils.isEmpty(view.getAbove()))
+		{
+			propertiesStrBuilder.append(String.format(XmlOutputConstant.ABOVE, view.getAbove()) + "\n");
+		}
+		
+		if(!TextUtils.isEmpty(view.getAlignLeft()))
+		{
+			propertiesStrBuilder.append(String.format(XmlOutputConstant.ALIGN_LEFT, view.getAlignLeft()) + "\n");
+		}
+		
+		if(!TextUtils.isEmpty(view.getAlignRight()))
+		{
+			propertiesStrBuilder.append(String.format(XmlOutputConstant.ALIGN_RIGHT, view.getAlignRight()) + "\n");
+		}
+		
+		if(!TextUtils.isEmpty(view.getAlignTop()))
+		{
+			propertiesStrBuilder.append(String.format(XmlOutputConstant.ALIGN_TOP, view.getAlignTop()) + "\n");
+		}
+		
+		if(!TextUtils.isEmpty(view.getAlignBottom()))
+		{
+			propertiesStrBuilder.append(String.format(XmlOutputConstant.ALIGN_BOTTOM, view.getAlignBottom()) + "\n");
+		}
+		
+		if(!TextUtils.isEmpty(view.getCenterInParent()))
+		{
+			propertiesStrBuilder.append(String.format(XmlOutputConstant.CENTER_IN_PARENT, view.getCenterInParent()) + "\n");
+		}
+		
+		if(!TextUtils.isEmpty(view.getCenterHorizontal()))
+		{
+			propertiesStrBuilder.append(String.format(XmlOutputConstant.CENTER_HORIZONTAL, view.getCenterHorizontal()) + "\n");
+		}
+		
+		if(!TextUtils.isEmpty(view.getCenterVertical()))
+		{
+			propertiesStrBuilder.append(String.format(XmlOutputConstant.CENTER_VERTICAL, view.getCenterVertical()) + "\n");
 		}
 		
 		return propertiesStrBuilder;
