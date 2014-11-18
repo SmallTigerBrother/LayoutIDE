@@ -576,7 +576,7 @@ public class TGListView extends ScrollView implements IViewGroup, IViewTree, OnL
 		
 		public DefaultAdapter(Context context, String listItemLayoutName)
 		{
-			super(context, null);
+			super(context, null, -1, null);
 			this.listItemLayoutName = listItemLayoutName;
 		}
 		
