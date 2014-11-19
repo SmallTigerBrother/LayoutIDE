@@ -28,7 +28,7 @@ import com.tiger.layoutide.storage.db.LayoutDBManager;
 import com.tiger.layoutide.storage.model.LayoutDBModel;
 import com.tiger.layoutide.utils.GravityValue;
 import com.tiger.layoutide.widget.IAdapterView;
-import com.tiger.layoutide.widget.ITextView;
+import com.tiger.layoutide.widget.ITextViewHelper;
 import com.tiger.layoutide.widget.IView;
 
 public class ContentToolBar extends FrameLayout
@@ -71,15 +71,15 @@ public class ContentToolBar extends FrameLayout
 			{
 				if(null != selectedView)
 				{
-					if(selectedView instanceof ITextView)
+					if(selectedView instanceof ITextViewHelper)
 					{
 						if(!TextUtils.isEmpty(s))
 						{
-							((ITextView)selectedView).setText(s.toString());
+							((ITextViewHelper)selectedView).setText(s.toString());
 						}
 						else
 						{
-							((ITextView)selectedView).setText("");
+							((ITextViewHelper)selectedView).setText("");
 						}
 					}
 				}
@@ -99,9 +99,9 @@ public class ContentToolBar extends FrameLayout
 				{
 					if(null != selectedView)
 					{
-						if(selectedView instanceof ITextView )
+						if(selectedView instanceof ITextViewHelper )
 						{
-							((ITextView)selectedView).setTextColor(s.toString());
+							((ITextViewHelper)selectedView).setTextColor(s.toString());
 						}
 					}
 					else
@@ -121,9 +121,9 @@ public class ContentToolBar extends FrameLayout
 				{
 					if(null != selectedView)
 					{
-						if(selectedView instanceof ITextView)
+						if(selectedView instanceof ITextViewHelper)
 						{
-							((ITextView)selectedView).setTextSize(s.toString());
+							((ITextViewHelper)selectedView).setTextSize(s.toString());
 						}
 					}
 					else
@@ -141,7 +141,7 @@ public class ContentToolBar extends FrameLayout
 			{
 				if(null != selectedView)
 				{
-					selectedView.setGravityValue(parent.getAdapter().getItem(position).toString());
+					selectedView.getViewHelper().setGravityValue(parent.getAdapter().getItem(position).toString());
 				}
 				else
 				{
@@ -197,7 +197,7 @@ public class ContentToolBar extends FrameLayout
 		this.selectedView = selectedView;
 		if(null != selectedView)
 		{
-			if(selectedView instanceof ITextView)
+			if(selectedView instanceof ITextViewHelper)
 			{
 				textEditText.setVisibility(View.VISIBLE);
 				textSizeEditText.setVisibility(View.VISIBLE);
@@ -206,27 +206,27 @@ public class ContentToolBar extends FrameLayout
 				adapterLayoutSelector.setVisibility(View.GONE);
 				createAdapterLayoutBtn.setVisibility(View.GONE);
 				
-				if(!TextUtils.isEmpty(((ITextView)selectedView).getText()))
+				if(!TextUtils.isEmpty(((ITextViewHelper)selectedView).getText()))
 				{
-					textEditText.setText(((ITextView)selectedView).getText());
+					textEditText.setText(((ITextViewHelper)selectedView).getText());
 				}
 				else
 				{
 					textEditText.setText("");
 				}
 				
-				if(((ITextView)selectedView).getTextSize() > 0)
+				if(((ITextViewHelper)selectedView).getTextSize() > 0)
 				{
-					textSizeEditText.setText(((ITextView)selectedView).getTextSize() + "");
+					textSizeEditText.setText(((ITextViewHelper)selectedView).getTextSize() + "");
 				}
 				else
 				{
 					textSizeEditText.setText("");
 				}
 				
-				if(!TextUtils.isEmpty(((ITextView)selectedView).getTextColor()))
+				if(!TextUtils.isEmpty(((ITextViewHelper)selectedView).getTextColor()))
 				{
-					textColorEditText.setText(((ITextView)selectedView).getTextColor());
+					textColorEditText.setText(((ITextViewHelper)selectedView).getTextColor());
 				}
 				else
 				{
@@ -304,7 +304,7 @@ public class ContentToolBar extends FrameLayout
 	
 	private void resetGravity()
 	{
-		String layoutGravity = selectedView.getGravityValue();
+		String layoutGravity = selectedView.getViewHelper().getGravityValue();
 		if(TextUtils.isEmpty(layoutGravity))
 		{
 			gravitySelector.setSelection(0);

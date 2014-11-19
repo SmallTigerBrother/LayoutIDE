@@ -16,7 +16,7 @@ import com.mn.tiger.annonation.ViewById;
 import com.mn.tiger.utility.ViewInjector;
 import com.tiger.layoutide.R;
 import com.tiger.layoutide.widget.IAdapterView;
-import com.tiger.layoutide.widget.ITextView;
+import com.tiger.layoutide.widget.ITextViewHelper;
 import com.tiger.layoutide.widget.IView;
 import com.tiger.layoutide.widget.TGLinearLayout;
 import com.tiger.layoutide.widget.TGRelativeLayout;
@@ -80,7 +80,7 @@ public class PropertiesToolBar
 				{
 					if(null != selectedView)
 					{
-						selectedView.setIdName(s.toString());
+						selectedView.getViewHelper().setIdName(s.toString());
 					}
 					else
 					{
@@ -133,7 +133,7 @@ public class PropertiesToolBar
 						linearPositionToolBar.setVisibility(View.GONE);
 					}
 					
-					if(selectedView instanceof ITextView || selectedView instanceof ImageView 
+					if(selectedView instanceof ITextViewHelper || selectedView instanceof ImageView 
 							|| selectedView instanceof IAdapterView)
 					{
 						contentToolBar.setVisibility(View.VISIBLE);
@@ -145,9 +145,9 @@ public class PropertiesToolBar
 					
 					curViewName.setText(selectedView.getSimpleClassName());
 					
-					if(!TextUtils.isEmpty(selectedView.getIdName()))
+					if(!TextUtils.isEmpty(selectedView.getViewHelper().getIdName()))
 					{
-						idEditText.setText(selectedView.getIdName());
+						idEditText.setText(selectedView.getViewHelper().getIdName());
 					}
 					else
 					{

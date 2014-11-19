@@ -21,6 +21,7 @@ import com.tiger.layoutide.utils.XmlOutputConstant;
 import com.tiger.layoutide.utils.GravityValue;
 import com.tiger.layoutide.widget.IView;
 import com.tiger.layoutide.widget.TGLinearLayout;
+import com.tiger.layoutide.widget.TGLinearLayout.LinearLayoutHelper;
 
 public class LinearPositionToolBar extends FrameLayout
 {
@@ -61,11 +62,11 @@ public class LinearPositionToolBar extends FrameLayout
 				{
 					if(!TextUtils.isEmpty(s))
 					{
-						selectedView.setLayoutWeight(s.toString());
+						selectedView.getViewHelper().setLayoutWeight(s.toString());
 					}
 					else
 					{
-						selectedView.setLayoutWeight("");
+						selectedView.getViewHelper().setLayoutWeight("");
 					}
 				}
 				else
@@ -84,13 +85,15 @@ public class LinearPositionToolBar extends FrameLayout
 				{
 					if(selectedView instanceof LinearLayout)
 					{
-						if(XmlOutputConstant.ORIENTATION_HORIZONTAL.equals(parent.getAdapter().getItem(position).toString()))
+						LinearLayoutHelper layoutHelper = (LinearLayoutHelper) ((TGLinearLayout)selectedView).getViewHelper();
+						if(XmlOutputConstant.ORIENTATION_HORIZONTAL.equals(
+								parent.getAdapter().getItem(position).toString()))
 						{
-							((TGLinearLayout)selectedView).setOrientationValue(XmlOutputConstant.ORIENTATION_HORIZONTAL);
+							layoutHelper.setOrientationValue(XmlOutputConstant.ORIENTATION_HORIZONTAL);
 						}
 						else
 						{
-							((TGLinearLayout)selectedView).setOrientationValue(XmlOutputConstant.ORIENTATION_VERTICAL);
+							layoutHelper.setOrientationValue(XmlOutputConstant.ORIENTATION_VERTICAL);
 						}
 					}
 				}
@@ -113,7 +116,8 @@ public class LinearPositionToolBar extends FrameLayout
 			{
 				if(null != selectedView)
 				{
-					selectedView.setLayoutGravityValue(parent.getAdapter().getItem(position).toString());
+					selectedView.getViewHelper().setLayoutGravityValue(
+							parent.getAdapter().getItem(position).toString());
 				}
 				else
 				{
@@ -136,8 +140,8 @@ public class LinearPositionToolBar extends FrameLayout
 			if(selectedView instanceof LinearLayout)
 			{
 				orientationProperty.setVisibility(View.VISIBLE);
-				
-				if(((TGLinearLayout)selectedView).getOrientationValue().equals(XmlOutputConstant.ORIENTATION_HORIZONTAL))
+				LinearLayoutHelper layoutHelper = (LinearLayoutHelper) ((TGLinearLayout)selectedView).getViewHelper();
+				if(layoutHelper.getOrientationValue().equals(XmlOutputConstant.ORIENTATION_HORIZONTAL))
 				{
 					orientationSelector.setSelection(0);
 				}
@@ -162,9 +166,9 @@ public class LinearPositionToolBar extends FrameLayout
 				layoutGravityProperty.setVisibility(View.GONE);
 			}
 			
-			if(selectedView.getLayoutWeight() > 0)
+			if(selectedView.getViewHelper().getLayoutWeight() > 0)
 			{
-				layoutWeightEditText.setText(selectedView.getLayoutWeight() + "");
+				layoutWeightEditText.setText(selectedView.getViewHelper().getLayoutWeight() + "");
 			}
 			else
 			{
@@ -175,7 +179,7 @@ public class LinearPositionToolBar extends FrameLayout
 	
 	private void resetLayoutGravity(IView selectedView)
 	{
-		String layoutGravity = selectedView.getLayoutGravityValue();
+		String layoutGravity = selectedView.getViewHelper().getLayoutGravityValue();
 		if(TextUtils.isEmpty(layoutGravity))
 		{
 			layoutGravitySelector.setSelection(0);

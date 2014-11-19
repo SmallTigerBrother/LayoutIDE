@@ -41,7 +41,7 @@ public class BackgroundToolBar extends FrameLayout
 				{
 					if(null != selectedView)
 					{
-						selectedView.setBackgroundColor(s.toString());
+						selectedView.getViewHelper().setBackgroundColor(s.toString());
 					}
 					else
 					{
@@ -57,9 +57,9 @@ public class BackgroundToolBar extends FrameLayout
 		this.selectedView = selectedView;
 		if(null != selectedView)
 		{
-			if(!TextUtils.isEmpty(selectedView.getBackgroundColor()))
+			if(!TextUtils.isEmpty(selectedView.getViewHelper().getBackgroundColor()))
 			{
-				backgroundColorEditText.setText(selectedView.getBackgroundColor());
+				backgroundColorEditText.setText(selectedView.getViewHelper().getBackgroundColor());
 			}
 			else
 			{

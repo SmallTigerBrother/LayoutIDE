@@ -115,7 +115,7 @@ public class RelativePositionToolBar extends FrameLayout
 			{
 				if(null != selectedView)
 				{
-					selectedView.setBelow(parent.getAdapter().getItem(position).toString());
+					selectedView.getViewHelper().setBelow(parent.getAdapter().getItem(position).toString());
 				}
 				else
 				{
@@ -136,7 +136,7 @@ public class RelativePositionToolBar extends FrameLayout
 			{
 				if(null != selectedView)
 				{
-					selectedView.setAbove(parent.getAdapter().getItem(position).toString());
+					selectedView.getViewHelper().setAbove(parent.getAdapter().getItem(position).toString());
 				}
 				else
 				{
@@ -157,7 +157,7 @@ public class RelativePositionToolBar extends FrameLayout
 			{
 				if(null != selectedView)
 				{
-					selectedView.setToLeftOf(parent.getAdapter().getItem(position).toString());
+					selectedView.getViewHelper().setToLeftOf(parent.getAdapter().getItem(position).toString());
 				}
 				else
 				{
@@ -178,7 +178,7 @@ public class RelativePositionToolBar extends FrameLayout
 			{
 				if(null != selectedView)
 				{
-					selectedView.setToRightOf(parent.getAdapter().getItem(position).toString());
+					selectedView.getViewHelper().setToRightOf(parent.getAdapter().getItem(position).toString());
 				}
 				else
 				{
@@ -199,7 +199,7 @@ public class RelativePositionToolBar extends FrameLayout
 			{
 				if(null != selectedView)
 				{
-					selectedView.setAlignLeft(parent.getAdapter().getItem(position).toString());
+					selectedView.getViewHelper().setAlignLeft(parent.getAdapter().getItem(position).toString());
 				}
 				else
 				{
@@ -220,7 +220,7 @@ public class RelativePositionToolBar extends FrameLayout
 			{
 				if(null != selectedView)
 				{
-					selectedView.setAlignRight(parent.getAdapter().getItem(position).toString());
+					selectedView.getViewHelper().setAlignRight(parent.getAdapter().getItem(position).toString());
 				}
 				else
 				{
@@ -241,7 +241,7 @@ public class RelativePositionToolBar extends FrameLayout
 			{
 				if(null != selectedView)
 				{
-					selectedView.setAlignTop(parent.getAdapter().getItem(position).toString());
+					selectedView.getViewHelper().setAlignTop(parent.getAdapter().getItem(position).toString());
 				}
 				else
 				{
@@ -262,7 +262,7 @@ public class RelativePositionToolBar extends FrameLayout
 			{
 				if(null != selectedView)
 				{
-					selectedView.setAlignBottom(parent.getAdapter().getItem(position).toString());
+					selectedView.getViewHelper().setAlignBottom(parent.getAdapter().getItem(position).toString());
 				}
 				else
 				{
@@ -281,66 +281,66 @@ public class RelativePositionToolBar extends FrameLayout
 	{
 		if(RelativeValues.ALIGN_PARENT_NONE.equals(curValue))
 		{
-			selectedView.setAlignParentLeft(XmlOutputConstant.FALSE);
-			selectedView.setAlignParentBottom(XmlOutputConstant.FALSE);
-			selectedView.setAlignParentTop(XmlOutputConstant.FALSE);
-			selectedView.setAlignParentRight(XmlOutputConstant.FALSE);
+			selectedView.getViewHelper().setAlignParentLeft(XmlOutputConstant.FALSE);
+			selectedView.getViewHelper().setAlignParentBottom(XmlOutputConstant.FALSE);
+			selectedView.getViewHelper().setAlignParentTop(XmlOutputConstant.FALSE);
+			selectedView.getViewHelper().setAlignParentRight(XmlOutputConstant.FALSE);
 		}
 		else if(RelativeValues.ALIGN_PARENT_LEFT.equals(curValue))
 		{
-			selectedView.setAlignParentLeft(XmlOutputConstant.TRUE);
-			selectedView.setAlignParentBottom(XmlOutputConstant.FALSE);
-			selectedView.setAlignParentTop(XmlOutputConstant.FALSE);
-			selectedView.setAlignParentRight(XmlOutputConstant.FALSE);
+			selectedView.getViewHelper().setAlignParentLeft(XmlOutputConstant.TRUE);
+			selectedView.getViewHelper().setAlignParentBottom(XmlOutputConstant.FALSE);
+			selectedView.getViewHelper().setAlignParentTop(XmlOutputConstant.FALSE);
+			selectedView.getViewHelper().setAlignParentRight(XmlOutputConstant.FALSE);
 		}
 		else if(RelativeValues.ALIGN_PARENT_RIGHT.equals(curValue))
 		{
-			selectedView.setAlignParentLeft(XmlOutputConstant.FALSE);
-			selectedView.setAlignParentBottom(XmlOutputConstant.FALSE);
-			selectedView.setAlignParentTop(XmlOutputConstant.FALSE);
-			selectedView.setAlignParentRight(XmlOutputConstant.TRUE);
+			selectedView.getViewHelper().setAlignParentLeft(XmlOutputConstant.FALSE);
+			selectedView.getViewHelper().setAlignParentBottom(XmlOutputConstant.FALSE);
+			selectedView.getViewHelper().setAlignParentTop(XmlOutputConstant.FALSE);
+			selectedView.getViewHelper().setAlignParentRight(XmlOutputConstant.TRUE);
 		}
 		else if(RelativeValues.ALIGN_PARENT_TOP.equals(curValue))
 		{
-			selectedView.setAlignParentLeft(XmlOutputConstant.FALSE);
-			selectedView.setAlignParentBottom(XmlOutputConstant.FALSE);
-			selectedView.setAlignParentTop(XmlOutputConstant.TRUE);
-			selectedView.setAlignParentRight(XmlOutputConstant.FALSE);
+			selectedView.getViewHelper().setAlignParentLeft(XmlOutputConstant.FALSE);
+			selectedView.getViewHelper().setAlignParentBottom(XmlOutputConstant.FALSE);
+			selectedView.getViewHelper().setAlignParentTop(XmlOutputConstant.TRUE);
+			selectedView.getViewHelper().setAlignParentRight(XmlOutputConstant.FALSE);
 		}
 		else if(RelativeValues.ALIGN_PARENT_BOTTOM.equals(curValue))
 		{
-			selectedView.setAlignParentLeft(XmlOutputConstant.FALSE);
-			selectedView.setAlignParentBottom(XmlOutputConstant.TRUE);
-			selectedView.setAlignParentTop(XmlOutputConstant.FALSE);
-			selectedView.setAlignParentRight(XmlOutputConstant.FALSE);
+			selectedView.getViewHelper().setAlignParentLeft(XmlOutputConstant.FALSE);
+			selectedView.getViewHelper().setAlignParentBottom(XmlOutputConstant.TRUE);
+			selectedView.getViewHelper().setAlignParentTop(XmlOutputConstant.FALSE);
+			selectedView.getViewHelper().setAlignParentRight(XmlOutputConstant.FALSE);
 		}
 		else if(RelativeValues.ALIGN_PARENT_LEFT_AND_TOP.equals(curValue))
 		{
-			selectedView.setAlignParentLeft(XmlOutputConstant.TRUE);
-			selectedView.setAlignParentBottom(XmlOutputConstant.FALSE);
-			selectedView.setAlignParentTop(XmlOutputConstant.TRUE);
-			selectedView.setAlignParentRight(XmlOutputConstant.FALSE);
+			selectedView.getViewHelper().setAlignParentLeft(XmlOutputConstant.TRUE);
+			selectedView.getViewHelper().setAlignParentBottom(XmlOutputConstant.FALSE);
+			selectedView.getViewHelper().setAlignParentTop(XmlOutputConstant.TRUE);
+			selectedView.getViewHelper().setAlignParentRight(XmlOutputConstant.FALSE);
 		}
 		else if(RelativeValues.ALIGN_PARENT_LEFT_AND_BOTTOM.equals(curValue))
 		{
-			selectedView.setAlignParentLeft(XmlOutputConstant.TRUE);
-			selectedView.setAlignParentBottom(XmlOutputConstant.TRUE);
-			selectedView.setAlignParentTop(XmlOutputConstant.FALSE);
-			selectedView.setAlignParentRight(XmlOutputConstant.FALSE);
+			selectedView.getViewHelper().setAlignParentLeft(XmlOutputConstant.TRUE);
+			selectedView.getViewHelper().setAlignParentBottom(XmlOutputConstant.TRUE);
+			selectedView.getViewHelper().setAlignParentTop(XmlOutputConstant.FALSE);
+			selectedView.getViewHelper().setAlignParentRight(XmlOutputConstant.FALSE);
 		}
 		else if(RelativeValues.ALIGN_PARENT_RIGHT_AND_TOP.equals(curValue))
 		{
-			selectedView.setAlignParentLeft(XmlOutputConstant.FALSE);
-			selectedView.setAlignParentBottom(XmlOutputConstant.FALSE);
-			selectedView.setAlignParentTop(XmlOutputConstant.TRUE);
-			selectedView.setAlignParentRight(XmlOutputConstant.TRUE);
+			selectedView.getViewHelper().setAlignParentLeft(XmlOutputConstant.FALSE);
+			selectedView.getViewHelper().setAlignParentBottom(XmlOutputConstant.FALSE);
+			selectedView.getViewHelper().setAlignParentTop(XmlOutputConstant.TRUE);
+			selectedView.getViewHelper().setAlignParentRight(XmlOutputConstant.TRUE);
 		}
 		else if(RelativeValues.ALIGN_PARENT_RIGHT_AND_BOTTOM.equals(curValue))
 		{
-			selectedView.setAlignParentLeft(XmlOutputConstant.FALSE);
-			selectedView.setAlignParentBottom(XmlOutputConstant.TRUE);
-			selectedView.setAlignParentTop(XmlOutputConstant.FALSE);
-			selectedView.setAlignParentRight(XmlOutputConstant.TRUE);
+			selectedView.getViewHelper().setAlignParentLeft(XmlOutputConstant.FALSE);
+			selectedView.getViewHelper().setAlignParentBottom(XmlOutputConstant.TRUE);
+			selectedView.getViewHelper().setAlignParentTop(XmlOutputConstant.FALSE);
+			selectedView.getViewHelper().setAlignParentRight(XmlOutputConstant.TRUE);
 		}
 	}
 	
@@ -348,27 +348,27 @@ public class RelativePositionToolBar extends FrameLayout
 	{
 		if(RelativeValues.CENTER_NONE.equals(curValue))
 		{
-			selectedView.setCenterInParent(XmlOutputConstant.FALSE);
-			selectedView.setCenterHorizontal(XmlOutputConstant.FALSE);
-			selectedView.setCenterVertical(XmlOutputConstant.FALSE);
+			selectedView.getViewHelper().setCenterInParent(XmlOutputConstant.FALSE);
+			selectedView.getViewHelper().setCenterHorizontal(XmlOutputConstant.FALSE);
+			selectedView.getViewHelper().setCenterVertical(XmlOutputConstant.FALSE);
 		}
 		else if(RelativeValues.CENTER_IN_PARENT.equals(curValue))
 		{
-			selectedView.setCenterInParent(XmlOutputConstant.TRUE);
-			selectedView.setCenterHorizontal(XmlOutputConstant.FALSE);
-			selectedView.setCenterVertical(XmlOutputConstant.FALSE);
+			selectedView.getViewHelper().setCenterInParent(XmlOutputConstant.TRUE);
+			selectedView.getViewHelper().setCenterHorizontal(XmlOutputConstant.FALSE);
+			selectedView.getViewHelper().setCenterVertical(XmlOutputConstant.FALSE);
 		}
 		else if(RelativeValues.CENTER_HORIZONTAL.equals(curValue))
 		{
-			selectedView.setCenterInParent(XmlOutputConstant.FALSE);
-			selectedView.setCenterHorizontal(XmlOutputConstant.TRUE);
-			selectedView.setCenterVertical(XmlOutputConstant.FALSE);
+			selectedView.getViewHelper().setCenterInParent(XmlOutputConstant.FALSE);
+			selectedView.getViewHelper().setCenterHorizontal(XmlOutputConstant.TRUE);
+			selectedView.getViewHelper().setCenterVertical(XmlOutputConstant.FALSE);
 		}
 		else if(RelativeValues.CENTER_VERTICAL.equals(curValue))
 		{
-			selectedView.setCenterInParent(XmlOutputConstant.FALSE);
-			selectedView.setCenterHorizontal(XmlOutputConstant.FALSE);
-			selectedView.setCenterVertical(XmlOutputConstant.TRUE);
+			selectedView.getViewHelper().setCenterInParent(XmlOutputConstant.FALSE);
+			selectedView.getViewHelper().setCenterHorizontal(XmlOutputConstant.FALSE);
+			selectedView.getViewHelper().setCenterVertical(XmlOutputConstant.TRUE);
 		}
 	}
 	
@@ -384,9 +384,9 @@ public class RelativePositionToolBar extends FrameLayout
 			
 			ArrayList<CharSequence> parentChildIdList = ((TGRelativeLayout)((View)selectedView).getParent()).getChildIdList();
 			//ÒÆ³ý×ÔÉíµÄid
-			if(null != selectedView.getIdName())
+			if(null != selectedView.getViewHelper().getIdName())
 			{
-				parentChildIdList.remove(selectedView.getIdName());
+				parentChildIdList.remove(selectedView.getViewHelper().getIdName());
 			}
 			CharSequence[] parentChildIds = new CharSequence[parentChildIdList.size()];
 			parentChildIdList.toArray(parentChildIds);
@@ -397,9 +397,10 @@ public class RelativePositionToolBar extends FrameLayout
 			
 			
 			belowSelector.setAdapter(adapter);
-			if(!TextUtils.isEmpty(selectedView.getBelow()))
+			if(!TextUtils.isEmpty(selectedView.getViewHelper().getBelow()))
 			{
-				belowSelector.setSelection(parentChildIdList.indexOf(selectedView.getBelow()));
+				belowSelector.setSelection(parentChildIdList.indexOf(
+						selectedView.getViewHelper().getBelow()));
 			}
 			else
 			{
@@ -407,9 +408,10 @@ public class RelativePositionToolBar extends FrameLayout
 			}
 			
 			aboveSelector.setAdapter(adapter);
-			if(!TextUtils.isEmpty(selectedView.getAbove()))
+			if(!TextUtils.isEmpty(selectedView.getViewHelper().getAbove()))
 			{
-				aboveSelector.setSelection(parentChildIdList.indexOf(selectedView.getAbove()));
+				aboveSelector.setSelection(parentChildIdList.indexOf(
+						selectedView.getViewHelper().getAbove()));
 			}
 			else
 			{
@@ -417,9 +419,10 @@ public class RelativePositionToolBar extends FrameLayout
 			}
 			
 			toLeftOfSelector.setAdapter(adapter);
-			if(!TextUtils.isEmpty(selectedView.getToLeftOf()))
+			if(!TextUtils.isEmpty(selectedView.getViewHelper().getToLeftOf()))
 			{
-				toLeftOfSelector.setSelection(parentChildIdList.indexOf(selectedView.getToLeftOf()));
+				toLeftOfSelector.setSelection(parentChildIdList.indexOf(
+						selectedView.getViewHelper().getToLeftOf()));
 			}
 			else
 			{
@@ -427,9 +430,10 @@ public class RelativePositionToolBar extends FrameLayout
 			}
 			
 			toRightOfSelector.setAdapter(adapter);
-			if(!TextUtils.isEmpty(selectedView.getToRightOf()))
+			if(!TextUtils.isEmpty(selectedView.getViewHelper().getToRightOf()))
 			{
-				toRightOfSelector.setSelection(parentChildIdList.indexOf(selectedView.getToRightOf()));
+				toRightOfSelector.setSelection(parentChildIdList.indexOf(
+						selectedView.getViewHelper().getToRightOf()));
 			}
 			else
 			{
@@ -437,9 +441,10 @@ public class RelativePositionToolBar extends FrameLayout
 			}
 			
 			alignLeftSelector.setAdapter(adapter);
-			if(!TextUtils.isEmpty(selectedView.getAlignLeft()))
+			if(!TextUtils.isEmpty(selectedView.getViewHelper().getAlignLeft()))
 			{
-				alignLeftSelector.setSelection(parentChildIdList.indexOf(selectedView.getAlignLeft()));
+				alignLeftSelector.setSelection(parentChildIdList.indexOf(
+						selectedView.getViewHelper().getAlignLeft()));
 			}
 			else
 			{
@@ -447,9 +452,10 @@ public class RelativePositionToolBar extends FrameLayout
 			}
 			
 			alignRightSelector.setAdapter(adapter);
-			if(!TextUtils.isEmpty(selectedView.getAlignRight()))
+			if(!TextUtils.isEmpty(selectedView.getViewHelper().getAlignRight()))
 			{
-				alignRightSelector.setSelection(parentChildIdList.indexOf(selectedView.getAlignRight()));
+				alignRightSelector.setSelection(parentChildIdList.indexOf(
+						selectedView.getViewHelper().getAlignRight()));
 			}
 			else
 			{
@@ -457,9 +463,10 @@ public class RelativePositionToolBar extends FrameLayout
 			}
 			
 			alignTopSelector.setAdapter(adapter);
-			if(!TextUtils.isEmpty(selectedView.getAlignTop()))
+			if(!TextUtils.isEmpty(selectedView.getViewHelper().getAlignTop()))
 			{
-				alignTopSelector.setSelection(parentChildIdList.indexOf(selectedView.getAlignTop()));
+				alignTopSelector.setSelection(parentChildIdList.indexOf(
+						selectedView.getViewHelper().getAlignTop()));
 			}
 			else
 			{
@@ -467,9 +474,10 @@ public class RelativePositionToolBar extends FrameLayout
 			}
 			
 			alignBottomSelector.setAdapter(adapter);
-			if(!TextUtils.isEmpty(selectedView.getAlignBottom()))
+			if(!TextUtils.isEmpty(selectedView.getViewHelper().getAlignBottom()))
 			{
-				alignBottomSelector.setSelection(parentChildIdList.indexOf(selectedView.getAlignBottom()));
+				alignBottomSelector.setSelection(parentChildIdList.indexOf(
+						selectedView.getViewHelper().getAlignBottom()));
 			}
 			else
 			{
@@ -480,48 +488,66 @@ public class RelativePositionToolBar extends FrameLayout
 	
 	private void resetAlignParentSelector()
 	{
-		if(TextUtils.isEmpty(selectedView.getAlignParentLeft()) && TextUtils.isEmpty(selectedView.getAlignParentRight()) &&
-				TextUtils.isEmpty(selectedView.getAlignParentTop()) && TextUtils.isEmpty(selectedView.getAlignParentBottom()))
+		if(TextUtils.isEmpty(selectedView.getViewHelper().getAlignParentLeft()) && 
+				TextUtils.isEmpty(selectedView.getViewHelper().getAlignParentRight()) &&
+				TextUtils.isEmpty(selectedView.getViewHelper().getAlignParentTop()) &&
+				TextUtils.isEmpty(selectedView.getViewHelper().getAlignParentBottom()))
 		{
 			alignParentSelector.setSelection(0);
 		}
-		else if(!TextUtils.isEmpty(selectedView.getAlignParentLeft()) && TextUtils.isEmpty(selectedView.getAlignParentRight()) &&
-				TextUtils.isEmpty(selectedView.getAlignParentTop()) && TextUtils.isEmpty(selectedView.getAlignParentBottom()))
+		else if(!TextUtils.isEmpty(selectedView.getViewHelper().getAlignParentLeft()) && 
+				TextUtils.isEmpty(selectedView.getViewHelper().getAlignParentRight()) &&
+				TextUtils.isEmpty(selectedView.getViewHelper().getAlignParentTop()) && 
+				TextUtils.isEmpty(selectedView.getViewHelper().getAlignParentBottom()))
 		{
 			alignParentSelector.setSelection(1);
 		}
-		else if(TextUtils.isEmpty(selectedView.getAlignParentLeft()) && !TextUtils.isEmpty(selectedView.getAlignParentRight()) &&
-				TextUtils.isEmpty(selectedView.getAlignParentTop()) && TextUtils.isEmpty(selectedView.getAlignParentBottom()))
+		else if(TextUtils.isEmpty(selectedView.getViewHelper().getAlignParentLeft()) && 
+				!TextUtils.isEmpty(selectedView.getViewHelper().getAlignParentRight()) &&
+				TextUtils.isEmpty(selectedView.getViewHelper().getAlignParentTop()) && 
+				TextUtils.isEmpty(selectedView.getViewHelper().getAlignParentBottom()))
 		{
 			alignParentSelector.setSelection(2);
 		}
-		else if(TextUtils.isEmpty(selectedView.getAlignParentLeft()) && TextUtils.isEmpty(selectedView.getAlignParentRight()) &&
-				!TextUtils.isEmpty(selectedView.getAlignParentTop()) && TextUtils.isEmpty(selectedView.getAlignParentBottom()))
+		else if(TextUtils.isEmpty(selectedView.getViewHelper().getAlignParentLeft()) &&
+				TextUtils.isEmpty(selectedView.getViewHelper().getAlignParentRight()) &&
+				!TextUtils.isEmpty(selectedView.getViewHelper().getAlignParentTop()) && 
+				TextUtils.isEmpty(selectedView.getViewHelper().getAlignParentBottom()))
 		{
 			alignParentSelector.setSelection(3);
 		}
-		else if(TextUtils.isEmpty(selectedView.getAlignParentLeft()) && TextUtils.isEmpty(selectedView.getAlignParentRight()) &&
-				TextUtils.isEmpty(selectedView.getAlignParentTop()) && !TextUtils.isEmpty(selectedView.getAlignParentBottom()))
+		else if(TextUtils.isEmpty(selectedView.getViewHelper().getAlignParentLeft()) && 
+				TextUtils.isEmpty(selectedView.getViewHelper().getAlignParentRight()) &&
+				TextUtils.isEmpty(selectedView.getViewHelper().getAlignParentTop()) && 
+				!TextUtils.isEmpty(selectedView.getViewHelper().getAlignParentBottom()))
 		{
 			alignParentSelector.setSelection(4);
 		}
-		else if(!TextUtils.isEmpty(selectedView.getAlignParentLeft()) && TextUtils.isEmpty(selectedView.getAlignParentRight()) &&
-				!TextUtils.isEmpty(selectedView.getAlignParentTop()) && TextUtils.isEmpty(selectedView.getAlignParentBottom()))
+		else if(!TextUtils.isEmpty(selectedView.getViewHelper().getAlignParentLeft()) && 
+				TextUtils.isEmpty(selectedView.getViewHelper().getAlignParentRight()) &&
+				!TextUtils.isEmpty(selectedView.getViewHelper().getAlignParentTop()) && 
+				TextUtils.isEmpty(selectedView.getViewHelper().getAlignParentBottom()))
 		{
 			alignParentSelector.setSelection(6);
 		}
-		else if(!TextUtils.isEmpty(selectedView.getAlignParentLeft()) && TextUtils.isEmpty(selectedView.getAlignParentRight()) &&
-				TextUtils.isEmpty(selectedView.getAlignParentTop()) && !TextUtils.isEmpty(selectedView.getAlignParentBottom()))
+		else if(!TextUtils.isEmpty(selectedView.getViewHelper().getAlignParentLeft()) &&
+				TextUtils.isEmpty(selectedView.getViewHelper().getAlignParentRight()) &&
+				TextUtils.isEmpty(selectedView.getViewHelper().getAlignParentTop()) && 
+				!TextUtils.isEmpty(selectedView.getViewHelper().getAlignParentBottom()))
 		{
 			alignParentSelector.setSelection(7);
 		}
-		else if(TextUtils.isEmpty(selectedView.getAlignParentLeft()) && !TextUtils.isEmpty(selectedView.getAlignParentRight()) &&
-				!TextUtils.isEmpty(selectedView.getAlignParentTop()) && TextUtils.isEmpty(selectedView.getAlignParentBottom()))
+		else if(TextUtils.isEmpty(selectedView.getViewHelper().getAlignParentLeft()) && 
+				!TextUtils.isEmpty(selectedView.getViewHelper().getAlignParentRight()) &&
+				!TextUtils.isEmpty(selectedView.getViewHelper().getAlignParentTop()) && 
+				TextUtils.isEmpty(selectedView.getViewHelper().getAlignParentBottom()))
 		{
 			alignParentSelector.setSelection(7);
 		}
-		else if(TextUtils.isEmpty(selectedView.getAlignParentLeft()) && !TextUtils.isEmpty(selectedView.getAlignParentRight()) &&
-				TextUtils.isEmpty(selectedView.getAlignParentTop()) && !TextUtils.isEmpty(selectedView.getAlignParentBottom()))
+		else if(TextUtils.isEmpty(selectedView.getViewHelper().getAlignParentLeft()) && 
+				!TextUtils.isEmpty(selectedView.getViewHelper().getAlignParentRight()) &&
+				TextUtils.isEmpty(selectedView.getViewHelper().getAlignParentTop()) && 
+				!TextUtils.isEmpty(selectedView.getViewHelper().getAlignParentBottom()))
 		{
 			alignParentSelector.setSelection(8);
 		}
@@ -529,23 +555,27 @@ public class RelativePositionToolBar extends FrameLayout
 	
 	private void resetCenterWhereSelector()
 	{
-		if(TextUtils.isEmpty(selectedView.getCenterInParent()) && TextUtils.isEmpty(selectedView.getCenterHorizontal()) &&
-				TextUtils.isEmpty(selectedView.getCenterVertical()))
+		if(TextUtils.isEmpty(selectedView.getViewHelper().getCenterInParent()) && 
+				TextUtils.isEmpty(selectedView.getViewHelper().getCenterHorizontal()) &&
+				TextUtils.isEmpty(selectedView.getViewHelper().getCenterVertical()))
 		{
 			centerWhereSelector.setSelection(0);
 		}
-		else if(!TextUtils.isEmpty(selectedView.getCenterInParent()) && TextUtils.isEmpty(selectedView.getCenterHorizontal()) &&
-				TextUtils.isEmpty(selectedView.getCenterVertical()))
+		else if(!TextUtils.isEmpty(selectedView.getViewHelper().getCenterInParent()) && 
+				TextUtils.isEmpty(selectedView.getViewHelper().getCenterHorizontal()) &&
+				TextUtils.isEmpty(selectedView.getViewHelper().getCenterVertical()))
 		{
 			centerWhereSelector.setSelection(1);
 		}
-		else if(TextUtils.isEmpty(selectedView.getCenterInParent()) && TextUtils.isEmpty(selectedView.getCenterHorizontal()) &&
-				!TextUtils.isEmpty(selectedView.getCenterVertical()))
+		else if(TextUtils.isEmpty(selectedView.getViewHelper().getCenterInParent()) && 
+				TextUtils.isEmpty(selectedView.getViewHelper().getCenterHorizontal()) &&
+				!TextUtils.isEmpty(selectedView.getViewHelper().getCenterVertical()))
 		{
 			centerWhereSelector.setSelection(2);
 		}
-		else if(TextUtils.isEmpty(selectedView.getCenterInParent()) && !TextUtils.isEmpty(selectedView.getCenterHorizontal()) &&
-				TextUtils.isEmpty(selectedView.getCenterVertical()))
+		else if(TextUtils.isEmpty(selectedView.getViewHelper().getCenterInParent()) && 
+				!TextUtils.isEmpty(selectedView.getViewHelper().getCenterHorizontal()) &&
+				TextUtils.isEmpty(selectedView.getViewHelper().getCenterVertical()))
 		{
 			centerWhereSelector.setSelection(3);
 		}

@@ -89,7 +89,7 @@ public class CommonPositionToolBar extends FrameLayout implements OnClickListene
 				{
 					if(null != selectedView)
 					{
-						selectedView.setLayoutWidth(s.toString());
+						selectedView.getViewHelper().setLayoutWidth(s.toString());
 					}
 					else
 					{
@@ -112,7 +112,7 @@ public class CommonPositionToolBar extends FrameLayout implements OnClickListene
 				{
 					if(null != selectedView)
 					{
-						selectedView.setLayoutHeight(s.toString());
+						selectedView.getViewHelper().setLayoutHeight(s.toString());
 					}
 					else
 					{
@@ -164,7 +164,7 @@ public class CommonPositionToolBar extends FrameLayout implements OnClickListene
 				{
 					if(null != selectedView)
 					{
-						selectedView.setLayoutMarginLeft(s.toString());
+						selectedView.getViewHelper().setLayoutMarginLeft(s.toString());
 					}
 					else
 					{
@@ -188,7 +188,7 @@ public class CommonPositionToolBar extends FrameLayout implements OnClickListene
 				{
 					if(null != selectedView)
 					{
-						selectedView.setLayoutMarginRight(s.toString());
+						selectedView.getViewHelper().setLayoutMarginRight(s.toString());
 					}
 					else
 					{
@@ -211,7 +211,7 @@ public class CommonPositionToolBar extends FrameLayout implements OnClickListene
 				{
 					if(null != selectedView)
 					{
-						selectedView.setLayoutMarginTop(s.toString());
+						selectedView.getViewHelper().setLayoutMarginTop(s.toString());
 					}
 					else
 					{
@@ -234,7 +234,7 @@ public class CommonPositionToolBar extends FrameLayout implements OnClickListene
 				{
 					if(null != selectedView)
 					{
-						selectedView.setLayoutMarginBottom(s.toString());
+						selectedView.getViewHelper().setLayoutMarginBottom(s.toString());
 					}
 					else
 					{
@@ -255,9 +255,9 @@ public class CommonPositionToolBar extends FrameLayout implements OnClickListene
 		
 		if(null != selectedView)
 		{
-			if(!TextUtils.isEmpty(selectedView.getLayoutWidth()))
+			if(!TextUtils.isEmpty(selectedView.getViewHelper().getLayoutWidth()))
 			{
-				String width = selectedView.getLayoutWidth();
+				String width = selectedView.getViewHelper().getLayoutWidth();
 				if(width.contains("dp"))
 				{
 					width = width.replace("dp", "");
@@ -269,9 +269,9 @@ public class CommonPositionToolBar extends FrameLayout implements OnClickListene
 				layoutWidthEditText.setText("");
 			}
 			
-			if(!TextUtils.isEmpty(selectedView.getLayoutHeight()))
+			if(!TextUtils.isEmpty(selectedView.getViewHelper().getLayoutHeight()))
 			{
-				String height = selectedView.getLayoutHeight();
+				String height = selectedView.getViewHelper().getLayoutHeight();
 				if(height.contains("dp"))
 				{
 					height = height.replace("dp", "");
@@ -283,36 +283,36 @@ public class CommonPositionToolBar extends FrameLayout implements OnClickListene
 				layoutHeightEditText.setText("");
 			}
 			
-			if(selectedView.getLayoutMarginLeft() > 0)
+			if(selectedView.getViewHelper().getLayoutMarginLeft() > 0)
 			{
-				marginLeftEditText.setText(selectedView.getLayoutMarginLeft() + "");
+				marginLeftEditText.setText(selectedView.getViewHelper().getLayoutMarginLeft() + "");
 			}
 			else
 			{
 				marginLeftEditText.setText("");
 			}
 			
-			if(selectedView.getLayoutMarginRight() > 0)
+			if(selectedView.getViewHelper().getLayoutMarginRight() > 0)
 			{
-				marginRightEditText.setText(selectedView.getLayoutMarginRight() + "");
+				marginRightEditText.setText(selectedView.getViewHelper().getLayoutMarginRight() + "");
 			}
 			else
 			{
 				marginRightEditText.setText("");
 			}
 			
-			if(selectedView.getLayoutMarginTop() > 0)
+			if(selectedView.getViewHelper().getLayoutMarginTop() > 0)
 			{
-				marginTopEditText.setText(selectedView.getLayoutMarginTop() + "");
+				marginTopEditText.setText(selectedView.getViewHelper().getLayoutMarginTop() + "");
 			}
 			else
 			{
 				marginTopEditText.setText("");
 			}
 			
-			if(selectedView.getLayoutMarginBottom() > 0)
+			if(selectedView.getViewHelper().getLayoutMarginBottom() > 0)
 			{
-				marginBottomEditText.setText(selectedView.getLayoutMarginBottom() + "");
+				marginBottomEditText.setText(selectedView.getViewHelper().getLayoutMarginBottom() + "");
 			}
 			else
 			{
