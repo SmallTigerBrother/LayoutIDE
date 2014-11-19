@@ -24,7 +24,8 @@ import com.tiger.layoutide.widget.tree.ViewTreeNodeImp;
  * ListView实现，使用ScrollView伪装成列表进行展示，代码输出时，输出成ListView
  * @author Dalang
  */
-public class TGListView extends ScrollView implements IAdapterView, IViewTreeNode, OnLongClickListener
+public class TGListView extends ScrollView implements IAdapterView, IViewTreeNode, 
+    OnLongClickListener
 {
 	private IViewTreeNode viewTree;
 	
@@ -47,7 +48,7 @@ public class TGListView extends ScrollView implements IAdapterView, IViewTreeNod
 	{
 		super(context, attrs);
 		
-		viewHelper = new ViewHelper(this);
+		viewHelper = new AdapterViewHelper(this);
 		
 		viewTree = new ViewTreeNodeImp(this);
 		
