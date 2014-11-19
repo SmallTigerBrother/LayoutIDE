@@ -5,38 +5,38 @@ import android.view.Gravity;
 
 public class GravityValue
 {
-	public static final String NO_GRAVITY = "NO_GRAVITY";
+	public static final String NO_GRAVITY = "no_gravity";
 	
-	public static final String CENTER = "CENTER";
+	public static final String CENTER = "center";
 	
-	public static final String TOP = "TOP";
+	public static final String TOP = "top";
 	
-	public static final String BOTTOM = "BOTTOM";
+	public static final String BOTTOM = "bottom";
 	
-	public static final String LEFT = "LEFT";
+	public static final String LEFT = "left";
 	
-	public static final String RIGHT = "RIGHT";
+	public static final String RIGHT = "right";
 	
-	public static final String CENTER_VERTICAL = "CENTER_VERTICAL";
+	public static final String CENTER_VERTICAL = "center_vertical";
 	
-	public static final String CENTER_HORIZONTAL = "CENTER_HORIZONTAL";
+	public static final String CENTER_HORIZONTAL = "center_horizontal";
 	
 	
-	public static final String LEFT_ADN_TOP = "LEFT|TOP";
+	public static final String LEFT_ADN_TOP = "left|top";
 	
-	public static final String LEFT_ADN_BOTTOM = "LEFT|BOTTOM";
+	public static final String LEFT_ADN_BOTTOM = "left|bottom";
 	
-	public static final String RIGHT_AND_TOP = "RIGHT|TOP";
+	public static final String RIGHT_AND_TOP = "right|top";
 	
-	public static final String RIGHT_AND_BOTTOM = "RIGHT|BOTTOM";
+	public static final String RIGHT_AND_BOTTOM = "right|bottom";
 	
-	public static final String TOP_AND_CENTER_HORIZONTAL = "TOP|CENTER_HORIZONTAL";
+	public static final String TOP_AND_CENTER_HORIZONTAL = "top|center_horizontal";
 	
-	public static final String BOTTOM_AND_CENTER_HORIZONTAL = "BOTTOM|CENTER_HORIZONTAL";
+	public static final String BOTTOM_AND_CENTER_HORIZONTAL = "bottom|center_horizontal";
 	
-	public static final String LEFT_AND_CENTER_VERTICAL = "LEFT|CENTER_VERTICAL";
+	public static final String LEFT_AND_CENTER_VERTICAL = "left|center_vertical";
 	
-	public static final String RIGHT_AND_CENTER_VERTICAL = "RIGHT|CENTER_VERTICAL";
+	public static final String RIGHT_AND_CENTER_VERTICAL = "right|center_vertical";
 	
 	public static int getIntValue(String gravity)
 	{
