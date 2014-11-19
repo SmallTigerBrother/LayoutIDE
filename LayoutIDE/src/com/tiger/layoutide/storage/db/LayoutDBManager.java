@@ -10,6 +10,7 @@ import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
 
 import com.mn.tiger.datastorage.TGDBManager;
 import com.mn.tiger.datastorage.db.exception.DbException;
@@ -20,7 +21,6 @@ import com.tiger.layoutide.storage.model.LayoutDBModel;
 import com.tiger.layoutide.storage.model.ViewDBModel;
 import com.tiger.layoutide.utils.WidgetSimpleName;
 import com.tiger.layoutide.widget.IAdapterView;
-import com.tiger.layoutide.widget.ITextViewHelper;
 import com.tiger.layoutide.widget.IView;
 import com.tiger.layoutide.widget.IViewGroup;
 import com.tiger.layoutide.widget.TGButton;
@@ -32,6 +32,7 @@ import com.tiger.layoutide.widget.TGLinearLayout.LinearLayoutHelper;
 import com.tiger.layoutide.widget.TGListView;
 import com.tiger.layoutide.widget.TGRelativeLayout;
 import com.tiger.layoutide.widget.TGTextView;
+import com.tiger.layoutide.widget.TextViewHelper;
 
 public class LayoutDBManager
 {
@@ -248,20 +249,21 @@ public class LayoutDBManager
 		viewDBModel.setCenterHorizontal(view.getViewHelper().getCenterHorizontal());
 		viewDBModel.setCenterVertical(view.getViewHelper().getCenterVertical());
 		
-		if(view instanceof ITextViewHelper)
+		if(view instanceof TextView)
 		{
-			if(TextUtils.isEmpty(((ITextViewHelper)view).getText()))
+			TextViewHelper viewHelper = (TextViewHelper) view.getViewHelper();
+			if(TextUtils.isEmpty(viewHelper.getText()))
 			{
 				viewDBModel.setText("");
 			}
 			else
 			{
-				viewDBModel.setText(((ITextViewHelper)view).getText().toString());
+				viewDBModel.setText(viewHelper.getText().toString());
 			}
 			
-			viewDBModel.setTextSize(((ITextViewHelper)view).getTextSize());
+			viewDBModel.setTextSize(viewHelper.getTextSize());
 			
-			viewDBModel.setTextColor(((ITextViewHelper)view).getTextColor());
+			viewDBModel.setTextColor(viewHelper.getTextColor());
 		}
 		else if(view instanceof TGLinearLayout)
 		{
@@ -319,11 +321,12 @@ public class LayoutDBManager
 		view.getViewHelper().setLayoutWeight(viewDBModel.getLayoutWeight() + "");
 		view.getViewHelper().setLayoutGravityValue(viewDBModel.getLayoutGravity());
 		
-		if(view instanceof ITextViewHelper)
+		if(view instanceof TextView)
 		{
-			((ITextViewHelper)view).setText(viewDBModel.getText());
-			((ITextViewHelper)view).setTextSize(viewDBModel.getTextSize() + "");
-			((ITextViewHelper)view).setTextColor(viewDBModel.getTextColor());
+			TextViewHelper viewHelper = (TextViewHelper) view.getViewHelper();
+			viewHelper.setText(viewDBModel.getText());
+			viewHelper.setTextSize(viewDBModel.getTextSize() + "");
+			viewHelper.setTextColor(viewDBModel.getTextColor());
 		}
 		else if(view instanceof TGLinearLayout)
 		{

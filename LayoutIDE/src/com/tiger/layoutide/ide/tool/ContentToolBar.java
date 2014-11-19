@@ -16,6 +16,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.FrameLayout;
 import android.widget.Spinner;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.mn.tiger.annonation.ViewById;
@@ -28,8 +29,8 @@ import com.tiger.layoutide.storage.db.LayoutDBManager;
 import com.tiger.layoutide.storage.model.LayoutDBModel;
 import com.tiger.layoutide.utils.GravityValue;
 import com.tiger.layoutide.widget.IAdapterView;
-import com.tiger.layoutide.widget.ITextViewHelper;
 import com.tiger.layoutide.widget.IView;
+import com.tiger.layoutide.widget.TextViewHelper;
 
 public class ContentToolBar extends FrameLayout
 {
@@ -71,15 +72,16 @@ public class ContentToolBar extends FrameLayout
 			{
 				if(null != selectedView)
 				{
-					if(selectedView instanceof ITextViewHelper)
+					if(selectedView instanceof TextView)
 					{
+						TextViewHelper viewHelper = (TextViewHelper) selectedView.getViewHelper();
 						if(!TextUtils.isEmpty(s))
 						{
-							((ITextViewHelper)selectedView).setText(s.toString());
+							viewHelper.setText(s.toString());
 						}
 						else
 						{
-							((ITextViewHelper)selectedView).setText("");
+							viewHelper.setText("");
 						}
 					}
 				}
@@ -99,9 +101,10 @@ public class ContentToolBar extends FrameLayout
 				{
 					if(null != selectedView)
 					{
-						if(selectedView instanceof ITextViewHelper )
+						if(selectedView instanceof TextView)
 						{
-							((ITextViewHelper)selectedView).setTextColor(s.toString());
+							TextViewHelper viewHelper = (TextViewHelper) selectedView.getViewHelper();
+							viewHelper.setTextColor(s.toString());
 						}
 					}
 					else
@@ -121,9 +124,10 @@ public class ContentToolBar extends FrameLayout
 				{
 					if(null != selectedView)
 					{
-						if(selectedView instanceof ITextViewHelper)
+						if(selectedView instanceof TextView)
 						{
-							((ITextViewHelper)selectedView).setTextSize(s.toString());
+							TextViewHelper viewHelper = (TextViewHelper) selectedView.getViewHelper();
+							viewHelper.setTextSize(s.toString());
 						}
 					}
 					else
@@ -197,8 +201,9 @@ public class ContentToolBar extends FrameLayout
 		this.selectedView = selectedView;
 		if(null != selectedView)
 		{
-			if(selectedView instanceof ITextViewHelper)
+			if(selectedView instanceof TextView)
 			{
+				TextViewHelper viewHelper = (TextViewHelper) selectedView.getViewHelper();
 				textEditText.setVisibility(View.VISIBLE);
 				textSizeEditText.setVisibility(View.VISIBLE);
 				textColorEditText.setVisibility(View.VISIBLE);
@@ -206,27 +211,27 @@ public class ContentToolBar extends FrameLayout
 				adapterLayoutSelector.setVisibility(View.GONE);
 				createAdapterLayoutBtn.setVisibility(View.GONE);
 				
-				if(!TextUtils.isEmpty(((ITextViewHelper)selectedView).getText()))
+				if(!TextUtils.isEmpty(viewHelper.getText()))
 				{
-					textEditText.setText(((ITextViewHelper)selectedView).getText());
+					textEditText.setText(viewHelper.getText());
 				}
 				else
 				{
 					textEditText.setText("");
 				}
 				
-				if(((ITextViewHelper)selectedView).getTextSize() > 0)
+				if(viewHelper.getTextSize() > 0)
 				{
-					textSizeEditText.setText(((ITextViewHelper)selectedView).getTextSize() + "");
+					textSizeEditText.setText(viewHelper.getTextSize() + "");
 				}
 				else
 				{
 					textSizeEditText.setText("");
 				}
 				
-				if(!TextUtils.isEmpty(((ITextViewHelper)selectedView).getTextColor()))
+				if(!TextUtils.isEmpty(viewHelper.getTextColor()))
 				{
-					textColorEditText.setText(((ITextViewHelper)selectedView).getTextColor());
+					textColorEditText.setText(viewHelper.getTextColor());
 				}
 				else
 				{

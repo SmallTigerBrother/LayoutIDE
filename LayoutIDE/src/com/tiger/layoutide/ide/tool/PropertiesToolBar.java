@@ -16,7 +16,6 @@ import com.mn.tiger.annonation.ViewById;
 import com.mn.tiger.utility.ViewInjector;
 import com.tiger.layoutide.R;
 import com.tiger.layoutide.widget.IAdapterView;
-import com.tiger.layoutide.widget.ITextViewHelper;
 import com.tiger.layoutide.widget.IView;
 import com.tiger.layoutide.widget.TGLinearLayout;
 import com.tiger.layoutide.widget.TGRelativeLayout;
@@ -133,7 +132,7 @@ public class PropertiesToolBar
 						linearPositionToolBar.setVisibility(View.GONE);
 					}
 					
-					if(selectedView instanceof ITextViewHelper || selectedView instanceof ImageView 
+					if(selectedView instanceof TextView || selectedView instanceof ImageView 
 							|| selectedView instanceof IAdapterView)
 					{
 						contentToolBar.setVisibility(View.VISIBLE);
