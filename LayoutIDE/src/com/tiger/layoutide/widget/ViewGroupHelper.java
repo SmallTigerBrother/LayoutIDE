@@ -9,7 +9,7 @@ import android.view.ViewGroup;
 import com.tiger.layoutide.ide.tool.Emulator;
 import com.tiger.layoutide.ide.tool.PropertiesToolBar;
 
-public class ViewGroupHelper extends ViewHelper implements IViewGroup, OnDragListener
+public class ViewGroupHelper extends ViewHelper implements OnDragListener
 {
 	private boolean isRootViewGroup = false;
 	
@@ -18,13 +18,11 @@ public class ViewGroupHelper extends ViewHelper implements IViewGroup, OnDragLis
 		super(viewGroup);
 	}
 
-	@Override
 	public boolean isRootViewGroup()
 	{
 		return isRootViewGroup;
 	}
 
-	@Override
 	public void setRootViewGroup(boolean isRootView)
 	{
 		this.isRootViewGroup = isRootView;

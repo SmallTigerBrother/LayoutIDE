@@ -8,15 +8,16 @@ import android.view.ViewGroup;
 import android.view.ViewGroup.MarginLayoutParams;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
+import android.widget.TextView;
 
 import com.mn.tiger.utility.DisplayUtils;
 import com.mn.tiger.utility.LogTools;
 import com.tiger.layoutide.utils.GravityValue;
 import com.tiger.layoutide.utils.XmlOutputConstant;
 
-public class ViewHelper implements IView
+public class ViewHelper
 {
-	private static String LOG_TAG = ViewHelper.class.getSimpleName();
+	protected String LOG_TAG = this.getClass().getSimpleName();
 	
 	private View view;
 	
@@ -40,6 +41,8 @@ public class ViewHelper implements IView
 	
 	private int bottomMargin = Integer.MIN_VALUE;
 	
+	private boolean setOnClickListener = false;
+	
 	public ViewHelper(View view)
 	{
 		this.view = view;
@@ -50,31 +53,19 @@ public class ViewHelper implements IView
 		return view;
 	}
 
-	@Override
-	public String getSimpleClassName()
-	{
-		return null;
-	}
-	
-	@Override
-	public String getPackageName()
-	{
-		return null;
-	}
-
 	public void setIdName(String idName)
 	{
 		this.idName = idName;
 		view.setTag(idName);
 	}
 
-	@Override
+	
 	public String getIdName()
 	{
 		return idName;
 	}
 
-	@Override
+	
 	public String getLayoutWidth()
 	{
 		if(!TextUtils.isEmpty(layoutWidth))
@@ -108,7 +99,7 @@ public class ViewHelper implements IView
 		}
 	}
 	
-	@Override
+	
 	public void setLayoutWidth(String layoutWidth)
 	{
 		ViewGroup.LayoutParams layoutParams = view.getLayoutParams();
@@ -140,7 +131,7 @@ public class ViewHelper implements IView
 		view.setLayoutParams(layoutParams);
 	}
 
-	@Override
+	
 	public String getLayoutHeight()
 	{
 		if(!TextUtils.isEmpty(layoutHeight))
@@ -182,7 +173,7 @@ public class ViewHelper implements IView
 		}
 	}
 	
-	@Override
+	
 	public void setLayoutHeight(String layoutHeight)
 	{
 		ViewGroup.LayoutParams layoutParams = view.getLayoutParams();
@@ -213,7 +204,7 @@ public class ViewHelper implements IView
 		view.setLayoutParams(layoutParams);
 	}
 
-	@Override
+	
 	public float getLayoutWeight()
 	{
 		ViewGroup.LayoutParams layoutParams = view.getLayoutParams();
@@ -227,7 +218,7 @@ public class ViewHelper implements IView
 		}
 	}
 	
-	@Override
+	
 	public void setLayoutWeight(String weight)
 	{
 		if(view.getLayoutParams() instanceof RelativeLayout.LayoutParams)
@@ -254,7 +245,7 @@ public class ViewHelper implements IView
 		view.setLayoutParams(layoutParams);
 	}
 
-	@Override
+	
 	public int getLayoutMarginLeft()
 	{
 		if(leftMargin > Integer.MIN_VALUE)
@@ -273,7 +264,7 @@ public class ViewHelper implements IView
 		}
 	}
 	
-	@Override
+	
 	public void setLayoutMarginLeft(String marginLeft)
 	{
 		MarginLayoutParams layoutParams = (MarginLayoutParams)view.getLayoutParams();
@@ -290,7 +281,7 @@ public class ViewHelper implements IView
 		view.setLayoutParams(layoutParams);
 	}
 
-	@Override
+	
 	public int getLayoutMarginRight()
 	{
 		if(rightMargin > Integer.MIN_VALUE)
@@ -325,7 +316,7 @@ public class ViewHelper implements IView
 		view.setLayoutParams(layoutParams);
 	}
 
-	@Override
+	
 	public int getLayoutMarginTop()
 	{
 		if(topMargin > Integer.MIN_VALUE)
@@ -360,7 +351,7 @@ public class ViewHelper implements IView
 		view.setLayoutParams(layoutParams);
 	}
 
-	@Override
+	
 	public int getLayoutMarginBottom()
 	{
 		if(bottomMargin > Integer.MIN_VALUE)
@@ -395,37 +386,98 @@ public class ViewHelper implements IView
 		view.setLayoutParams(layoutParams);
 	}
 
-	@Override
+	
 	public String getBackgroundColor()
 	{
 		return backgroundColor;
 	}
 	
-	@Override
+	
 	public void setBackgroundColor(String color)
 	{
-		this.backgroundColor = color;
+		try
+		{
+			if(color.contains("#"))
+			{
+				color.replace("#", "");
+			}
+			if(color.contains("0x"))
+			{
+				color.replace("0x", "");
+			}
+			
+			int rgbColorInt = ViewHelper.getColorInt(color);
+			if(rgbColorInt > Integer.MIN_VALUE)
+			{
+				view.setBackgroundColor(rgbColorInt);
+				this.backgroundColor = color;
+			}
+			else
+			{
+				LogTools.w(LOG_TAG, "The backgroundColor can not be parsed from value " + color);
+			}
+		}
+		catch (Exception e)
+		{
+			LogTools.e(LOG_TAG, "The backgroundColor can not be parsed from value " + color);
+		}
 	}
 
-	@Override
+	
 	public String getGravityValue()
 	{
 		return gravity;
 	}
 	
-	@Override
+	
 	public void setGravityValue(String gravity)
 	{
-		this.gravity = gravity;
+		int intGravity = GravityValue.getIntValue(gravity);
+		if(view instanceof TextView)
+		{
+			((TextView)view).setGravity(intGravity);
+			if(intGravity != Gravity.NO_GRAVITY)
+			{
+				this.gravity = gravity;
+			}
+			else
+			{
+				this.gravity = null;
+			}
+		}
+		else if(view instanceof LinearLayout)
+		{
+			((LinearLayout)view).setGravity(intGravity);
+			if(intGravity != Gravity.NO_GRAVITY)
+			{
+				this.gravity = gravity;
+			}
+			else
+			{
+				this.gravity = null;
+			}
+		}
+		else if(view instanceof RelativeLayout)
+		{
+			((RelativeLayout)view).setGravity(intGravity);
+			if(intGravity != Gravity.NO_GRAVITY)
+			{
+				this.gravity = gravity;
+			}
+			else
+			{
+				this.gravity = null;
+			}
+		}
 	}
 
-	@Override
+	
 	public String getLayoutGravityValue()
 	{
 		return layoutGravity;
 	}
 	
-	@Override
+	
 	public void setLayoutGravityValue(String gravity)
 	{
 		if(view.getLayoutParams() instanceof LinearLayout.LayoutParams)
@@ -463,23 +515,7 @@ public class ViewHelper implements IView
 		return Integer.MIN_VALUE;
 	}
 	
-	@Override
-	public void onSelected()
-	{
-	}
 	
-	@Override
-	public void onUnSelected()
-	{
-	}
-	
-	@Override
-	public View newInstance()
-	{
-		return null;
-	}
-	
-	@Override
 	public void setAlignParentLeft(String value)
 	{
 		ViewGroup.LayoutParams layoutParams = (ViewGroup.LayoutParams) view.getLayoutParams();
@@ -498,7 +534,7 @@ public class ViewHelper implements IView
 		}
 	}
 
-	@Override
+	
 	public String getAlignParentLeft()
 	{
 		ViewGroup.LayoutParams layoutParams = (ViewGroup.LayoutParams) view.getLayoutParams();
@@ -513,7 +549,7 @@ public class ViewHelper implements IView
 		return null;
 	}
 
-	@Override
+	
 	public void setAlignParentRight(String value)
 	{
 		ViewGroup.LayoutParams layoutParams = (ViewGroup.LayoutParams) view.getLayoutParams();
@@ -532,7 +568,7 @@ public class ViewHelper implements IView
 		}
 	}
 	
-	@Override
+	
 	public String getAlignParentRight()
 	{
 		ViewGroup.LayoutParams layoutParams = (ViewGroup.LayoutParams) view.getLayoutParams();
@@ -547,7 +583,7 @@ public class ViewHelper implements IView
 		return null;
 	}
 	
-	@Override
+	
 	public void setAlignParentTop(String value)
 	{
 		ViewGroup.LayoutParams layoutParams = (ViewGroup.LayoutParams) view.getLayoutParams();
@@ -566,7 +602,7 @@ public class ViewHelper implements IView
 		}
 	}
 
-	@Override
+	
 	public String getAlignParentTop()
 	{
 		ViewGroup.LayoutParams layoutParams = (ViewGroup.LayoutParams) view.getLayoutParams();
@@ -581,7 +617,7 @@ public class ViewHelper implements IView
 		return null;
 	}
 
-	@Override
+	
 	public void setAlignParentBottom(String value)
 	{
 		ViewGroup.LayoutParams layoutParams = (ViewGroup.LayoutParams) view.getLayoutParams();
@@ -600,7 +636,7 @@ public class ViewHelper implements IView
 		}
 	}
 	
-	@Override
+	
 	public String getAlignParentBottom()
 	{
 		ViewGroup.LayoutParams layoutParams = (ViewGroup.LayoutParams) view.getLayoutParams();
@@ -615,7 +651,7 @@ public class ViewHelper implements IView
 		return null;
 	}
 	
-	@Override
+	
 	public void setToLeftOf(String anchorIdName)
 	{
 		ViewGroup.LayoutParams layoutParams = (ViewGroup.LayoutParams) view.getLayoutParams();
@@ -627,7 +663,7 @@ public class ViewHelper implements IView
 		}
 	}
 	
-	@Override
+	
 	public String getToLeftOf()
 	{
 		ViewGroup.LayoutParams layoutParams = (ViewGroup.LayoutParams) view.getLayoutParams();
@@ -642,7 +678,7 @@ public class ViewHelper implements IView
 		return null;
 	}
 	
-	@Override
+	
 	public void setToRightOf(String anchorIdName)
 	{
 		ViewGroup.LayoutParams layoutParams = (ViewGroup.LayoutParams) view.getLayoutParams();
@@ -654,7 +690,7 @@ public class ViewHelper implements IView
 		}
 	}
 	
-	@Override
+	
 	public String getToRightOf()
 	{
 		ViewGroup.LayoutParams layoutParams = (ViewGroup.LayoutParams) view.getLayoutParams();
@@ -669,7 +705,7 @@ public class ViewHelper implements IView
 		return null;
 	}
 	
-	@Override
+	
 	public void setBelow(String anchorIdName)
 	{
 		if(!TextUtils.isEmpty(anchorIdName))
@@ -684,7 +720,7 @@ public class ViewHelper implements IView
 		}
 	}
 
-	@Override
+	
 	public String getBelow()
 	{
 		ViewGroup.LayoutParams layoutParams = (ViewGroup.LayoutParams) view.getLayoutParams();
@@ -699,7 +735,7 @@ public class ViewHelper implements IView
 		return null;
 	}
 	
-	@Override
+	
 	public void setAbove(String anchorIdName)
 	{
 		if(!TextUtils.isEmpty(anchorIdName))
@@ -714,7 +750,7 @@ public class ViewHelper implements IView
 		}
 	}
 
-	@Override
+	
 	public String getAbove()
 	{
 		ViewGroup.LayoutParams layoutParams = (ViewGroup.LayoutParams) view.getLayoutParams();
@@ -729,7 +765,7 @@ public class ViewHelper implements IView
 		return null;
 	}
 
-	@Override
+	
 	public void setAlignLeft(String anchorIdName)
 	{
 		if(!TextUtils.isEmpty(anchorIdName))
@@ -744,7 +780,7 @@ public class ViewHelper implements IView
 		}
 	}
 
-	@Override
+	
 	public String getAlignLeft()
 	{
 		ViewGroup.LayoutParams layoutParams = (ViewGroup.LayoutParams) view.getLayoutParams();
@@ -759,7 +795,7 @@ public class ViewHelper implements IView
 		return null;
 	}
 	
-	@Override
+	
 	public void setAlignRight(String anchorIdName)
 	{
 		if(!TextUtils.isEmpty(anchorIdName))
@@ -774,7 +810,7 @@ public class ViewHelper implements IView
 		}
 	}
 
-	@Override
+	
 	public String getAlignRight()
 	{
 		ViewGroup.LayoutParams layoutParams = (ViewGroup.LayoutParams) view.getLayoutParams();
@@ -789,7 +825,7 @@ public class ViewHelper implements IView
 		return null;
 	}
 	
-	@Override
+	
 	public void setAlignTop(String anchorIdName)
 	{
 		ViewGroup.LayoutParams layoutParams = (ViewGroup.LayoutParams) view.getLayoutParams();
@@ -801,7 +837,7 @@ public class ViewHelper implements IView
 		}
 	}
 
-	@Override
+	
 	public String getAlignTop()
 	{
 		ViewGroup.LayoutParams layoutParams = (ViewGroup.LayoutParams) view.getLayoutParams();
@@ -816,7 +852,7 @@ public class ViewHelper implements IView
 		return null;
 	}
 	
-	@Override
+	
 	public void setAlignBottom(String anchorIdName)
 	{
 		ViewGroup.LayoutParams layoutParams = (ViewGroup.LayoutParams) view.getLayoutParams();
@@ -828,7 +864,7 @@ public class ViewHelper implements IView
 		}
 	}
 
-	@Override
+	
 	public String getAlignBottom()
 	{
 		ViewGroup.LayoutParams layoutParams = (ViewGroup.LayoutParams) view.getLayoutParams();
@@ -843,7 +879,7 @@ public class ViewHelper implements IView
 		return null;
 	}
 	
-	@Override
+	
 	public void setCenterInParent(String value)
 	{
 		ViewGroup.LayoutParams layoutParams = (ViewGroup.LayoutParams) view.getLayoutParams();
@@ -862,7 +898,7 @@ public class ViewHelper implements IView
 		}
 	}
 	
-	@Override
+	
 	public String getCenterInParent()
 	{
 		ViewGroup.LayoutParams layoutParams = (ViewGroup.LayoutParams) view.getLayoutParams();
@@ -877,7 +913,7 @@ public class ViewHelper implements IView
 		return null;
 	}
 	
-	@Override
+	
 	public void setCenterHorizontal(String value)
 	{
 		ViewGroup.LayoutParams layoutParams = (ViewGroup.LayoutParams) view.getLayoutParams();
@@ -896,7 +932,7 @@ public class ViewHelper implements IView
 		}
 	}
 	
-	@Override
+	
 	public String getCenterHorizontal()
 	{
 		ViewGroup.LayoutParams layoutParams = (ViewGroup.LayoutParams) view.getLayoutParams();
@@ -911,7 +947,7 @@ public class ViewHelper implements IView
 		return null;
 	}
 	
-	@Override
+	
 	public void setCenterVertical(String value)
 	{
 		ViewGroup.LayoutParams layoutParams = (ViewGroup.LayoutParams) view.getLayoutParams();
@@ -930,7 +966,7 @@ public class ViewHelper implements IView
 		}
 	}
 	
-	@Override
+	
 	public String getCenterVertical()
 	{
 		ViewGroup.LayoutParams layoutParams = (ViewGroup.LayoutParams) view.getLayoutParams();
@@ -949,5 +985,15 @@ public class ViewHelper implements IView
 	{
 		//未添加该属性时，值为0
 		return (rules[verb] != 0);
+	}
+
+	public void setOnClickListener(boolean isSetOnClickListener)
+	{
+		this.setOnClickListener = isSetOnClickListener;
+	}
+
+	public boolean isSetOnClickListener()
+	{
+		return setOnClickListener;
 	}
 }
