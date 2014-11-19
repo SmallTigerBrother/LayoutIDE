@@ -15,10 +15,13 @@ import com.tiger.code.constant.JActionScope;
 import com.tiger.code.model.JAnnonation;
 import com.tiger.code.model.JAnnonation.ParamKeyValue;
 import com.tiger.code.model.JClass;
+import com.tiger.code.model.JCodeBlock;
 import com.tiger.code.model.JField;
 import com.tiger.code.model.JGeneric;
 import com.tiger.code.model.JGeneric.WildCardType;
 import com.tiger.code.model.JInterface;
+import com.tiger.code.model.JMethod;
+import com.tiger.code.operator.JSwitch;
 import com.tiger.layoutide.R;
 import com.tiger.layoutide.ide.code.library.AndroidClass;
 import com.tiger.layoutide.ide.code.library.AndroidInterface;
@@ -26,6 +29,7 @@ import com.tiger.layoutide.ide.code.library.ClassFactory;
 import com.tiger.layoutide.ide.code.library.CustomAdapters;
 import com.tiger.layoutide.ide.code.library.InterfaceFactory;
 import com.tiger.layoutide.ide.code.library.JActivity;
+import com.tiger.layoutide.widget.AdapterViewHelper;
 import com.tiger.layoutide.widget.IView;
 
 public class JCodeHelper
@@ -36,26 +40,67 @@ public class JCodeHelper
 	public static String outputInjectViewById(ViewGroup viewGroup)
 	{
 		JClass jClass = new JClass(null, "ViewById");
-		jClass.addFields(getInjectViewFields(viewGroup));
+		getInjectViewFields(jClass, viewGroup);
 		return jClass.toString();
 	}
 	
-	private static List<JField> getInjectViewFields(View view)
+	private static void getInjectViewFields(JClass jClass, View mianView)
 	{
-		List<JField> fields = new ArrayList<JField>();
+		List<IView> views = getAllViews(mianView);
 		
-		if(!TextUtils.isEmpty(((IView)view).getViewHelper().getIdName()))
+		IView view;
+		JSwitch jSwitch = new JSwitch("view.getId()");
+		for(int i = 0;i < views.size(); i++)
 		{
-			JClass valueType = new JClass(((IView)view).getPackageName(), 
-					((IView)view).getSimpleClassName());
-			JField jField = new JField(JActionScope.PRIVATE, valueType, getViewName(
-					((IView)view).getViewHelper().getIdName()));
-			JAnnonation jAnnonation = new JAnnonation(ViewById.class.getSimpleName());
-			jAnnonation.addKeyValue(new ParamKeyValue("id", "R.id." + 
-			((IView)view).getViewHelper().getIdName()));
-			jField.addAnnonation(jAnnonation);
+			view = views.get(i);
+			if(!TextUtils.isEmpty(view.getViewHelper().getIdName()))
+			{
+				JClass valueType = new JClass(view.getPackageName(), 
+						view.getSimpleClassName());
+				JField jField = new JField(JActionScope.PRIVATE, valueType, getViewName(
+						view.getViewHelper().getIdName()));
+				JAnnonation jAnnonation = new JAnnonation(ViewById.class.getSimpleName());
+				jAnnonation.addKeyValue(new ParamKeyValue("id", "R.id." + 
+						view.getViewHelper().getIdName()));
+				jField.addAnnonation(jAnnonation);
+				jClass.addField(jField);
+				
+				if(view.getViewHelper().isSetOnClickListener())
+				{
+					jSwitch.addCase("R.id." + view.getViewHelper().getIdName());
+				}
+				
+				if(view.getViewHelper() instanceof AdapterViewHelper && 
+						((AdapterViewHelper)view.getViewHelper()).isSetOnItemClickListener())
+				{
+					
+				}
+			}
 			
-			fields.add(jField);
+			//TODO 加入其他的自定义事件
+		}
+		
+		if(jSwitch.getCaseValues().size() > 0)
+		{
+			JInterface jInterface = InterfaceFactory.createInterface(
+					AndroidInterface.OnClickListener4View);
+			
+			JMethod onClickMethod = jInterface.getMethods().get(0);
+			JCodeBlock codeBlock = new JCodeBlock();
+			codeBlock.addCode(jSwitch);
+			onClickMethod.setCodeBlock(codeBlock);
+			
+			jClass.implementInterface(jInterface);
+		}
+	}
+	
+	private static List<IView> getAllViews(View view)
+	{
+		List<IView> views = new ArrayList<IView>();
+		
+		if(view instanceof IView)
+		{
+			views.add((IView) view);
 		}
 		
 		if(view instanceof ViewGroup)
@@ -63,11 +108,11 @@ public class JCodeHelper
 			for (int i = 0; i < ((ViewGroup)view).getChildCount(); i++)
 			{
 				View childView = ((ViewGroup)view).getChildAt(i);
-				fields.addAll(getInjectViewFields(childView));
+				views.addAll(getAllViews(childView));
 			}
 		}
 		
-		return fields;
+		return views;
 	}
 	
 	@SuppressLint("DefaultLocale")
@@ -115,7 +160,7 @@ public class JCodeHelper
 				jActivity.implementInterfaces(params.getInterfaces());
 				
 				//添加所有 注入的View声明
-				jActivity.addFields(getInjectViewFields(viewGroup));
+//				jActivity.addFields(getInjectViewFields(viewGroup));
 		
 		return jActivity;
 	}
