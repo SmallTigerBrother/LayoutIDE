@@ -27,7 +27,7 @@ public class TGViewPager extends ViewPager implements IAdapterView, IViewTreeNod
 {
 	private IViewTreeNode viewTreeNode;
 	
-	private ViewGroupHelper viewGroupHelper;
+	private ViewHelper viewGroupHelper;
 	
 	private boolean isSelected = false;
 	
@@ -50,7 +50,7 @@ public class TGViewPager extends ViewPager implements IAdapterView, IViewTreeNod
 	{
 		super(context, attrs);
 		
-		viewGroupHelper = new ViewGroupHelper(this);
+		viewGroupHelper = new ViewHelper(this);
 		
 		viewTreeNode = new ViewTreeNodeImp(this);
 		
@@ -264,6 +264,26 @@ public class TGViewPager extends ViewPager implements IAdapterView, IViewTreeNod
 					mHasPerformedLongPress = true;
 				}
 			}
+		}
+	}
+	
+	public static class ViewPagerHelper extends ViewHelper
+	{
+		private boolean setOnPagerChangedListener;
+		
+		public ViewPagerHelper(View view)
+		{
+			super(view);
+		}
+
+		public boolean isSetOnPagerChangedListener()
+		{
+			return setOnPagerChangedListener;
+		}
+
+		public void setOnPagerChangedListener(boolean setOnPagerChangedListener)
+		{
+			this.setOnPagerChangedListener = setOnPagerChangedListener;
 		}
 	}
 }
