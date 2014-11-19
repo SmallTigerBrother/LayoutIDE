@@ -14,13 +14,11 @@ import com.mn.tiger.annonation.ViewById;
 import com.tiger.code.constant.JActionScope;
 import com.tiger.code.model.JAnnonation;
 import com.tiger.code.model.JAnnonation.ParamKeyValue;
-import com.tiger.code.model.JGeneric.WildCardType;
 import com.tiger.code.model.JClass;
-import com.tiger.code.model.JCodeBlock;
 import com.tiger.code.model.JField;
 import com.tiger.code.model.JGeneric;
+import com.tiger.code.model.JGeneric.WildCardType;
 import com.tiger.code.model.JInterface;
-import com.tiger.code.model.JPackage;
 import com.tiger.layoutide.R;
 import com.tiger.layoutide.ide.code.library.AndroidClass;
 import com.tiger.layoutide.ide.code.library.AndroidInterface;
@@ -46,14 +44,15 @@ public class JCodeHelper
 	{
 		List<JField> fields = new ArrayList<JField>();
 		
-		if(!TextUtils.isEmpty(((IView)view).getIdName()))
+		if(!TextUtils.isEmpty(((IView)view).getViewHelper().getIdName()))
 		{
 			JClass valueType = new JClass(((IView)view).getPackageName(), 
 					((IView)view).getSimpleClassName());
 			JField jField = new JField(JActionScope.PRIVATE, valueType, getViewName(
-					((IView)view).getIdName()));
+					((IView)view).getViewHelper().getIdName()));
 			JAnnonation jAnnonation = new JAnnonation(ViewById.class.getSimpleName());
-			jAnnonation.addKeyValue(new ParamKeyValue("id", "R.id." + ((IView)view).getIdName()));
+			jAnnonation.addKeyValue(new ParamKeyValue("id", "R.id." + 
+			((IView)view).getViewHelper().getIdName()));
 			jField.addAnnonation(jAnnonation);
 			
 			fields.add(jField);
