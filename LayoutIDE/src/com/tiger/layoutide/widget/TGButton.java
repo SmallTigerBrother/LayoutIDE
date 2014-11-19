@@ -39,7 +39,7 @@ public class TGButton extends Button implements IView, IViewTreeNode, OnLongClic
 	{
 		super(context, attrs);
 		
-		viewHelper = new ViewHelper(this);
+		viewHelper = new TextViewHelper(this);
 		
 		viewTreeNode = new ViewTreeNodeImp(this);
 		

@@ -38,7 +38,7 @@ public class TGCheckBox extends CheckBox implements IViewTreeNode, IView, OnLong
 	{
 		super(context, attrs);
 		
-		viewHelper = new ViewHelper(this);
+		viewHelper = new TextViewHelper(this);
 		
 		viewTreeNode = new ViewTreeNodeImp(this);
 		
