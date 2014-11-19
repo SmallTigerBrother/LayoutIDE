@@ -20,7 +20,7 @@ import com.tiger.layoutide.storage.model.LayoutDBModel;
 import com.tiger.layoutide.storage.model.ViewDBModel;
 import com.tiger.layoutide.utils.WidgetSimpleName;
 import com.tiger.layoutide.widget.IAdapterView;
-import com.tiger.layoutide.widget.ITextView;
+import com.tiger.layoutide.widget.ITextViewHelper;
 import com.tiger.layoutide.widget.IView;
 import com.tiger.layoutide.widget.IViewGroup;
 import com.tiger.layoutide.widget.TGButton;
@@ -28,6 +28,7 @@ import com.tiger.layoutide.widget.TGCheckBox;
 import com.tiger.layoutide.widget.TGEditText;
 import com.tiger.layoutide.widget.TGImageView;
 import com.tiger.layoutide.widget.TGLinearLayout;
+import com.tiger.layoutide.widget.TGLinearLayout.LinearLayoutHelper;
 import com.tiger.layoutide.widget.TGListView;
 import com.tiger.layoutide.widget.TGRelativeLayout;
 import com.tiger.layoutide.widget.TGTextView;
@@ -198,11 +199,11 @@ public class LayoutDBManager
 			viewDBModel.setParentViewClassName(WidgetSimpleName.VIEWGROUP);
 		}
 		
-		viewDBModel.setIdName(view.getIdName());
+		viewDBModel.setIdName(view.getViewHelper().getIdName());
 		
-		if(!TextUtils.isEmpty(view.getLayoutWidth()))
+		if(!TextUtils.isEmpty(view.getViewHelper().getLayoutWidth()))
 		{
-			String width = view.getLayoutWidth();
+			String width = view.getViewHelper().getLayoutWidth();
 			if(width.contains("dp"))
 			{
 				width = width.replace("dp", "");
@@ -210,9 +211,9 @@ public class LayoutDBManager
 			viewDBModel.setLayoutWidth(width);
 		}
 		
-		if(!TextUtils.isEmpty(view.getLayoutHeight()))
+		if(!TextUtils.isEmpty(view.getViewHelper().getLayoutHeight()))
 		{
-			String height = view.getLayoutHeight();
+			String height = view.getViewHelper().getLayoutHeight();
 			if(height.contains("dp"))
 			{
 				height = height.replace("dp", "");
@@ -220,51 +221,52 @@ public class LayoutDBManager
 			viewDBModel.setLayoutHeight(height);
 		}
 		
-		viewDBModel.setLeftMargin(view.getLayoutMarginLeft());
-		viewDBModel.setRightMargin(view.getLayoutMarginRight());
-		viewDBModel.setTopMargin(view.getLayoutMarginTop());
-		viewDBModel.setBottomMargin(view.getLayoutMarginBottom());
+		viewDBModel.setLeftMargin(view.getViewHelper().getLayoutMarginLeft());
+		viewDBModel.setRightMargin(view.getViewHelper().getLayoutMarginRight());
+		viewDBModel.setTopMargin(view.getViewHelper().getLayoutMarginTop());
+		viewDBModel.setBottomMargin(view.getViewHelper().getLayoutMarginBottom());
 		
-		viewDBModel.setLayoutWeight(view.getLayoutWeight());
-		viewDBModel.setLayoutGravity(view.getLayoutGravityValue());
+		viewDBModel.setLayoutWeight(view.getViewHelper().getLayoutWeight());
+		viewDBModel.setLayoutGravity(view.getViewHelper().getLayoutGravityValue());
 		
-		viewDBModel.setAlignParentLeft(view.getAlignParentLeft());
-		viewDBModel.setAlignParentRight(view.getAlignParentRight());
-		viewDBModel.setAlignParentTop(view.getAlignParentTop());
-		viewDBModel.setAlignParentBottom(view.getAlignParentBottom());
+		viewDBModel.setAlignParentLeft(view.getViewHelper().getAlignParentLeft());
+		viewDBModel.setAlignParentRight(view.getViewHelper().getAlignParentRight());
+		viewDBModel.setAlignParentTop(view.getViewHelper().getAlignParentTop());
+		viewDBModel.setAlignParentBottom(view.getViewHelper().getAlignParentBottom());
 		
-		viewDBModel.setAbove(view.getAbove());
-		viewDBModel.setBelow(view.getBelow());
-		viewDBModel.setToLeftOf(view.getToLeftOf());
-		viewDBModel.setToRightOf(view.getToRightOf());
+		viewDBModel.setAbove(view.getViewHelper().getAbove());
+		viewDBModel.setBelow(view.getViewHelper().getBelow());
+		viewDBModel.setToLeftOf(view.getViewHelper().getToLeftOf());
+		viewDBModel.setToRightOf(view.getViewHelper().getToRightOf());
 		
-		viewDBModel.setAlignLeft(view.getAlignLeft());
-		viewDBModel.setAlignRight(view.getAlignRight());
-		viewDBModel.setAlignTop(view.getAlignTop());
-		viewDBModel.setAlignBottom(view.getAlignBottom());
+		viewDBModel.setAlignLeft(view.getViewHelper().getAlignLeft());
+		viewDBModel.setAlignRight(view.getViewHelper().getAlignRight());
+		viewDBModel.setAlignTop(view.getViewHelper().getAlignTop());
+		viewDBModel.setAlignBottom(view.getViewHelper().getAlignBottom());
 		
-		viewDBModel.setCenterInParent(view.getCenterInParent());
-		viewDBModel.setCenterHorizontal(view.getCenterHorizontal());
-		viewDBModel.setCenterVertical(view.getCenterVertical());
+		viewDBModel.setCenterInParent(view.getViewHelper().getCenterInParent());
+		viewDBModel.setCenterHorizontal(view.getViewHelper().getCenterHorizontal());
+		viewDBModel.setCenterVertical(view.getViewHelper().getCenterVertical());
 		
-		if(view instanceof ITextView)
+		if(view instanceof ITextViewHelper)
 		{
-			if(TextUtils.isEmpty(((ITextView)view).getText()))
+			if(TextUtils.isEmpty(((ITextViewHelper)view).getText()))
 			{
 				viewDBModel.setText("");
 			}
 			else
 			{
-				viewDBModel.setText(((ITextView)view).getText().toString());
+				viewDBModel.setText(((ITextViewHelper)view).getText().toString());
 			}
 			
-			viewDBModel.setTextSize(((ITextView)view).getTextSize());
+			viewDBModel.setTextSize(((ITextViewHelper)view).getTextSize());
 			
-			viewDBModel.setTextColor(((ITextView)view).getTextColor());
+			viewDBModel.setTextColor(((ITextViewHelper)view).getTextColor());
 		}
 		else if(view instanceof TGLinearLayout)
 		{
-			viewDBModel.setOrientation(((TGLinearLayout)view).getOrientationValue());
+			LinearLayoutHelper layoutHelper = (LinearLayoutHelper)view.getViewHelper();
+			viewDBModel.setOrientation(layoutHelper.getOrientationValue());
 			viewDBModel.setRootViewGroup(((TGLinearLayout)view).isRootViewGroup());
 		}
 		else if(view instanceof TGRelativeLayout)
@@ -276,9 +278,9 @@ public class LayoutDBManager
 			viewDBModel.setItemLayout(((IAdapterView)view).getItemLayout());
 		}
 		
-		viewDBModel.setGravity(view.getGravityValue());
+		viewDBModel.setGravity(view.getViewHelper().getGravityValue());
 		
-		viewDBModel.setBackgroundColor(view.getBackgroundColor());
+		viewDBModel.setBackgroundColor(view.getViewHelper().getBackgroundColor());
 		
 		return viewDBModel;
 	}
@@ -287,7 +289,7 @@ public class LayoutDBManager
 	{
 		IView view = createNewView(context, viewDBModel);
 		
-		view.setIdName(viewDBModel.getIdName());
+		view.getViewHelper().setIdName(viewDBModel.getIdName());
 		
 		if(!TextUtils.isEmpty(viewDBModel.getLayoutWidth()))
 		{
@@ -296,7 +298,7 @@ public class LayoutDBManager
 			{
 				width = width.replace("dp", "");
 			}
-			view.setLayoutWidth(width);
+			view.getViewHelper().setLayoutWidth(width);
 		}
 		
 		if(!TextUtils.isEmpty(viewDBModel.getLayoutHeight()))
@@ -306,26 +308,27 @@ public class LayoutDBManager
 			{
 				height = height.replace("dp", "");
 			}
-			view.setLayoutHeight(height);
+			view.getViewHelper().setLayoutHeight(height);
 		}
 		
-		view.setLayoutMarginLeft(viewDBModel.getLeftMargin() + "");
-		view.setLayoutMarginRight(viewDBModel.getRightMargin() + "");
-		view.setLayoutMarginTop(viewDBModel.getTopMargin() + "");
-		view.setLayoutMarginBottom(viewDBModel.getBottomMargin() + "");
+		view.getViewHelper().setLayoutMarginLeft(viewDBModel.getLeftMargin() + "");
+		view.getViewHelper().setLayoutMarginRight(viewDBModel.getRightMargin() + "");
+		view.getViewHelper().setLayoutMarginTop(viewDBModel.getTopMargin() + "");
+		view.getViewHelper().setLayoutMarginBottom(viewDBModel.getBottomMargin() + "");
 		
-		view.setLayoutWeight(viewDBModel.getLayoutWeight() + "");
-		view.setLayoutGravityValue(viewDBModel.getLayoutGravity());
+		view.getViewHelper().setLayoutWeight(viewDBModel.getLayoutWeight() + "");
+		view.getViewHelper().setLayoutGravityValue(viewDBModel.getLayoutGravity());
 		
-		if(view instanceof ITextView)
+		if(view instanceof ITextViewHelper)
 		{
-			((ITextView)view).setText(viewDBModel.getText());
-			((ITextView)view).setTextSize(viewDBModel.getTextSize() + "");
-			((ITextView)view).setTextColor(viewDBModel.getTextColor());
+			((ITextViewHelper)view).setText(viewDBModel.getText());
+			((ITextViewHelper)view).setTextSize(viewDBModel.getTextSize() + "");
+			((ITextViewHelper)view).setTextColor(viewDBModel.getTextColor());
 		}
 		else if(view instanceof TGLinearLayout)
 		{
-			((TGLinearLayout)view).setOrientationValue(viewDBModel.getOrientation());
+			LinearLayoutHelper layoutHelper = (LinearLayoutHelper)view.getViewHelper();
+			layoutHelper.setOrientationValue(viewDBModel.getOrientation());
 			((TGLinearLayout)view).setRootViewGroup(viewDBModel.isRootViewGroup());
 		}
 		else if(view instanceof TGRelativeLayout)
@@ -337,33 +340,33 @@ public class LayoutDBManager
 			((IAdapterView)view).setItemLayout(viewDBModel.getItemLayout());
 		}
 		
-		view.setGravityValue(viewDBModel.getGravity());
+		view.getViewHelper().setGravityValue(viewDBModel.getGravity());
 		
-		view.setBackgroundColor(viewDBModel.getBackgroundColor());
+		view.getViewHelper().setBackgroundColor(viewDBModel.getBackgroundColor());
 		
 		return view;
 	}
 	
 	private static void setRelativePostions(IView view, ViewDBModel viewDBModel)
 	{
-		view.setAlignParentLeft(viewDBModel.getAlignParentLeft());
-		view.setAlignParentRight(viewDBModel.getAlignParentRight());
-		view.setAlignParentTop(viewDBModel.getAlignParentTop());
-		view.setAlignParentBottom(viewDBModel.getAlignParentBottom());
+		view.getViewHelper().setAlignParentLeft(viewDBModel.getAlignParentLeft());
+		view.getViewHelper().setAlignParentRight(viewDBModel.getAlignParentRight());
+		view.getViewHelper().setAlignParentTop(viewDBModel.getAlignParentTop());
+		view.getViewHelper().setAlignParentBottom(viewDBModel.getAlignParentBottom());
 		
-		view.setAbove(viewDBModel.getAbove());
-		view.setBelow(viewDBModel.getBelow());
-		view.setToLeftOf(viewDBModel.getToLeftOf());
-		view.setToRightOf(viewDBModel.getToRightOf());
+		view.getViewHelper().setAbove(viewDBModel.getAbove());
+		view.getViewHelper().setBelow(viewDBModel.getBelow());
+		view.getViewHelper().setToLeftOf(viewDBModel.getToLeftOf());
+		view.getViewHelper().setToRightOf(viewDBModel.getToRightOf());
 		
-		view.setAlignLeft(viewDBModel.getAlignLeft());
-		view.setAlignRight(viewDBModel.getAlignRight());
-		view.setAlignTop(viewDBModel.getAlignTop());
-		view.setAlignBottom(viewDBModel.getAlignBottom());
+		view.getViewHelper().setAlignLeft(viewDBModel.getAlignLeft());
+		view.getViewHelper().setAlignRight(viewDBModel.getAlignRight());
+		view.getViewHelper().setAlignTop(viewDBModel.getAlignTop());
+		view.getViewHelper().setAlignBottom(viewDBModel.getAlignBottom());
 		
-		view.setCenterInParent(viewDBModel.getCenterInParent());
-		view.setCenterHorizontal(viewDBModel.getCenterHorizontal());
-		view.setCenterVertical(viewDBModel.getCenterVertical());
+		view.getViewHelper().setCenterInParent(viewDBModel.getCenterInParent());
+		view.getViewHelper().setCenterHorizontal(viewDBModel.getCenterHorizontal());
+		view.getViewHelper().setCenterVertical(viewDBModel.getCenterVertical());
 	}
 	
 	private static IView createNewView(Context context, ViewDBModel viewDBModel)
