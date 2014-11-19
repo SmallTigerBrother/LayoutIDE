@@ -6,11 +6,9 @@ import android.widget.TextView;
 
 import com.tiger.layoutide.utils.XmlOutputConstant;
 import com.tiger.layoutide.widget.IView;
-import com.tiger.layoutide.widget.TGButton;
-import com.tiger.layoutide.widget.TGCheckBox;
-import com.tiger.layoutide.widget.TGEditText;
 import com.tiger.layoutide.widget.TGLinearLayout;
-import com.tiger.layoutide.widget.TGTextView;
+import com.tiger.layoutide.widget.TGLinearLayout.LinearLayoutHelper;
+import com.tiger.layoutide.widget.TextViewHelper;
 
 public class ViewTreeNodeImp implements IViewTreeNode
 {
@@ -37,60 +35,71 @@ public class ViewTreeNodeImp implements IViewTreeNode
 	{
 		StringBuilder propertiesStrBuilder = new StringBuilder();
 		
-		if(!TextUtils.isEmpty(view.getIdName()))
+		if(!TextUtils.isEmpty(view.getViewHelper().getIdName()))
 		{
-			propertiesStrBuilder.append(String.format(XmlOutputConstant.ID, view.getIdName()) + "\n");
+			propertiesStrBuilder.append(String.format(XmlOutputConstant.ID, 
+					view.getViewHelper().getIdName()) + "\n");
 		}
 		
-		propertiesStrBuilder.append(String.format(XmlOutputConstant.LAYOUT_WIDTH, view.getLayoutWidth()) + "\n");
-		propertiesStrBuilder.append(String.format(XmlOutputConstant.LAYOUT_HEIGHT, view.getLayoutHeight()) + "\n");
+		propertiesStrBuilder.append(String.format(XmlOutputConstant.LAYOUT_WIDTH, 
+				view.getViewHelper().getLayoutWidth()) + "\n");
+		propertiesStrBuilder.append(String.format(XmlOutputConstant.LAYOUT_HEIGHT, 
+				view.getViewHelper().getLayoutHeight()) + "\n");
 		
 		/********************************* Common Position *************************************/
 		
-		if(view.getLayoutMarginLeft() > 0)
+		if(view.getViewHelper().getLayoutMarginLeft() > 0)
 		{
-			propertiesStrBuilder.append(String.format(XmlOutputConstant.LAYOUT_MARGIN_LEFT, view.getLayoutMarginLeft()) + "\n");
+			propertiesStrBuilder.append(String.format(XmlOutputConstant.LAYOUT_MARGIN_LEFT, 
+					view.getViewHelper().getLayoutMarginLeft()) + "\n");
 		}
 		
-		if(view.getLayoutMarginRight() > 0)
+		if(view.getViewHelper().getLayoutMarginRight() > 0)
 		{
-			propertiesStrBuilder.append(String.format(XmlOutputConstant.LAYOUT_MARGIN_RIGHT, view.getLayoutMarginRight()) + "\n");
+			propertiesStrBuilder.append(String.format(XmlOutputConstant.LAYOUT_MARGIN_RIGHT, 
+					view.getViewHelper().getLayoutMarginRight()) + "\n");
 		}
 		
-		if(view.getLayoutMarginTop() > 0)
+		if(view.getViewHelper().getLayoutMarginTop() > 0)
 		{
-			propertiesStrBuilder.append(String.format(XmlOutputConstant.LAYOUT_MARGIN_TOP, view.getLayoutMarginTop()) + "\n");
+			propertiesStrBuilder.append(String.format(XmlOutputConstant.LAYOUT_MARGIN_TOP, 
+					view.getViewHelper().getLayoutMarginTop()) + "\n");
 		}
 		
-		if(view.getLayoutMarginBottom() > 0)
+		if(view.getViewHelper().getLayoutMarginBottom() > 0)
 		{
-			propertiesStrBuilder.append(String.format(XmlOutputConstant.LAYOUT_MARGIN_BOTTOM, view.getLayoutMarginBottom()) + "\n");
+			propertiesStrBuilder.append(String.format(XmlOutputConstant.LAYOUT_MARGIN_BOTTOM, 
+					view.getViewHelper().getLayoutMarginBottom()) + "\n");
 		}
 		
 		/********************************* LinearLayout *************************************/
 		
-		if(view.getLayoutWeight() > 0)
+		if(view.getViewHelper().getLayoutWeight() > 0)
 		{
-			propertiesStrBuilder.append(String.format(XmlOutputConstant.LAYOUT_WEIGHT, view.getLayoutWeight()) + "\n");
+			propertiesStrBuilder.append(String.format(XmlOutputConstant.LAYOUT_WEIGHT, 
+					view.getViewHelper().getLayoutWeight()) + "\n");
 		}
 		
-		if(!TextUtils.isEmpty(view.getLayoutGravityValue()))
+		if(!TextUtils.isEmpty(view.getViewHelper().getLayoutGravityValue()))
 		{
-			propertiesStrBuilder.append(String.format(XmlOutputConstant.LAYOUT_GRAVITY, view.getLayoutGravityValue()) + "\n");
+			propertiesStrBuilder.append(String.format(XmlOutputConstant.LAYOUT_GRAVITY, 
+					view.getViewHelper().getLayoutGravityValue()) + "\n");
 		}
 		
 		/********************************* Content *************************************/
 		
-		if(!TextUtils.isEmpty(view.getGravityValue()))
+		if(!TextUtils.isEmpty(view.getViewHelper().getGravityValue()))
 		{
-			propertiesStrBuilder.append(String.format(XmlOutputConstant.GRAVITY, view.getGravityValue()) + "\n");
+			propertiesStrBuilder.append(String.format(XmlOutputConstant.GRAVITY, 
+					view.getViewHelper().getGravityValue()) + "\n");
 		}
 		
 		/********************************* BackGround *************************************/
 		
-		if(!TextUtils.isEmpty(view.getBackgroundColor()))
+		if(!TextUtils.isEmpty(view.getViewHelper().getBackgroundColor()))
 		{
-			propertiesStrBuilder.append(String.format(XmlOutputConstant.BACKGROUND_COLOR, view.getBackgroundColor()) + "\n");
+			propertiesStrBuilder.append(String.format(XmlOutputConstant.BACKGROUND_COLOR, 
+					view.getViewHelper().getBackgroundColor()) + "\n");
 		}
 		
 		/********************************* RelativeLayout *************************************/
@@ -108,9 +117,11 @@ public class ViewTreeNodeImp implements IViewTreeNode
 	{
 		if(view instanceof LinearLayout)
 		{
-			if(!TextUtils.isEmpty(((TGLinearLayout)view).getOrientationValue()))
+			LinearLayoutHelper layoutHelper = (LinearLayoutHelper) ((TGLinearLayout)view).getViewHelper();
+			if(!TextUtils.isEmpty(layoutHelper.getOrientationValue()))
 			{
-				propertiesStrBuilder.append(String.format(XmlOutputConstant.LAYOUT_ORIENTATION, ((TGLinearLayout)view).getOrientationValue()) + "\n");
+				propertiesStrBuilder.append(String.format(XmlOutputConstant.LAYOUT_ORIENTATION,
+						layoutHelper.getOrientationValue()) + "\n");
 			}
 		}
 		
@@ -123,137 +134,117 @@ public class ViewTreeNodeImp implements IViewTreeNode
 		{
 			if(!TextUtils.isEmpty(((TextView)view).getText()))
 			{
-				propertiesStrBuilder.append(String.format(XmlOutputConstant.TEXT, ((TextView)view).getText()) + "\n");
-			}
-		}
-		
-		if(view instanceof TGTextView)
-		{
-			if(((TGTextView)view).getTextSize() > 0)
-			{
-				propertiesStrBuilder.append(String.format(XmlOutputConstant.TEXT_SIZE, ((TGTextView)view).getTextSize()) + "\n");
+				propertiesStrBuilder.append(String.format(XmlOutputConstant.TEXT, 
+						((TextView)view).getText()) + "\n");
 			}
 			
-			if(!TextUtils.isEmpty(((TGTextView)view).getTextColor()))
+			TextViewHelper viewHelper = (TextViewHelper) view.getViewHelper();
+			
+			if(viewHelper.getTextSize() > 0)
 			{
-				propertiesStrBuilder.append(String.format(XmlOutputConstant.TEXT_COLOR, ((TGTextView)view).getTextColor()) + "\n");
-			}
-		}
-		else if(view instanceof TGButton)
-		{
-			if(((TGButton)view).getTextSize() > 0)
-			{
-				propertiesStrBuilder.append(String.format(XmlOutputConstant.TEXT_SIZE, ((TGButton)view).getTextSize()) + "\n");
+				propertiesStrBuilder.append(String.format(XmlOutputConstant.TEXT_SIZE,
+						viewHelper.getTextSize()) + "\n");
 			}
 			
-			if(!TextUtils.isEmpty(((TGButton)view).getTextColor()))
+			if(!TextUtils.isEmpty(viewHelper.getTextColor()))
 			{
-				propertiesStrBuilder.append(String.format(XmlOutputConstant.TEXT_COLOR, ((TGButton)view).getTextColor()) + "\n");
+				propertiesStrBuilder.append(String.format(XmlOutputConstant.TEXT_COLOR, 
+						viewHelper.getTextColor()) + "\n");
 			}
 		}
-		else if(view instanceof TGEditText)
-		{
-			if(((TGEditText)view).getTextSize() > 0)
-			{
-				propertiesStrBuilder.append(String.format(XmlOutputConstant.TEXT_SIZE, ((TGEditText)view).getTextSize()) + "\n");
-			}
-			
-			if(!TextUtils.isEmpty(((TGEditText)view).getTextColor()))
-			{
-				propertiesStrBuilder.append(String.format(XmlOutputConstant.TEXT_COLOR, ((TGEditText)view).getTextColor()) + "\n");
-			}
-		}
-		else if(view instanceof TGCheckBox)
-		{
-			if(((TGCheckBox)view).getTextSize() > 0)
-			{
-				propertiesStrBuilder.append(String.format(XmlOutputConstant.TEXT_SIZE, ((TGCheckBox)view).getTextSize()) + "\n");
-			}
-			
-			if(!TextUtils.isEmpty(((TGCheckBox)view).getTextColor()))
-			{
-				propertiesStrBuilder.append(String.format(XmlOutputConstant.TEXT_COLOR, ((TGCheckBox)view).getTextColor()) + "\n");
-			}
-		}
-		
 		return propertiesStrBuilder;
 	}
 	
 	private StringBuilder appendRelativePositionProperties(StringBuilder propertiesStrBuilder)
 	{
-		if(!TextUtils.isEmpty(view.getAlignParentLeft()))
+		if(!TextUtils.isEmpty(view.getViewHelper().getAlignParentLeft()))
 		{
-			propertiesStrBuilder.append(String.format(XmlOutputConstant.ALIGN_PARENT_LEFT, view.getAlignParentLeft()) + "\n");
+			propertiesStrBuilder.append(String.format(XmlOutputConstant.ALIGN_PARENT_LEFT, 
+					view.getViewHelper().getAlignParentLeft()) + "\n");
 		}
 		
-		if(!TextUtils.isEmpty(view.getAlignParentRight()))
+		if(!TextUtils.isEmpty(view.getViewHelper().getAlignParentRight()))
 		{
-			propertiesStrBuilder.append(String.format(XmlOutputConstant.ALIGN_PARENT_RIGHT, view.getAlignParentRight()) + "\n");
+			propertiesStrBuilder.append(String.format(XmlOutputConstant.ALIGN_PARENT_RIGHT, 
+					view.getViewHelper().getAlignParentRight()) + "\n");
 		}
 		
-		if(!TextUtils.isEmpty(view.getAlignParentTop()))
+		if(!TextUtils.isEmpty(view.getViewHelper().getAlignParentTop()))
 		{
-			propertiesStrBuilder.append(String.format(XmlOutputConstant.ALIGN_PARENT_TOP, view.getAlignParentTop()) + "\n");
+			propertiesStrBuilder.append(String.format(XmlOutputConstant.ALIGN_PARENT_TOP, 
+					view.getViewHelper().getAlignParentTop()) + "\n");
 		}
 		
-		if(!TextUtils.isEmpty(view.getAlignParentBottom()))
+		if(!TextUtils.isEmpty(view.getViewHelper().getAlignParentBottom()))
 		{
-			propertiesStrBuilder.append(String.format(XmlOutputConstant.ALIGN_PARENT_BOTTOM, view.getAlignParentBottom()) + "\n");
+			propertiesStrBuilder.append(String.format(XmlOutputConstant.ALIGN_PARENT_BOTTOM, 
+					view.getViewHelper().getAlignParentBottom()) + "\n");
 		}
 		
-		if(!TextUtils.isEmpty(view.getToLeftOf()))
+		if(!TextUtils.isEmpty(view.getViewHelper().getToLeftOf()))
 		{
-			propertiesStrBuilder.append(String.format(XmlOutputConstant.TO_LEFT_OF, view.getToLeftOf()) + "\n");
+			propertiesStrBuilder.append(String.format(XmlOutputConstant.TO_LEFT_OF, 
+					view.getViewHelper().getToLeftOf()) + "\n");
 		}
 		
-		if(!TextUtils.isEmpty(view.getToRightOf()))
+		if(!TextUtils.isEmpty(view.getViewHelper().getToRightOf()))
 		{
-			propertiesStrBuilder.append(String.format(XmlOutputConstant.TO_RIGHT_OF, view.getToRightOf()) + "\n");
+			propertiesStrBuilder.append(String.format(XmlOutputConstant.TO_RIGHT_OF,
+					view.getViewHelper().getToRightOf()) + "\n");
 		}
 		
-		if(!TextUtils.isEmpty(view.getBelow()))
+		if(!TextUtils.isEmpty(view.getViewHelper().getBelow()))
 		{
-			propertiesStrBuilder.append(String.format(XmlOutputConstant.BELOW, view.getBelow()) + "\n");
+			propertiesStrBuilder.append(String.format(XmlOutputConstant.BELOW, 
+					view.getViewHelper().getBelow()) + "\n");
 		}
 		
-		if(!TextUtils.isEmpty(view.getAbove()))
+		if(!TextUtils.isEmpty(view.getViewHelper().getAbove()))
 		{
-			propertiesStrBuilder.append(String.format(XmlOutputConstant.ABOVE, view.getAbove()) + "\n");
+			propertiesStrBuilder.append(String.format(XmlOutputConstant.ABOVE, 
+					view.getViewHelper().getAbove()) + "\n");
 		}
 		
-		if(!TextUtils.isEmpty(view.getAlignLeft()))
+		if(!TextUtils.isEmpty(view.getViewHelper().getAlignLeft()))
 		{
-			propertiesStrBuilder.append(String.format(XmlOutputConstant.ALIGN_LEFT, view.getAlignLeft()) + "\n");
+			propertiesStrBuilder.append(String.format(XmlOutputConstant.ALIGN_LEFT, 
+					view.getViewHelper().getAlignLeft()) + "\n");
 		}
 		
-		if(!TextUtils.isEmpty(view.getAlignRight()))
+		if(!TextUtils.isEmpty(view.getViewHelper().getAlignRight()))
 		{
-			propertiesStrBuilder.append(String.format(XmlOutputConstant.ALIGN_RIGHT, view.getAlignRight()) + "\n");
+			propertiesStrBuilder.append(String.format(XmlOutputConstant.ALIGN_RIGHT,
+					view.getViewHelper().getAlignRight()) + "\n");
 		}
 		
-		if(!TextUtils.isEmpty(view.getAlignTop()))
+		if(!TextUtils.isEmpty(view.getViewHelper().getAlignTop()))
 		{
-			propertiesStrBuilder.append(String.format(XmlOutputConstant.ALIGN_TOP, view.getAlignTop()) + "\n");
+			propertiesStrBuilder.append(String.format(XmlOutputConstant.ALIGN_TOP, 
+					view.getViewHelper().getAlignTop()) + "\n");
 		}
 		
-		if(!TextUtils.isEmpty(view.getAlignBottom()))
+		if(!TextUtils.isEmpty(view.getViewHelper().getAlignBottom()))
 		{
-			propertiesStrBuilder.append(String.format(XmlOutputConstant.ALIGN_BOTTOM, view.getAlignBottom()) + "\n");
+			propertiesStrBuilder.append(String.format(XmlOutputConstant.ALIGN_BOTTOM, 
+					view.getViewHelper().getAlignBottom()) + "\n");
 		}
 		
-		if(!TextUtils.isEmpty(view.getCenterInParent()))
+		if(!TextUtils.isEmpty(view.getViewHelper().getCenterInParent()))
 		{
-			propertiesStrBuilder.append(String.format(XmlOutputConstant.CENTER_IN_PARENT, view.getCenterInParent()) + "\n");
+			propertiesStrBuilder.append(String.format(XmlOutputConstant.CENTER_IN_PARENT, 
+					view.getViewHelper().getCenterInParent()) + "\n");
 		}
 		
-		if(!TextUtils.isEmpty(view.getCenterHorizontal()))
+		if(!TextUtils.isEmpty(view.getViewHelper().getCenterHorizontal()))
 		{
-			propertiesStrBuilder.append(String.format(XmlOutputConstant.CENTER_HORIZONTAL, view.getCenterHorizontal()) + "\n");
+			propertiesStrBuilder.append(String.format(XmlOutputConstant.CENTER_HORIZONTAL, 
+					view.getViewHelper().getCenterHorizontal()) + "\n");
 		}
 		
-		if(!TextUtils.isEmpty(view.getCenterVertical()))
+		if(!TextUtils.isEmpty(view.getViewHelper().getCenterVertical()))
 		{
-			propertiesStrBuilder.append(String.format(XmlOutputConstant.CENTER_VERTICAL, view.getCenterVertical()) + "\n");
+			propertiesStrBuilder.append(String.format(XmlOutputConstant.CENTER_VERTICAL, 
+					view.getViewHelper().getCenterVertical()) + "\n");
 		}
 		
 		return propertiesStrBuilder;
