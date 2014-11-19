@@ -1,7 +1,7 @@
 package com.tiger.layoutide.widget;
 
 
-public interface IAdapterView extends IViewGroup
+public interface IAdapterView extends IView
 {
 	public String getItemLayout();
 
