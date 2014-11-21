@@ -15,7 +15,7 @@ import android.widget.TextView;
 import com.mn.tiger.datastorage.TGDBManager;
 import com.mn.tiger.datastorage.db.exception.DbException;
 import com.mn.tiger.datastorage.db.sqlite.WhereBuilder;
-import com.mn.tiger.utility.LogTools;
+import com.mn.tiger.log.LogTools;
 import com.tiger.layoutide.ide.tool.PropertiesToolBar;
 import com.tiger.layoutide.storage.model.LayoutDBModel;
 import com.tiger.layoutide.storage.model.ViewDBModel;

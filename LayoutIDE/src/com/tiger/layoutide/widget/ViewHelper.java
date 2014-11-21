@@ -10,8 +10,8 @@ import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 
+import com.mn.tiger.log.LogTools;
 import com.mn.tiger.utility.DisplayUtils;
-import com.mn.tiger.utility.LogTools;
 import com.tiger.layoutide.utils.GravityValue;
 import com.tiger.layoutide.utils.XmlOutputConstant;
 

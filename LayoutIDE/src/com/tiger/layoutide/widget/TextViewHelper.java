@@ -1,9 +1,9 @@
 package com.tiger.layoutide.widget;
 
-import com.mn.tiger.utility.LogTools;
-
 import android.view.View;
 import android.widget.TextView;
+
+import com.mn.tiger.log.LogTools;
 
 public class TextViewHelper extends ViewHelper
 {
