@@ -12,18 +12,16 @@ import android.text.TextUtils;
 import android.util.AttributeSet;
 import android.view.MotionEvent;
 import android.view.View;
-import android.view.View.OnLongClickListener;
 import android.view.ViewConfiguration;
 import android.view.ViewGroup;
 
 import com.mn.tiger.widget.viewpager.TGPagerAdapter;
-import com.tiger.layoutide.ide.tool.Emulator;
 import com.tiger.layoutide.storage.db.LayoutDBManager;
 import com.tiger.layoutide.utils.WidgetSimpleName;
 import com.tiger.layoutide.widget.tree.IViewTreeNode;
 import com.tiger.layoutide.widget.tree.ViewTreeNodeImp;
 
-public class JTGViewPager extends ViewPager implements IAdapterView, IViewTreeNode, OnLongClickListener
+public class JTGViewPager extends ViewPager implements IAdapterView, IViewTreeNode
 {
 	private IViewTreeNode viewTreeNode;
 	
@@ -59,7 +57,6 @@ public class JTGViewPager extends ViewPager implements IAdapterView, IViewTreeNo
 		paint.setStyle(Style.STROKE);
 		paint.setStrokeWidth(10);
 		
-		this.setOnLongClickListener(this);
 		this.setLongClickable(true);
 	}
 	
@@ -121,14 +118,6 @@ public class JTGViewPager extends ViewPager implements IAdapterView, IViewTreeNo
 		{
 			super.onDraw(canvas);
 		}
-	}
-	
-	@Override
-	public boolean onLongClick(View v) 
-	{
-		this.startDrag(null, new DragShadowBuilder(v) , null, 0);
-		Emulator.getSingleInstance().setCurDragView(this);
-		return true;
 	}
 	
 	@Override

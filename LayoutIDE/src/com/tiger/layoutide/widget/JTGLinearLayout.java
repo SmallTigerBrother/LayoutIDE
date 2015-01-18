@@ -10,11 +10,9 @@ import android.graphics.Paint.Style;
 import android.text.TextUtils;
 import android.util.AttributeSet;
 import android.view.View;
-import android.view.View.OnLongClickListener;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
 
-import com.tiger.layoutide.ide.tool.Emulator;
 import com.tiger.layoutide.utils.WidgetSimpleName;
 import com.tiger.layoutide.utils.XmlOutputConstant;
 import com.tiger.layoutide.widget.tree.IViewTree;
@@ -25,7 +23,7 @@ import com.tiger.layoutide.widget.tree.ViewTreeImp;
  * @author Dalang
  *
  */
-public class JTGLinearLayout extends LinearLayout implements IViewGroup, IViewTree, OnLongClickListener
+public class JTGLinearLayout extends LinearLayout implements IViewGroup, IViewTree
 {
 	private IViewTree viewTree;
 	
@@ -56,8 +54,6 @@ public class JTGLinearLayout extends LinearLayout implements IViewGroup, IViewTr
 		paint.setStrokeWidth(10);
 		
 		this.setOnDragListener(viewGroupHelper);
-		
-		this.setOnLongClickListener(this);
 	}
 
 	@Override
@@ -183,14 +179,6 @@ public class JTGLinearLayout extends LinearLayout implements IViewGroup, IViewTr
 		{
 			super.onDraw(canvas);
 		}
-	}
-	
-	@Override
-	public boolean onLongClick(View v) 
-	{
-		this.startDrag(null, new DragShadowBuilder(v) , null, 0);
-		Emulator.getSingleInstance().setCurDragView(this);
-		return true;
 	}
 	
 	@Override

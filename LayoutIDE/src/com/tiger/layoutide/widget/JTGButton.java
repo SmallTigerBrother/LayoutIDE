@@ -7,11 +7,9 @@ import android.graphics.Paint;
 import android.graphics.Paint.Style;
 import android.util.AttributeSet;
 import android.view.View;
-import android.view.View.OnLongClickListener;
 import android.view.ViewGroup;
 import android.widget.Button;
 
-import com.tiger.layoutide.ide.tool.Emulator;
 import com.tiger.layoutide.utils.WidgetSimpleName;
 import com.tiger.layoutide.widget.tree.IViewTreeNode;
 import com.tiger.layoutide.widget.tree.ViewTreeNodeImp;
@@ -20,7 +18,7 @@ import com.tiger.layoutide.widget.tree.ViewTreeNodeImp;
  * @author Dalang
  *
  */
-public class JTGButton extends Button implements IView, IViewTreeNode, OnLongClickListener
+public class JTGButton extends Button implements IView, IViewTreeNode
 {
 	private IViewTreeNode viewTreeNode;
 	
@@ -47,8 +45,6 @@ public class JTGButton extends Button implements IView, IViewTreeNode, OnLongCli
 		paint.setColor(Color.RED);
 		paint.setStyle(Style.STROKE);
 		paint.setStrokeWidth(10);
-		
-		this.setOnLongClickListener(this);
 	}
 
 	@Override
@@ -107,14 +103,6 @@ public class JTGButton extends Button implements IView, IViewTreeNode, OnLongCli
 		{
 			super.onDraw(canvas);
 		}
-	}
-	
-	@Override
-	public boolean onLongClick(View v) 
-	{
-		this.startDrag(null, new DragShadowBuilder(v) , null, 0);
-		Emulator.getSingleInstance().setCurDragView(this);
-		return true;
 	}
 	
 	@Override

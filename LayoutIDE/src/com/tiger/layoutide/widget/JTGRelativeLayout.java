@@ -11,11 +11,9 @@ import android.graphics.Paint.Style;
 import android.text.TextUtils;
 import android.util.AttributeSet;
 import android.view.View;
-import android.view.View.OnLongClickListener;
 import android.view.ViewGroup;
 import android.widget.RelativeLayout;
 
-import com.tiger.layoutide.ide.tool.Emulator;
 import com.tiger.layoutide.utils.WidgetSimpleName;
 import com.tiger.layoutide.utils.XmlOutputConstant;
 import com.tiger.layoutide.widget.tree.IViewTree;
@@ -26,7 +24,7 @@ import com.tiger.layoutide.widget.tree.ViewTreeImp;
  * @author Dalang
  *
  */
-public class JTGRelativeLayout extends RelativeLayout implements IViewTree,IViewGroup, OnLongClickListener
+public class JTGRelativeLayout extends RelativeLayout implements IViewTree,IViewGroup
 {
 	private IViewTree viewTree;
 	
@@ -57,8 +55,6 @@ public class JTGRelativeLayout extends RelativeLayout implements IViewTree,IView
 		paint.setStrokeWidth(10);
 		
 		this.setOnDragListener(viewGroupHelper);
-		
-		this.setOnLongClickListener(this);
 	}
 
 	@Override
@@ -197,14 +193,6 @@ public class JTGRelativeLayout extends RelativeLayout implements IViewTree,IView
 		{
 			super.onDraw(canvas);
 		}
-	}
-	
-	@Override
-	public boolean onLongClick(View v) 
-	{
-		this.startDrag(null, new DragShadowBuilder(v) , null, 0);
-		Emulator.getSingleInstance().setCurDragView(this);
-		return true;
 	}
 	
 	@Override

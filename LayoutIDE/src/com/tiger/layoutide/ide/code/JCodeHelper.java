@@ -8,7 +8,6 @@ import android.text.TextUtils;
 import android.util.Log;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.EditText;
 
 import com.mn.tiger.annonation.ViewById;
 import com.tiger.code.constant.JActionScope;
@@ -22,7 +21,6 @@ import com.tiger.code.model.JGeneric.WildCardType;
 import com.tiger.code.model.JInterface;
 import com.tiger.code.model.JMethod;
 import com.tiger.code.operator.JSwitch;
-import com.tiger.layoutide.R;
 import com.tiger.layoutide.ide.code.library.AndroidClass;
 import com.tiger.layoutide.ide.code.library.AndroidInterface;
 import com.tiger.layoutide.ide.code.library.ClassFactory;
@@ -34,9 +32,6 @@ import com.tiger.layoutide.widget.IView;
 
 public class JCodeHelper
 {
-	@ViewById(id = R.id.layout_width_editor)
-	private EditText layoutWidthEditText;
-	
 	public static String outputInjectViewById(ViewGroup viewGroup)
 	{
 		JClass jClass = new JClass(null, "ViewById");
@@ -77,7 +72,7 @@ public class JCodeHelper
 				}
 			}
 			
-			//TODO 加入其他的自定义事件
+			//TODO 锟斤拷锟斤拷锟斤拷锟斤拷锟斤拷锟皆讹拷锟斤拷锟铰硷拷
 		}
 		
 		if(jSwitch.getCaseValues().size() > 0)
@@ -149,17 +144,11 @@ public class JCodeHelper
 	{
 		JActivity jActivity = new JActivity(null, activityName);
 		
-		//注册事件总线
 		if(params.isRegisterEventBus())
 		{
-			//装饰一下
 		}
-		
-		
-		//实现接口
 				jActivity.implementInterfaces(params.getInterfaces());
 				
-				//添加所有 注入的View声明
 //				jActivity.addFields(getInjectViewFields(viewGroup));
 		
 		return jActivity;

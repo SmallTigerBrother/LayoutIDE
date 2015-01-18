@@ -6,7 +6,6 @@ import java.util.List;
 import android.content.Context;
 import android.text.TextUtils;
 import android.view.View;
-import android.view.View.OnClickListener;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.RelativeLayout;
@@ -16,7 +15,6 @@ import com.mn.tiger.datastorage.TGDBManager;
 import com.mn.tiger.datastorage.db.exception.DbException;
 import com.mn.tiger.datastorage.db.sqlite.WhereBuilder;
 import com.mn.tiger.log.LogTools;
-import com.tiger.layoutide.ide.tool.PropertiesToolBar;
 import com.tiger.layoutide.storage.model.LayoutDBModel;
 import com.tiger.layoutide.storage.model.ViewDBModel;
 import com.tiger.layoutide.utils.WidgetSimpleName;
@@ -429,15 +427,6 @@ public class LayoutDBManager
 							ViewGroup.LayoutParams.WRAP_CONTENT);
 			view.setLayoutParams(layoutParams);
 		}
-		
-		view.setOnClickListener(new OnClickListener()
-		{
-			@Override
-			public void onClick(View v)
-			{
-				PropertiesToolBar.getSingleInstance().setSelectedView((IView) v);
-			}
-		});
 		
 		return (IView) view;
 	}

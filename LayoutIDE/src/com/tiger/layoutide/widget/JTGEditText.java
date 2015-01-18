@@ -8,12 +8,10 @@ import android.graphics.Paint.Style;
 import android.util.AttributeSet;
 import android.view.DragEvent;
 import android.view.View;
-import android.view.View.OnLongClickListener;
 import android.view.ViewGroup;
 import android.widget.EditText;
 
 import com.mn.tiger.log.LogTools;
-import com.tiger.layoutide.ide.tool.Emulator;
 import com.tiger.layoutide.utils.WidgetSimpleName;
 import com.tiger.layoutide.widget.tree.IViewTreeNode;
 import com.tiger.layoutide.widget.tree.ViewTreeNodeImp;
@@ -22,7 +20,7 @@ import com.tiger.layoutide.widget.tree.ViewTreeNodeImp;
  * @author Dalang
  *
  */
-public class JTGEditText extends EditText implements IViewTreeNode, IView, OnLongClickListener
+public class JTGEditText extends EditText implements IViewTreeNode, IView
 {
 	private static String LOG_TAG = JTGCheckBox.class.getSimpleName();
 	
@@ -51,8 +49,6 @@ public class JTGEditText extends EditText implements IViewTreeNode, IView, OnLon
 		paint.setColor(Color.RED);
 		paint.setStyle(Style.STROKE);
 		paint.setStrokeWidth(10);
-		
-		this.setOnLongClickListener(this);
 	}
 	
 	@Override
@@ -112,14 +108,6 @@ public class JTGEditText extends EditText implements IViewTreeNode, IView, OnLon
 		{
 			super.onDraw(canvas);
 		}
-	}
-	
-	@Override
-	public boolean onLongClick(View v) 
-	{
-		this.startDrag(null, new DragShadowBuilder(v) , null, 0);
-		Emulator.getSingleInstance().setCurDragView(this);
-		return true;
 	}
 	
 	@Override

@@ -8,14 +8,12 @@ import android.graphics.Paint;
 import android.graphics.Paint.Style;
 import android.util.AttributeSet;
 import android.view.View;
-import android.view.View.OnLongClickListener;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
 import android.widget.ListAdapter;
 import android.widget.ScrollView;
 
 import com.mn.tiger.widget.adpter.TGListAdapter;
-import com.tiger.layoutide.ide.tool.Emulator;
 import com.tiger.layoutide.storage.db.LayoutDBManager;
 import com.tiger.layoutide.utils.WidgetSimpleName;
 import com.tiger.layoutide.widget.tree.IViewTreeNode;
@@ -24,8 +22,7 @@ import com.tiger.layoutide.widget.tree.ViewTreeNodeImp;
 /**
  * @author Dalang
  */
-public class JTGListView extends ScrollView implements IAdapterView, IViewTreeNode, 
-    OnLongClickListener
+public class JTGListView extends ScrollView implements IAdapterView, IViewTreeNode
 {
 	private IViewTreeNode viewTree;
 	
@@ -56,8 +53,6 @@ public class JTGListView extends ScrollView implements IAdapterView, IViewTreeNo
 		paint.setColor(Color.RED);
 		paint.setStyle(Style.STROKE);
 		paint.setStrokeWidth(10);
-		
-		this.setOnLongClickListener(this);
 		
 		initView();
 	}
@@ -124,14 +119,6 @@ public class JTGListView extends ScrollView implements IAdapterView, IViewTreeNo
 		{
 			super.onDraw(canvas);
 		}
-	}
-	
-	@Override
-	public boolean onLongClick(View v) 
-	{
-		this.startDrag(null, new DragShadowBuilder(v) , null, 0);
-		Emulator.getSingleInstance().setCurDragView(this);
-		return true;
 	}
 	
 	@Override
