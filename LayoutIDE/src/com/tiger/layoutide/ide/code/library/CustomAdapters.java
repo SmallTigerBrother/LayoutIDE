@@ -12,14 +12,12 @@ public class CustomAdapters
 		JClass viewHolder = new JClass("com.medialab.quizup.adapter", 
 				"QuizUpBaseViewHolder");
 		
-		//写入onInit方法
 		Parameter itemView = new Parameter("itemView", ClassFactory.getClass(AndroidClass.View));
 		JMethod onInit = new JMethod("onInit");
 		onInit.setAbstract(true);
 		onInit.setParameters(itemView);
 		viewHolder.addMethod(onInit);
 		
-		//写入onFillData方法
 		JMethod onFillData = new JMethod("onFillData");
 		Parameter position = new Parameter("position", Primatives.newIntegerClass());
 		Parameter itemData = new Parameter("itemData", Primatives.newGenericClass("T"));
@@ -28,7 +26,6 @@ public class CustomAdapters
 		
 		viewHolder.addMethod(onFillData);
 		
-		//写入onClick方法
 		JMethod onClick = new JMethod("onClick");
 		Parameter viewParam = new Parameter("view", ClassFactory.getClass(
 				AndroidClass.View));
