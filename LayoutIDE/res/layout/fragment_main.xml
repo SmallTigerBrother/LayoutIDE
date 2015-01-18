@@ -103,50 +103,50 @@
         android:layout_height="match_parent"
         android:orientation="vertical" >
 
-        <com.tiger.layoutide.widget.TGTextView
+        <com.tiger.layoutide.widget.JTGTextView
             android:id="@+id/textview_model"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="TextView" />
 
-        <com.tiger.layoutide.widget.TGButton
+        <com.tiger.layoutide.widget.JTGButton
             android:id="@+id/button_model"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="Button" />
 
-        <com.tiger.layoutide.widget.TGEditText
+        <com.tiger.layoutide.widget.JTGEditText
             android:id="@+id/edittext_model"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="EditText" />
 
-        <com.tiger.layoutide.widget.TGImageView
+        <com.tiger.layoutide.widget.JTGImageView
             android:id="@+id/imageview_model"
             android:layout_width="80dp"
             android:layout_height="40dp"
             android:background="@drawable/ic_launcher" />
 
-        <com.tiger.layoutide.widget.TGCheckBox
+        <com.tiger.layoutide.widget.JTGCheckBox
             android:id="@+id/checkbox_model"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:text="CheckBox" />
 
-        <com.tiger.layoutide.widget.TGLinearLayout
+        <com.tiger.layoutide.widget.JTGLinearLayout
             android:id="@+id/linearlayout_model"
             android:layout_width="80dp"
             android:layout_height="40dp"
             android:background="@android:color/holo_green_dark"
             android:orientation="horizontal" />
 
-        <com.tiger.layoutide.widget.TGRelativeLayout
+        <com.tiger.layoutide.widget.JTGRelativeLayout
             android:id="@+id/relativelayout_model"
             android:layout_width="80dp"
             android:layout_height="40dp"
             android:background="@android:color/holo_blue_light" />
         
-        <com.tiger.layoutide.widget.TGViewPager
+        <com.tiger.layoutide.widget.JTGViewPager
             android:id="@+id/viewpager_model"
             android:layout_width="80dp"
             android:layout_height="40dp"
