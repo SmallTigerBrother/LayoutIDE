@@ -4,9 +4,9 @@ import android.content.Context;
 import android.util.AttributeSet;
 
 import com.tiger.layoutide.widget.IView;
-import com.tiger.layoutide.widget.TGLinearLayout;
+import com.tiger.layoutide.widget.JTGLinearLayout;
 
-public class Emulator extends TGLinearLayout
+public class Emulator extends JTGLinearLayout
 {
 	private static Emulator emulator;
 	

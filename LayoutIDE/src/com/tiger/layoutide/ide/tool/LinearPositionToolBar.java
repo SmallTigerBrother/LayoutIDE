@@ -20,8 +20,8 @@ import com.tiger.layoutide.ide.tool.PropertiesToolBar.CustomTextWatcher;
 import com.tiger.layoutide.utils.XmlOutputConstant;
 import com.tiger.layoutide.utils.GravityValue;
 import com.tiger.layoutide.widget.IView;
-import com.tiger.layoutide.widget.TGLinearLayout;
-import com.tiger.layoutide.widget.TGLinearLayout.LinearLayoutHelper;
+import com.tiger.layoutide.widget.JTGLinearLayout;
+import com.tiger.layoutide.widget.JTGLinearLayout.LinearLayoutHelper;
 
 public class LinearPositionToolBar extends FrameLayout
 {
@@ -85,7 +85,7 @@ public class LinearPositionToolBar extends FrameLayout
 				{
 					if(selectedView instanceof LinearLayout)
 					{
-						LinearLayoutHelper layoutHelper = (LinearLayoutHelper) ((TGLinearLayout)selectedView).getViewHelper();
+						LinearLayoutHelper layoutHelper = (LinearLayoutHelper) ((JTGLinearLayout)selectedView).getViewHelper();
 						if(XmlOutputConstant.ORIENTATION_HORIZONTAL.equals(
 								parent.getAdapter().getItem(position).toString()))
 						{
@@ -140,7 +140,7 @@ public class LinearPositionToolBar extends FrameLayout
 			if(selectedView instanceof LinearLayout)
 			{
 				orientationProperty.setVisibility(View.VISIBLE);
-				LinearLayoutHelper layoutHelper = (LinearLayoutHelper) ((TGLinearLayout)selectedView).getViewHelper();
+				LinearLayoutHelper layoutHelper = (LinearLayoutHelper) ((JTGLinearLayout)selectedView).getViewHelper();
 				if(layoutHelper.getOrientationValue().equals(XmlOutputConstant.ORIENTATION_HORIZONTAL))
 				{
 					orientationSelector.setSelection(0);

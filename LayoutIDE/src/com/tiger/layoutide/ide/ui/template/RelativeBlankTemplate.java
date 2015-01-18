@@ -12,7 +12,7 @@ import android.widget.TextView;
 
 import com.tiger.layoutide.ide.tool.PropertiesToolBar;
 import com.tiger.layoutide.widget.IView;
-import com.tiger.layoutide.widget.TGRelativeLayout;
+import com.tiger.layoutide.widget.JTGRelativeLayout;
 
 public class RelativeBlankTemplate extends TemplateLayout
 {
@@ -49,7 +49,7 @@ public class RelativeBlankTemplate extends TemplateLayout
 				LinearLayout.LayoutParams.MATCH_PARENT, 
 				LinearLayout.LayoutParams.MATCH_PARENT);
 		
-		TGRelativeLayout realView = new TGRelativeLayout(activity);
+		JTGRelativeLayout realView = new JTGRelativeLayout(activity);
 		realView.setRootViewGroup(true);
 		realView.setLayoutParams(layoutParams);
 		realView.setBackgroundColor(Color.BLUE);

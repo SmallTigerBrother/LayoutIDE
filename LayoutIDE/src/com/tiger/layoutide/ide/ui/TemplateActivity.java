@@ -55,7 +55,7 @@ public class TemplateActivity extends Activity implements OnClickListener
 			default:
 				break;
 		}
-		//·µ»ØÉÏÒ»½çÃæ
+		//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ò»ï¿½ï¿½ï¿½ï¿½
 		Intent intent = new Intent();
 		intent.putExtra(IntentKeys.TEMPLATE_TYPE, selectedTemplateType);
 		

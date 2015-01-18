@@ -19,7 +19,7 @@ import com.tiger.layoutide.R;
 import com.tiger.layoutide.utils.XmlOutputConstant;
 import com.tiger.layoutide.utils.RelativeValues;
 import com.tiger.layoutide.widget.IView;
-import com.tiger.layoutide.widget.TGRelativeLayout;
+import com.tiger.layoutide.widget.JTGRelativeLayout;
 
 public class RelativePositionToolBar extends FrameLayout
 {
@@ -382,8 +382,8 @@ public class RelativePositionToolBar extends FrameLayout
 			
 			resetCenterWhereSelector();
 			
-			ArrayList<CharSequence> parentChildIdList = ((TGRelativeLayout)((View)selectedView).getParent()).getChildIdList();
-			//ÒÆ³ý×ÔÉíµÄid
+			ArrayList<CharSequence> parentChildIdList = ((JTGRelativeLayout)((View)selectedView).getParent()).getChildIdList();
+			//ï¿½Æ³ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½id
 			if(null != selectedView.getViewHelper().getIdName())
 			{
 				parentChildIdList.remove(selectedView.getViewHelper().getIdName());

@@ -12,7 +12,7 @@ import android.widget.TextView;
 
 import com.tiger.layoutide.ide.tool.PropertiesToolBar;
 import com.tiger.layoutide.widget.IView;
-import com.tiger.layoutide.widget.TGLinearLayout;
+import com.tiger.layoutide.widget.JTGLinearLayout;
 
 public class LinearBlankTemplate extends TemplateLayout
 {
@@ -48,7 +48,7 @@ public class LinearBlankTemplate extends TemplateLayout
 				LinearLayout.LayoutParams.MATCH_PARENT, 
 				LinearLayout.LayoutParams.MATCH_PARENT);
 		
-		TGLinearLayout realView = new TGLinearLayout(activity);
+		JTGLinearLayout realView = new JTGLinearLayout(activity);
 		realView.setRootViewGroup(true);
 		realView.setLayoutParams(layoutParams);
 		realView.setBackgroundColor(Color.GREEN);

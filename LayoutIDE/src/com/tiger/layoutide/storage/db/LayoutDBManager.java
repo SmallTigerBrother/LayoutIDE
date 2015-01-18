@@ -23,15 +23,15 @@ import com.tiger.layoutide.utils.WidgetSimpleName;
 import com.tiger.layoutide.widget.IAdapterView;
 import com.tiger.layoutide.widget.IView;
 import com.tiger.layoutide.widget.IViewGroup;
-import com.tiger.layoutide.widget.TGButton;
-import com.tiger.layoutide.widget.TGCheckBox;
-import com.tiger.layoutide.widget.TGEditText;
-import com.tiger.layoutide.widget.TGImageView;
-import com.tiger.layoutide.widget.TGLinearLayout;
-import com.tiger.layoutide.widget.TGLinearLayout.LinearLayoutHelper;
-import com.tiger.layoutide.widget.TGListView;
-import com.tiger.layoutide.widget.TGRelativeLayout;
-import com.tiger.layoutide.widget.TGTextView;
+import com.tiger.layoutide.widget.JTGButton;
+import com.tiger.layoutide.widget.JTGCheckBox;
+import com.tiger.layoutide.widget.JTGEditText;
+import com.tiger.layoutide.widget.JTGImageView;
+import com.tiger.layoutide.widget.JTGLinearLayout;
+import com.tiger.layoutide.widget.JTGLinearLayout.LinearLayoutHelper;
+import com.tiger.layoutide.widget.JTGListView;
+import com.tiger.layoutide.widget.JTGRelativeLayout;
+import com.tiger.layoutide.widget.JTGTextView;
 import com.tiger.layoutide.widget.TextViewHelper;
 
 public class LayoutDBManager
@@ -265,15 +265,15 @@ public class LayoutDBManager
 			
 			viewDBModel.setTextColor(viewHelper.getTextColor());
 		}
-		else if(view instanceof TGLinearLayout)
+		else if(view instanceof JTGLinearLayout)
 		{
 			LinearLayoutHelper layoutHelper = (LinearLayoutHelper)view.getViewHelper();
 			viewDBModel.setOrientation(layoutHelper.getOrientationValue());
-			viewDBModel.setRootViewGroup(((TGLinearLayout)view).isRootViewGroup());
+			viewDBModel.setRootViewGroup(((JTGLinearLayout)view).isRootViewGroup());
 		}
-		else if(view instanceof TGRelativeLayout)
+		else if(view instanceof JTGRelativeLayout)
 		{
-			viewDBModel.setRootViewGroup(((TGRelativeLayout)view).isRootViewGroup());
+			viewDBModel.setRootViewGroup(((JTGRelativeLayout)view).isRootViewGroup());
 		}
 		else if(view instanceof IAdapterView)
 		{
@@ -328,15 +328,15 @@ public class LayoutDBManager
 			viewHelper.setTextSize(viewDBModel.getTextSize() + "");
 			viewHelper.setTextColor(viewDBModel.getTextColor());
 		}
-		else if(view instanceof TGLinearLayout)
+		else if(view instanceof JTGLinearLayout)
 		{
 			LinearLayoutHelper layoutHelper = (LinearLayoutHelper)view.getViewHelper();
 			layoutHelper.setOrientationValue(viewDBModel.getOrientation());
-			((TGLinearLayout)view).setRootViewGroup(viewDBModel.isRootViewGroup());
+			((JTGLinearLayout)view).setRootViewGroup(viewDBModel.isRootViewGroup());
 		}
-		else if(view instanceof TGRelativeLayout)
+		else if(view instanceof JTGRelativeLayout)
 		{
-			((TGRelativeLayout)view).setRootViewGroup(viewDBModel.isRootViewGroup());
+			((JTGRelativeLayout)view).setRootViewGroup(viewDBModel.isRootViewGroup());
 		}
 		else if(view instanceof IAdapterView)
 		{
@@ -377,35 +377,35 @@ public class LayoutDBManager
 		View view = null;
 		if(WidgetSimpleName.TEXT_VIEW.equals(viewDBModel.getSimpleClassName()))
 		{
-			view = new TGTextView(context);
+			view = new JTGTextView(context);
 		}
 		else if(WidgetSimpleName.BUTTON.equals(viewDBModel.getSimpleClassName()))
 		{
-			view = new TGButton(context);
+			view = new JTGButton(context);
 		}
 		else if(WidgetSimpleName.EDIT_TEXT.equals(viewDBModel.getSimpleClassName()))
 		{
-			view = new TGEditText(context);
+			view = new JTGEditText(context);
 		}
 		else if(WidgetSimpleName.IMAGE_VIEW.equals(viewDBModel.getSimpleClassName()))
 		{
-			view = new TGImageView(context);
+			view = new JTGImageView(context);
 		}
 		else if(WidgetSimpleName.CHECK_BOX.equals(viewDBModel.getSimpleClassName()))
 		{
-			view = new TGCheckBox(context);
+			view = new JTGCheckBox(context);
 		}
 		else if(WidgetSimpleName.LINEAR_LAYOUT.equals(viewDBModel.getSimpleClassName()))
 		{
-			view = new TGLinearLayout(context);
+			view = new JTGLinearLayout(context);
 		}
 		else if(WidgetSimpleName.RELATIVE_LAYOUT.equals(viewDBModel.getSimpleClassName()))
 		{
-			view = new TGRelativeLayout(context);
+			view = new JTGRelativeLayout(context);
 		}
 		else if(WidgetSimpleName.LISTVIEW.equals(viewDBModel.getSimpleClassName()))
 		{
-			view = new TGListView(context);
+			view = new JTGListView(context);
 		}
 		
 		if(WidgetSimpleName.LINEAR_LAYOUT.equals(viewDBModel.getParentViewClassName()))
@@ -417,7 +417,7 @@ public class LayoutDBManager
 		}
 		else if(WidgetSimpleName.RELATIVE_LAYOUT.equals(viewDBModel.getParentViewClassName()))
 		{
-			TGRelativeLayout.LayoutParams layoutParams = new TGRelativeLayout.LayoutParams
+			JTGRelativeLayout.LayoutParams layoutParams = new JTGRelativeLayout.LayoutParams
 					(RelativeLayout.LayoutParams.WRAP_CONTENT, 
 							RelativeLayout.LayoutParams.WRAP_CONTENT);
 			view.setLayoutParams(layoutParams);

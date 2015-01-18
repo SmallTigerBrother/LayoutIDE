@@ -17,8 +17,8 @@ import com.mn.tiger.utility.ViewInjector;
 import com.tiger.layoutide.R;
 import com.tiger.layoutide.widget.IAdapterView;
 import com.tiger.layoutide.widget.IView;
-import com.tiger.layoutide.widget.TGLinearLayout;
-import com.tiger.layoutide.widget.TGRelativeLayout;
+import com.tiger.layoutide.widget.JTGLinearLayout;
+import com.tiger.layoutide.widget.JTGRelativeLayout;
 
 public class PropertiesToolBar
 {
@@ -105,7 +105,7 @@ public class PropertiesToolBar
 		{
 			if(lastSelectedView != curSelectedView)
 			{
-				//ÉèÖÃÉÏÒ»´ÎÑ¡ÖÐµÄViewµÄ×´Ì¬ÎªÎ´Ñ¡ÖÐ×´Ì¬
+				//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Ò»ï¿½ï¿½Ñ¡ï¿½Ðµï¿½Viewï¿½ï¿½×´Ì¬ÎªÎ´Ñ¡ï¿½ï¿½×´Ì¬
 				if(null != lastSelectedView)
 				{
 					lastSelectedView.onUnSelected();
@@ -113,7 +113,7 @@ public class PropertiesToolBar
 				
 				if(null != curSelectedView)
 				{
-					//ÉèÖÃµ±Ç°Ñ¡ÖÐµÄViewµÄ×´Ì¬ÎªÑ¡ÖÐ×´Ì¬
+					//ï¿½ï¿½ï¿½Ãµï¿½Ç°Ñ¡ï¿½Ðµï¿½Viewï¿½ï¿½×´Ì¬ÎªÑ¡ï¿½ï¿½×´Ì¬
 					curSelectedView.onSelected();
 				}
 				
@@ -166,13 +166,13 @@ public class PropertiesToolBar
 					contentToolBar.resetContent(selectedView);
 					/*********************************** Linear Position *********************************/
 					
-					if(((View)selectedView).getParent() instanceof TGLinearLayout)
+					if(((View)selectedView).getParent() instanceof JTGLinearLayout)
 					{
 						linearPositionToolBar.resetLinearPosition(selectedView);
 					}
 					
 					/*********************************** Relativie Position *********************************/
-					if(((View)selectedView).getParent() instanceof TGRelativeLayout)
+					if(((View)selectedView).getParent() instanceof JTGRelativeLayout)
 					{
 						relativiePositionToolBar.resetRelativePosition(selectedView);
 					}

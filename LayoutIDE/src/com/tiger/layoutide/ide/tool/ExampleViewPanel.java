@@ -8,40 +8,40 @@ import com.mn.tiger.annonation.ViewById;
 import com.mn.tiger.utility.ViewInjector;
 import com.tiger.layoutide.R;
 import com.tiger.layoutide.widget.IView;
-import com.tiger.layoutide.widget.TGButton;
-import com.tiger.layoutide.widget.TGCheckBox;
-import com.tiger.layoutide.widget.TGEditText;
-import com.tiger.layoutide.widget.TGImageView;
-import com.tiger.layoutide.widget.TGLinearLayout;
-import com.tiger.layoutide.widget.TGRelativeLayout;
-import com.tiger.layoutide.widget.TGTextView;
-import com.tiger.layoutide.widget.TGViewPager;
+import com.tiger.layoutide.widget.JTGButton;
+import com.tiger.layoutide.widget.JTGCheckBox;
+import com.tiger.layoutide.widget.JTGEditText;
+import com.tiger.layoutide.widget.JTGImageView;
+import com.tiger.layoutide.widget.JTGLinearLayout;
+import com.tiger.layoutide.widget.JTGRelativeLayout;
+import com.tiger.layoutide.widget.JTGTextView;
+import com.tiger.layoutide.widget.JTGViewPager;
 
 public class ExampleViewPanel implements OnLongClickListener
 {
 	@ViewById(id = R.id.textview_model)
-	private TGTextView textView;
+	private JTGTextView textView;
 	
 	@ViewById(id = R.id.button_model)
-	private TGButton button;
+	private JTGButton button;
 	
 	@ViewById(id = R.id.edittext_model)
-	private TGEditText editText;
+	private JTGEditText editText;
 	
 	@ViewById(id = R.id.imageview_model)
-	private TGImageView imageView;
+	private JTGImageView imageView;
 	
 	@ViewById(id = R.id.checkbox_model)
-	private TGCheckBox checkBox;
+	private JTGCheckBox checkBox;
 	
 	@ViewById(id = R.id.linearlayout_model)
-	private TGLinearLayout linearLayout;
+	private JTGLinearLayout linearLayout;
 	
 	@ViewById(id = R.id.relativelayout_model)
-	private TGRelativeLayout relativeLayout;
+	private JTGRelativeLayout relativeLayout;
 	
 	@ViewById(id = R.id.viewpager_model)
-	private TGViewPager viewPager;
+	private JTGViewPager viewPager;
 	
 	private static ExampleViewPanel exampleViewPanel;
 	
