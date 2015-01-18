@@ -8,6 +8,8 @@ import com.tiger.code.output.JCodeBuilder;
 
 public class JGeneric extends JCodeModel
 {
+	private static final long serialVersionUID = 1L;
+	
 	private ArrayList<WildCardType> wildCards;
 	
 	public JGeneric()
@@ -48,6 +50,8 @@ public class JGeneric extends JCodeModel
 	
 	public static class WildCardType extends JCodeModel
 	{
+		private static final long serialVersionUID = 1L;
+
 		private JClass superClazz;
 		
 		private String name = "?";

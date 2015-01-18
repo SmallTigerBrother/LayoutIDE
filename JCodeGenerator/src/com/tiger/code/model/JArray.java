@@ -6,6 +6,8 @@ import com.tiger.code.output.JCodeBuilder;
 
 public class JArray extends JField
 {
+	private static final long serialVersionUID = 1L;
+
 	public JArray(String actionScope, JClass valueType, String filedName)
 	{
 		super(actionScope, valueType, filedName);

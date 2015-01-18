@@ -7,6 +7,8 @@ import com.tiger.code.output.JCodeBuilder;
 
 public class JCodeBlock extends JCodeModel
 {
+	private static final long serialVersionUID = 1L;
+	
 	private ArrayList<JCodeModel> codeModels;
 	
 	public JCodeBlock()

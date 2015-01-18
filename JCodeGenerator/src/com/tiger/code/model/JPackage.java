@@ -7,6 +7,8 @@ import com.tiger.code.output.JCodeBuilder;
 
 public class JPackage extends JCodeModel
 {
+	private static final long serialVersionUID = 1L;
+	
 	private String packageName = "com.tiger.code";
 	
 	public JPackage()

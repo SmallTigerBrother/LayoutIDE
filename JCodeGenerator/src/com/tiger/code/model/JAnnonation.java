@@ -8,6 +8,8 @@ import com.tiger.code.output.JCodeBuilder;
 
 public class JAnnonation extends JCodeModel
 {
+	private static final long serialVersionUID = 1L;
+
 	private String annonationName = "";
 	
 	private ArrayList<ParamKeyValue> paramKeyValues;

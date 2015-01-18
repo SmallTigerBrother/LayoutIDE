@@ -10,6 +10,8 @@ import com.tiger.code.output.JCodeBuilder;
 
 public class JField extends JCodeModel
 {
+	private static final long serialVersionUID = 1L;
+
 	private String filedName = "JClass";
 	
 	private String actionScope = JActionScope.PUBLIC;

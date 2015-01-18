@@ -14,14 +14,14 @@ public class Primatives
 	 
 	 public static final String BOOLEAN = "boolean";
 	 
-	 public static final String STRING = "String";
-	 
 	 public static final String VOID = "void";
 	
 	public static JClass newIntegerClass()
 	{
 		return new JClass(null, "int")
 		{
+			private static final long serialVersionUID = 1L;
+
 			@Override
 			public JCodeBuilder write2Code(JCodeBuilder jCodeBuilder)
 			{
@@ -35,6 +35,8 @@ public class Primatives
 	{
 		return new JClass(null, "long")
 		{
+			private static final long serialVersionUID = 1L;
+
 			@Override
 			public JCodeBuilder write2Code(JCodeBuilder jCodeBuilder)
 			{
@@ -48,6 +50,8 @@ public class Primatives
 	{
 		return new JClass(null, "float")
 		{
+			private static final long serialVersionUID = 1L;
+
 			@Override
 			public JCodeBuilder write2Code(JCodeBuilder jCodeBuilder)
 			{
@@ -61,6 +65,8 @@ public class Primatives
 	{
 		return new JClass(null, "double")
 		{
+			private static final long serialVersionUID = 1L;
+
 			@Override
 			public JCodeBuilder write2Code(JCodeBuilder jCodeBuilder)
 			{
@@ -74,6 +80,8 @@ public class Primatives
 	{
 		return new JClass(null, "boolean")
 		{
+			private static final long serialVersionUID = 1L;
+
 			@Override
 			public JCodeBuilder write2Code(JCodeBuilder jCodeBuilder)
 			{
@@ -83,23 +91,12 @@ public class Primatives
 		};
 	}
 	
-	public static JClass newStringClass()
-	{
-		return new JClass(null, "String")
-		{
-			@Override
-			public JCodeBuilder write2Code(JCodeBuilder jCodeBuilder)
-			{
-				jCodeBuilder.append("String");
-				return jCodeBuilder;
-			}
-		};
-	}
-	
 	public static JClass newVoidClass()
 	{
 		return new JClass(null, "void")
 		{
+			private static final long serialVersionUID = 1L;
+
 			@Override
 			public JCodeBuilder write2Code(JCodeBuilder jCodeBuilder)
 			{
@@ -113,6 +110,8 @@ public class Primatives
 	{
 		JClass jClass = new JClass(null, name)
 		{
+			private static final long serialVersionUID = 1L;
+
 			@Override
 			public JCodeBuilder write2Code(JCodeBuilder jCodeBuilder)
 			{

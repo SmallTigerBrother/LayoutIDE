@@ -6,6 +6,8 @@ import com.tiger.code.output.JCodeBuilder;
 
 public class JImport extends JCodeModel
 {
+	private static final long serialVersionUID = 1L;
+
 	private JClass clazz;
 	
 	private JInterface jInterface;
@@ -43,7 +45,6 @@ public class JImport extends JCodeModel
 				!Primatives.DOUBLE.equals(clazz.getSimpleName()) && 
 				!Primatives.LONG.equals(clazz.getSimpleName()) && 
 				!Primatives.BOOLEAN.equals(clazz.getSimpleName()) && 
-				!Primatives.STRING.equals(clazz.getSimpleName()) && 
 				!Primatives.VOID.equals(clazz.getSimpleName()))
 		{
 			if(null != clazz)

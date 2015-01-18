@@ -1,9 +1,13 @@
 package com.tiger.code.model;
 
+import java.io.Serializable;
+
 import com.tiger.code.output.JCodeBuilder;
 
-public class JCodeModel
+public class JCodeModel implements Serializable
 {
+	private static final long serialVersionUID = 1L;
+
 	private String indentation = "";
 	
 	private String codeString = "";
