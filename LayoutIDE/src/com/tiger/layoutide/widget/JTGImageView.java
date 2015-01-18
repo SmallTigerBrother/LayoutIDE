@@ -9,8 +9,9 @@ import android.util.AttributeSet;
 import android.view.View;
 import android.view.View.OnLongClickListener;
 import android.view.ViewGroup;
-import android.widget.Button;
+import android.widget.ImageView;
 
+import com.tiger.layoutide.R;
 import com.tiger.layoutide.ide.tool.Emulator;
 import com.tiger.layoutide.utils.WidgetSimpleName;
 import com.tiger.layoutide.widget.tree.IViewTreeNode;
@@ -20,7 +21,7 @@ import com.tiger.layoutide.widget.tree.ViewTreeNodeImp;
  * @author Dalang
  *
  */
-public class TGButton extends Button implements IView, IViewTreeNode, OnLongClickListener
+public class JTGImageView extends ImageView implements IViewTreeNode, IView, OnLongClickListener
 {
 	private IViewTreeNode viewTreeNode;
 	
@@ -30,16 +31,16 @@ public class TGButton extends Button implements IView, IViewTreeNode, OnLongClic
 	
 	private Paint paint = null;
 	
-	public TGButton(Context context)
+	public JTGImageView(Context context)
 	{
 		this(context, null);
 	}
-	
-	public TGButton(Context context, AttributeSet attrs)
+
+	public JTGImageView(Context context, AttributeSet attrs)
 	{
 		super(context, attrs);
 		
-		viewHelper = new TextViewHelper(this);
+		viewHelper = new ViewHelper(this);
 		
 		viewTreeNode = new ViewTreeNodeImp(this);
 		
@@ -50,7 +51,7 @@ public class TGButton extends Button implements IView, IViewTreeNode, OnLongClic
 		
 		this.setOnLongClickListener(this);
 	}
-
+	
 	@Override
 	public String getXMLString()
 	{
@@ -68,29 +69,30 @@ public class TGButton extends Button implements IView, IViewTreeNode, OnLongClic
 		return viewHelper;
 	}
 	
-	
 	@Override
 	public String getSimpleClassName()
 	{
-		return WidgetSimpleName.BUTTON;
+		return WidgetSimpleName.IMAGE_VIEW;
 	}
-
+	
 	@Override
 	public String getPackageName()
 	{
 		return "android.widget";
 	}
-	
+
 	@Override
 	public void onSelected()
 	{
 		this.isSelected = true;
+		//ִ���ػ�
 		this.invalidate();
 	}
 	
 	@Override
 	public void onUnSelected()
 	{
+		//ִ���ػ�
 		this.isSelected = false;
 		this.invalidate();
 	}
@@ -120,11 +122,11 @@ public class TGButton extends Button implements IView, IViewTreeNode, OnLongClic
 	@Override
 	public View newInstance()
 	{
-		TGButton button = new TGButton(getContext());
+		JTGImageView imageView = new JTGImageView(getContext());
 		ViewGroup.LayoutParams layoutParams = new ViewGroup.LayoutParams(
 				ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
-		button.setLayoutParams(layoutParams);
-		button.setText("Button");
-		return button;
+		imageView.setLayoutParams(layoutParams);
+		imageView.setBackgroundResource(R.drawable.ic_launcher);
+		return imageView;
 	}
 }

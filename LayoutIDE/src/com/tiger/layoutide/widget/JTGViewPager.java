@@ -23,7 +23,7 @@ import com.tiger.layoutide.utils.WidgetSimpleName;
 import com.tiger.layoutide.widget.tree.IViewTreeNode;
 import com.tiger.layoutide.widget.tree.ViewTreeNodeImp;
 
-public class TGViewPager extends ViewPager implements IAdapterView, IViewTreeNode, OnLongClickListener
+public class JTGViewPager extends ViewPager implements IAdapterView, IViewTreeNode, OnLongClickListener
 {
 	private IViewTreeNode viewTreeNode;
 	
@@ -41,12 +41,12 @@ public class TGViewPager extends ViewPager implements IAdapterView, IViewTreeNod
 	 
 	private PerformClick mPerformClick;
 	
-	public TGViewPager(Context context)
+	public JTGViewPager(Context context)
 	{
 		this(context, null);
 	}
 
-	public TGViewPager(Context context, AttributeSet attrs)
+	public JTGViewPager(Context context, AttributeSet attrs)
 	{
 		super(context, attrs);
 		
@@ -134,7 +134,7 @@ public class TGViewPager extends ViewPager implements IAdapterView, IViewTreeNod
 	@Override
 	public View newInstance()
 	{
-		TGViewPager viewPager = new TGViewPager(getContext());
+		JTGViewPager viewPager = new JTGViewPager(getContext());
 		ViewGroup.LayoutParams layoutParams = new ViewGroup.LayoutParams(
 				ViewGroup.LayoutParams.MATCH_PARENT, 
 				ViewGroup.LayoutParams.MATCH_PARENT);

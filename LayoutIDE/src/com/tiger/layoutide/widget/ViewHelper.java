@@ -527,7 +527,7 @@ public class ViewHelper
 			}
 			else
 			{
-				//½«ÖµÖÃÎª0£¬¼´Ïû³ýÏà¶ÔÎ»ÖÃÉèÖÃ
+				//ï¿½ï¿½Öµï¿½ï¿½Îª0ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Î»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 				((RelativeLayout.LayoutParams)layoutParams).addRule(RelativeLayout.ALIGN_PARENT_LEFT, 0);
 			}
 			view.setLayoutParams(layoutParams);
@@ -561,7 +561,7 @@ public class ViewHelper
 			}
 			else
 			{
-				//½«ÖµÖÃÎª0£¬¼´Ïû³ýÏà¶ÔÎ»ÖÃÉèÖÃ
+				//ï¿½ï¿½Öµï¿½ï¿½Îª0ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Î»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 				((RelativeLayout.LayoutParams)layoutParams).addRule(RelativeLayout.ALIGN_PARENT_RIGHT, 0);
 			}
 			view.setLayoutParams(layoutParams);
@@ -595,7 +595,7 @@ public class ViewHelper
 			}
 			else
 			{
-				//½«ÖµÖÃÎª0£¬¼´Ïû³ýÏà¶ÔÎ»ÖÃÉèÖÃ
+				//ï¿½ï¿½Öµï¿½ï¿½Îª0ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Î»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 				((RelativeLayout.LayoutParams)layoutParams).addRule(RelativeLayout.ALIGN_PARENT_TOP, 0);
 			}
 			view.setLayoutParams(layoutParams);
@@ -629,7 +629,7 @@ public class ViewHelper
 			}
 			else
 			{
-				//½«ÖµÖÃÎª0£¬¼´Ïû³ýÏà¶ÔÎ»ÖÃÉèÖÃ
+				//ï¿½ï¿½Öµï¿½ï¿½Îª0ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Î»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 				((RelativeLayout.LayoutParams)layoutParams).addRule(RelativeLayout.ALIGN_PARENT_BOTTOM, 0);
 			}
 			view.setLayoutParams(layoutParams);
@@ -655,10 +655,10 @@ public class ViewHelper
 	public void setToLeftOf(String anchorIdName)
 	{
 		ViewGroup.LayoutParams layoutParams = (ViewGroup.LayoutParams) view.getLayoutParams();
-		if(layoutParams instanceof TGRelativeLayout.LayoutParams)
+		if(layoutParams instanceof JTGRelativeLayout.LayoutParams)
 		{
-			int anchorId = ((TGRelativeLayout)view.getParent()).getChildId(anchorIdName);
-			((TGRelativeLayout.LayoutParams)layoutParams).addRule(RelativeLayout.LEFT_OF, anchorId, anchorIdName);
+			int anchorId = ((JTGRelativeLayout)view.getParent()).getChildId(anchorIdName);
+			((JTGRelativeLayout.LayoutParams)layoutParams).addRule(RelativeLayout.LEFT_OF, anchorId, anchorIdName);
 			view.setLayoutParams(layoutParams);
 		}
 	}
@@ -667,9 +667,9 @@ public class ViewHelper
 	public String getToLeftOf()
 	{
 		ViewGroup.LayoutParams layoutParams = (ViewGroup.LayoutParams) view.getLayoutParams();
-		if(layoutParams instanceof TGRelativeLayout.LayoutParams)
+		if(layoutParams instanceof JTGRelativeLayout.LayoutParams)
 		{
-			TGRelativeLayout.LayoutParams relativieLayoutParams = (TGRelativeLayout.LayoutParams)layoutParams;
+			JTGRelativeLayout.LayoutParams relativieLayoutParams = (JTGRelativeLayout.LayoutParams)layoutParams;
 			if(containsRule(relativieLayoutParams.getRules(), RelativeLayout.LEFT_OF))
 			{
 				return relativieLayoutParams.getBelowAnchorId();
@@ -682,10 +682,10 @@ public class ViewHelper
 	public void setToRightOf(String anchorIdName)
 	{
 		ViewGroup.LayoutParams layoutParams = (ViewGroup.LayoutParams) view.getLayoutParams();
-		if(layoutParams instanceof TGRelativeLayout.LayoutParams)
+		if(layoutParams instanceof JTGRelativeLayout.LayoutParams)
 		{
-			int anchorId = ((TGRelativeLayout)view.getParent()).getChildId(anchorIdName);
-			((TGRelativeLayout.LayoutParams)layoutParams).addRule(RelativeLayout.RIGHT_OF, anchorId, anchorIdName);
+			int anchorId = ((JTGRelativeLayout)view.getParent()).getChildId(anchorIdName);
+			((JTGRelativeLayout.LayoutParams)layoutParams).addRule(RelativeLayout.RIGHT_OF, anchorId, anchorIdName);
 			view.setLayoutParams(layoutParams);
 		}
 	}
@@ -694,9 +694,9 @@ public class ViewHelper
 	public String getToRightOf()
 	{
 		ViewGroup.LayoutParams layoutParams = (ViewGroup.LayoutParams) view.getLayoutParams();
-		if(layoutParams instanceof TGRelativeLayout.LayoutParams)
+		if(layoutParams instanceof JTGRelativeLayout.LayoutParams)
 		{
-			TGRelativeLayout.LayoutParams relativieLayoutParams = (TGRelativeLayout.LayoutParams)layoutParams;
+			JTGRelativeLayout.LayoutParams relativieLayoutParams = (JTGRelativeLayout.LayoutParams)layoutParams;
 			if(containsRule(relativieLayoutParams.getRules(), RelativeLayout.RIGHT_OF))
 			{
 				return relativieLayoutParams.getBelowAnchorId();
@@ -711,10 +711,10 @@ public class ViewHelper
 		if(!TextUtils.isEmpty(anchorIdName))
 		{
 			ViewGroup.LayoutParams layoutParams = (ViewGroup.LayoutParams) view.getLayoutParams();
-			if(layoutParams instanceof TGRelativeLayout.LayoutParams)
+			if(layoutParams instanceof JTGRelativeLayout.LayoutParams)
 			{
-				int anchorId = ((TGRelativeLayout)view.getParent()).getChildId(anchorIdName);
-				((TGRelativeLayout.LayoutParams)layoutParams).addRule(RelativeLayout.BELOW, anchorId, anchorIdName);
+				int anchorId = ((JTGRelativeLayout)view.getParent()).getChildId(anchorIdName);
+				((JTGRelativeLayout.LayoutParams)layoutParams).addRule(RelativeLayout.BELOW, anchorId, anchorIdName);
 				view.setLayoutParams(layoutParams);
 			}
 		}
@@ -724,9 +724,9 @@ public class ViewHelper
 	public String getBelow()
 	{
 		ViewGroup.LayoutParams layoutParams = (ViewGroup.LayoutParams) view.getLayoutParams();
-		if(layoutParams instanceof TGRelativeLayout.LayoutParams)
+		if(layoutParams instanceof JTGRelativeLayout.LayoutParams)
 		{
-			TGRelativeLayout.LayoutParams relativieLayoutParams = (TGRelativeLayout.LayoutParams)layoutParams;
+			JTGRelativeLayout.LayoutParams relativieLayoutParams = (JTGRelativeLayout.LayoutParams)layoutParams;
 			if(containsRule(relativieLayoutParams.getRules(), RelativeLayout.BELOW))
 			{
 				return relativieLayoutParams.getBelowAnchorId();
@@ -741,10 +741,10 @@ public class ViewHelper
 		if(!TextUtils.isEmpty(anchorIdName))
 		{
 			ViewGroup.LayoutParams layoutParams = (ViewGroup.LayoutParams) view.getLayoutParams();
-			if(layoutParams instanceof TGRelativeLayout.LayoutParams)
+			if(layoutParams instanceof JTGRelativeLayout.LayoutParams)
 			{
-				int anchorId = ((TGRelativeLayout)view.getParent()).getChildId(anchorIdName);
-				((TGRelativeLayout.LayoutParams)layoutParams).addRule(RelativeLayout.ABOVE, anchorId, anchorIdName);
+				int anchorId = ((JTGRelativeLayout)view.getParent()).getChildId(anchorIdName);
+				((JTGRelativeLayout.LayoutParams)layoutParams).addRule(RelativeLayout.ABOVE, anchorId, anchorIdName);
 				view.setLayoutParams(layoutParams);
 			}
 		}
@@ -754,9 +754,9 @@ public class ViewHelper
 	public String getAbove()
 	{
 		ViewGroup.LayoutParams layoutParams = (ViewGroup.LayoutParams) view.getLayoutParams();
-		if(layoutParams instanceof TGRelativeLayout.LayoutParams)
+		if(layoutParams instanceof JTGRelativeLayout.LayoutParams)
 		{
-			TGRelativeLayout.LayoutParams relativieLayoutParams = (TGRelativeLayout.LayoutParams)layoutParams;
+			JTGRelativeLayout.LayoutParams relativieLayoutParams = (JTGRelativeLayout.LayoutParams)layoutParams;
 			if(containsRule(relativieLayoutParams.getRules(), RelativeLayout.ABOVE))
 			{
 				return relativieLayoutParams.getAboveAnchorId();
@@ -771,10 +771,10 @@ public class ViewHelper
 		if(!TextUtils.isEmpty(anchorIdName))
 		{
 			ViewGroup.LayoutParams layoutParams = (ViewGroup.LayoutParams) view.getLayoutParams();
-			if(layoutParams instanceof TGRelativeLayout.LayoutParams)
+			if(layoutParams instanceof JTGRelativeLayout.LayoutParams)
 			{
-				int anchorId = ((TGRelativeLayout)view.getParent()).getChildId(anchorIdName);
-				((TGRelativeLayout.LayoutParams)layoutParams).addRule(RelativeLayout.ALIGN_LEFT, anchorId, anchorIdName);
+				int anchorId = ((JTGRelativeLayout)view.getParent()).getChildId(anchorIdName);
+				((JTGRelativeLayout.LayoutParams)layoutParams).addRule(RelativeLayout.ALIGN_LEFT, anchorId, anchorIdName);
 				view.setLayoutParams(layoutParams);
 			}
 		}
@@ -784,9 +784,9 @@ public class ViewHelper
 	public String getAlignLeft()
 	{
 		ViewGroup.LayoutParams layoutParams = (ViewGroup.LayoutParams) view.getLayoutParams();
-		if(layoutParams instanceof TGRelativeLayout.LayoutParams)
+		if(layoutParams instanceof JTGRelativeLayout.LayoutParams)
 		{
-			TGRelativeLayout.LayoutParams relativieLayoutParams = (TGRelativeLayout.LayoutParams)layoutParams;
+			JTGRelativeLayout.LayoutParams relativieLayoutParams = (JTGRelativeLayout.LayoutParams)layoutParams;
 			if(containsRule(relativieLayoutParams.getRules(), RelativeLayout.ALIGN_LEFT))
 			{
 				return relativieLayoutParams.getAlignLeftAnchorId();
@@ -801,10 +801,10 @@ public class ViewHelper
 		if(!TextUtils.isEmpty(anchorIdName))
 		{
 			ViewGroup.LayoutParams layoutParams = (ViewGroup.LayoutParams) view.getLayoutParams();
-			if(layoutParams instanceof TGRelativeLayout.LayoutParams)
+			if(layoutParams instanceof JTGRelativeLayout.LayoutParams)
 			{
-				int anchorId = ((TGRelativeLayout)view.getParent()).getChildId(anchorIdName);
-				((TGRelativeLayout.LayoutParams)layoutParams).addRule(RelativeLayout.ALIGN_RIGHT, anchorId, anchorIdName);
+				int anchorId = ((JTGRelativeLayout)view.getParent()).getChildId(anchorIdName);
+				((JTGRelativeLayout.LayoutParams)layoutParams).addRule(RelativeLayout.ALIGN_RIGHT, anchorId, anchorIdName);
 				view.setLayoutParams(layoutParams);
 			}
 		}
@@ -814,9 +814,9 @@ public class ViewHelper
 	public String getAlignRight()
 	{
 		ViewGroup.LayoutParams layoutParams = (ViewGroup.LayoutParams) view.getLayoutParams();
-		if(layoutParams instanceof TGRelativeLayout.LayoutParams)
+		if(layoutParams instanceof JTGRelativeLayout.LayoutParams)
 		{
-			TGRelativeLayout.LayoutParams relativieLayoutParams = (TGRelativeLayout.LayoutParams)layoutParams;
+			JTGRelativeLayout.LayoutParams relativieLayoutParams = (JTGRelativeLayout.LayoutParams)layoutParams;
 			if(containsRule(relativieLayoutParams.getRules(), RelativeLayout.ALIGN_RIGHT))
 			{
 				return relativieLayoutParams.getAlignRightAnchorId();
@@ -829,10 +829,10 @@ public class ViewHelper
 	public void setAlignTop(String anchorIdName)
 	{
 		ViewGroup.LayoutParams layoutParams = (ViewGroup.LayoutParams) view.getLayoutParams();
-		if(layoutParams instanceof TGRelativeLayout.LayoutParams)
+		if(layoutParams instanceof JTGRelativeLayout.LayoutParams)
 		{
-			int anchorId = ((TGRelativeLayout)view.getParent()).getChildId(anchorIdName);
-			((TGRelativeLayout.LayoutParams)layoutParams).addRule(RelativeLayout.ALIGN_TOP, anchorId, anchorIdName);
+			int anchorId = ((JTGRelativeLayout)view.getParent()).getChildId(anchorIdName);
+			((JTGRelativeLayout.LayoutParams)layoutParams).addRule(RelativeLayout.ALIGN_TOP, anchorId, anchorIdName);
 			view.setLayoutParams(layoutParams);
 		}
 	}
@@ -841,9 +841,9 @@ public class ViewHelper
 	public String getAlignTop()
 	{
 		ViewGroup.LayoutParams layoutParams = (ViewGroup.LayoutParams) view.getLayoutParams();
-		if(layoutParams instanceof TGRelativeLayout.LayoutParams)
+		if(layoutParams instanceof JTGRelativeLayout.LayoutParams)
 		{
-			TGRelativeLayout.LayoutParams relativieLayoutParams = (TGRelativeLayout.LayoutParams)layoutParams;
+			JTGRelativeLayout.LayoutParams relativieLayoutParams = (JTGRelativeLayout.LayoutParams)layoutParams;
 			if(containsRule(relativieLayoutParams.getRules(), RelativeLayout.ALIGN_TOP))
 			{
 				return relativieLayoutParams.getAlignTopAnchorId();
@@ -856,10 +856,10 @@ public class ViewHelper
 	public void setAlignBottom(String anchorIdName)
 	{
 		ViewGroup.LayoutParams layoutParams = (ViewGroup.LayoutParams) view.getLayoutParams();
-		if(layoutParams instanceof TGRelativeLayout.LayoutParams)
+		if(layoutParams instanceof JTGRelativeLayout.LayoutParams)
 		{
-			int anchorId = ((TGRelativeLayout)view.getParent()).getChildId(anchorIdName);
-			((TGRelativeLayout.LayoutParams)layoutParams).addRule(RelativeLayout.ALIGN_BOTTOM, anchorId, anchorIdName);
+			int anchorId = ((JTGRelativeLayout)view.getParent()).getChildId(anchorIdName);
+			((JTGRelativeLayout.LayoutParams)layoutParams).addRule(RelativeLayout.ALIGN_BOTTOM, anchorId, anchorIdName);
 			view.setLayoutParams(layoutParams);
 		}
 	}
@@ -868,9 +868,9 @@ public class ViewHelper
 	public String getAlignBottom()
 	{
 		ViewGroup.LayoutParams layoutParams = (ViewGroup.LayoutParams) view.getLayoutParams();
-		if(layoutParams instanceof TGRelativeLayout.LayoutParams)
+		if(layoutParams instanceof JTGRelativeLayout.LayoutParams)
 		{
-			TGRelativeLayout.LayoutParams relativieLayoutParams = (TGRelativeLayout.LayoutParams)layoutParams;
+			JTGRelativeLayout.LayoutParams relativieLayoutParams = (JTGRelativeLayout.LayoutParams)layoutParams;
 			if(containsRule(relativieLayoutParams.getRules(), RelativeLayout.ALIGN_BOTTOM))
 			{
 				return relativieLayoutParams.getAlignBottomAnchorId();
@@ -891,7 +891,7 @@ public class ViewHelper
 			}
 			else
 			{
-				//½«ÖµÖÃÎª0£¬¼´Ïû³ýÏà¶ÔÎ»ÖÃÉèÖÃ
+				//ï¿½ï¿½Öµï¿½ï¿½Îª0ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Î»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 				((RelativeLayout.LayoutParams)layoutParams).addRule(RelativeLayout.CENTER_IN_PARENT, 0);
 			}
 			view.setLayoutParams(layoutParams);
@@ -925,7 +925,7 @@ public class ViewHelper
 			}
 			else
 			{
-				//½«ÖµÖÃÎª0£¬¼´Ïû³ýÏà¶ÔÎ»ÖÃÉèÖÃ
+				//ï¿½ï¿½Öµï¿½ï¿½Îª0ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Î»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 				((RelativeLayout.LayoutParams)layoutParams).addRule(RelativeLayout.CENTER_HORIZONTAL, 0);
 			}
 			view.setLayoutParams(layoutParams);
@@ -959,7 +959,7 @@ public class ViewHelper
 			}
 			else
 			{
-				//½«ÖµÖÃÎª0£¬¼´Ïû³ýÏà¶ÔÎ»ÖÃÉèÖÃ
+				//ï¿½ï¿½Öµï¿½ï¿½Îª0ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Î»ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 				((RelativeLayout.LayoutParams)layoutParams).addRule(RelativeLayout.CENTER_VERTICAL, 0);
 			}
 			view.setLayoutParams(layoutParams);
@@ -983,7 +983,7 @@ public class ViewHelper
 	
 	private boolean containsRule(int[] rules, int verb)
 	{
-		//Î´Ìí¼Ó¸ÃÊôÐÔÊ±£¬ÖµÎª0
+		//Î´ï¿½ï¿½Ó¸ï¿½ï¿½ï¿½ï¿½ï¿½Ê±ï¿½ï¿½ÖµÎª0
 		return (rules[verb] != 0);
 	}
 

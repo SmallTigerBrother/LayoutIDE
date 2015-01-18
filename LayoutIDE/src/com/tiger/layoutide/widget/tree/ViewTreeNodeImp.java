@@ -6,8 +6,8 @@ import android.widget.TextView;
 
 import com.tiger.layoutide.utils.XmlOutputConstant;
 import com.tiger.layoutide.widget.IView;
-import com.tiger.layoutide.widget.TGLinearLayout;
-import com.tiger.layoutide.widget.TGLinearLayout.LinearLayoutHelper;
+import com.tiger.layoutide.widget.JTGLinearLayout;
+import com.tiger.layoutide.widget.JTGLinearLayout.LinearLayoutHelper;
 import com.tiger.layoutide.widget.TextViewHelper;
 
 public class ViewTreeNodeImp implements IViewTreeNode
@@ -117,7 +117,7 @@ public class ViewTreeNodeImp implements IViewTreeNode
 	{
 		if(view instanceof LinearLayout)
 		{
-			LinearLayoutHelper layoutHelper = (LinearLayoutHelper) ((TGLinearLayout)view).getViewHelper();
+			LinearLayoutHelper layoutHelper = (LinearLayoutHelper) ((JTGLinearLayout)view).getViewHelper();
 			if(!TextUtils.isEmpty(layoutHelper.getOrientationValue()))
 			{
 				propertiesStrBuilder.append(String.format(XmlOutputConstant.LAYOUT_ORIENTATION,

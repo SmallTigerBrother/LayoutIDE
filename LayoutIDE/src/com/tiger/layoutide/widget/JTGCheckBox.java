@@ -6,13 +6,11 @@ import android.graphics.Color;
 import android.graphics.Paint;
 import android.graphics.Paint.Style;
 import android.util.AttributeSet;
-import android.view.DragEvent;
 import android.view.View;
 import android.view.View.OnLongClickListener;
 import android.view.ViewGroup;
-import android.widget.EditText;
+import android.widget.CheckBox;
 
-import com.mn.tiger.log.LogTools;
 import com.tiger.layoutide.ide.tool.Emulator;
 import com.tiger.layoutide.utils.WidgetSimpleName;
 import com.tiger.layoutide.widget.tree.IViewTreeNode;
@@ -20,12 +18,9 @@ import com.tiger.layoutide.widget.tree.ViewTreeNodeImp;
 
 /**
  * @author Dalang
- *
  */
-public class TGEditText extends EditText implements IViewTreeNode, IView, OnLongClickListener
+public class JTGCheckBox extends CheckBox implements IViewTreeNode, IView, OnLongClickListener
 {
-	private static String LOG_TAG = TGCheckBox.class.getSimpleName();
-	
 	private IViewTreeNode viewTreeNode;
 	
 	private ViewHelper viewHelper;
@@ -34,12 +29,12 @@ public class TGEditText extends EditText implements IViewTreeNode, IView, OnLong
 	
 	private Paint paint = null;
 	
-	public TGEditText(Context context)
+	public JTGCheckBox(Context context)
 	{
 		this(context, null);
 	}
-
-	public TGEditText(Context context, AttributeSet attrs)
+	
+	public JTGCheckBox(Context context, AttributeSet attrs)
 	{
 		super(context, attrs);
 		
@@ -54,7 +49,7 @@ public class TGEditText extends EditText implements IViewTreeNode, IView, OnLong
 		
 		this.setOnLongClickListener(this);
 	}
-	
+
 	@Override
 	public String getXMLString()
 	{
@@ -75,15 +70,15 @@ public class TGEditText extends EditText implements IViewTreeNode, IView, OnLong
 	@Override
 	public String getSimpleClassName()
 	{
-		return WidgetSimpleName.EDIT_TEXT;
+		return WidgetSimpleName.CHECK_BOX;
 	}
-	
+
 	@Override
 	public String getPackageName()
 	{
 		return "android.widget";
 	}
-
+	
 	@Override
 	public void onSelected()
 	{
@@ -125,25 +120,11 @@ public class TGEditText extends EditText implements IViewTreeNode, IView, OnLong
 	@Override
 	public View newInstance()
 	{
-		TGEditText editText = new TGEditText(getContext());
+		JTGCheckBox checkBox = new JTGCheckBox(getContext());
 		ViewGroup.LayoutParams layoutParams = new ViewGroup.LayoutParams(
 				ViewGroup.LayoutParams.WRAP_CONTENT, ViewGroup.LayoutParams.WRAP_CONTENT);
-		editText.setLayoutParams(layoutParams);
-		editText.setText("EditText");
-		return editText;
-	}
-	
-	@Override
-	public boolean onDragEvent(DragEvent event)
-	{
-		try
-		{
-			return super.onDragEvent(event);
-		}
-		catch (Exception e)
-		{
-			LogTools.e(LOG_TAG, e);
-			return false;
-		}
+		checkBox.setLayoutParams(layoutParams);
+		checkBox.setText("CheckBox");
+		return checkBox;
 	}
 }

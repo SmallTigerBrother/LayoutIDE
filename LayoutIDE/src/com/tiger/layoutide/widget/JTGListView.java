@@ -24,7 +24,7 @@ import com.tiger.layoutide.widget.tree.ViewTreeNodeImp;
 /**
  * @author Dalang
  */
-public class TGListView extends ScrollView implements IAdapterView, IViewTreeNode, 
+public class JTGListView extends ScrollView implements IAdapterView, IViewTreeNode, 
     OnLongClickListener
 {
 	private IViewTreeNode viewTree;
@@ -39,12 +39,12 @@ public class TGListView extends ScrollView implements IAdapterView, IViewTreeNod
 	
 	private String listItemLayout = "";
 	
-	public TGListView(Context context)
+	public JTGListView(Context context)
 	{
 		this(context, null);
 	}
 	
-	public TGListView(Context context, AttributeSet attrs)
+	public JTGListView(Context context, AttributeSet attrs)
 	{
 		super(context, attrs);
 		
@@ -137,7 +137,7 @@ public class TGListView extends ScrollView implements IAdapterView, IViewTreeNod
 	@Override
 	public View newInstance()
 	{
-		TGLinearLayout linearLayout = new TGLinearLayout(getContext());
+		JTGLinearLayout linearLayout = new JTGLinearLayout(getContext());
 		ViewGroup.LayoutParams layoutParams = new ViewGroup.LayoutParams(
 				100, 100);
 		linearLayout.setLayoutParams(layoutParams);

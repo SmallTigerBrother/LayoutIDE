@@ -35,7 +35,7 @@ public class ViewGroupHelper extends ViewHelper implements OnDragListener
 		{
 			if(null != Emulator.getSingleInstance().getNewViewModel())
 			{
-				if(getView() instanceof TGLinearLayout || getView() instanceof TGRelativeLayout)
+				if(getView() instanceof JTGLinearLayout || getView() instanceof JTGRelativeLayout)
 				{
 					ViewGroup viewGroup = (ViewGroup)getView();
 					
