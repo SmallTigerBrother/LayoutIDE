@@ -1,5 +1,6 @@
 package com.tiger.code.model;
 
+import java.lang.reflect.Method;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -12,6 +13,8 @@ import com.tiger.code.output.JCodeBuilder;
 
 public class JClass extends JCodeModel
 {
+	private static final long serialVersionUID = 1L;
+
 	public static final String MODEL_NAME = "class";
 	
 	private JPackage jPackage;
@@ -91,6 +94,11 @@ public class JClass extends JCodeModel
 	
 	public void addMethod(JMethod method)
 	{
+		if(method.equals(JMethod.NULL_METHOD))
+		{
+			return;
+		}
+		
 		Parameter[] parameters = method.getParameters();
 		if(null != parameters)
 		{
@@ -335,6 +343,33 @@ public class JClass extends JCodeModel
 		}
 		
 		return false;
+	}
+	
+	/**
+	 * 从class中提取JClass
+	 * @param clazz
+	 * @return
+	 */
+	public static JClass refClass(Class<?> clazz)
+	{
+		JClass jClass = new JClass(clazz.getPackage().getName(), clazz.getSimpleName());
+		if(!clazz.equals(Object.class)) 
+		{
+			jClass.setSuperClass(JClass.refClass(clazz.getSuperclass()));
+		}
+		
+		Method[] methods = clazz.getDeclaredMethods();
+		JMethod jMethod;
+		Method method;
+		for(int i = 0; i < methods.length; i++)
+		{
+			method = methods[i];
+			jMethod = JMethod.refMethod(method);
+			
+			jClass.addMethod(jMethod);
+		}
+		
+		return jClass;
 	}
 
 	public static class ImportList extends ArrayList<JImport>

@@ -1,5 +1,6 @@
 package com.tiger.code.model;
 
+import java.lang.reflect.Method;
 import java.util.ArrayList;
 
 import com.tiger.code.constant.JActionScope;
@@ -11,6 +12,8 @@ import com.tiger.code.output.JCodeBuilder;
 
 public class JInterface extends JCodeModel
 {
+	private static final long serialVersionUID = 1L;
+
 	public static final String MODEL_NAME = "interface";
 	
 	private JInterface superInterface;
@@ -98,6 +101,34 @@ public class JInterface extends JCodeModel
 	public JInterface getSuperInterface()
 	{
 		return superInterface;
+	}
+	
+	/**
+	 * 从Class中提取JInterface
+	 * @param interfaceClazz
+	 * @return
+	 */
+	public static JInterface refInterface(Class<?> interfaceClazz)
+	{
+		JInterface jInterface = new JInterface(interfaceClazz.getPackage().getName(), 
+				interfaceClazz.getSimpleName());
+		if(!interfaceClazz.equals(Object.class)) 
+		{
+			jInterface.setSuperInterface(JInterface.refInterface(interfaceClazz.getSuperclass()));
+		}
+		
+		Method[] methods = interfaceClazz.getDeclaredMethods();
+		JMethod jMethod;
+		Method method;
+		for(int i = 0; i < methods.length; i++)
+		{
+			method = methods[i];
+			jMethod = JMethod.refMethod(method);
+			
+			jInterface.addMethod(jMethod);
+		}
+		
+		return jInterface;
 	}
 
 	@Override

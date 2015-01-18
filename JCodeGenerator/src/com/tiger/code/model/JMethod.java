@@ -1,5 +1,7 @@
 package com.tiger.code.model;
 
+import java.lang.reflect.Method;
+import java.lang.reflect.Modifier;
 import java.util.ArrayList;
 
 import com.tiger.code.constant.JActionScope;
@@ -10,6 +12,10 @@ import com.tiger.code.output.JCodeBuilder;
 
 public class JMethod extends JCodeModel
 {
+	private static final long serialVersionUID = 1L;
+
+	public static final JMethod NULL_METHOD = new JMethod();
+	
 	private String methodName = "method";
 	
 	private String actionScope = JActionScope.PUBLIC;
@@ -31,6 +37,9 @@ public class JMethod extends JCodeModel
 	private JCodeBlock jCodeBlock;
 	
 	private JClass returnType;
+	
+	private JMethod()
+	{}
 	
 	public JMethod(String methodName)
 	{
@@ -263,9 +272,74 @@ public class JMethod extends JCodeModel
 	{
 		this.returnType = returnType;
 	}
+	
+	/**
+	 * 从Method中提取JMethod
+	 * @param method
+	 * @return
+	 */
+	public static JMethod refMethod(Method method)
+	{
+		JMethod jMethod = new JMethod(method.getName());
+		
+		int modifiers = method.getModifiers();
+		if(!Modifier.isFinal(modifiers) && !Modifier.isPrivate(modifiers) && 
+				!Modifier.isStatic(modifiers))
+		{
+			jMethod.setAbstract(Modifier.isAbstract(modifiers));
+			jMethod.setSynchronized(Modifier.isSynchronized(modifiers));
+			jMethod.setActionScope(getActionScope(modifiers));
+			jMethod.setReturnType(JClass.refClass(method.getReturnType()));
+			jMethod.setParameters(getParameters(method));
+			return jMethod;
+		}
+		
+		return NULL_METHOD;
+	}
+	
+	private static Parameter[] getParameters(Method method)
+	{
+		Class<?>[] paramClasses = method.getParameterTypes();
+		int count = paramClasses.length;
+		if(null != paramClasses && count > 0)
+		{
+			Parameter[] parameters = new Parameter[count];
+			Parameter parameter;
+			for(int i = 0; i < count; i++)
+			{
+				parameter = new Parameter("arg_" + i, JClass.refClass(paramClasses[i]));
+				parameters[i] = parameter;
+			}
+			return parameters;
+		}
+		
+		return null;
+	}
+	
+	private static String getActionScope(int modifiers)
+	{
+		if(Modifier.isPublic(modifiers))
+		{
+			return JActionScope.PUBLIC;
+		}
+		else if(Modifier.isProtected(modifiers))
+		{
+			return JActionScope.PROTECTED;
+		}
+		else if(Modifier.isPrivate(modifiers))
+		{	
+			return JActionScope.PRIVATE;
+		}
+		else
+		{
+			return JActionScope.DEFAULT;
+		}
+	}
 
 	public static class Parameter extends JCodeModel
 	{
+		private static final long serialVersionUID = 1L;
+
 		private boolean isFinal = false;
 		
 		private String parameterName;
