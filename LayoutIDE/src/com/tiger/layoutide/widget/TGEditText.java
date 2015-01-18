@@ -12,7 +12,7 @@ import android.view.View.OnLongClickListener;
 import android.view.ViewGroup;
 import android.widget.EditText;
 
-import com.mn.tiger.utility.LogTools;
+import com.mn.tiger.log.LogTools;
 import com.tiger.layoutide.ide.tool.Emulator;
 import com.tiger.layoutide.utils.WidgetSimpleName;
 import com.tiger.layoutide.widget.tree.IViewTreeNode;
@@ -88,14 +88,14 @@ public class TGEditText extends EditText implements IViewTreeNode, IView, OnLong
 	public void onSelected()
 	{
 		this.isSelected = true;
-		//Ö´ÐÐÖØ»æ
+		//Ö´ï¿½ï¿½ï¿½Ø»ï¿½
 		this.invalidate();
 	}
 	
 	@Override
 	public void onUnSelected()
 	{
-		//Ö´ÐÐÖØ»æ
+		//Ö´ï¿½ï¿½ï¿½Ø»ï¿½
 		this.isSelected = false;
 		this.invalidate();
 	}

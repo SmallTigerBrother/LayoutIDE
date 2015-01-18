@@ -1,5 +1,6 @@
 package com.tiger.layoutide.widget;
 
+import android.app.Activity;
 import android.content.Context;
 import android.graphics.Canvas;
 import android.graphics.Color;
@@ -21,7 +22,6 @@ import com.tiger.layoutide.widget.tree.IViewTreeNode;
 import com.tiger.layoutide.widget.tree.ViewTreeNodeImp;
 
 /**
- * ListViewÊµÏÖ£¬Ê¹ÓÃScrollViewÎ±×°³ÉÁÐ±í½øÐÐÕ¹Ê¾£¬´úÂëÊä³öÊ±£¬Êä³ö³ÉListView
  * @author Dalang
  */
 public class TGListView extends ScrollView implements IAdapterView, IViewTreeNode, 
@@ -100,14 +100,14 @@ public class TGListView extends ScrollView implements IAdapterView, IViewTreeNod
 	public void onSelected()
 	{
 		this.isSelected = true;
-		//Ö´ÐÐÖØ»æ
+		//Ö´ï¿½ï¿½ï¿½Ø»ï¿½
 		this.invalidate();
 	}
 	
 	@Override
 	public void onUnSelected()
 	{
-		//Ö´ÐÐÖØ»æ
+		//Ö´ï¿½ï¿½ï¿½Ø»ï¿½
 		this.isSelected = false;
 		this.invalidate();
 	}
@@ -148,10 +148,10 @@ public class TGListView extends ScrollView implements IAdapterView, IViewTreeNod
 
 	private void setAdapter(ListAdapter adapter)
 	{
-		//Çå¿ÕËùÓÐ×ÓÊÓÍ¼
+		//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Í¼
 		mainLayout.removeAllViews();
 		
-		//Ìí¼ÓÐÂÊÓÍ¼
+		//ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½Í¼
 		int count = adapter.getCount();
 		View view = null;
 		LinearLayout.LayoutParams layoutParams = new LinearLayout.LayoutParams(
@@ -169,9 +169,9 @@ public class TGListView extends ScrollView implements IAdapterView, IViewTreeNod
 	{
 		private String listItemLayoutName = "";
 		
-		public DefaultAdapter(Context context, String listItemLayoutName)
+		public DefaultAdapter(Activity activity, String listItemLayoutName)
 		{
-			super(context, null, -1, null);
+			super(activity, null, - 1, null);
 			this.listItemLayoutName = listItemLayoutName;
 		}
 		
@@ -183,15 +183,13 @@ public class TGListView extends ScrollView implements IAdapterView, IViewTreeNod
 		
 		public View getView(int position, View convertView, ViewGroup parent)
 		{
-			//TODO ×Ô¶¯×°ÅäView
-			return (View) LayoutDBManager.getLayout(getContext(), listItemLayoutName);
+			return (View) LayoutDBManager.getLayout(getActivity(), listItemLayoutName);
 		};
 	}
 
 	public void setListItemLayout(String layoutName)
 	{
-		// Ìæ»»µ±Ç°µÄAdapter
-		DefaultAdapter adapter = new DefaultAdapter(getContext(), layoutName);
+		DefaultAdapter adapter = new DefaultAdapter((Activity)getContext(), layoutName);
 		this.setAdapter(adapter);
 
 		this.listItemLayout = layoutName;

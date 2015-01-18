@@ -85,14 +85,12 @@ public class TGButton extends Button implements IView, IViewTreeNode, OnLongClic
 	public void onSelected()
 	{
 		this.isSelected = true;
-		//执行重绘
 		this.invalidate();
 	}
 	
 	@Override
 	public void onUnSelected()
 	{
-		//执行重绘
 		this.isSelected = false;
 		this.invalidate();
 	}

@@ -16,7 +16,7 @@ import android.view.View.OnLongClickListener;
 import android.view.ViewConfiguration;
 import android.view.ViewGroup;
 
-import com.mn.tiger.widget.adpter.TGPagerAdapter;
+import com.mn.tiger.widget.viewpager.TGPagerAdapter;
 import com.tiger.layoutide.ide.tool.Emulator;
 import com.tiger.layoutide.storage.db.LayoutDBManager;
 import com.tiger.layoutide.utils.WidgetSimpleName;
@@ -97,14 +97,14 @@ public class TGViewPager extends ViewPager implements IAdapterView, IViewTreeNod
 	public void onSelected()
 	{
 		this.isSelected = true;
-		//Ö´ÐÐÖØ»æ
+		//Ö´ï¿½ï¿½ï¿½Ø»ï¿½
 		this.invalidate();
 	}
 	
 	@Override
 	public void onUnSelected()
 	{
-		//Ö´ÐÐÖØ»æ
+		//Ö´ï¿½ï¿½ï¿½Ø»ï¿½
 		this.isSelected = false;
 		this.invalidate();
 	}
@@ -152,7 +152,6 @@ public class TGViewPager extends ViewPager implements IAdapterView, IViewTreeNod
 		{
 			super(null);
 			this.listItemLayoutName = listItemlayoutName;
-			//³õÊ¼»¯×Ô¶¨Òå×ÓÊÓÍ¼
 			ArrayList<View> views = new ArrayList<View>(4);
 			for(int i = 0; i < 4; i++)
 			{
