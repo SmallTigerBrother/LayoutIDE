@@ -5,6 +5,8 @@ import com.tiger.code.model.JMethod;
 
 public class JActivity extends JClass
 {
+	private static final long serialVersionUID = 1L;
+
 	private JMethod onCreateMethod;
 	
 	private JMethod onResumeMethod;
@@ -17,7 +19,6 @@ public class JActivity extends JClass
 	{
 		super(packageName, simpleClazzName);
 		
-		//设置默认基类
 		JClass superClazz = ClassFactory.getClass(AndroidClass.Activity);
 		this.setSuperClass(superClazz);
 	}
