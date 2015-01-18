@@ -64,7 +64,7 @@ public class JSONClassGenerator
 	
 	private List<JClass> jsonObject2Classes(JsonObject jsonObject, String rootClassName)
 	{
-		//获取当前jsonObject类名
+		//锟斤拷取锟斤拷前jsonObject锟斤拷锟斤拷
 		rootClassName = getJsonClassName(rootClassName);
 		
 		ArrayList<JClass> clazzes = new ArrayList<JClass>();
@@ -110,7 +110,7 @@ public class JSONClassGenerator
 				else if(jsonPrimitive.isString())
 				{
 					JField jField = new JField(JActionScope.PRIVATE, 
-							Primatives.newStringClass(), jsonEntry.getKey());
+							JClass.refClass(String.class), jsonEntry.getKey());
 					jClass.addField(jField);
 				}
 				else if(jsonPrimitive.isBoolean())
