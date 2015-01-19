@@ -39,14 +39,16 @@ public class JCodeModel implements Serializable
 		return write2Code(jCodeBuilder).toString();
 	}
 
-	public String getCodeString()
-	{
-		return codeString;
-	}
-
 	public void setCodeString(String codeString)
 	{
 		this.codeString = codeString;
+	}
+	
+	public static JCodeModel fromString(String codeString)
+	{
+		JCodeModel codeModel = new JCodeModel();
+		codeModel.setCodeString(codeString);
+		return codeModel;
 	}
 	
 	public static String getActionScope(int modifiers)

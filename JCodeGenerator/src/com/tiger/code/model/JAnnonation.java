@@ -1,5 +1,6 @@
 package com.tiger.code.model;
 
+import java.lang.annotation.Annotation;
 import java.util.ArrayList;
 
 import com.tiger.code.constant.JConstant;
@@ -55,6 +56,12 @@ public class JAnnonation extends JCodeModel
 		jCodeBuilder.append(JIndentation.NEW_LINE);
 		
 		return jCodeBuilder;
+	}
+	
+	public static JAnnonation refAnnonation(Annotation annotation)
+	{
+		JAnnonation annonation = new JAnnonation(annotation.annotationType().getSimpleName());
+		return annonation;
 	}
 
 	public static class ParamKeyValue
