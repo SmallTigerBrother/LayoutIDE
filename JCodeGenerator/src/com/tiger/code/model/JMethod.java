@@ -136,13 +136,13 @@ public class JMethod extends JCodeModel
 	@Override
 	public JCodeBuilder write2Code(JCodeBuilder jCodeBuilder)
 	{
-		//Æ´½Ó×¢½â
+		//Æ´ï¿½ï¿½×¢ï¿½ï¿½
 		for(int i = 0; i < annonations.size(); i++)
 		{
 			jCodeBuilder.appendWithIndentation(annonations.get(i).toString());
 		}
 		
-		//Æ´½Ó·½·¨µÄÉùÃ÷
+		//Æ´ï¿½Ó·ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½
 		jCodeBuilder.appendWithIndentation(actionScope);
 		
 		if(isSynchronized)
@@ -162,7 +162,7 @@ public class JMethod extends JCodeModel
 		
 		jCodeBuilder.append(returnType.toString() + methodName + JConstant.PARENTHESES_LEFT);
 		
-		//Æ´½ÓËùÓÐ²ÎÊý
+		//Æ´ï¿½ï¿½ï¿½ï¿½ï¿½Ð²ï¿½ï¿½ï¿½
 		if(null != parameters)
 		{
 			for (int i = 0; i < parameters.length; i++)
@@ -177,19 +177,19 @@ public class JMethod extends JCodeModel
 		
 		jCodeBuilder.append(JConstant.PARENTHESES_RIGHT);
 		
-		//³éÏó·½·¨¡¢½Ó¿Ú·½·¨ÎÞ·½·¨Ìå
+		//ï¿½ï¿½ï¿½ó·½·ï¿½ï¿½ï¿½ï¿½Ó¿Ú·ï¿½ï¿½ï¿½ï¿½Þ·ï¿½ï¿½ï¿½ï¿½ï¿½
 		if(isAbstract || isForInterface)
 		{
 			jCodeBuilder.append(JConstant.SIMECOLON);
 		}
 		else
 		{
-			//Æ´½Ó·½·¨Ìå
+			//Æ´ï¿½Ó·ï¿½ï¿½ï¿½ï¿½ï¿½
 			jCodeBuilder.append(JIndentation.NEW_LINE);
 			jCodeBuilder.appendWithIndentation(JConstant.BRACE_LEFT + 
 					JIndentation.NEW_LINE);
 			
-			//Æ´½Ó·½·¨Ìå
+			//Æ´ï¿½Ó·ï¿½ï¿½ï¿½ï¿½ï¿½
 			if(null != jCodeBlock)
 			{
 				jCodeBlock.setIndentation(getIndentation() + JIndentation.METHOD);
@@ -208,7 +208,7 @@ public class JMethod extends JCodeModel
 		JCodeBuilder jCodeBuilder = new JCodeBuilder();
 		jCodeBuilder.append(JKeyWords.SUPER + JConstant.POINT + 
 				methodName + JConstant.PARENTHESES_LEFT);
-		//Æ´½ÓËùÓÐ²ÎÊý
+		//Æ´ï¿½ï¿½ï¿½ï¿½ï¿½Ð²ï¿½ï¿½ï¿½
 		if(null != parameters)
 		{
 			for (int i = 0; i < parameters.length; i++)
@@ -234,7 +234,7 @@ public class JMethod extends JCodeModel
 		jCodeBuilder.append(methodName + JConstant.PARENTHESES_LEFT);
 		if(null != params && params.length > 0)
 		{
-			//Æ´½ÓËùÓÐ²ÎÊý
+			//Æ´ï¿½ï¿½ï¿½ï¿½ï¿½Ð²ï¿½ï¿½ï¿½
 			for (int i = 0; i < params.length; i++)
 			{
 				jCodeBuilder.append(params[i]);
@@ -274,7 +274,6 @@ public class JMethod extends JCodeModel
 	}
 	
 	/**
-	 * ´ÓMethodÖÐÌáÈ¡JMethod
 	 * @param method
 	 * @return
 	 */
@@ -316,26 +315,6 @@ public class JMethod extends JCodeModel
 		return null;
 	}
 	
-	private static String getActionScope(int modifiers)
-	{
-		if(Modifier.isPublic(modifiers))
-		{
-			return JActionScope.PUBLIC;
-		}
-		else if(Modifier.isProtected(modifiers))
-		{
-			return JActionScope.PROTECTED;
-		}
-		else if(Modifier.isPrivate(modifiers))
-		{	
-			return JActionScope.PRIVATE;
-		}
-		else
-		{
-			return JActionScope.DEFAULT;
-		}
-	}
-
 	public static class Parameter extends JCodeModel
 	{
 		private static final long serialVersionUID = 1L;
