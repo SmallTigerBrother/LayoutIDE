@@ -1,6 +1,7 @@
 package com.tiger.code.model;
 
 import java.lang.reflect.Method;
+import java.lang.reflect.Modifier;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -37,6 +38,8 @@ public class JClass extends JCodeModel
 	
 	private boolean isAbstract = false;
 	
+	private boolean isFinal = false;
+	
 	public JClass(String packageName, String simpleClazzName)
 	{
 		this.jPackage = new JPackage(packageName);
@@ -52,9 +55,7 @@ public class JClass extends JCodeModel
 	public void implementInterface(JInterface jInterface)
 	{
 		implementInterfaces.add(jInterface);
-		//import接口
 		imports.add(new JImport(jInterface));
-		//插入接口声明的所有方法
 		JMethod jMethod = null;
 		for(int i = 0; i < jInterface.getMethods().size(); i++)
 		{
@@ -79,7 +80,6 @@ public class JClass extends JCodeModel
 	
 	public void addField(JField field)
 	{
-		//加入引用类
 		imports.add(new JImport(field.getValueType()));
 		fields.add(field);
 	}
@@ -131,22 +131,18 @@ public class JClass extends JCodeModel
 	@Override
 	public JCodeBuilder write2Code(JCodeBuilder jCodeBuilder)
 	{
-		//设置缩进
 		jCodeBuilder.setIndentation(JIndentation.FIELD);
 		
-		//拼接包名
 		if(null != jPackage)
 		{
 			jCodeBuilder.append(jPackage.toString());
 		}
 		
-		//拼接import
 		for (int i = 0; i < imports.size(); i++)
 		{
 			jCodeBuilder.append(imports.get(i).toString());
 		}
 		
-		//拼接类的声明
 		jCodeBuilder.append(JIndentation.NEW_LINE);
 		jCodeBuilder.append(actionScope + MODEL_NAME + 
 				JIndentation.BETWEEN + simpleName);
@@ -156,14 +152,12 @@ public class JClass extends JCodeModel
 			jCodeBuilder.append(generic.toString());
 		}
 		
-		//拼接基类
 		if(null != superClazz)
 		{
 			jCodeBuilder.append(JKeyWords.EXTENDS + 
 					superClazz.getSimpleName());
 		}
 		
-		//拼接实现的接口
 		if(implementInterfaces.size() > 0)
 		{
 			jCodeBuilder.append(JKeyWords.IMPLEMENTS);
@@ -180,15 +174,9 @@ public class JClass extends JCodeModel
 		jCodeBuilder.append(JIndentation.NEW_LINE);
 		jCodeBuilder.append(JConstant.BRACE_LEFT);
 		
-		//拼接全局变量
 		jCodeBuilder = appendFields(jCodeBuilder);
 		
-		//拼接方法(接口方法已在加入接口时插入到methods中)
 		jCodeBuilder = appendMethods(jCodeBuilder);
-		
-		//TODO 拼接内部类
-		
-		//TODO 拼接内部接口
 		
 		
 		jCodeBuilder.append(JConstant.BRACE_RIGHT);
@@ -230,6 +218,21 @@ public class JClass extends JCodeModel
 	{
 		return actionScope;
 	}
+	
+	public void setActionScope(String actionScope)
+	{
+		this.actionScope = actionScope;
+	}
+	
+	public boolean isFinal()
+	{
+		return isFinal;
+	}
+	
+	public void setFinal(boolean isFinal)
+	{
+		this.isFinal = isFinal;
+	}
 
 	public String getSimpleName()
 	{
@@ -262,12 +265,10 @@ public class JClass extends JCodeModel
 	public void setSuperClass(JClass superClazz)
 	{
 		this.superClazz = superClazz;
-		//import基类
 		imports.add(new JImport(superClazz));
 		
 		if(superClazz.isAbstract())
 		{
-			//写入abstract方法
 			ArrayList<JMethod> jMethods = superClazz.getMethods();
 			JMethod method;
 			for(int i = 0; i < jMethods.size(); i++)
@@ -281,7 +282,6 @@ public class JClass extends JCodeModel
 			}
 		}
 		
-		//TODO 写入未实现的接口方法
 	}
 	
 	public JClass getSuperClazz()
@@ -346,7 +346,6 @@ public class JClass extends JCodeModel
 	}
 	
 	/**
-	 * 从class中提取JClass
 	 * @param clazz
 	 * @return
 	 */
@@ -357,6 +356,11 @@ public class JClass extends JCodeModel
 		{
 			jClass.setSuperClass(JClass.refClass(clazz.getSuperclass()));
 		}
+		
+		int modifiers = clazz.getModifiers();
+		jClass.setAbstract(Modifier.isAbstract(modifiers));
+		jClass.setActionScope(getActionScope(modifiers));
+		jClass.setFinal(Modifier.isFinal(modifiers));
 		
 		Method[] methods = clazz.getDeclaredMethods();
 		JMethod jMethod;
