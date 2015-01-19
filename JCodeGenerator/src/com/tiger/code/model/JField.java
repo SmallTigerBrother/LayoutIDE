@@ -1,5 +1,7 @@
 package com.tiger.code.model;
 
+import java.lang.annotation.Annotation;
+import java.lang.reflect.Field;
 import java.util.ArrayList;
 
 import com.tiger.code.constant.JActionScope;
@@ -83,5 +85,21 @@ public class JField extends JCodeModel
 		jCodeBuilder.append(JConstant.SIMECOLON_AND_NEWLINE);
 		
 		return jCodeBuilder;
+	}
+	
+	public static JField refField(Field field)
+	{
+		JField jField = new JField(getActionScope(field.getModifiers()), 
+				JClass.refClass(field.getType()), field.getName());
+		Annotation[] annonations = field.getAnnotations();
+		if(null != annonations && annonations.length > 0)
+		{
+			for(int i = 0 ;i < annonations.length; i++)
+			{
+				jField.addAnnonation(JAnnonation.refAnnonation(annonations[i]));
+			}
+		}
+		
+		return jField;
 	}
 }
