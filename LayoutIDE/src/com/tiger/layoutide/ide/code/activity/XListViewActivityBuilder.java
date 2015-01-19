@@ -75,28 +75,6 @@ public class XListViewActivityBuilder extends JActivityBuilder
 		
 		setupViewsBlock.addCode(xListViewField.getFiledName() + JConstant.POINT + 
 				"setOnItemClickListener(this);");
-		//TODO 设置Adapter
 	}
-	
-	@Override
-	public JClass buildSuperClass()
-	{
-		return null;
-	}
-
-	@Override
-	public JMethod buildOnRequestSuccess(JActivity activity)
-	{
-		JMethod requestListData = new JMethod("requestListData");
-		JCodeBlock requestDataCode = new JCodeBlock();
-		//TODO 添加网络请求方法
-//		requestDataCode.addCode(codeString);
-		
-		requestListData.setCodeBlock(requestDataCode);
-		activity.addMethod(requestListData);
-		
-		return null;
-	}
-	
 	
 }
